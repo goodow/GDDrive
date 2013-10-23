@@ -1,0 +1,700 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6534B22D1815340F000F83E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534B22C1815340F000F83E9 /* Foundation.framework */; };
+		6534B22F1815340F000F83E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534B22E1815340F000F83E9 /* CoreGraphics.framework */; };
+		6534B2311815340F000F83E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534B2301815340F000F83E9 /* UIKit.framework */; };
+		6534B2461815340F000F83E9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534B2451815340F000F83E9 /* XCTest.framework */; };
+		6534B2471815340F000F83E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534B22C1815340F000F83E9 /* Foundation.framework */; };
+		6534B2481815340F000F83E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6534B2301815340F000F83E9 /* UIKit.framework */; };
+		6534B2501815340F000F83E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6534B24E1815340F000F83E9 /* InfoPlist.strings */; };
+		6534B2521815340F000F83E9 /* GDDriveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6534B2511815340F000F83E9 /* GDDriveTests.m */; };
+		6534B26718153577000F83E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6534B26218153577000F83E9 /* InfoPlist.strings */; };
+		6534B26818153577000F83E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6534B26518153577000F83E9 /* Images.xcassets */; };
+		6534B26918153577000F83E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6534B26618153577000F83E9 /* main.m */; };
+		65484777181765BA00586C62 /* icon_100x100.png in Resources */ = {isa = PBXBuildFile; fileRef = 6548475F181765BA00586C62 /* icon_100x100.png */; };
+		65484778181765BA00586C62 /* icon_1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484760181765BA00586C62 /* icon_1024x1024.png */; };
+		65484779181765BA00586C62 /* icon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484761181765BA00586C62 /* icon_114x114.png */; };
+		6548477A181765BA00586C62 /* icon_120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484762181765BA00586C62 /* icon_120x120.png */; };
+		6548477B181765BA00586C62 /* icon_144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484763181765BA00586C62 /* icon_144x144.png */; };
+		6548477C181765BA00586C62 /* icon_152x152.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484764181765BA00586C62 /* icon_152x152.png */; };
+		6548477D181765BA00586C62 /* icon_29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484765181765BA00586C62 /* icon_29x29.png */; };
+		6548477E181765BA00586C62 /* icon_40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484766181765BA00586C62 /* icon_40x40.png */; };
+		6548477F181765BA00586C62 /* icon_50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484767181765BA00586C62 /* icon_50x50.png */; };
+		65484780181765BA00586C62 /* icon_512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484768181765BA00586C62 /* icon_512x512.png */; };
+		65484781181765BA00586C62 /* icon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 65484769181765BA00586C62 /* icon_57x57.png */; };
+		65484782181765BA00586C62 /* icon_58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 6548476A181765BA00586C62 /* icon_58x58.png */; };
+		65484783181765BA00586C62 /* icon_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6548476B181765BA00586C62 /* icon_72x72.png */; };
+		65484784181765BA00586C62 /* icon_76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 6548476C181765BA00586C62 /* icon_76x76.png */; };
+		65484785181765BA00586C62 /* icon_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 6548476D181765BA00586C62 /* icon_80x80.png */; };
+		6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481A181767B800586C62 /* Main_iPad.storyboard */; };
+		6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481C181767B800586C62 /* Main_iPhone.storyboard */; };
+		65484822181767EB00586C62 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65484821181767EB00586C62 /* ViewController.m */; };
+		773E070449474D719289E8E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763A91962AF40D8ABD7D5A7 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6534B2491815340F000F83E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6534B2211815340F000F83E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6534B2281815340F000F83E9;
+			remoteInfo = GDDrive;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1763A91962AF40D8ABD7D5A7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6534B2291815340F000F83E9 /* GDDrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GDDrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6534B22C1815340F000F83E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6534B22E1815340F000F83E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6534B2301815340F000F83E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6534B2341815340F000F83E9 /* GDDrive-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GDDrive-Info.plist"; sourceTree = "<group>"; };
+		6534B2441815340F000F83E9 /* GDDriveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GDDriveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6534B2451815340F000F83E9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6534B24D1815340F000F83E9 /* GDDriveTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GDDriveTests-Info.plist"; sourceTree = "<group>"; };
+		6534B24F1815340F000F83E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6534B2511815340F000F83E9 /* GDDriveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDDriveTests.m; sourceTree = "<group>"; };
+		6534B26318153577000F83E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
+		6534B26418153577000F83E9 /* GDDrive-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GDDrive-Prefix.pch"; sourceTree = "<group>"; };
+		6534B26518153577000F83E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6534B26618153577000F83E9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6548475F181765BA00586C62 /* icon_100x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_100x100.png; sourceTree = "<group>"; };
+		65484760181765BA00586C62 /* icon_1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_1024x1024.png; sourceTree = "<group>"; };
+		65484761181765BA00586C62 /* icon_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114x114.png; sourceTree = "<group>"; };
+		65484762181765BA00586C62 /* icon_120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_120x120.png; sourceTree = "<group>"; };
+		65484763181765BA00586C62 /* icon_144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_144x144.png; sourceTree = "<group>"; };
+		65484764181765BA00586C62 /* icon_152x152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_152x152.png; sourceTree = "<group>"; };
+		65484765181765BA00586C62 /* icon_29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_29x29.png; sourceTree = "<group>"; };
+		65484766181765BA00586C62 /* icon_40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_40x40.png; sourceTree = "<group>"; };
+		65484767181765BA00586C62 /* icon_50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_50x50.png; sourceTree = "<group>"; };
+		65484768181765BA00586C62 /* icon_512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_512x512.png; sourceTree = "<group>"; };
+		65484769181765BA00586C62 /* icon_57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57x57.png; sourceTree = "<group>"; };
+		6548476A181765BA00586C62 /* icon_58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_58x58.png; sourceTree = "<group>"; };
+		6548476B181765BA00586C62 /* icon_72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_72x72.png; sourceTree = "<group>"; };
+		6548476C181765BA00586C62 /* icon_76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_76x76.png; sourceTree = "<group>"; };
+		6548476D181765BA00586C62 /* icon_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_80x80.png; sourceTree = "<group>"; };
+		6548481B181767B800586C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		6548481D181767B800586C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		65484820181767EB00586C62 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		65484821181767EB00586C62 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6534B2261815340F000F83E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6534B22F1815340F000F83E9 /* CoreGraphics.framework in Frameworks */,
+				6534B2311815340F000F83E9 /* UIKit.framework in Frameworks */,
+				6534B22D1815340F000F83E9 /* Foundation.framework in Frameworks */,
+				773E070449474D719289E8E7 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6534B2411815340F000F83E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6534B2461815340F000F83E9 /* XCTest.framework in Frameworks */,
+				6534B2481815340F000F83E9 /* UIKit.framework in Frameworks */,
+				6534B2471815340F000F83E9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6534B2201815340F000F83E9 = {
+			isa = PBXGroup;
+			children = (
+				6534B2321815340F000F83E9 /* GDDrive */,
+				6534B24B1815340F000F83E9 /* GDDriveTests */,
+				6534B22B1815340F000F83E9 /* Frameworks */,
+				6534B22A1815340F000F83E9 /* Products */,
+				8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		6534B22A1815340F000F83E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6534B2291815340F000F83E9 /* GDDrive.app */,
+				6534B2441815340F000F83E9 /* GDDriveTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6534B22B1815340F000F83E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6534B22C1815340F000F83E9 /* Foundation.framework */,
+				6534B22E1815340F000F83E9 /* CoreGraphics.framework */,
+				6534B2301815340F000F83E9 /* UIKit.framework */,
+				6534B2451815340F000F83E9 /* XCTest.framework */,
+				1763A91962AF40D8ABD7D5A7 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6534B2321815340F000F83E9 /* GDDrive */ = {
+			isa = PBXGroup;
+			children = (
+				65484786181765C500586C62 /* UI */,
+				65484820181767EB00586C62 /* ViewController.h */,
+				65484821181767EB00586C62 /* ViewController.m */,
+				6548481A181767B800586C62 /* Main_iPad.storyboard */,
+				6548481C181767B800586C62 /* Main_iPhone.storyboard */,
+				6534B2331815340F000F83E9 /* Supporting Files */,
+			);
+			path = GDDrive;
+			sourceTree = "<group>";
+		};
+		6534B2331815340F000F83E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6548475E181765BA00586C62 /* icon */,
+				6548476E181765BA00586C62 /* Images */,
+				6534B26118153577000F83E9 /* en.lproj */,
+				6534B26418153577000F83E9 /* GDDrive-Prefix.pch */,
+				6534B2341815340F000F83E9 /* GDDrive-Info.plist */,
+				6534B26518153577000F83E9 /* Images.xcassets */,
+				6534B26618153577000F83E9 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6534B24B1815340F000F83E9 /* GDDriveTests */ = {
+			isa = PBXGroup;
+			children = (
+				6534B2511815340F000F83E9 /* GDDriveTests.m */,
+				6534B24C1815340F000F83E9 /* Supporting Files */,
+			);
+			path = GDDriveTests;
+			sourceTree = "<group>";
+		};
+		6534B24C1815340F000F83E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6534B24D1815340F000F83E9 /* GDDriveTests-Info.plist */,
+				6534B24E1815340F000F83E9 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6534B26118153577000F83E9 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				6534B26218153577000F83E9 /* InfoPlist.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		6548475E181765BA00586C62 /* icon */ = {
+			isa = PBXGroup;
+			children = (
+				6548475F181765BA00586C62 /* icon_100x100.png */,
+				65484760181765BA00586C62 /* icon_1024x1024.png */,
+				65484761181765BA00586C62 /* icon_114x114.png */,
+				65484762181765BA00586C62 /* icon_120x120.png */,
+				65484763181765BA00586C62 /* icon_144x144.png */,
+				65484764181765BA00586C62 /* icon_152x152.png */,
+				65484765181765BA00586C62 /* icon_29x29.png */,
+				65484766181765BA00586C62 /* icon_40x40.png */,
+				65484767181765BA00586C62 /* icon_50x50.png */,
+				65484768181765BA00586C62 /* icon_512x512.png */,
+				65484769181765BA00586C62 /* icon_57x57.png */,
+				6548476A181765BA00586C62 /* icon_58x58.png */,
+				6548476B181765BA00586C62 /* icon_72x72.png */,
+				6548476C181765BA00586C62 /* icon_76x76.png */,
+				6548476D181765BA00586C62 /* icon_80x80.png */,
+			);
+			path = icon;
+			sourceTree = "<group>";
+		};
+		6548476E181765BA00586C62 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6548476F181765BA00586C62 /* ipad */,
+				65484774181765BA00586C62 /* iphone */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		6548476F181765BA00586C62 /* ipad */ = {
+			isa = PBXGroup;
+			children = (
+				65484770181765BA00586C62 /* 1024x768 */,
+				65484771181765BA00586C62 /* 1536x2048 */,
+				65484772181765BA00586C62 /* 2048x1536 */,
+				65484773181765BA00586C62 /* 768x1024 */,
+			);
+			path = ipad;
+			sourceTree = "<group>";
+		};
+		65484770181765BA00586C62 /* 1024x768 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 1024x768;
+			sourceTree = "<group>";
+		};
+		65484771181765BA00586C62 /* 1536x2048 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 1536x2048;
+			sourceTree = "<group>";
+		};
+		65484772181765BA00586C62 /* 2048x1536 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 2048x1536;
+			sourceTree = "<group>";
+		};
+		65484773181765BA00586C62 /* 768x1024 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 768x1024;
+			sourceTree = "<group>";
+		};
+		65484774181765BA00586C62 /* iphone */ = {
+			isa = PBXGroup;
+			children = (
+				65484775181765BA00586C62 /* 320x480 */,
+				65484776181765BA00586C62 /* 640x960 */,
+			);
+			path = iphone;
+			sourceTree = "<group>";
+		};
+		65484775181765BA00586C62 /* 320x480 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 320x480;
+			sourceTree = "<group>";
+		};
+		65484776181765BA00586C62 /* 640x960 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 640x960;
+			sourceTree = "<group>";
+		};
+		65484786181765C500586C62 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				65484787181765C500586C62 /* ipad */,
+				65484788181765C500586C62 /* iphone */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		65484787181765C500586C62 /* ipad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ipad;
+			sourceTree = "<group>";
+		};
+		65484788181765C500586C62 /* iphone */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = iphone;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6534B2281815340F000F83E9 /* GDDrive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6534B2551815340F000F83E9 /* Build configuration list for PBXNativeTarget "GDDrive" */;
+			buildPhases = (
+				A0F1FF1ACD36406FBE5E7849 /* Check Pods Manifest.lock */,
+				6534B2251815340F000F83E9 /* Sources */,
+				6534B2261815340F000F83E9 /* Frameworks */,
+				6534B2271815340F000F83E9 /* Resources */,
+				DE35B68B650C4FE8BFE5D6BB /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GDDrive;
+			productName = GDDrive;
+			productReference = 6534B2291815340F000F83E9 /* GDDrive.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6534B2431815340F000F83E9 /* GDDriveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6534B2581815340F000F83E9 /* Build configuration list for PBXNativeTarget "GDDriveTests" */;
+			buildPhases = (
+				6534B2401815340F000F83E9 /* Sources */,
+				6534B2411815340F000F83E9 /* Frameworks */,
+				6534B2421815340F000F83E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6534B24A1815340F000F83E9 /* PBXTargetDependency */,
+			);
+			name = GDDriveTests;
+			productName = GDDriveTests;
+			productReference = 6534B2441815340F000F83E9 /* GDDriveTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6534B2211815340F000F83E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "大黄";
+				TargetAttributes = {
+					6534B2431815340F000F83E9 = {
+						TestTargetID = 6534B2281815340F000F83E9;
+					};
+				};
+			};
+			buildConfigurationList = 6534B2241815340F000F83E9 /* Build configuration list for PBXProject "GDDrive" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6534B2201815340F000F83E9;
+			productRefGroup = 6534B22A1815340F000F83E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6534B2281815340F000F83E9 /* GDDrive */,
+				6534B2431815340F000F83E9 /* GDDriveTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6534B2271815340F000F83E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6534B26818153577000F83E9 /* Images.xcassets in Resources */,
+				65484777181765BA00586C62 /* icon_100x100.png in Resources */,
+				65484781181765BA00586C62 /* icon_57x57.png in Resources */,
+				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
+				6548477B181765BA00586C62 /* icon_144x144.png in Resources */,
+				6548477D181765BA00586C62 /* icon_29x29.png in Resources */,
+				6548477C181765BA00586C62 /* icon_152x152.png in Resources */,
+				65484779181765BA00586C62 /* icon_114x114.png in Resources */,
+				6548477F181765BA00586C62 /* icon_50x50.png in Resources */,
+				6534B26718153577000F83E9 /* InfoPlist.strings in Resources */,
+				65484782181765BA00586C62 /* icon_58x58.png in Resources */,
+				6548477E181765BA00586C62 /* icon_40x40.png in Resources */,
+				65484784181765BA00586C62 /* icon_76x76.png in Resources */,
+				65484783181765BA00586C62 /* icon_72x72.png in Resources */,
+				6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */,
+				65484778181765BA00586C62 /* icon_1024x1024.png in Resources */,
+				6548477A181765BA00586C62 /* icon_120x120.png in Resources */,
+				65484780181765BA00586C62 /* icon_512x512.png in Resources */,
+				65484785181765BA00586C62 /* icon_80x80.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6534B2421815340F000F83E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6534B2501815340F000F83E9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A0F1FF1ACD36406FBE5E7849 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DE35B68B650C4FE8BFE5D6BB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6534B2251815340F000F83E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				65484822181767EB00586C62 /* ViewController.m in Sources */,
+				6534B26918153577000F83E9 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6534B2401815340F000F83E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6534B2521815340F000F83E9 /* GDDriveTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6534B24A1815340F000F83E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6534B2281815340F000F83E9 /* GDDrive */;
+			targetProxy = 6534B2491815340F000F83E9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6534B24E1815340F000F83E9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6534B24F1815340F000F83E9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6534B26218153577000F83E9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6534B26318153577000F83E9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6548481A181767B800586C62 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6548481B181767B800586C62 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		6548481C181767B800586C62 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6548481D181767B800586C62 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6534B2531815340F000F83E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6534B2541815340F000F83E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6534B2561815340F000F83E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
+				INFOPLIST_FILE = "GDDrive/GDDrive-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6534B2571815340F000F83E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
+				INFOPLIST_FILE = "GDDrive/GDDrive-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		6534B2591815340F000F83E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GDDrive.app/GDDrive";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GDDriveTests/GDDriveTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6534B25A1815340F000F83E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GDDrive.app/GDDrive";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
+				INFOPLIST_FILE = "GDDriveTests/GDDriveTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6534B2241815340F000F83E9 /* Build configuration list for PBXProject "GDDrive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6534B2531815340F000F83E9 /* Debug */,
+				6534B2541815340F000F83E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6534B2551815340F000F83E9 /* Build configuration list for PBXNativeTarget "GDDrive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6534B2561815340F000F83E9 /* Debug */,
+				6534B2571815340F000F83E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6534B2581815340F000F83E9 /* Build configuration list for PBXNativeTarget "GDDriveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6534B2591815340F000F83E9 /* Debug */,
+				6534B25A1815340F000F83E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6534B2211815340F000F83E9 /* Project object */;
+}
