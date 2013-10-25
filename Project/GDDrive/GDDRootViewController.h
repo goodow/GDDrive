@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  GDDRootViewController.h
 //  TestOne
 //
 //  Created by 大黄 on 13-10-23.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface GDDRootViewController : UIViewController
 
 @end
