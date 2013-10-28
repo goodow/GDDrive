@@ -1,5 +1,5 @@
 //
-//  GDDClassViewController_iPad.h
+//  GDDOfflineFilesViewController_iPad.h
 //  GDDrive
 //
 //  Created by 大黄 on 13-10-25.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDDClassViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface GDDOfflineFilesViewController_iPad : UIViewController
 
 @end

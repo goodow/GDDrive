@@ -36,8 +36,13 @@
 		6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481A181767B800586C62 /* Main_iPad.storyboard */; };
 		6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481C181767B800586C62 /* Main_iPhone.storyboard */; };
 		65484822181767EB00586C62 /* GDDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65484821181767EB00586C62 /* GDDRootViewController.m */; };
+		65538B76181DFA18008D1DE0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65538B75181DFA18008D1DE0 /* config.plist */; };
 		65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */; };
 		65C488D6181A0AA7008E2EAF /* GDDClassViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */; };
+		65C488DF181A203B008E2EAF /* GDDFaviconsViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488DD181A203B008E2EAF /* GDDFaviconsViewController_iPad.m */; };
+		65C488E0181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488DE181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib */; };
+		65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */; };
+		65C488EF181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */; };
 		773E070449474D719289E8E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763A91962AF40D8ABD7D5A7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -86,9 +91,16 @@
 		6548481D181767B800586C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		65484820181767EB00586C62 /* GDDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDRootViewController.h; sourceTree = "<group>"; };
 		65484821181767EB00586C62 /* GDDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDRootViewController.m; sourceTree = "<group>"; };
+		65538B75181DFA18008D1DE0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		65C488D2181A0AA7008E2EAF /* GDDClassViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDClassViewController_iPad.h; sourceTree = "<group>"; };
 		65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDClassViewController_iPad.m; sourceTree = "<group>"; };
 		65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDClassViewController_iPad.xib; sourceTree = "<group>"; };
+		65C488DC181A203B008E2EAF /* GDDFaviconsViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFaviconsViewController_iPad.h; sourceTree = "<group>"; };
+		65C488DD181A203B008E2EAF /* GDDFaviconsViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFaviconsViewController_iPad.m; sourceTree = "<group>"; };
+		65C488DE181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDFaviconsViewController_iPad.xib; sourceTree = "<group>"; };
+		65C488EB181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDOfflineFilesViewController_iPad.h; sourceTree = "<group>"; };
+		65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDOfflineFilesViewController_iPad.m; sourceTree = "<group>"; };
+		65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDOfflineFilesViewController_iPad.xib; sourceTree = "<group>"; };
 		8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +182,7 @@
 				6534B26118153577000F83E9 /* en.lproj */,
 				6534B26418153577000F83E9 /* GDDrive-Prefix.pch */,
 				6534B2341815340F000F83E9 /* GDDrive-Info.plist */,
+				65538B75181DFA18008D1DE0 /* config.plist */,
 				6534B26518153577000F83E9 /* Images.xcassets */,
 				6534B26618153577000F83E9 /* main.m */,
 			);
@@ -310,6 +323,12 @@
 				65C488D2181A0AA7008E2EAF /* GDDClassViewController_iPad.h */,
 				65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */,
 				65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */,
+				65C488DC181A203B008E2EAF /* GDDFaviconsViewController_iPad.h */,
+				65C488DD181A203B008E2EAF /* GDDFaviconsViewController_iPad.m */,
+				65C488DE181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib */,
+				65C488EB181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.h */,
+				65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */,
+				65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */,
 			);
 			path = ipad;
 			sourceTree = "<group>";
@@ -401,6 +420,7 @@
 			files = (
 				6534B26818153577000F83E9 /* Images.xcassets in Resources */,
 				65C488D6181A0AA7008E2EAF /* GDDClassViewController_iPad.xib in Resources */,
+				65538B76181DFA18008D1DE0 /* config.plist in Resources */,
 				65484777181765BA00586C62 /* icon_100x100.png in Resources */,
 				65484781181765BA00586C62 /* icon_57x57.png in Resources */,
 				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
@@ -411,6 +431,7 @@
 				6548477F181765BA00586C62 /* icon_50x50.png in Resources */,
 				6534B26718153577000F83E9 /* InfoPlist.strings in Resources */,
 				65484782181765BA00586C62 /* icon_58x58.png in Resources */,
+				65C488E0181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib in Resources */,
 				6548477E181765BA00586C62 /* icon_40x40.png in Resources */,
 				65484784181765BA00586C62 /* icon_76x76.png in Resources */,
 				65484783181765BA00586C62 /* icon_72x72.png in Resources */,
@@ -418,6 +439,7 @@
 				65484778181765BA00586C62 /* icon_1024x1024.png in Resources */,
 				6548477A181765BA00586C62 /* icon_120x120.png in Resources */,
 				65484780181765BA00586C62 /* icon_512x512.png in Resources */,
+				65C488EF181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib in Resources */,
 				65484785181765BA00586C62 /* icon_80x80.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,6 +494,8 @@
 			files = (
 				65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */,
 				65484822181767EB00586C62 /* GDDRootViewController.m in Sources */,
+				65C488DF181A203B008E2EAF /* GDDFaviconsViewController_iPad.m in Sources */,
+				65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -614,6 +638,7 @@
 				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
 				INFOPLIST_FILE = "GDDrive/GDDrive-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -628,6 +653,7 @@
 				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
 				INFOPLIST_FILE = "GDDrive/GDDrive-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -1,5 +1,5 @@
 //
-//  GDDClassViewController_iPad.h
+//  GDDFaviconsViewController_iPad.h
 //  GDDrive
 //
 //  Created by 大黄 on 13-10-25.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDDClassViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate>
+@interface GDDFaviconsViewController_iPad : UIViewController
 
 @end
