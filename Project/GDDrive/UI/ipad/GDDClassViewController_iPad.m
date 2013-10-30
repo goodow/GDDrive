@@ -10,13 +10,14 @@
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UINavigationBar *navigationBar;
 
+@property (nonatomic, strong) UIBarButtonItem *backButtonItem;
 @property (nonatomic, strong) GDRDocument *doc;
 @property (nonatomic, strong) GDRModel *mod;
 @property (nonatomic, strong) GDRCollaborativeMap *root;
 @property (nonatomic, strong) GDRCollaborativeList *folderList;
 @property (nonatomic, strong) GDRCollaborativeList *filesList;
+@property (nonatomic, strong) NSMutableArray *historyList;
 @end
 
 static NSString * FOLDERS_KEY = @"folders";
@@ -28,55 +29,40 @@ static NSString * FILES_KEY = @"files";
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    // Custom initialization
   }
   return self;
 }
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];  
-  
-  __block GDDClassViewController_iPad *blockSelf = self;
-  GDRModelInitializerBlock initializer = ^(GDRModel * model){
-//    GDRCollaborativeMap *root = [model getRoot];
-//    GDRCollaborativeString *string = [model createString:@"Edit Me!"];
-//    [root set:FOLDERS_KEY value:string];
-  };
-  GDRDocumentLoadedBlock onLoaded = ^(GDRDocument *document) {
-    
-    blockSelf.doc = document;
-    blockSelf.mod = [self.doc getModel];
-    blockSelf.root = [self.mod getRoot];
-    
-    
-    [blockSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
-      if ([event isSaving] || [event isPending]) {
-       
-      }
-    }];
-    [blockSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
-
-    }];
-//    self.str = [self.root get:STR_KEY];
-//    self.textView.text = [self.str getText];
-//    id block = ^(GDRBaseModelEvent *event) {
-//      self.textView.text = [self.str getText];
-//    };
-//    [self.str addObjectChangedListener:block];
-    
-    blockSelf.folderList = [self.root get:FOLDERS_KEY];
-    blockSelf.filesList = [self.root get:FILES_KEY];
-    
-    NSLog(@"blockSelf.folderList：%@",blockSelf.folderList);
-    [blockSelf.tableView reloadData];
-  };
+  [super viewDidLoad];
+  __weak GDDClassViewController_iPad *weakSelf = self;
   NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
   NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"lesson07"]
-           onLoaded:onLoaded
-    opt_initializer:initializer
-          opt_error:nil];
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"lesson25"]
+           onLoaded:^(GDRDocument *document) {
+             weakSelf.doc = document;
+             weakSelf.mod = [weakSelf.doc getModel];
+             weakSelf.root = [weakSelf.mod getRoot];
+             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
+               if ([event isSaving] || [event isPending]) {
+               }
+             }];
+             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
+             }];
+             weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
+             weakSelf.filesList = [weakSelf.root get:FILES_KEY];
+             NSLog(@"weakSelf.folderList：%@",weakSelf.folderList);
+             [weakSelf.tableView reloadData];
+           } opt_initializer:^(GDRModel *model) {
+             
+           } opt_error:^(GDRError *error) {
+             
+           }];
+  
+  self.backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"我的课程" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonItemListener:)];
+  self.navigationItem.leftBarButtonItem = self.backButtonItem;
+  self.historyList = [NSMutableArray array];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,12 +74,10 @@ static NSString * FILES_KEY = @"files";
 #pragma mark -tableView dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  // Return the number of sections.
   return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  // Return the number of rows in the section.
   return [self.folderList length] + [self.filesList length];
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -103,10 +87,8 @@ static NSString * FILES_KEY = @"files";
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
   }
-//  cell.textLabel.text = [self.folderList length] > 0 ?  @"":[self.folderList get:indexPath.row];
   if ([self.folderList length]>0) {
     GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-    NSLog(@"%@",map);
     cell.textLabel.text = [map get:@"label"];
   }
   return cell;
@@ -114,11 +96,28 @@ static NSString * FILES_KEY = @"files";
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-  GDDClassViewController_iPad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDClassViewController_iPad" bundle:nil];
-  [self.navigationController pushViewController:classViewController animated:YES];
-  
+  [self.historyList addObject:self.folderList];
+  GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
+  NSMutableString *finalStr = [[NSMutableString alloc]initWithString:self.backButtonItem.title];
+  [finalStr appendFormat:@" < %@",[map get:@"label"]];
+  self.backButtonItem.title = finalStr;
+  self.folderList = [map get:FOLDERS_KEY];
+  self.filesList = [map get:FILES_KEY];
+  [self.tableView reloadData];
 }
 
-
+#pragma mark -IBAction
+-(IBAction)backButtonItemListener:(id)sender{
+  if ([self.historyList count] > 0) {
+    self.folderList = [self.historyList lastObject];
+    [self.historyList removeLastObject];
+    [self.tableView reloadData];
+    NSArray *array= [self.backButtonItem.title componentsSeparatedByString:@" < "];
+    NSMutableString *finalStr = [[NSMutableString alloc]initWithString:[array objectAtIndex:0]];
+    for (int i = 1; i<[array count]-1; i++) {
+      [finalStr appendFormat:@" < %@",[array objectAtIndex:i]];
+    }
+    self.backButtonItem.title = finalStr;
+  }
+}
 @end

@@ -27,9 +27,10 @@
   [super viewDidLoad];
   NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
   NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
+  //  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
+  [GDRRealtime setServerAddress:@"http://61.177.139.216:8084"];
   [GDRRealtime authorize:[dictionary objectForKey:@"userId"] token:[dictionary objectForKey:@"token"]];
-
+  
   GDDClassViewController_iPad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDClassViewController_iPad" bundle:nil];
   UINavigationController *classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
   [self addChildViewController:classNavigationController];
