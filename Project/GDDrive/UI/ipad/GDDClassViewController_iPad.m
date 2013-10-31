@@ -7,17 +7,17 @@
 //
 
 #import "GDDClassViewController_iPad.h"
+#import "GDDUIBarButtonItem.h"
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) UIBarButtonItem *backButtonItem;
+@property (nonatomic, strong) GDDUIBarButtonItem *backBarButtonItem;
 @property (nonatomic, strong) GDRDocument *doc;
 @property (nonatomic, strong) GDRModel *mod;
 @property (nonatomic, strong) GDRCollaborativeMap *root;
 @property (nonatomic, strong) GDRCollaborativeList *folderList;
 @property (nonatomic, strong) GDRCollaborativeList *filesList;
-@property (nonatomic, strong) NSMutableArray *historyList;
 @end
 
 static NSString * FOLDERS_KEY = @"folders";
@@ -60,15 +60,16 @@ static NSString * FILES_KEY = @"files";
              
            }];
   
-  self.backButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"我的课程" style:UIBarButtonItemStylePlain target:self action:@selector(backButtonItemListener:)];
-  self.navigationItem.leftBarButtonItem = self.backButtonItem;
-  self.historyList = [NSMutableArray array];
+  self.backBarButtonItem  = [[GDDUIBarButtonItem alloc] initWithRootTitle:@"我的课程" withClick:^{
+    self.folderList = [self.backBarButtonItem historyLastObjectAndRemoveIt];
+    [self.tableView reloadData];
+  }];
+  self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -tableView dataSource
@@ -93,31 +94,13 @@ static NSString * FILES_KEY = @"files";
   }
   return cell;
 }
-#pragma mark - Table view delegate
+#pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [self.historyList addObject:self.folderList];
+  [self.backBarButtonItem addHistoryData:self.folderList pushTitleBySelectIndex:indexPath.row];
   GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-  NSMutableString *finalStr = [[NSMutableString alloc]initWithString:self.backButtonItem.title];
-  [finalStr appendFormat:@" < %@",[map get:@"label"]];
-  self.backButtonItem.title = finalStr;
   self.folderList = [map get:FOLDERS_KEY];
   self.filesList = [map get:FILES_KEY];
   [self.tableView reloadData];
-}
-
-#pragma mark -IBAction
--(IBAction)backButtonItemListener:(id)sender{
-  if ([self.historyList count] > 0) {
-    self.folderList = [self.historyList lastObject];
-    [self.historyList removeLastObject];
-    [self.tableView reloadData];
-    NSArray *array= [self.backButtonItem.title componentsSeparatedByString:@" < "];
-    NSMutableString *finalStr = [[NSMutableString alloc]initWithString:[array objectAtIndex:0]];
-    for (int i = 1; i<[array count]-1; i++) {
-      [finalStr appendFormat:@" < %@",[array objectAtIndex:i]];
-    }
-    self.backButtonItem.title = finalStr;
-  }
 }
 @end

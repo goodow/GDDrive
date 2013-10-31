@@ -37,6 +37,7 @@
 		6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481C181767B800586C62 /* Main_iPhone.storyboard */; };
 		65484822181767EB00586C62 /* GDDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65484821181767EB00586C62 /* GDDRootViewController.m */; };
 		65538B76181DFA18008D1DE0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65538B75181DFA18008D1DE0 /* config.plist */; };
+		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
 		65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */; };
 		65C488D6181A0AA7008E2EAF /* GDDClassViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */; };
 		65C488DF181A203B008E2EAF /* GDDFaviconsViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488DD181A203B008E2EAF /* GDDFaviconsViewController_iPad.m */; };
@@ -92,6 +93,8 @@
 		65484820181767EB00586C62 /* GDDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDRootViewController.h; sourceTree = "<group>"; };
 		65484821181767EB00586C62 /* GDDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDRootViewController.m; sourceTree = "<group>"; };
 		65538B75181DFA18008D1DE0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDUIBarButtonItem.h; sourceTree = "<group>"; };
+		65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUIBarButtonItem.m; sourceTree = "<group>"; };
 		65C488D2181A0AA7008E2EAF /* GDDClassViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDClassViewController_iPad.h; sourceTree = "<group>"; };
 		65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDClassViewController_iPad.m; sourceTree = "<group>"; };
 		65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDClassViewController_iPad.xib; sourceTree = "<group>"; };
@@ -164,6 +167,7 @@
 		6534B2321815340F000F83E9 /* GDDrive */ = {
 			isa = PBXGroup;
 			children = (
+				65A63A471821EFFA004B6A18 /* CustomView */,
 				65484786181765C500586C62 /* UI */,
 				65484820181767EB00586C62 /* GDDRootViewController.h */,
 				65484821181767EB00586C62 /* GDDRootViewController.m */,
@@ -340,6 +344,15 @@
 			path = iphone;
 			sourceTree = "<group>";
 		};
+		65A63A471821EFFA004B6A18 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */,
+				65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -497,6 +510,7 @@
 				65C488DF181A203B008E2EAF /* GDDFaviconsViewController_iPad.m in Sources */,
 				65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
+				65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
