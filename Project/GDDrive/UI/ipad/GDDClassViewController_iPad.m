@@ -8,6 +8,7 @@
 
 #import "GDDClassViewController_iPad.h"
 #import "GDDUIBarButtonItem.h"
+#import "GDR.h"
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -18,6 +19,13 @@
 @property (nonatomic, strong) GDRCollaborativeMap *root;
 @property (nonatomic, strong) GDRCollaborativeList *folderList;
 @property (nonatomic, strong) GDRCollaborativeList *filesList;
+
+@property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
+@property (nonatomic, strong) id <GDJsonObject> path;
+@property (nonatomic, strong) id <GDJsonArray> currentPath;
+@property (nonatomic, strong) id <GDJsonString> currentID;
+
+@property (nonatomic, strong) GDRCollaborativeMap *cachePath;
 @end
 
 static NSString * FOLDERS_KEY = @"folders";
@@ -39,11 +47,48 @@ static NSString * FILES_KEY = @"files";
   __weak GDDClassViewController_iPad *weakSelf = self;
   NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
   NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+  //记录和监听文件目录
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"remotecontrol25"]
+           onLoaded:^(GDRDocument *document) {
+             GDRModel *mod = [document getModel];
+             weakSelf.cachePath = [[mod getRoot] get:@"path"];
+             weakSelf.remotecontrolRoot = [mod getRoot];
+             [weakSelf.remotecontrolRoot addValueChangedListener:^(GDRValueChangedEvent *event) {
+               do {
+                 if (![[event getProperty] isEqualToString:@"path"]) break;
+                 if ([[weakSelf.cachePath description] isEqualToString:[[[mod getRoot] get:@"path"] description]]) break;
+                 weakSelf.cachePath = [[mod getRoot] get:@"path"];
+                 [self loadLesson];
+               } while (NO);
+             }];
+             [self loadLesson];
+           }
+    opt_initializer:^(GDRModel *model) {}
+          opt_error:^(GDRError *error) {}];
+  
+  self.backBarButtonItem  = [[GDDUIBarButtonItem alloc] initWithRootTitle:@"我的课程" withClick:^{
+    [self.currentPath remove:([self.currentPath length]-1)];
+    [self.path set:@"currentpath" value:self.currentPath];
+    [self.remotecontrolRoot set:@"path" value:self.path];
+  }];
+  self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
+}
+
+- (void)loadLesson{
+  __weak GDDClassViewController_iPad *weakSelf = self;
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+  weakSelf.path = [weakSelf.remotecontrolRoot get:@"path"];
+  weakSelf.currentPath = [weakSelf.path get:@"currentpath"];
+  weakSelf.currentID = [weakSelf.path get:@"currentdocid"];
+  
   [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"lesson25"]
            onLoaded:^(GDRDocument *document) {
              weakSelf.doc = document;
              weakSelf.mod = [weakSelf.doc getModel];
              weakSelf.root = [weakSelf.mod getRoot];
+             NSString *gdID = [[weakSelf.currentPath get:([weakSelf.currentPath length]-1)]getString];
+             weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
              [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
                if ([event isSaving] || [event isPending]) {
                }
@@ -52,19 +97,27 @@ static NSString * FILES_KEY = @"files";
              }];
              weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
              weakSelf.filesList = [weakSelf.root get:FILES_KEY];
-             NSLog(@"weakSelf.folderList：%@",weakSelf.folderList);
              [weakSelf.tableView reloadData];
+             
+             //设置该页面的back显示
+             id <GDJsonObject> changePath = [weakSelf.remotecontrolRoot get:@"path"];
+             id <GDJsonArray> changeCurrentPath = [changePath get:@"currentpath"];
+             NSMutableArray *historyIDs = [NSMutableArray array];
+             NSMutableArray *historyNames = [NSMutableArray array];
+             for (int i = 1; i<[changeCurrentPath length]; i++) {
+               NSString *gdID = [[changeCurrentPath get:(i)]getString];
+               [historyIDs addObject:gdID];
+               GDRCollaborativeMap *changeRoot = [weakSelf.mod getObjectWithNSString:gdID];
+               NSString *name = [changeRoot get:@"label"];
+               [historyNames addObject:name];
+             }
+             [self.backBarButtonItem updateAllHistoryListWithHistoryID:historyIDs titles:historyNames];
+             
            } opt_initializer:^(GDRModel *model) {
              
            } opt_error:^(GDRError *error) {
              
            }];
-  
-  self.backBarButtonItem  = [[GDDUIBarButtonItem alloc] initWithRootTitle:@"我的课程" withClick:^{
-    self.folderList = [self.backBarButtonItem historyLastObjectAndRemoveIt];
-    [self.tableView reloadData];
-  }];
-  self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,15 +158,15 @@ static NSString * FILES_KEY = @"files";
     }
     return cell;
   }
-  
 }
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [self.backBarButtonItem addHistoryData:self.folderList pushTitleBySelectIndex:indexPath.row];
+  //选择文件
   GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-  self.folderList = [map get:FOLDERS_KEY];
-  self.filesList = [map get:FILES_KEY];
-  [self.tableView reloadData];
+  id <GDJsonString> idStr = [GDJson createString:[map getId]];
+  [self.currentPath insert:[self.currentPath length] value:idStr];
+  [self.path set:@"currentpath" value:self.currentPath];
+  [self.remotecontrolRoot set:@"path" value:self.path];
 }
 @end

@@ -10,7 +10,8 @@
 
 @interface GDDUIBarButtonItem()
 
-@property (nonatomic, strong) NSMutableArray *historyList;
+@property (nonatomic, strong) NSMutableArray *historyIDs;
+@property (nonatomic, strong) NSMutableArray *historyNames;
 @property (nonatomic, strong) GDDUIBarButtonItemClickBlock barButtonItemClickBlock;
 
 @end
@@ -20,38 +21,35 @@ static NSString *BREAK = @" > ";
 @implementation GDDUIBarButtonItem
 -(id)initWithRootTitle:(NSString *)title withClick:(GDDUIBarButtonItemClickBlock)block{
   if (self = [super initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(backButtonItemListener:)]) {
-    self.historyList = [NSMutableArray array];
+    self.historyIDs = [NSMutableArray array];
+    self.historyNames = [NSMutableArray array];
     self.barButtonItemClickBlock = block;
   }
   return self;
 }
--(void)addHistoryData:(NSObject *)obj pushTitleBySelectIndex:(NSInteger)index{
-  [self.historyList addObject:obj];
-  [self pushTitle:index];
+-(void)updateAllHistoryListWithHistoryID:(NSArray *)hids titles:(NSArray *)titles{
+  [self.historyIDs removeAllObjects];
+  [self.historyNames removeAllObjects];
+  self.historyIDs = [NSMutableArray arrayWithArray:hids];
+  self.historyNames = [NSMutableArray arrayWithArray:titles];
+  [self refreshData];
 }
+-(void)refreshData{
+  NSArray *array= [self.title componentsSeparatedByString:BREAK];
+  NSString *rootStr = [array objectAtIndex:0];
+  NSMutableString *finalStr = [[NSMutableString alloc]initWithString:rootStr];
+  for (NSString *title in self.historyNames) {
+    [finalStr appendFormat:@"%@%@",BREAK,title];
+  }
+  self.title = finalStr;
+}
+
+#pragma mark -IBAction
 -(IBAction)backButtonItemListener:(id)sender{
-  if ([self.historyList count] > 0) {
+  if ([self.historyIDs count] > 0) {
     self.barButtonItemClickBlock();
   }
 }
--(id)historyLastObjectAndRemoveIt{
-  NSMutableArray *aHistoryList = [self.historyList lastObject];
-  [self.historyList removeLastObject];
-  [self popTitle];
-  return aHistoryList;
-}
--(void)pushTitle:(NSInteger)index{
-  GDRCollaborativeMap *map = [(GDRCollaborativeList *)[self.historyList lastObject] get:index];
-  NSMutableString *finalStr = [[NSMutableString alloc]initWithString:self.title];
-  [finalStr appendFormat:@"%@%@",BREAK,[map get:@"label"]];
-  self.title = finalStr;
-}
--(void)popTitle{
-  NSArray *array= [self.title componentsSeparatedByString:BREAK];
-  NSMutableString *finalStr = [[NSMutableString alloc]initWithString:[array objectAtIndex:0]];
-  for (int i = 1; i<[array count]-1; i++) {
-    [finalStr appendFormat:@"%@%@",BREAK,[array objectAtIndex:i]];
-  }
-  self.title = finalStr;
-}
+
+
 @end

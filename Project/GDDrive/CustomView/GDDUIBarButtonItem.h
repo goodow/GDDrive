@@ -11,7 +11,6 @@ typedef void (^GDDUIBarButtonItemClickBlock)(void);
 
 @interface GDDUIBarButtonItem : UIBarButtonItem
 -(id)initWithRootTitle:(NSString *)title withClick:(GDDUIBarButtonItemClickBlock)block;
--(void)addHistoryData:(NSObject *)obj pushTitleBySelectIndex:(NSInteger)index;
--(id)historyLastObjectAndRemoveIt;
+-(void)updateAllHistoryListWithHistoryID:(NSArray *)hids titles:(NSArray *)titles;
 @end
 
