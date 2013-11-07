@@ -11,13 +11,20 @@
 #import "GDDFaviconsViewController_iPad.h"
 #import "GDDOfflineFilesViewController_iPad.h"
 #import "GDR.h"
+#import "GDDRealtimeDataToViewController.h"
 
 @interface GDDRootViewController ()
 @property (nonatomic, weak) IBOutlet UIView *contextView;
 @property (nonatomic, strong) UIViewController *currentViewController;
+@property (nonatomic, strong) id <GDRealtimeProtocol> realtimeProtocol;
+
+@property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
+@property (nonatomic, strong) GDRCollaborativeMap *cachePath;
+
 -(IBAction)classOnClickListener:(id)sender;
 -(IBAction)faviconsOnClickListener:(id)sender;
 -(IBAction)offlineFilesOnClickListener:(id)sender;
+
 @end
 
 @implementation GDDRootViewController
@@ -45,6 +52,32 @@
   
   [self.contextView addSubview:classNavigationController.view];
   self.currentViewController = classNavigationController;
+  
+  
+  self.realtimeProtocol = [[GDDRealtimeDataToViewController alloc]initWithObjectsAndKeys:
+                           classViewController,@"lesson25",
+                           faviconsViewController,@"favorites25",
+                           offlineFilesViewController,@"offlinedoc25",nil];
+  //记录和监听文件目录
+  __weak GDDRootViewController *weakSelf = self;
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"remotecontrol25"]
+           onLoaded:^(GDRDocument *document) {
+             GDRModel *mod = [document getModel];
+             weakSelf.cachePath = [[mod getRoot] get:@"path"];
+             weakSelf.remotecontrolRoot = [mod getRoot];
+             [weakSelf.realtimeProtocol loadRealtimeData:mod];
+             [weakSelf.remotecontrolRoot addValueChangedListener:^(GDRValueChangedEvent *event) {
+               do {
+                 if (![[event getProperty] isEqualToString:@"path"]) break;
+                 if ([[weakSelf.cachePath description] isEqualToString:[[[mod getRoot] get:@"path"] description]]) break;
+                 weakSelf.cachePath = [[mod getRoot] get:@"path"];
+                 [weakSelf.realtimeProtocol loadRealtimeData:mod];
+               } while (NO);
+             }];
+             
+           }
+    opt_initializer:^(GDRModel *model) {}
+          opt_error:^(GDRError *error) {}];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -55,7 +88,7 @@
   __weak GDDRootViewController *weakSelf = self;
   [self transitionFromViewController:self.currentViewController
                     toViewController:[self.childViewControllers objectAtIndex:index]
-                            duration:1
+                            duration:0
                              options:UIViewAnimationOptionTransitionNone
                           animations:nil
                           completion:^(BOOL finished) {

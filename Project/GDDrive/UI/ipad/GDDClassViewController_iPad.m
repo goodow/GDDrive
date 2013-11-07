@@ -44,34 +44,17 @@ static NSString * FILES_KEY = @"files";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  __weak GDDClassViewController_iPad *weakSelf = self;
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-  //记录和监听文件目录
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"remotecontrol25"]
-           onLoaded:^(GDRDocument *document) {
-             GDRModel *mod = [document getModel];
-             weakSelf.cachePath = [[mod getRoot] get:@"path"];
-             weakSelf.remotecontrolRoot = [mod getRoot];
-             [weakSelf.remotecontrolRoot addValueChangedListener:^(GDRValueChangedEvent *event) {
-               do {
-                 if (![[event getProperty] isEqualToString:@"path"]) break;
-                 if ([[weakSelf.cachePath description] isEqualToString:[[[mod getRoot] get:@"path"] description]]) break;
-                 weakSelf.cachePath = [[mod getRoot] get:@"path"];
-                 [self loadLesson];
-               } while (NO);
-             }];
-             [self loadLesson];
-           }
-    opt_initializer:^(GDRModel *model) {}
-          opt_error:^(GDRError *error) {}];
-  
+
   self.backBarButtonItem  = [[GDDUIBarButtonItem alloc] initWithRootTitle:@"我的课程" withClick:^{
     [self.currentPath remove:([self.currentPath length]-1)];
     [self.path set:@"currentpath" value:self.currentPath];
     [self.remotecontrolRoot set:@"path" value:self.path];
   }];
   self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
+}
+-(void)loadRealtimeData:(GDRModel *)mod{
+  self.remotecontrolRoot = [mod getRoot];
+  [self loadLesson];
 }
 
 - (void)loadLesson{

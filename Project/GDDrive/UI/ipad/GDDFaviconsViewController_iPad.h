@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDDFaviconsViewController_iPad : UIViewController
+@interface GDDFaviconsViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate>
 
 @end
