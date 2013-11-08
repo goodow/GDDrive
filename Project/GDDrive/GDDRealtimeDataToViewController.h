@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "GDRealtimeProtocol.h"
+typedef void (^TransitionFromChildViewControllerToViewControllerBlock)(NSInteger i);
 
 @interface GDDRealtimeDataToViewController : NSObject <GDRealtimeProtocol>
 
--(id)initWithObjectsAndKeys:(id)objectsAndKeys, ... ;
+-(id)initWithTransitionFromChildViewControllerToViewControllerBlock:(TransitionFromChildViewControllerToViewControllerBlock)block ObjectsAndKeys:(id)objectsAndKeys, ... ;
 
 @end

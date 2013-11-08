@@ -53,13 +53,16 @@
   [self.contextView addSubview:classNavigationController.view];
   self.currentViewController = classNavigationController;
   
-  
-  self.realtimeProtocol = [[GDDRealtimeDataToViewController alloc]initWithObjectsAndKeys:
+  __weak GDDRootViewController *weakSelf = self;
+  self.realtimeProtocol = [[GDDRealtimeDataToViewController alloc]
+                           initWithTransitionFromChildViewControllerToViewControllerBlock:^(NSInteger i) {
+                             [weakSelf transitionFromChildViewControllerToViewControllerByIndex:i];
+                           } ObjectsAndKeys:
                            classViewController,@"lesson25",
                            faviconsViewController,@"favorites25",
                            offlineFilesViewController,@"offlinedoc25",nil];
+  
   //记录和监听文件目录
-  __weak GDDRootViewController *weakSelf = self;
   [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"remotecontrol25"]
            onLoaded:^(GDRDocument *document) {
              GDRModel *mod = [document getModel];

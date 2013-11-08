@@ -8,7 +8,6 @@
 
 #import "GDDClassViewController_iPad.h"
 #import "GDDUIBarButtonItem.h"
-#import "GDR.h"
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -25,7 +24,6 @@
 @property (nonatomic, strong) id <GDJsonArray> currentPath;
 @property (nonatomic, strong) id <GDJsonString> currentID;
 
-@property (nonatomic, strong) GDRCollaborativeMap *cachePath;
 @end
 
 static NSString * FOLDERS_KEY = @"folders";
@@ -44,7 +42,6 @@ static NSString * FILES_KEY = @"files";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
   self.backBarButtonItem  = [[GDDUIBarButtonItem alloc] initWithRootTitle:@"我的课程" withClick:^{
     [self.currentPath remove:([self.currentPath length]-1)];
     [self.path set:@"currentpath" value:self.currentPath];
@@ -52,57 +49,6 @@ static NSString * FILES_KEY = @"files";
   }];
   self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
 }
--(void)loadRealtimeData:(GDRModel *)mod{
-  self.remotecontrolRoot = [mod getRoot];
-  [self loadLesson];
-}
-
-- (void)loadLesson{
-  __weak GDDClassViewController_iPad *weakSelf = self;
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-  weakSelf.path = [weakSelf.remotecontrolRoot get:@"path"];
-  weakSelf.currentPath = [weakSelf.path get:@"currentpath"];
-  weakSelf.currentID = [weakSelf.path get:@"currentdocid"];
-  
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"lesson25"]
-           onLoaded:^(GDRDocument *document) {
-             weakSelf.doc = document;
-             weakSelf.mod = [weakSelf.doc getModel];
-             weakSelf.root = [weakSelf.mod getRoot];
-             NSString *gdID = [[weakSelf.currentPath get:([weakSelf.currentPath length]-1)]getString];
-             weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
-             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
-               if ([event isSaving] || [event isPending]) {
-               }
-             }];
-             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
-             }];
-             weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
-             weakSelf.filesList = [weakSelf.root get:FILES_KEY];
-             [weakSelf.tableView reloadData];
-             
-             //设置该页面的back显示
-             id <GDJsonObject> changePath = [weakSelf.remotecontrolRoot get:@"path"];
-             id <GDJsonArray> changeCurrentPath = [changePath get:@"currentpath"];
-             NSMutableArray *historyIDs = [NSMutableArray array];
-             NSMutableArray *historyNames = [NSMutableArray array];
-             for (int i = 1; i<[changeCurrentPath length]; i++) {
-               NSString *gdID = [[changeCurrentPath get:(i)]getString];
-               [historyIDs addObject:gdID];
-               GDRCollaborativeMap *changeRoot = [weakSelf.mod getObjectWithNSString:gdID];
-               NSString *name = [changeRoot get:@"label"];
-               [historyNames addObject:name];
-             }
-             [self.backBarButtonItem updateAllHistoryListWithHistoryID:historyIDs titles:historyNames];
-             
-           } opt_initializer:^(GDRModel *model) {
-             
-           } opt_error:^(GDRError *error) {
-             
-           }];
-}
-
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
@@ -151,5 +97,53 @@ static NSString * FILES_KEY = @"files";
   [self.currentPath insert:[self.currentPath length] value:idStr];
   [self.path set:@"currentpath" value:self.currentPath];
   [self.remotecontrolRoot set:@"path" value:self.path];
+}
+#pragma mark - GDRealtimeProtocol Override
+-(void)loadRealtimeData:(GDRModel *)mod{
+  self.remotecontrolRoot = [mod getRoot];
+  
+  __weak GDDClassViewController_iPad *weakSelf = self;
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+  weakSelf.path = [weakSelf.remotecontrolRoot get:@"path"];
+  weakSelf.currentPath = [weakSelf.path get:@"currentpath"];
+  weakSelf.currentID = [weakSelf.path get:@"currentdocid"];
+  
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"lesson25"]
+           onLoaded:^(GDRDocument *document) {
+             weakSelf.doc = document;
+             weakSelf.mod = [weakSelf.doc getModel];
+             weakSelf.root = [weakSelf.mod getRoot];
+             NSString *gdID = [[weakSelf.currentPath get:([weakSelf.currentPath length]-1)]getString];
+             weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
+             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
+               if ([event isSaving] || [event isPending]) {
+               }
+             }];
+             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
+             }];
+             weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
+             weakSelf.filesList = [weakSelf.root get:FILES_KEY];
+             [weakSelf.tableView reloadData];
+             
+             //设置该页面的back显示
+             id <GDJsonObject> changePath = [weakSelf.remotecontrolRoot get:@"path"];
+             id <GDJsonArray> changeCurrentPath = [changePath get:@"currentpath"];
+             NSMutableArray *historyIDs = [NSMutableArray array];
+             NSMutableArray *historyNames = [NSMutableArray array];
+             for (int i = 1; i<[changeCurrentPath length]; i++) {
+               NSString *gdID = [[changeCurrentPath get:(i)]getString];
+               [historyIDs addObject:gdID];
+               GDRCollaborativeMap *changeRoot = [weakSelf.mod getObjectWithNSString:gdID];
+               NSString *name = [changeRoot get:@"label"];
+               [historyNames addObject:name];
+             }
+             [self.backBarButtonItem updateAllHistoryListWithHistoryID:historyIDs titles:historyNames];
+             
+           } opt_initializer:^(GDRModel *model) {
+             
+           } opt_error:^(GDRError *error) {
+             
+           }];
 }
 @end

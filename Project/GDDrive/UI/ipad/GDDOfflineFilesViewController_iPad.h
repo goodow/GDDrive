@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GDRealtimeProtocol.h"
 
-@interface GDDOfflineFilesViewController_iPad : UIViewController
+@interface GDDOfflineFilesViewController_iPad : UIViewController<UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol>
 
 @end

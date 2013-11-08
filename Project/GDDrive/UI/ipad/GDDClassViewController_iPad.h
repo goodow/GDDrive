@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "GDRealtimeProtocol.h"
-
 @interface GDDClassViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol>
 
 @end

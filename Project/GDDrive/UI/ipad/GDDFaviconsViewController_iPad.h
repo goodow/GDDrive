@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface GDDFaviconsViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate>
-
+#import "GDRealtimeProtocol.h"
+@interface GDDFaviconsViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol>
 @end
