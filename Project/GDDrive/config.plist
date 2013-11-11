@@ -8,5 +8,13 @@
 	<string>73bc32028ba556be71071349839931fc8136e63b</string>
 	<key>documentId</key>
 	<string>@tmp</string>
+	<key>remotecontrol</key>
+	<string>remotecontrol25</string>
+	<key>lesson</key>
+	<string>lesson25</string>
+	<key>favorites</key>
+	<string>favorites25</string>
+	<key>offlinedoc</key>
+	<string>offlinedoc25</string>
 </dict>
 </plist>

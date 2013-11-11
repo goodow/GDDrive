@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GDRAppDelegate.h"
+#import "GDDAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
   @autoreleasepool {
-    return UIApplicationMain(argc, argv, nil, NSStringFromClass([GDRAppDelegate class]));
+    return UIApplicationMain(argc, argv, nil, NSStringFromClass([GDDAppDelegate class]));
   }
 }

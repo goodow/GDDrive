@@ -8,5 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "GDRealtimeProtocol.h"
-@interface GDDFaviconsViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol>
+#import "PSStackedViewDelegate.h"
+@interface GDDFaviconsViewController_iPad : UIViewController <UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol,PSStackedViewDelegate>
 @end

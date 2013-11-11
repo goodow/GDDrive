@@ -102,7 +102,6 @@ static NSString * FILES_KEY = @"files";
 #pragma mark - GDRealtimeProtocol Override
 -(void)loadRealtimeData:(GDRModel *)mod{
   self.remotecontrolRoot = [mod getRoot];
-  
   __weak GDDOfflineFilesViewController_iPad *weakSelf = self;
   NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
   NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
@@ -110,7 +109,7 @@ static NSString * FILES_KEY = @"files";
   weakSelf.currentPath = [weakSelf.path get:@"currentpath"];
   weakSelf.currentID = [weakSelf.path get:@"currentdocid"];
   
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],@"offlinedoc25"]
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],[dictionary objectForKey:@"offlinedoc"]]
            onLoaded:^(GDRDocument *document) {
              weakSelf.doc = document;
              weakSelf.mod = [weakSelf.doc getModel];

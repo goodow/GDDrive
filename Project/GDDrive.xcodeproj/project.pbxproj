@@ -21,8 +21,10 @@
 		653A972F182B84DA000E4CAC /* GDDRealtimeDataToViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 653A972E182B84DA000E4CAC /* GDDRealtimeDataToViewController.m */; };
 		6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481A181767B800586C62 /* Main_iPad.storyboard */; };
 		6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481C181767B800586C62 /* Main_iPhone.storyboard */; };
-		65484822181767EB00586C62 /* GDDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65484821181767EB00586C62 /* GDDRootViewController.m */; };
 		65538B76181DFA18008D1DE0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65538B75181DFA18008D1DE0 /* config.plist */; };
+		65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D291830C3C3001FF93C /* GDDAppDelegate.m */; };
+		65818D421831D131001FF93C /* GDDDescriptionMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D401831D131001FF93C /* GDDDescriptionMessageViewController.m */; };
+		65818D431831D131001FF93C /* GDDDescriptionMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65818D411831D131001FF93C /* GDDDescriptionMessageViewController.xib */; };
 		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
 		65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */; };
 		65C488D6181A0AA7008E2EAF /* GDDClassViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */; };
@@ -30,6 +32,8 @@
 		65C488E0181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488DE181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib */; };
 		65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */; };
 		65C488EF181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */; };
+		65EA26571833138B00077EF4 /* GDDMenuRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA26551833138B00077EF4 /* GDDMenuRootController.m */; };
+		65EA26581833138B00077EF4 /* GDDMenuRootController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EA26561833138B00077EF4 /* GDDMenuRootController.xib */; };
 		773E070449474D719289E8E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763A91962AF40D8ABD7D5A7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -64,9 +68,12 @@
 		653A972E182B84DA000E4CAC /* GDDRealtimeDataToViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDRealtimeDataToViewController.m; sourceTree = "<group>"; };
 		6548481B181767B800586C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		6548481D181767B800586C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		65484820181767EB00586C62 /* GDDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDRootViewController.h; sourceTree = "<group>"; };
-		65484821181767EB00586C62 /* GDDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDRootViewController.m; sourceTree = "<group>"; };
 		65538B75181DFA18008D1DE0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		65818D281830C3C3001FF93C /* GDDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDAppDelegate.h; sourceTree = "<group>"; };
+		65818D291830C3C3001FF93C /* GDDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDAppDelegate.m; sourceTree = "<group>"; };
+		65818D3F1831D131001FF93C /* GDDDescriptionMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDescriptionMessageViewController.h; sourceTree = "<group>"; };
+		65818D401831D131001FF93C /* GDDDescriptionMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDDescriptionMessageViewController.m; sourceTree = "<group>"; };
+		65818D411831D131001FF93C /* GDDDescriptionMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDDescriptionMessageViewController.xib; sourceTree = "<group>"; };
 		65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDUIBarButtonItem.h; sourceTree = "<group>"; };
 		65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUIBarButtonItem.m; sourceTree = "<group>"; };
 		65C488D2181A0AA7008E2EAF /* GDDClassViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDClassViewController_iPad.h; sourceTree = "<group>"; };
@@ -78,6 +85,9 @@
 		65C488EB181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDOfflineFilesViewController_iPad.h; sourceTree = "<group>"; };
 		65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDOfflineFilesViewController_iPad.m; sourceTree = "<group>"; };
 		65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDOfflineFilesViewController_iPad.xib; sourceTree = "<group>"; };
+		65EA26541833138B00077EF4 /* GDDMenuRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootController.h; sourceTree = "<group>"; };
+		65EA26551833138B00077EF4 /* GDDMenuRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootController.m; sourceTree = "<group>"; };
+		65EA26561833138B00077EF4 /* GDDMenuRootController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootController.xib; sourceTree = "<group>"; };
 		8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -141,13 +151,14 @@
 		6534B2321815340F000F83E9 /* GDDrive */ = {
 			isa = PBXGroup;
 			children = (
+				65EA265B18331B0100077EF4 /* Util */,
 				65A63A471821EFFA004B6A18 /* CustomView */,
 				65484786181765C500586C62 /* UI */,
-				65484820181767EB00586C62 /* GDDRootViewController.h */,
-				65484821181767EB00586C62 /* GDDRootViewController.m */,
 				653A972C182B75AB000E4CAC /* GDRealtimeProtocol.h */,
 				653A972D182B84DA000E4CAC /* GDDRealtimeDataToViewController.h */,
 				653A972E182B84DA000E4CAC /* GDDRealtimeDataToViewController.m */,
+				65818D281830C3C3001FF93C /* GDDAppDelegate.h */,
+				65818D291830C3C3001FF93C /* GDDAppDelegate.m */,
 				6548481A181767B800586C62 /* Main_iPad.storyboard */,
 				6548481C181767B800586C62 /* Main_iPhone.storyboard */,
 				6534B2331815340F000F83E9 /* Supporting Files */,
@@ -287,6 +298,12 @@
 				65C488EB181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.h */,
 				65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */,
 				65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */,
+				65818D3F1831D131001FF93C /* GDDDescriptionMessageViewController.h */,
+				65818D401831D131001FF93C /* GDDDescriptionMessageViewController.m */,
+				65818D411831D131001FF93C /* GDDDescriptionMessageViewController.xib */,
+				65EA26541833138B00077EF4 /* GDDMenuRootController.h */,
+				65EA26551833138B00077EF4 /* GDDMenuRootController.m */,
+				65EA26561833138B00077EF4 /* GDDMenuRootController.xib */,
 			);
 			path = ipad;
 			sourceTree = "<group>";
@@ -305,6 +322,13 @@
 				65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		65EA265B18331B0100077EF4 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,8 +410,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6534B26818153577000F83E9 /* Images.xcassets in Resources */,
+				65818D431831D131001FF93C /* GDDDescriptionMessageViewController.xib in Resources */,
 				65C488D6181A0AA7008E2EAF /* GDDClassViewController_iPad.xib in Resources */,
 				65538B76181DFA18008D1DE0 /* config.plist in Resources */,
+				65EA26581833138B00077EF4 /* GDDMenuRootController.xib in Resources */,
 				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
 				6534B26718153577000F83E9 /* InfoPlist.strings in Resources */,
 				65C488E0181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib in Resources */,
@@ -445,11 +471,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */,
-				65484822181767EB00586C62 /* GDDRootViewController.m in Sources */,
+				65818D421831D131001FF93C /* GDDDescriptionMessageViewController.m in Sources */,
+				65EA26571833138B00077EF4 /* GDDMenuRootController.m in Sources */,
 				65C488DF181A203B008E2EAF /* GDDFaviconsViewController_iPad.m in Sources */,
 				65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 				653A972F182B84DA000E4CAC /* GDDRealtimeDataToViewController.m in Sources */,
+				65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */,
 				65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

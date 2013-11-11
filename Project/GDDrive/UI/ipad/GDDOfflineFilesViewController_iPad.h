@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GDRealtimeProtocol.h"
-
-@interface GDDOfflineFilesViewController_iPad : UIViewController<UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol>
+#import "PSStackedViewDelegate.h"
+@interface GDDOfflineFilesViewController_iPad : UIViewController<UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol,PSStackedViewDelegate>
 
 @end
