@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDDMenuRootController : UIViewController
+@interface GDDMenuRootController_ipad : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

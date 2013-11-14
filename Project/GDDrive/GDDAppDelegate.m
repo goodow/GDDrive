@@ -7,7 +7,7 @@
 //
 
 #import "GDDAppDelegate.h"
-#import "GDDMenuRootController.h"
+#import "GDDMenuRootController_ipad.h"
 #import "GDDRootViewController.h"
 
 @interface GDDAppDelegate ()
@@ -25,11 +25,11 @@
     self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
   }
   // set root controller as stack controller
-  GDDMenuRootController *menuController = [[GDDMenuRootController alloc] initWithNibName:@"GDDMenuRootController" bundle:nil];
+  GDDMenuRootController_ipad *menuController = [[GDDMenuRootController_ipad alloc] initWithNibName:@"GDDMenuRootController_ipad" bundle:nil];
   self.stackController = [[PSStackedViewController alloc] initWithRootViewController:menuController];
   
-  self.stackController.largeLeftInset = 150;
-  self.stackController.leftInset = 50;
+  self.stackController.largeLeftInset = 180;
+  self.stackController.leftInset = 60;
   self.stackController.enableBounces = NO;
   self.stackController.enableShadows = NO;
 

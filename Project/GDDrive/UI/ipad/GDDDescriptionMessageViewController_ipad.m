@@ -6,14 +6,14 @@
 //  Copyright (c) 2013年 大黄. All rights reserved.
 //
 
-#import "GDDDescriptionMessageViewController.h"
+#import "GDDDescriptionMessageViewController_ipad.h"
 #import "GDDAppDelegate.h"
 
-@interface GDDDescriptionMessageViewController ()
+@interface GDDDescriptionMessageViewController_ipad ()
 -(IBAction)dismissViewListener:(id)sender;
 @end
 
-@implementation GDDDescriptionMessageViewController
+@implementation GDDDescriptionMessageViewController_ipad
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

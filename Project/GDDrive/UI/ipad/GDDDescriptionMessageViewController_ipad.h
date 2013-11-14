@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDDDescriptionMessageViewController : UIViewController
+@interface GDDDescriptionMessageViewController_ipad : UIViewController
 
 - (void)presentViewController;
 - (void)dismissViewController;
