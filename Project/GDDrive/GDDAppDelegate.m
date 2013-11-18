@@ -31,7 +31,8 @@
   self.stackController.largeLeftInset = 180;
   self.stackController.leftInset = 60;
   self.stackController.enableBounces = NO;
-  self.stackController.enableShadows = NO;
+  self.stackController.enableShadows = YES;
+  self.stackController.defaultShadowWidth = 10.0f;
 
   self.window.rootViewController = self.stackController;
   [self.window makeKeyAndVisible];

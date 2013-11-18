@@ -116,12 +116,12 @@ static NSString * FILES_KEY = @"files";
              weakSelf.root = [weakSelf.mod getRoot];
              NSString *gdID = [[weakSelf.currentPath get:([weakSelf.currentPath length]-1)]getString];
              weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
-             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
-               if ([event isSaving] || [event isPending]) {
-               }
-             }];
-             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
-             }];
+//             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
+//               if ([event isSaving] || [event isPending]) {
+//               }
+//             }];
+//             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
+//             }];
              weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
              weakSelf.filesList = [weakSelf.root get:FILES_KEY];
              [weakSelf.tableView reloadData];

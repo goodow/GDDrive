@@ -30,10 +30,7 @@
 
 @property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
 @property (nonatomic, strong) GDRCollaborativeMap *cachePath;
-
 @property (nonatomic, strong) GDDMenuRootModel *menuRootModel;
-
-
 @end
 
 @implementation GDDMenuRootController_ipad

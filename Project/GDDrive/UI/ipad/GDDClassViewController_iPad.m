@@ -48,10 +48,37 @@ static NSString * FILES_KEY = @"files";
     [self.remotecontrolRoot set:@"path" value:self.path];
   }];
   self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
+//  [self loadRealtime];
 }
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
+}
+- (void)loadRealtime{
+
+  __weak GDDClassViewController_iPad *weakSelf = self;
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
+  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],[dictionary objectForKey:@"lesson"]]
+           onLoaded:^(GDRDocument *document) {
+             weakSelf.doc = document;
+             weakSelf.mod = [weakSelf.doc getModel];
+             weakSelf.root = [weakSelf.mod getRoot];
+
+             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
+               if ([event isSaving] || [event isPending]) {
+               }
+             }];
+             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
+               
+             }];
+             
+           } opt_initializer:^(GDRModel *model) {
+             
+           } opt_error:^(GDRError *error) {
+             
+           }];
+  
 }
 #pragma mark -tableView dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -62,9 +89,35 @@ static NSString * FILES_KEY = @"files";
 {
   return section == 0 ? [self.folderList length] : [self.filesList length];
 }
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 44.0)];
   
-  return section == 0 ? @"文件夹" : @"文件";
+  UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+  headerLabel.backgroundColor = [UIColor clearColor];
+  headerLabel.opaque = NO;
+  headerLabel.textColor = [UIColor grayColor];
+  headerLabel.highlightedTextColor = [UIColor whiteColor];
+  headerLabel.font = [UIFont boldSystemFontOfSize:16];
+  headerLabel.frame = CGRectMake(0.0, 0.0, 300.0, 44.0);
+  headerLabel.text = section ? @"文件" : @"文件夹";
+  [customView addSubview:headerLabel];
+  
+  UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectZero];
+  timeLable.backgroundColor = [UIColor clearColor];
+  timeLable.opaque = NO;
+  timeLable.textColor = [UIColor grayColor];
+  timeLable.highlightedTextColor = [UIColor whiteColor];
+  timeLable.font = [UIFont boldSystemFontOfSize:16];
+  timeLable.frame = CGRectMake(400.0, 0.0, 300.0, 44.0);
+  timeLable.text = @"上次修改时间";
+  [customView addSubview:timeLable];
+  
+  return customView;
+}
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  return 44.0;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -111,17 +164,19 @@ static NSString * FILES_KEY = @"files";
            onLoaded:^(GDRDocument *document) {
              weakSelf.doc = document;
              weakSelf.mod = [weakSelf.doc getModel];
-             weakSelf.root = [weakSelf.mod getRoot];
              NSString *gdID = [[weakSelf.currentPath get:([weakSelf.currentPath length]-1)]getString];
              weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
-             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
-               if ([event isSaving] || [event isPending]) {
-               }
-             }];
-             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
-             }];
              weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
              weakSelf.filesList = [weakSelf.root get:FILES_KEY];
+             id block = ^(GDRBaseModelEvent *event) {
+               [weakSelf.tableView reloadData];
+             };
+             [weakSelf.folderList addValuesAddedListener:block];
+             [weakSelf.folderList addValuesRemovedListener:block];
+             [weakSelf.folderList addValuesSetListener:block];
+             [weakSelf.filesList addValuesAddedListener:block];
+             [weakSelf.filesList addValuesRemovedListener:block];
+             [weakSelf.filesList addValuesSetListener:block];
              [weakSelf.tableView reloadData];
              
              //设置该页面的back显示
