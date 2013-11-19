@@ -8,6 +8,8 @@
 
 #import "GDDClassViewController_iPad.h"
 #import "GDDUIBarButtonItem.h"
+#import "GDDContentListCell_ipad.h"
+#import "Boolean.h"
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -92,7 +94,6 @@ static NSString * FILES_KEY = @"files";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
   UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 44.0)];
-  
   UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
   headerLabel.backgroundColor = [UIColor clearColor];
   headerLabel.opaque = NO;
@@ -102,17 +103,6 @@ static NSString * FILES_KEY = @"files";
   headerLabel.frame = CGRectMake(0.0, 0.0, 300.0, 44.0);
   headerLabel.text = section ? @"文件" : @"文件夹";
   [customView addSubview:headerLabel];
-  
-  UILabel * timeLable = [[UILabel alloc] initWithFrame:CGRectZero];
-  timeLable.backgroundColor = [UIColor clearColor];
-  timeLable.opaque = NO;
-  timeLable.textColor = [UIColor grayColor];
-  timeLable.highlightedTextColor = [UIColor whiteColor];
-  timeLable.font = [UIFont boldSystemFontOfSize:16];
-  timeLable.frame = CGRectMake(400.0, 0.0, 300.0, 44.0);
-  timeLable.text = @"上次修改时间";
-  [customView addSubview:timeLable];
-  
   return customView;
 }
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -121,34 +111,53 @@ static NSString * FILES_KEY = @"files";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *CellIdentifier = @"CollaborativeListCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  static NSString *CellIdentifier = @"GDDContentListCell_ipad";
+  GDDContentListCell_ipad *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    UINib *nibObject =  [UINib nibWithNibName:@"GDDContentListCell_ipad" bundle:nil];
+    NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
+    cell = [nibObjects objectAtIndex:0];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
   }
+  
   if (indexPath.section == 0) {
     if ([self.folderList length]>0) {
       GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-      cell.textLabel.text = [map get:@"label"];
+      [cell setLabel:[map get:@"label"]];
+      BOOL isclass = [[map get:@"isclass"]booleanValue];
+      if (isclass) {
+        [cell setContentType:@"noClass"];
+      }else{
+        [cell setContentType:@"isClass"];
+      }
     }
     return cell;
   }else{
     if ([self.filesList length]>0) {
       GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
-      cell.textLabel.text = [map get:@"label"];
+      [cell setLabel:[map get:@"label"]];
+      [cell setContentType:[map get:@"type"]];
     }
     return cell;
   }
+
 }
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  //选择文件
-  GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-  id <GDJsonString> idStr = [GDJson createString:[map getId]];
-  [self.currentPath insert:[self.currentPath length] value:idStr];
-  [self.path set:@"currentpath" value:self.currentPath];
-  [self.remotecontrolRoot set:@"path" value:self.path];
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  //选择文件夹
+  if (indexPath.section == 0) {
+    GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
+    id <GDJsonString> idStr = [GDJson createString:[map getId]];
+    [self.currentPath insert:[self.currentPath length] value:idStr];
+    [self.path set:@"currentpath" value:self.currentPath];
+    [self.remotecontrolRoot set:@"path" value:self.path];
+  }else{
+    
+  }
+  
 }
 #pragma mark - GDRealtimeProtocol Override
 -(void)loadRealtimeData:(GDRModel *)mod{

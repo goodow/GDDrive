@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self presentViewController];
+//  [self presentViewController];
   // Do any additional setup after loading the view from its nib.
 }
 

@@ -26,6 +26,8 @@
 		655927BA18349FEE0031EB1F /* GDDMenuRootCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655927B918349FEE0031EB1F /* GDDMenuRootCell_ipad.m */; };
 		655927BC1834A0090031EB1F /* GDDMenuRootCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655927BB1834A0090031EB1F /* GDDMenuRootCell_ipad.xib */; };
 		655927BE1834B42E0031EB1F /* favicons_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 655927BD1834B42E0031EB1F /* favicons_icon.png */; };
+		655DAB1B183B003000703FA4 /* GDDContentListCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB1A183B003000703FA4 /* GDDContentListCell_ipad.m */; };
+		655DAB1D183B004D00703FA4 /* GDDContentListCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB1C183B004D00703FA4 /* GDDContentListCell_ipad.xib */; };
 		6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD591835B3BE0008F709 /* class_icon.png */; };
 		6563BD5C1835B3BE0008F709 /* offline_files_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD5A1835B3BE0008F709 /* offline_files_icon.png */; };
 		6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563BD811835C8EB0008F709 /* GDDMenuRootModel.m */; };
@@ -82,6 +84,9 @@
 		655927B918349FEE0031EB1F /* GDDMenuRootCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootCell_ipad.m; sourceTree = "<group>"; };
 		655927BB1834A0090031EB1F /* GDDMenuRootCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootCell_ipad.xib; sourceTree = "<group>"; };
 		655927BD1834B42E0031EB1F /* favicons_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favicons_icon.png; sourceTree = "<group>"; };
+		655DAB19183B003000703FA4 /* GDDContentListCell_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDContentListCell_ipad.h; sourceTree = "<group>"; };
+		655DAB1A183B003000703FA4 /* GDDContentListCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDContentListCell_ipad.m; sourceTree = "<group>"; };
+		655DAB1C183B004D00703FA4 /* GDDContentListCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDContentListCell_ipad.xib; sourceTree = "<group>"; };
 		6563BD591835B3BE0008F709 /* class_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_icon.png; sourceTree = "<group>"; };
 		6563BD5A1835B3BE0008F709 /* offline_files_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offline_files_icon.png; sourceTree = "<group>"; };
 		6563BD801835C8EB0008F709 /* GDDMenuRootModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootModel.h; sourceTree = "<group>"; };
@@ -310,6 +315,9 @@
 		65484787181765C500586C62 /* ipad */ = {
 			isa = PBXGroup;
 			children = (
+				655DAB19183B003000703FA4 /* GDDContentListCell_ipad.h */,
+				655DAB1A183B003000703FA4 /* GDDContentListCell_ipad.m */,
+				655DAB1C183B004D00703FA4 /* GDDContentListCell_ipad.xib */,
 				65C488D2181A0AA7008E2EAF /* GDDClassViewController_iPad.h */,
 				65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */,
 				65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */,
@@ -452,6 +460,7 @@
 				65538B76181DFA18008D1DE0 /* config.plist in Resources */,
 				65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */,
 				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
+				655DAB1D183B004D00703FA4 /* GDDContentListCell_ipad.xib in Resources */,
 				6534B26718153577000F83E9 /* InfoPlist.strings in Resources */,
 				65C488E0181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib in Resources */,
 				6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */,
@@ -509,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655DAB1B183B003000703FA4 /* GDDContentListCell_ipad.m in Sources */,
 				65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */,
