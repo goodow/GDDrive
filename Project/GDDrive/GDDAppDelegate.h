@@ -8,12 +8,14 @@
 
 #import "GDRAppDelegate.h"
 #import "PSStackedView.h"
+#import "GDDFlickrEngine.h"
 
 #define GDDRiveDelegate ((GDDAppDelegate *)[[UIApplication sharedApplication] delegate])
+#define GDDConfigPlist(__KEY__) [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"]]objectForKey:__KEY__]
+#define GDDMultimediaHeadURL(__ID__) [NSString stringWithFormat:@"http://%@/serve?id=%@", GDDConfigPlist(@"service"),__ID__]
 
 @class PSStackedViewController;
 @interface GDDAppDelegate : GDRAppDelegate
-
 @property (nonatomic, strong, readonly) PSStackedViewController *stackController;
-
+@property (nonatomic, strong, readonly) GDDFlickrEngine *flickrEngine;
 @end

@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 大黄. All rights reserved.
 //
 
+#import <MediaPlayer/MediaPlayer.h> 
 #import "GDDDescriptionMessageViewController_ipad.h"
 #import "GDDAppDelegate.h"
 
@@ -40,8 +41,10 @@
   [GDDRiveDelegate.window addSubview:self.view];
   CGRect rect = [[UIScreen mainScreen] bounds];
   self.view.center = CGPointMake(rect.size.width, rect.size.height/2);
+  self.view.alpha = 0.0f;
   [UIView animateWithDuration:0.2f animations:^{
     self.view.center = CGPointMake(rect.size.width/2, rect.size.height/2);
+    self.view.alpha = 1.0f;
   } completion:^(BOOL finished) {
     
   }];
@@ -49,8 +52,10 @@
 -(void)dismissViewController{
   CGRect rect = [[UIScreen mainScreen] bounds];
   self.view.center = CGPointMake(rect.size.width/2, rect.size.height/2);
+  self.view.alpha = 1.0f;
   [UIView animateWithDuration:0.2f animations:^{
     self.view.center = CGPointMake(rect.size.width, rect.size.height/2);
+    self.view.alpha = 0.0f;
   } completion:^(BOOL finished) {
     [self.view removeFromSuperview];
   }];

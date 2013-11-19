@@ -57,12 +57,18 @@ PODS:
   - J2ObjC (0.8.6.1):
     - J2ObjC/lib/jre
   - J2ObjC/lib/jre (0.8.6.1)
+  - MKNetworkKit (0.87):
+    - Reachability (~> 3.1.0)
   - PSStackedView (1.0)
+  - Reachability (3.1.1)
   - SBJson (3.2)
+  - vfrReader (2.6.2)
 
 DEPENDENCIES:
   - GDRealtime (from `https://github.com/goodow/GDRealtime.git`)
+  - MKNetworkKit (~> 0.87)
   - PSStackedView (~> 1.0)
+  - vfrReader (~> 2.6.2)
 
 EXTERNAL SOURCES:
   GDRealtime:
@@ -76,7 +82,10 @@ SPEC CHECKSUMS:
   gtm-oauth2: 92e23fbb4ab77c4f441ffc95e2bbbf174ea589c1
   GTMHTTPFetcher: b0af09f18ec87e7a5edeffcc8cb6449fdbf0e83f
   J2ObjC: bea4c24af35100985485c173958f1189aa0f0f6b
+  MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
   PSStackedView: 734c9bd6fdae2576aa9403edef60ffcb5873a90e
-  SBJson: e60b4dc22448c2ae1e754b523a4ab53408e85c8d
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  SBJson: abc2bf2baef456d5dae213f9826fe2b6fdf19861
+  vfrReader: b6b005af559b8430dad01120f00fb341bdc8a420
 
 COCOAPODS: 0.27.1

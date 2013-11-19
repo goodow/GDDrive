@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>service</key>
+	<string>61.177.139.216:8880</string>
 	<key>userId</key>
 	<string>087768137213776651506</string>
 	<key>token</key>

@@ -23,11 +23,18 @@
 		6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481C181767B800586C62 /* Main_iPhone.storyboard */; };
 		65538B76181DFA18008D1DE0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65538B75181DFA18008D1DE0 /* config.plist */; };
 		655927B718349AC10031EB1F /* GDDColorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 655927B618349AC10031EB1F /* GDDColorUtils.m */; };
-		655927BA18349FEE0031EB1F /* GDDMenuRootCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655927B918349FEE0031EB1F /* GDDMenuRootCell_ipad.m */; };
-		655927BC1834A0090031EB1F /* GDDMenuRootCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655927BB1834A0090031EB1F /* GDDMenuRootCell_ipad.xib */; };
 		655927BE1834B42E0031EB1F /* favicons_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 655927BD1834B42E0031EB1F /* favicons_icon.png */; };
-		655DAB1B183B003000703FA4 /* GDDContentListCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB1A183B003000703FA4 /* GDDContentListCell_ipad.m */; };
-		655DAB1D183B004D00703FA4 /* GDDContentListCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB1C183B004D00703FA4 /* GDDContentListCell_ipad.xib */; };
+		655DAB27183B5B4300703FA4 /* GDDContentListCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB22183B5B4300703FA4 /* GDDContentListCell_ipad.m */; };
+		655DAB28183B5B4300703FA4 /* GDDContentListCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB23183B5B4300703FA4 /* GDDContentListCell_ipad.xib */; };
+		655DAB29183B5B4300703FA4 /* GDDMenuRootCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB25183B5B4300703FA4 /* GDDMenuRootCell_ipad.m */; };
+		655DAB2A183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB26183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib */; };
+		655DAB2D183B637200703FA4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 655DAB2C183B637200703FA4 /* MediaPlayer.framework */; };
+		655DAB37183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB35183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.m */; };
+		655DAB38183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB36183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.xib */; };
+		655DAB3C183C49D300703FA4 /* loading.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB3B183C49D300703FA4 /* loading.jpg */; };
+		655DAB43183C51F300703FA4 /* GDDEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB42183C51F300703FA4 /* GDDEngine.m */; };
+		655DAB49183C55C800703FA4 /* GDDFlickrEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB48183C55C800703FA4 /* GDDFlickrEngine.m */; };
+		655DAB4D183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB4C183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.m */; };
 		6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD591835B3BE0008F709 /* class_icon.png */; };
 		6563BD5C1835B3BE0008F709 /* offline_files_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD5A1835B3BE0008F709 /* offline_files_icon.png */; };
 		6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563BD811835C8EB0008F709 /* GDDMenuRootModel.m */; };
@@ -80,13 +87,24 @@
 		65538B75181DFA18008D1DE0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		655927B518349AC10031EB1F /* GDDColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDColorUtils.h; sourceTree = "<group>"; };
 		655927B618349AC10031EB1F /* GDDColorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDColorUtils.m; sourceTree = "<group>"; };
-		655927B818349FEE0031EB1F /* GDDMenuRootCell_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootCell_ipad.h; sourceTree = "<group>"; };
-		655927B918349FEE0031EB1F /* GDDMenuRootCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootCell_ipad.m; sourceTree = "<group>"; };
-		655927BB1834A0090031EB1F /* GDDMenuRootCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootCell_ipad.xib; sourceTree = "<group>"; };
 		655927BD1834B42E0031EB1F /* favicons_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favicons_icon.png; sourceTree = "<group>"; };
-		655DAB19183B003000703FA4 /* GDDContentListCell_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDContentListCell_ipad.h; sourceTree = "<group>"; };
-		655DAB1A183B003000703FA4 /* GDDContentListCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDContentListCell_ipad.m; sourceTree = "<group>"; };
-		655DAB1C183B004D00703FA4 /* GDDContentListCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDContentListCell_ipad.xib; sourceTree = "<group>"; };
+		655DAB21183B5B4300703FA4 /* GDDContentListCell_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDContentListCell_ipad.h; sourceTree = "<group>"; };
+		655DAB22183B5B4300703FA4 /* GDDContentListCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDContentListCell_ipad.m; sourceTree = "<group>"; };
+		655DAB23183B5B4300703FA4 /* GDDContentListCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDContentListCell_ipad.xib; sourceTree = "<group>"; };
+		655DAB24183B5B4300703FA4 /* GDDMenuRootCell_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootCell_ipad.h; sourceTree = "<group>"; };
+		655DAB25183B5B4300703FA4 /* GDDMenuRootCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootCell_ipad.m; sourceTree = "<group>"; };
+		655DAB26183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootCell_ipad.xib; sourceTree = "<group>"; };
+		655DAB2C183B637200703FA4 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		655DAB34183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GDDPlayPNGAndJPGViewController_ipad.h; path = GDDrive/UI/ipad/GDDPlayPNGAndJPGViewController_ipad.h; sourceTree = SOURCE_ROOT; };
+		655DAB35183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GDDPlayPNGAndJPGViewController_ipad.m; path = GDDrive/UI/ipad/GDDPlayPNGAndJPGViewController_ipad.m; sourceTree = SOURCE_ROOT; };
+		655DAB36183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GDDPlayPNGAndJPGViewController_ipad.xib; path = GDDrive/UI/ipad/GDDPlayPNGAndJPGViewController_ipad.xib; sourceTree = SOURCE_ROOT; };
+		655DAB3B183C49D300703FA4 /* loading.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading.jpg; sourceTree = "<group>"; };
+		655DAB41183C51F300703FA4 /* GDDEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDEngine.h; sourceTree = "<group>"; };
+		655DAB42183C51F300703FA4 /* GDDEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDEngine.m; sourceTree = "<group>"; };
+		655DAB47183C55C800703FA4 /* GDDFlickrEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFlickrEngine.h; sourceTree = "<group>"; };
+		655DAB48183C55C800703FA4 /* GDDFlickrEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFlickrEngine.m; sourceTree = "<group>"; };
+		655DAB4B183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		655DAB4C183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
 		6563BD591835B3BE0008F709 /* class_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_icon.png; sourceTree = "<group>"; };
 		6563BD5A1835B3BE0008F709 /* offline_files_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offline_files_icon.png; sourceTree = "<group>"; };
 		6563BD801835C8EB0008F709 /* GDDMenuRootModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootModel.h; sourceTree = "<group>"; };
@@ -118,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655DAB2D183B637200703FA4 /* MediaPlayer.framework in Frameworks */,
 				6534B22F1815340F000F83E9 /* CoreGraphics.framework in Frameworks */,
 				6534B2311815340F000F83E9 /* UIKit.framework in Frameworks */,
 				6534B22D1815340F000F83E9 /* Foundation.framework in Frameworks */,
@@ -161,6 +180,7 @@
 		6534B22B1815340F000F83E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				655DAB2C183B637200703FA4 /* MediaPlayer.framework */,
 				6534B22C1815340F000F83E9 /* Foundation.framework */,
 				6534B22E1815340F000F83E9 /* CoreGraphics.framework */,
 				6534B2301815340F000F83E9 /* UIKit.framework */,
@@ -173,6 +193,7 @@
 		6534B2321815340F000F83E9 /* GDDrive */ = {
 			isa = PBXGroup;
 			children = (
+				655DAB40183C51C500703FA4 /* NetWork */,
 				65EA265B18331B0100077EF4 /* Util */,
 				65A63A471821EFFA004B6A18 /* CustomView */,
 				6563BD581835B0E10008F709 /* Model */,
@@ -232,6 +253,7 @@
 		6548476E181765BA00586C62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				655DAB3B183C49D300703FA4 /* loading.jpg */,
 				6563BD591835B3BE0008F709 /* class_icon.png */,
 				6563BD5A1835B3BE0008F709 /* offline_files_icon.png */,
 				655927BD1834B42E0031EB1F /* favicons_icon.png */,
@@ -315,9 +337,7 @@
 		65484787181765C500586C62 /* ipad */ = {
 			isa = PBXGroup;
 			children = (
-				655DAB19183B003000703FA4 /* GDDContentListCell_ipad.h */,
-				655DAB1A183B003000703FA4 /* GDDContentListCell_ipad.m */,
-				655DAB1C183B004D00703FA4 /* GDDContentListCell_ipad.xib */,
+				655DAB2E183B823300703FA4 /* GDDPlayMultimediaViewController_ipad */,
 				65C488D2181A0AA7008E2EAF /* GDDClassViewController_iPad.h */,
 				65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */,
 				65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */,
@@ -333,9 +353,6 @@
 				65EA26541833138B00077EF4 /* GDDMenuRootController_ipad.h */,
 				65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */,
 				65EA26561833138B00077EF4 /* GDDMenuRootController_ipad.xib */,
-				655927B818349FEE0031EB1F /* GDDMenuRootCell_ipad.h */,
-				655927B918349FEE0031EB1F /* GDDMenuRootCell_ipad.m */,
-				655927BB1834A0090031EB1F /* GDDMenuRootCell_ipad.xib */,
 			);
 			path = ipad;
 			sourceTree = "<group>";
@@ -345,6 +362,37 @@
 			children = (
 			);
 			path = iphone;
+			sourceTree = "<group>";
+		};
+		655DAB2E183B823300703FA4 /* GDDPlayMultimediaViewController_ipad */ = {
+			isa = PBXGroup;
+			children = (
+				655DAB34183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.h */,
+				655DAB35183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.m */,
+				655DAB36183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.xib */,
+			);
+			path = GDDPlayMultimediaViewController_ipad;
+			sourceTree = "<group>";
+		};
+		655DAB40183C51C500703FA4 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				655DAB41183C51F300703FA4 /* GDDEngine.h */,
+				655DAB42183C51F300703FA4 /* GDDEngine.m */,
+				655DAB47183C55C800703FA4 /* GDDFlickrEngine.h */,
+				655DAB48183C55C800703FA4 /* GDDFlickrEngine.m */,
+				655DAB4A183C619A00703FA4 /* GDDPlayMultimediaUtils */,
+			);
+			path = NetWork;
+			sourceTree = "<group>";
+		};
+		655DAB4A183C619A00703FA4 /* GDDPlayMultimediaUtils */ = {
+			isa = PBXGroup;
+			children = (
+				655DAB4B183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.h */,
+				655DAB4C183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.m */,
+			);
+			path = GDDPlayMultimediaUtils;
 			sourceTree = "<group>";
 		};
 		6563BD581835B0E10008F709 /* Model */ = {
@@ -359,6 +407,12 @@
 		65A63A471821EFFA004B6A18 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				655DAB21183B5B4300703FA4 /* GDDContentListCell_ipad.h */,
+				655DAB22183B5B4300703FA4 /* GDDContentListCell_ipad.m */,
+				655DAB23183B5B4300703FA4 /* GDDContentListCell_ipad.xib */,
+				655DAB24183B5B4300703FA4 /* GDDMenuRootCell_ipad.h */,
+				655DAB25183B5B4300703FA4 /* GDDMenuRootCell_ipad.m */,
+				655DAB26183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib */,
 				65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */,
 				65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */,
 			);
@@ -453,6 +507,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6563BD5C1835B3BE0008F709 /* offline_files_icon.png in Resources */,
+				655DAB2A183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib in Resources */,
+				655DAB38183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.xib in Resources */,
 				6534B26818153577000F83E9 /* Images.xcassets in Resources */,
 				655927BE1834B42E0031EB1F /* favicons_icon.png in Resources */,
 				65818D431831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib in Resources */,
@@ -460,13 +516,13 @@
 				65538B76181DFA18008D1DE0 /* config.plist in Resources */,
 				65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */,
 				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
-				655DAB1D183B004D00703FA4 /* GDDContentListCell_ipad.xib in Resources */,
 				6534B26718153577000F83E9 /* InfoPlist.strings in Resources */,
+				655DAB28183B5B4300703FA4 /* GDDContentListCell_ipad.xib in Resources */,
 				65C488E0181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib in Resources */,
 				6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */,
 				6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */,
+				655DAB3C183C49D300703FA4 /* loading.jpg in Resources */,
 				65C488EF181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib in Resources */,
-				655927BC1834A0090031EB1F /* GDDMenuRootCell_ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,18 +574,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				655DAB1B183B003000703FA4 /* GDDContentListCell_ipad.m in Sources */,
+				655DAB37183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.m in Sources */,
 				65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */,
+				655DAB27183B5B4300703FA4 /* GDDContentListCell_ipad.m in Sources */,
 				65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */,
-				655927BA18349FEE0031EB1F /* GDDMenuRootCell_ipad.m in Sources */,
 				65C488DF181A203B008E2EAF /* GDDFaviconsViewController_iPad.m in Sources */,
 				65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
+				655DAB49183C55C800703FA4 /* GDDFlickrEngine.m in Sources */,
+				655DAB29183B5B4300703FA4 /* GDDMenuRootCell_ipad.m in Sources */,
 				653A972F182B84DA000E4CAC /* GDDRealtimeDataToViewController.m in Sources */,
+				655DAB43183C51F300703FA4 /* GDDEngine.m in Sources */,
 				65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */,
 				65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */,
+				655DAB4D183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				655927B718349AC10031EB1F /* GDDColorUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

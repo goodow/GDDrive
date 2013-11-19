@@ -10,6 +10,7 @@
 #import "GDDUIBarButtonItem.h"
 #import "GDDContentListCell_ipad.h"
 #import "Boolean.h"
+#import "GDDPlayPNGAndJPGViewController_ipad.h"
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) id <GDJsonArray> currentPath;
 @property (nonatomic, strong) id <GDJsonString> currentID;
 
+@property (nonatomic, strong) GDDPlayPNGAndJPGViewController_ipad *playPNGAndJPGViewController;
 @end
 
 static NSString * FOLDERS_KEY = @"folders";
@@ -50,23 +52,21 @@ static NSString * FILES_KEY = @"files";
     [self.remotecontrolRoot set:@"path" value:self.path];
   }];
   self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
-//  [self loadRealtime];
+  //  [self loadRealtime];
 }
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
 }
 - (void)loadRealtime{
-
+  
   __weak GDDClassViewController_iPad *weakSelf = self;
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],[dictionary objectForKey:@"lesson"]]
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"lesson")]
            onLoaded:^(GDRDocument *document) {
              weakSelf.doc = document;
              weakSelf.mod = [weakSelf.doc getModel];
              weakSelf.root = [weakSelf.mod getRoot];
-
+             
              [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
                if ([event isSaving] || [event isPending]) {
                }
@@ -141,7 +141,7 @@ static NSString * FILES_KEY = @"files";
     }
     return cell;
   }
-
+  
 }
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,6 +155,11 @@ static NSString * FILES_KEY = @"files";
     [self.path set:@"currentpath" value:self.currentPath];
     [self.remotecontrolRoot set:@"path" value:self.path];
   }else{
+    //这里先认为只是要播放png jpg资源
+    GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
+    self.playPNGAndJPGViewController = [[GDDPlayPNGAndJPGViewController_ipad alloc]initWithNibName:@"GDDPlayPNGAndJPGViewController_ipad" bundle:nil];
+    [self presentViewController:self.playPNGAndJPGViewController animated:YES completion:nil];
+    [self.playPNGAndJPGViewController loadMultimediaWith:map];
     
   }
   
@@ -163,13 +168,11 @@ static NSString * FILES_KEY = @"files";
 -(void)loadRealtimeData:(GDRModel *)mod{
   self.remotecontrolRoot = [mod getRoot];
   __weak GDDClassViewController_iPad *weakSelf = self;
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
   weakSelf.path = [weakSelf.remotecontrolRoot get:@"path"];
   weakSelf.currentPath = [weakSelf.path get:@"currentpath"];
   weakSelf.currentID = [weakSelf.path get:@"currentdocid"];
   
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],[dictionary objectForKey:@"lesson"]]
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"lesson")]
            onLoaded:^(GDRDocument *document) {
              weakSelf.doc = document;
              weakSelf.mod = [weakSelf.doc getModel];

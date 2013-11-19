@@ -9,9 +9,11 @@
 #import "GDDAppDelegate.h"
 #import "GDDMenuRootController_ipad.h"
 #import "GDDRootViewController.h"
+#import "UIImageView+MKNetworkKitAdditions.h"
 
 @interface GDDAppDelegate ()
 @property (nonatomic, strong) PSStackedViewController *stackController;
+@property (nonatomic, strong) GDDFlickrEngine *flickrEngine;
 @end
 
 @implementation GDDAppDelegate
@@ -36,6 +38,10 @@
 
   self.window.rootViewController = self.stackController;
   [self.window makeKeyAndVisible];
+  self.flickrEngine = [[GDDFlickrEngine alloc] initWithHostName:GDDConfigPlist(@"service")];
+  [self.flickrEngine useCache];
+  [UIImageView setDefaultEngine:self.flickrEngine];
+  
   return YES;
 }
 

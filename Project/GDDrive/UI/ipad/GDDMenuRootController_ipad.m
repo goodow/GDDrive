@@ -42,11 +42,9 @@
   self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png"] labels:@[@"我的课程", @"我的收藏", @"我的下载"]];
   
   self.childViewController = [NSMutableArray array];
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
   //  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
   [GDRRealtime setServerAddress:@"http://61.177.139.216:8084"];
-  [GDRRealtime authorize:[dictionary objectForKey:@"userId"] token:[dictionary objectForKey:@"token"]];
+  [GDRRealtime authorize:GDDConfigPlist(@"userId") token:GDDConfigPlist(@"token")];
   
   GDDClassViewController_iPad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDClassViewController_iPad" bundle:nil];
   self.classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
@@ -65,12 +63,12 @@
                            initWithTransitionFromChildViewControllerToViewControllerBlock:^(NSInteger i) {
                              [weakSelf transitionChildViewControllerByIndex:i];
                            } ObjectsAndKeys:
-                           classViewController,[dictionary objectForKey:@"lesson"],
-                           faviconsViewController,[dictionary objectForKey:@"favorites"],
-                           offlineFilesViewController,[dictionary objectForKey:@"offlinedoc"],nil];
+                           classViewController,GDDConfigPlist(@"lesson"),
+                           faviconsViewController,GDDConfigPlist(@"favorites"),
+                           offlineFilesViewController,GDDConfigPlist(@"offlinedoc"),nil];
   
   //记录和监听文件目录
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],[dictionary objectForKey:@"remotecontrol"]]
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"remotecontrol")]
            onLoaded:^(GDRDocument *document) {
              GDRModel *mod = [document getModel];
              weakSelf.cachePath = [[mod getRoot] get:@"path"];

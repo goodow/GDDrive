@@ -103,13 +103,10 @@ static NSString * FILES_KEY = @"files";
 -(void)loadRealtimeData:(GDRModel *)mod{
   self.remotecontrolRoot = [mod getRoot];
   __weak GDDFaviconsViewController_iPad *weakSelf = self;
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
   weakSelf.path = [weakSelf.remotecontrolRoot get:@"path"];
   weakSelf.currentPath = [weakSelf.path get:@"currentpath"];
   weakSelf.currentID = [weakSelf.path get:@"currentdocid"];
-  
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],[dictionary objectForKey:@"favorites"]]
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"favorites")]
            onLoaded:^(GDRDocument *document) {
              weakSelf.doc = document;
              weakSelf.mod = [weakSelf.doc getModel];
