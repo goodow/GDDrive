@@ -16,8 +16,7 @@
 @property (nonatomic, strong) GDRDocument *doc;
 @property (nonatomic, strong) GDRModel *mod;
 @property (nonatomic, strong) GDRCollaborativeMap *root;
-@property (nonatomic, strong) GDRCollaborativeList *folderList;
-@property (nonatomic, strong) GDRCollaborativeList *filesList;
+@property (nonatomic, strong) GDRCollaborativeList *offLineList;
 
 @property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
 @property (nonatomic, strong) id <GDJsonObject> path;
@@ -57,15 +56,15 @@ static NSString * FILES_KEY = @"files";
 #pragma mark -tableView dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 2;
+  return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return section == 0 ? [self.folderList length] : [self.filesList length];
+  return [self.offLineList length];
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
   
-  return section == 0 ? @"文件夹" : @"文件";
+  return @"";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -74,25 +73,18 @@ static NSString * FILES_KEY = @"files";
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
   }
-  if (indexPath.section == 0) {
-    if ([self.folderList length]>0) {
-      GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-      cell.textLabel.text = [map get:@"label"];
-    }
-    return cell;
-  }else{
-    if ([self.filesList length]>0) {
-      GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
-      cell.textLabel.text = [map get:@"label"];
-    }
-    return cell;
+
+  if ([self.offLineList length]>0) {
+    GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
+    cell.textLabel.text = [map get:@"label"];
   }
+  return cell;
 }
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   //选择文件
-  GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
+  GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
   id <GDJsonString> idStr = [GDJson createString:[map getId]];
   [self.currentPath insert:[self.currentPath length] value:idStr];
   [self.path set:@"currentpath" value:self.currentPath];
@@ -119,8 +111,7 @@ static NSString * FILES_KEY = @"files";
 //             }];
 //             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
 //             }];
-             weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
-             weakSelf.filesList = [weakSelf.root get:FILES_KEY];
+             weakSelf.offLineList = [weakSelf.root get:@"offline"];
              [weakSelf.tableView reloadData];
              
              //设置该页面的back显示

@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface GDDContentListCell_ipad : UITableViewCell
-
--(void)setLabel:(NSString *)text;
--(void)setContentType:(NSString *)aContentType;
+-(void)setCellData:(GDRCollaborativeMap *)aMap;
 @end

@@ -8,6 +8,7 @@
 
 #import "GDDPlayPNGAndJPGViewController_ipad.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
+#import "GDDGenreImageDictionary.h"
 
 @interface GDDPlayPNGAndJPGViewController_ipad ()
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
@@ -47,8 +48,14 @@
 }
 
 -(void)loadMultimediaWith:(GDRCollaborativeMap *)map{
-  [self.imageView setImageFromURL:[NSURL URLWithString:GDDMultimediaHeadURL([map get:@"id"])]
-                 placeHolderImage:[UIImage imageNamed:@"loading.jpg"]];
+  if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
+    [self.imageView setImageFromURL:[NSURL URLWithString:GDDMultimediaHeadURL([map get:@"id"])]
+                   placeHolderImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+  }else{
+    [self.imageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+  }
+  
+  
 }
 -(IBAction)cancelButtonListener:(id)sender{
   [self dismissViewControllerAnimated:YES completion:nil];

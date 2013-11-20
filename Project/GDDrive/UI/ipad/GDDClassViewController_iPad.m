@@ -124,20 +124,22 @@ static NSString * FILES_KEY = @"files";
   if (indexPath.section == 0) {
     if ([self.folderList length]>0) {
       GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-      [cell setLabel:[map get:@"label"]];
-      BOOL isclass = [[map get:@"isclass"]booleanValue];
-      if (isclass) {
-        [cell setContentType:@"noClass"];
-      }else{
-        [cell setContentType:@"isClass"];
-      }
+      [cell setCellData:map];
+//      [cell setLabel:[map get:@"label"]];
+//      BOOL isclass = [[map get:@"isclass"]booleanValue];
+//      if (isclass) {
+//        [cell setContentType:@"noClass"];
+//      }else{
+//        [cell setContentType:@"isClass"];
+//      }
     }
     return cell;
   }else{
     if ([self.filesList length]>0) {
       GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
-      [cell setLabel:[map get:@"label"]];
-      [cell setContentType:[map get:@"type"]];
+      [cell setCellData:map];
+//      [cell setLabel:[map get:@"label"]];
+//      [cell setContentType:[map get:@"type"]];
     }
     return cell;
   }
@@ -160,9 +162,7 @@ static NSString * FILES_KEY = @"files";
     self.playPNGAndJPGViewController = [[GDDPlayPNGAndJPGViewController_ipad alloc]initWithNibName:@"GDDPlayPNGAndJPGViewController_ipad" bundle:nil];
     [self presentViewController:self.playPNGAndJPGViewController animated:YES completion:nil];
     [self.playPNGAndJPGViewController loadMultimediaWith:map];
-    
   }
-  
 }
 #pragma mark - GDRealtimeProtocol Override
 -(void)loadRealtimeData:(GDRModel *)mod{

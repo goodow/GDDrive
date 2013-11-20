@@ -103,9 +103,7 @@
 }
 -(void)transitionChildViewControllerAndIntoRootPathByKey:(NSString *)key{
   GDRCollaborativeMap *path = [self.remotecontrolRoot get:@"path"];
-  NSString *filePath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:filePath];
-  NSString *newCurrentdocid = [NSString stringWithFormat:@"%@/%@/%@",[dictionary objectForKey:@"documentId"],[dictionary objectForKey:@"userId"],[dictionary objectForKey:key]];
+  NSString *newCurrentdocid = [NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(key)];
   id <GDJsonString> jsonCurrentdocid = [GDJson createString:newCurrentdocid];
   id <GDJsonArray> jsonCurrentpath = [GDJson createArray];
   [jsonCurrentpath set:0 string:@"root"];

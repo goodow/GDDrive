@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^CompletionBlock)(BOOL finished);
 
 @interface GDDDescriptionMessageViewController_ipad : UIViewController
-
-- (void)presentViewController;
-- (void)dismissViewController;
+- (void)presentViewControllerCompletion:(CompletionBlock)completion;
+- (void)dismissViewControllerCompletion:(CompletionBlock)completion;
+- (void)updateData:(GDRCollaborativeMap *)map;
 @end
