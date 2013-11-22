@@ -28,6 +28,8 @@
 @property (nonatomic, strong) id <GDJsonString> currentID;
 
 @property (nonatomic, strong) GDDPlayPNGAndJPGViewController_ipad *playPNGAndJPGViewController;
+
+@property (nonatomic, assign) BOOL isControllerDealloc;
 @end
 
 static NSString * FOLDERS_KEY = @"folders";
@@ -39,6 +41,7 @@ static NSString * FILES_KEY = @"files";
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
+    _isControllerDealloc = NO;
   }
   return self;
 }
@@ -52,7 +55,12 @@ static NSString * FILES_KEY = @"files";
     [self.remotecontrolRoot set:@"path" value:self.path];
   }];
   self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
+  
   //  [self loadRealtime];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  self.isControllerDealloc = YES;
 }
 - (void)didReceiveMemoryWarning
 {
@@ -118,28 +126,22 @@ static NSString * FILES_KEY = @"files";
     NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
     cell = [nibObjects objectAtIndex:0];
     [cell setBackgroundColor:[UIColor clearColor]];
-    
+
+    [self addObserver:cell forKeyPath:isControllerDealloc
+              options:NSKeyValueObservingOptionNew
+              context:(__bridge void*)cell];
   }
   
   if (indexPath.section == 0) {
     if ([self.folderList length]>0) {
       GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-      [cell setCellData:map];
-//      [cell setLabel:[map get:@"label"]];
-//      BOOL isclass = [[map get:@"isclass"]booleanValue];
-//      if (isclass) {
-//        [cell setContentType:@"noClass"];
-//      }else{
-//        [cell setContentType:@"isClass"];
-//      }
+      [cell bindWithDataBean:map];
     }
     return cell;
   }else{
     if ([self.filesList length]>0) {
       GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
-      [cell setCellData:map];
-//      [cell setLabel:[map get:@"label"]];
-//      [cell setContentType:[map get:@"type"]];
+      [cell bindWithDataBean:map];
     }
     return cell;
   }

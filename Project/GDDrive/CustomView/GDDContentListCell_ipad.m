@@ -10,31 +10,42 @@
 #import "GDDDescriptionMessageViewController_ipad.h"
 #import "Boolean.h"
 #import "GDDGenreImageDictionary.h"
+#import "UIImageView+MKNetworkKitAdditions.h"
+
 @interface GDDContentListCell_ipad()
 
 @property (nonatomic, weak) IBOutlet UIImageView *contentListImageView;
 @property (nonatomic, weak) IBOutlet UILabel *contentListLabel;
-@property (nonatomic, strong) NSString *contentType;
-@property (nonatomic, strong) GDDDescriptionMessageViewController_ipad *messageViewController;
-@property (nonatomic, strong) GDRCollaborativeMap *map;
+@property (nonatomic, strong, readwrite) GDDDescriptionMessageViewController_ipad *messageViewController;
+@property (nonatomic, strong, readwrite) GDRCollaborativeMap *map;
 
 -(IBAction)contentMessageListener:(id)sender;
 @end
 @implementation GDDContentListCell_ipad
-
+-(id)initWithCoder:(NSCoder *)aDecoder{
+  if (self = [super initWithCoder:aDecoder]) {
+    
+  }
+  return self;
+}
 -(void)setLabel:(NSString *)text{
   [self.contentListLabel setText:text];
 }
 -(void)setContentType:(NSString *)aContentType{
-  [self setIconImage:[[GDDGenreImageDictionary sharedInstance]imageNameByKey:aContentType]];
+  [self setIconImage:aContentType];
 }
--(void)setIconImage:(NSString *)image{
-  [self.contentListImageView setImage:[UIImage imageNamed:image] ];
+-(void)setIconImage:(NSString *)imageType{
+  [self.contentListImageView cancelOperation];
+  if ([imageType isEqualToString:@"image/jpeg"] || [imageType isEqualToString:@"image/png"]) {
+    [self.contentListImageView setImageFromURL:[NSURL URLWithString:[self.map get:@"thumbnail"]]
+                              placeHolderImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]imageNameByKey:imageType]]];
+  }else{
+    [self.contentListImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]imageNameByKey:imageType]]];
+  }
 }
--(void)setCellData:(GDRCollaborativeMap *)aMap{
+-(void)bindWithDataBean:(GDRCollaborativeMap *)aMap{
   self.map = aMap;
   [self setLabel:[aMap get:@"label"]];
-  
   if ([aMap get:@"type"]) [self setContentType:[aMap get:@"type"]];
   if ([aMap get:@"isclass"]) [[aMap get:@"isclass"]booleanValue] ?[self setContentType:@"noClass"]:[self setContentType:@"isClass"];
 }
@@ -45,4 +56,22 @@
   }];
   [self.messageViewController updateData:self.map];
 }
+
+#pragma mark KVO 监听
+-(void)observeValueForKeyPath:(NSString *)keyPath
+										 ofObject:(id)object
+											 change:(NSDictionary *)change
+											context:(void *)context {
+  
+  if ((__bridge id)context == self) {// Our notification, not our superclass’s
+    if ([keyPath isEqualToString:isControllerDealloc]) {
+      // 外部控制器, 已经被释放了, 在这里释放cell占用的资源
+      [self.contentListImageView cancelOperation];
+      [object removeObserver:self forKeyPath:isControllerDealloc];
+    }
+  } else {
+    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+  }
+}
+
 @end

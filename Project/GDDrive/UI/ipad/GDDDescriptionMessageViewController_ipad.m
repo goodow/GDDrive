@@ -199,7 +199,7 @@
   BOOL isButtonOn = [switchButton isOn];
   if (isButtonOn) {
     NSLog(@"is on");
-    self.offlineMap = [self.mod createMap:@{@"url": @"",
+    self.offlineMap = [self.mod createMap:@{@"url": GDDMultimediaHeadURL([self.map get:@"id"]),
                                             @"progress": @"0",
                                             @"status": @"未下载",
                                             @"label": [self.map get:@"label"],

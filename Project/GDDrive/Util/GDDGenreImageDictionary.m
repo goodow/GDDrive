@@ -32,12 +32,12 @@
     // 初始化代码
     self.genreImageDictionary = @{@"isClass": @"class_icon.png",
                                   @"noClass": @"offline_files_icon.png",
-                                  @"image/jpeg": @"favicons_icon.png",
-                                  @"image/png": @"favicons_icon.png",
-                                  @"video/mp4": @"favicons_icon.png",
-                                  @"video/mp3": @"favicons_icon.png",
-                                  @"application/pdf": @"favicons_icon.png",
-                                  @"application/x-shockwave-flash": @"favicons_icon.png"};
+                                  @"image/jpeg": @"icon_type_jpg.png",
+                                  @"image/png": @"icon_type_png.png",
+                                  @"video/mp4": @"icon_type_mp4.png",
+                                  @"video/mp3": @"icon_type_mp3.png",
+                                  @"application/pdf": @"icon_type_pdf.png",
+                                  @"application/x-shockwave-flash": @"icon_type_swf.png"};
     
     self.genreTinyImageDictionary = @{@"isClass": @"icon_type_class.png",
                                       @"noClass": @"icon_type_folder.png",

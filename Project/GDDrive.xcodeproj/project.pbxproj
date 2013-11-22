@@ -52,12 +52,18 @@
 		655DAB9A183E1C0F00703FA4 /* icon_type_pdf.png in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB8A183E1C0F00703FA4 /* icon_type_pdf.png */; };
 		655DAB9B183E1C0F00703FA4 /* icon_type_png.png in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB8B183E1C0F00703FA4 /* icon_type_png.png */; };
 		655DAB9C183E1C0F00703FA4 /* icon_type_swf.png in Resources */ = {isa = PBXBuildFile; fileRef = 655DAB8C183E1C0F00703FA4 /* icon_type_swf.png */; };
+		655DAB9F183EF77600703FA4 /* GDDConstMapUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB9E183EF77500703FA4 /* GDDConstMapUtil.m */; };
+		655DABB1183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655DABB0183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib */; };
+		655DABB4183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DABB3183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m */; };
+		655DAC31183F7D1500703FA4 /* GDDFileOperateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAC30183F7D1500703FA4 /* GDDFileOperateHelper.m */; };
+		655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAC331842E47C00703FA4 /* GDDOffineFilesHelper.m */; };
 		6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD591835B3BE0008F709 /* class_icon.png */; };
 		6563BD5C1835B3BE0008F709 /* offline_files_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD5A1835B3BE0008F709 /* offline_files_icon.png */; };
 		6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563BD811835C8EB0008F709 /* GDDMenuRootModel.m */; };
 		65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D291830C3C3001FF93C /* GDDAppDelegate.m */; };
 		65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D401831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m */; };
 		65818D431831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65818D411831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib */; };
+		65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A524DA184327710030F958 /* cell_selected_style_black.png */; };
 		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
 		65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488D3181A0AA7008E2EAF /* GDDClassViewController_iPad.m */; };
 		65C488D6181A0AA7008E2EAF /* GDDClassViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488D4181A0AA7008E2EAF /* GDDClassViewController_iPad.xib */; };
@@ -141,6 +147,15 @@
 		655DAB8A183E1C0F00703FA4 /* icon_type_pdf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_type_pdf.png; sourceTree = "<group>"; };
 		655DAB8B183E1C0F00703FA4 /* icon_type_png.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_type_png.png; sourceTree = "<group>"; };
 		655DAB8C183E1C0F00703FA4 /* icon_type_swf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_type_swf.png; sourceTree = "<group>"; };
+		655DAB9D183EF77500703FA4 /* GDDConstMapUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDConstMapUtil.h; sourceTree = "<group>"; };
+		655DAB9E183EF77500703FA4 /* GDDConstMapUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDConstMapUtil.m; sourceTree = "<group>"; };
+		655DABB0183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDOfflineContentListCell_ipad.xib; sourceTree = "<group>"; };
+		655DABB2183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDOfflineContentListCell_ipad.h; sourceTree = "<group>"; };
+		655DABB3183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDOfflineContentListCell_ipad.m; sourceTree = "<group>"; };
+		655DAC2F183F7D1500703FA4 /* GDDFileOperateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFileOperateHelper.h; sourceTree = "<group>"; };
+		655DAC30183F7D1500703FA4 /* GDDFileOperateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFileOperateHelper.m; sourceTree = "<group>"; };
+		655DAC321842E47C00703FA4 /* GDDOffineFilesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDOffineFilesHelper.h; sourceTree = "<group>"; };
+		655DAC331842E47C00703FA4 /* GDDOffineFilesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDOffineFilesHelper.m; sourceTree = "<group>"; };
 		6563BD591835B3BE0008F709 /* class_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_icon.png; sourceTree = "<group>"; };
 		6563BD5A1835B3BE0008F709 /* offline_files_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offline_files_icon.png; sourceTree = "<group>"; };
 		6563BD801835C8EB0008F709 /* GDDMenuRootModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootModel.h; sourceTree = "<group>"; };
@@ -150,6 +165,7 @@
 		65818D3F1831D131001FF93C /* GDDDescriptionMessageViewController_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDescriptionMessageViewController_ipad.h; sourceTree = "<group>"; };
 		65818D401831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDDescriptionMessageViewController_ipad.m; sourceTree = "<group>"; };
 		65818D411831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDDescriptionMessageViewController_ipad.xib; sourceTree = "<group>"; };
+		65A524DA184327710030F958 /* cell_selected_style_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_selected_style_black.png; sourceTree = "<group>"; };
 		65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDUIBarButtonItem.h; sourceTree = "<group>"; };
 		65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUIBarButtonItem.m; sourceTree = "<group>"; };
 		65C488D2181A0AA7008E2EAF /* GDDClassViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDClassViewController_iPad.h; sourceTree = "<group>"; };
@@ -289,6 +305,7 @@
 		6548476E181765BA00586C62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				65A524DA184327710030F958 /* cell_selected_style_black.png */,
 				655DAB3B183C49D300703FA4 /* loading.jpg */,
 				6563BD591835B3BE0008F709 /* class_icon.png */,
 				6563BD5A1835B3BE0008F709 /* offline_files_icon.png */,
@@ -470,6 +487,9 @@
 				655DAB21183B5B4300703FA4 /* GDDContentListCell_ipad.h */,
 				655DAB22183B5B4300703FA4 /* GDDContentListCell_ipad.m */,
 				655DAB23183B5B4300703FA4 /* GDDContentListCell_ipad.xib */,
+				655DABB2183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.h */,
+				655DABB3183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m */,
+				655DABB0183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib */,
 				655DAB24183B5B4300703FA4 /* GDDMenuRootCell_ipad.h */,
 				655DAB25183B5B4300703FA4 /* GDDMenuRootCell_ipad.m */,
 				655DAB26183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib */,
@@ -487,6 +507,12 @@
 				655927B618349AC10031EB1F /* GDDColorUtils.m */,
 				655DAB4E183CC32400703FA4 /* GDDGenreImageDictionary.h */,
 				655DAB4F183CC32400703FA4 /* GDDGenreImageDictionary.m */,
+				655DAB9D183EF77500703FA4 /* GDDConstMapUtil.h */,
+				655DAB9E183EF77500703FA4 /* GDDConstMapUtil.m */,
+				655DAC2F183F7D1500703FA4 /* GDDFileOperateHelper.h */,
+				655DAC30183F7D1500703FA4 /* GDDFileOperateHelper.m */,
+				655DAC321842E47C00703FA4 /* GDDOffineFilesHelper.h */,
+				655DAC331842E47C00703FA4 /* GDDOffineFilesHelper.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -580,10 +606,12 @@
 				655DAB8D183E1C0F00703FA4 /* default_type_class.png in Resources */,
 				655927BE1834B42E0031EB1F /* favicons_icon.png in Resources */,
 				65818D431831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib in Resources */,
+				655DABB1183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib in Resources */,
 				65C488D6181A0AA7008E2EAF /* GDDClassViewController_iPad.xib in Resources */,
 				655DAB90183E1C0F00703FA4 /* default_type_mp3.png in Resources */,
 				65538B76181DFA18008D1DE0 /* config.plist in Resources */,
 				655DAB8F183E1C0F00703FA4 /* default_type_jpg.png in Resources */,
+				65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */,
 				65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */,
 				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
 				6534B26718153577000F83E9 /* InfoPlist.strings in Resources */,
@@ -653,7 +681,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,
 				655DAB37183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.m in Sources */,
+				655DAC31183F7D1500703FA4 /* GDDFileOperateHelper.m in Sources */,
 				65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */,
@@ -663,12 +693,14 @@
 				65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 				655DAB49183C55C800703FA4 /* GDDFlickrEngine.m in Sources */,
+				655DABB4183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m in Sources */,
 				655DAB29183B5B4300703FA4 /* GDDMenuRootCell_ipad.m in Sources */,
 				653A972F182B84DA000E4CAC /* GDDRealtimeDataToViewController.m in Sources */,
 				655DAB43183C51F300703FA4 /* GDDEngine.m in Sources */,
 				65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */,
 				65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */,
 				655DAB50183CC32400703FA4 /* GDDGenreImageDictionary.m in Sources */,
+				655DAB9F183EF77600703FA4 /* GDDConstMapUtil.m in Sources */,
 				655DAB4D183C619A00703FA4 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				655927B718349AC10031EB1F /* GDDColorUtils.m in Sources */,
 			);

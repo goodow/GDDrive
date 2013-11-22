@@ -43,7 +43,7 @@
   
   self.childViewController = [NSMutableArray array];
   //  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
-  [GDRRealtime setServerAddress:@"http://61.177.139.216:8084"];
+  [GDRRealtime setServerAddress:@"http://221.230.60.42:8880"];
   [GDRRealtime authorize:GDDConfigPlist(@"userId") token:GDDConfigPlist(@"token")];
   
   GDDClassViewController_iPad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDClassViewController_iPad" bundle:nil];
@@ -138,6 +138,13 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     [cell setPropertys:@[@"label",@"icon"]];
     [cell setObject:self.menuRootModel];
+    
+    //设置cell点击背景效果
+    UIView *cellBackView = [[UIView alloc]init];
+    UIImageView *cellBackImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"cell_selected_style_black.png"]];
+    [cellBackImageView setFrame:cell.bounds];
+    [cellBackView addSubview:cellBackImageView];
+    [cell setSelectedBackgroundView:cellBackView];
   }
   return cell;
 }

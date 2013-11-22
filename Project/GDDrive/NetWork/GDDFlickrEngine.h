@@ -14,5 +14,7 @@
 @interface GDDFlickrEngine : MKNetworkEngine
 
 typedef void (^FlickrImagesResponseBlock)(NSMutableArray* imageURLs);
--(void) imagesForTag:(NSString*) tag completionHandler:(FlickrImagesResponseBlock) imageURLBlock errorHandler:(MKNKErrorBlock) errorBlock;
+//-(void) imagesForTag:(NSString*) tag completionHandler:(FlickrImagesResponseBlock) imageURLBlock errorHandler:(MKNKErrorBlock) errorBlock;
+-(MKNetworkOperation*) downloadFatAssFileFrom:(NSString*) remoteURL toFile:(NSString*) filePath;
+
 @end

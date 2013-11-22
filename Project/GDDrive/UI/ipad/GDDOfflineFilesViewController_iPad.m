@@ -8,6 +8,7 @@
 
 #import "GDDOfflineFilesViewController_iPad.h"
 #import "GDDUIBarButtonItem.h"
+#import "GDDOfflineContentListCell_ipad.h"
 
 @interface GDDOfflineFilesViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) id <GDJsonObject> path;
 @property (nonatomic, strong) id <GDJsonArray> currentPath;
 @property (nonatomic, strong) id <GDJsonString> currentID;
+
+@property (nonatomic, assign) BOOL isControllerDealloc;
 @end
 
 static NSString * FOLDERS_KEY = @"folders";
@@ -34,6 +37,7 @@ static NSString * FILES_KEY = @"files";
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     // Custom initialization
+    _isControllerDealloc = NO;
   }
   return self;
 }
@@ -48,7 +52,10 @@ static NSString * FILES_KEY = @"files";
   }];
   self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
 }
-
+-(void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  self.isControllerDealloc = YES;
+}
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
@@ -68,27 +75,34 @@ static NSString * FILES_KEY = @"files";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *CellIdentifier = @"CollaborativeListCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  static NSString *CellIdentifier = @"GDDOfflineContentListCell_ipad";
+  GDDOfflineContentListCell_ipad *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    UINib *nibObject =  [UINib nibWithNibName:@"GDDOfflineContentListCell_ipad" bundle:nil];
+    NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
+    cell = [nibObjects objectAtIndex:0];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    [self addObserver:cell forKeyPath:isControllerDealloc
+              options:NSKeyValueObservingOptionNew
+              context:(__bridge void*)cell];
   }
-
   if ([self.offLineList length]>0) {
     GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
-    cell.textLabel.text = [map get:@"label"];
+    NSLog(@"%@",map);
+    [cell bindWithDataBean:map];
   }
   return cell;
+  
 }
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   //选择文件
-  GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
-  id <GDJsonString> idStr = [GDJson createString:[map getId]];
-  [self.currentPath insert:[self.currentPath length] value:idStr];
-  [self.path set:@"currentpath" value:self.currentPath];
-  [self.remotecontrolRoot set:@"path" value:self.path];
+  //  GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
+  //  id <GDJsonString> idStr = [GDJson createString:[map getId]];
+  //  [self.currentPath insert:[self.currentPath length] value:idStr];
+  //  [self.path set:@"currentpath" value:self.currentPath];
+  //  [self.remotecontrolRoot set:@"path" value:self.path];
 }
 
 #pragma mark - GDRealtimeProtocol Override
@@ -105,13 +119,20 @@ static NSString * FILES_KEY = @"files";
              weakSelf.root = [weakSelf.mod getRoot];
              NSString *gdID = [[weakSelf.currentPath get:([weakSelf.currentPath length]-1)]getString];
              weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
-//             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
-//               if ([event isSaving] || [event isPending]) {
-//               }
-//             }];
-//             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
-//             }];
+             //             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
+             //               if ([event isSaving] || [event isPending]) {
+             //               }
+             //             }];
+             //             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
+             //             }];
              weakSelf.offLineList = [weakSelf.root get:@"offline"];
+             
+             id block = ^(GDRBaseModelEvent *event) {
+               [weakSelf.tableView reloadData];
+             };
+             [weakSelf.offLineList addValuesAddedListener:block];
+             [weakSelf.offLineList addValuesRemovedListener:block];
+             [weakSelf.offLineList addValuesSetListener:block];
              [weakSelf.tableView reloadData];
              
              //设置该页面的back显示

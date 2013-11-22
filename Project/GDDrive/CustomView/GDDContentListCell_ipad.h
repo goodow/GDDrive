@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface GDDContentListCell_ipad : UITableViewCell
--(void)setCellData:(GDRCollaborativeMap *)aMap;
+
+@property (nonatomic, strong, readonly) GDRCollaborativeMap *map;
+
+-(void)bindWithDataBean:(GDRCollaborativeMap *)aMap;
 @end
