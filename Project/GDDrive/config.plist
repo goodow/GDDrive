@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>service</key>
+	<key>realtime_service</key>
 	<string>221.230.60.42:8080</string>
+	<key>drive_service</key>
+	<string>221.230.60.42:8880</string>
 	<key>userId</key>
 	<string>955467882842706481201</string>
 	<key>token</key>
@@ -11,12 +13,12 @@
 	<key>documentId</key>
 	<string>@tmp</string>
 	<key>remotecontrol</key>
-	<string>remotecontrol25</string>
+	<string>remotecontrol07</string>
 	<key>lesson</key>
-	<string>lesson25</string>
+	<string>lesson07</string>
 	<key>favorites</key>
-	<string>favorites25</string>
+	<string>favorites07</string>
 	<key>offlinedoc</key>
-	<string>offlinedoc25</string>
+	<string>offlinedoc07</string>
 </dict>
 </plist>

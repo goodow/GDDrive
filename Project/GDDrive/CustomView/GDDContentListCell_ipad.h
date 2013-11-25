@@ -13,4 +13,5 @@
 @property (nonatomic, strong, readonly) GDRCollaborativeMap *map;
 
 -(void)bindWithDataBean:(GDRCollaborativeMap *)aMap;
+-(IBAction)contentMessageListener:(id)sender;
 @end

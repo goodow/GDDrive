@@ -27,6 +27,8 @@
 @property (nonatomic, strong) id <GDJsonArray> currentPath;
 @property (nonatomic, strong) id <GDJsonString> currentID;
 
+@property (nonatomic, strong) id lessonBlock;
+
 @property (nonatomic, strong) GDDPlayPNGAndJPGViewController_ipad *playPNGAndJPGViewController;
 
 @property (nonatomic, assign) BOOL isControllerDealloc;
@@ -61,6 +63,8 @@ static NSString * FILES_KEY = @"files";
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
   self.isControllerDealloc = YES;
+  [self.folderList removeObjectChangedListener:self.lessonBlock];
+  [self.filesList removeObjectChangedListener:self.lessonBlock];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -182,15 +186,12 @@ static NSString * FILES_KEY = @"files";
              weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
              weakSelf.folderList = [weakSelf.root get:FOLDERS_KEY];
              weakSelf.filesList = [weakSelf.root get:FILES_KEY];
-             id block = ^(GDRBaseModelEvent *event) {
+             self.lessonBlock = ^(GDRBaseModelEvent *event) {
                [weakSelf.tableView reloadData];
              };
-             [weakSelf.folderList addValuesAddedListener:block];
-             [weakSelf.folderList addValuesRemovedListener:block];
-             [weakSelf.folderList addValuesSetListener:block];
-             [weakSelf.filesList addValuesAddedListener:block];
-             [weakSelf.filesList addValuesRemovedListener:block];
-             [weakSelf.filesList addValuesSetListener:block];
+
+             [weakSelf.folderList addObjectChangedListener:self.lessonBlock];
+             [weakSelf.filesList addObjectChangedListener:self.lessonBlock];
              [weakSelf.tableView reloadData];
              
              //设置该页面的back显示

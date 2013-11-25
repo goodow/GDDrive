@@ -19,7 +19,6 @@
 @property (nonatomic, strong, readwrite) GDDDescriptionMessageViewController_ipad *messageViewController;
 @property (nonatomic, strong, readwrite) GDRCollaborativeMap *map;
 
--(IBAction)contentMessageListener:(id)sender;
 @end
 @implementation GDDContentListCell_ipad
 -(id)initWithCoder:(NSCoder *)aDecoder{

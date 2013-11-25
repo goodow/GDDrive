@@ -35,7 +35,7 @@
                                   @"image/jpeg": @"icon_type_jpg.png",
                                   @"image/png": @"icon_type_png.png",
                                   @"video/mp4": @"icon_type_mp4.png",
-                                  @"video/mp3": @"icon_type_mp3.png",
+                                  @"audio/mp3": @"icon_type_mp3.png",
                                   @"application/pdf": @"icon_type_pdf.png",
                                   @"application/x-shockwave-flash": @"icon_type_swf.png"};
     
@@ -44,7 +44,7 @@
                                       @"image/jpeg": @"icon_type_jpg.png",
                                       @"image/png": @"icon_type_png.png",
                                       @"video/mp4": @"icon_type_mp4.png",
-                                      @"video/mp3": @"icon_type_mp3.png",
+                                      @"audio/mp3": @"icon_type_mp3.png",
                                       @"application/pdf": @"icon_type_pdf.png",
                                       @"application/x-shockwave-flash": @"icon_type_swf.png"};
     
@@ -53,7 +53,7 @@
                                        @"image/jpeg": @"default_type_jpg.png",
                                        @"image/png": @"default_type_png.png",
                                        @"video/mp4": @"default_type_mp4.png",
-                                       @"video/mp3": @"default_type_mp3.png",
+                                       @"audio/mp3": @"default_type_mp3.png",
                                        @"application/pdf": @"default_type_pdf.png",
                                        @"application/x-shockwave-flash": @"default_type_swf.png"};
     

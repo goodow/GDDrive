@@ -10,4 +10,6 @@
 
 @interface GDDEngine : MKNetworkEngine
 
+-(MKNetworkOperation*) downloadFatAssFileFrom:(NSString*) remoteURL toFile:(NSString*) filePath;
+
 @end

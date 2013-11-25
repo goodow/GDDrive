@@ -15,9 +15,19 @@ typedef void (^DownloadErrorBlock)(NSError* error);
 
 @interface GDDOffineFilesHelper : NSObject
 
--(void)downloadByData:(GDRCollaborativeMap *)map
+UIKIT_EXTERN NSString *const hadDownloadKey;
+@property (nonatomic, assign) BOOL hadDownload;
+//判断文件本地是否已经存在
+- (BOOL)isAlreadyPresentInTheLocalFileByData:(GDRCollaborativeMap *)map;
+//下载文件
+- (void)downloadByData:(GDRCollaborativeMap *)map
 downloadProgressChanged:(DownloadProgressChangedBlock) changeBlock
      downloadFinished:(DownloadProgressFinishedBlock) finishedBlock
         downloadError:(DownloadErrorBlock) errorBlock;
-- (void) cancelDownload;
+//取消下载
+- (void) cancelDownloadByData:(GDRCollaborativeMap *)map;
+//删除本地文件
+- (void)deleteLocalHostFileByData:(GDRCollaborativeMap *)map;
+//读取本地文件
+- (NSData *)readFileByData:(GDRCollaborativeMap *)map;
 @end

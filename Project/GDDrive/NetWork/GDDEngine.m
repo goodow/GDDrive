@@ -10,4 +10,16 @@
 
 @implementation GDDEngine
 
+-(MKNetworkOperation*) downloadFatAssFileFrom:(NSString*) remoteURL toFile:(NSString*) filePath {
+  
+  MKNetworkOperation *op = [self operationWithURLString:remoteURL];
+  
+  [op addDownloadStream:[NSOutputStream outputStreamToFileAtPath:filePath
+                                                          append:YES]];
+  
+  [self enqueueOperation:op];
+  return op;
+}
+
+
 @end

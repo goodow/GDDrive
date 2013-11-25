@@ -55,7 +55,6 @@
 		655DAB9F183EF77600703FA4 /* GDDConstMapUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAB9E183EF77500703FA4 /* GDDConstMapUtil.m */; };
 		655DABB1183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655DABB0183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib */; };
 		655DABB4183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DABB3183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m */; };
-		655DAC31183F7D1500703FA4 /* GDDFileOperateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAC30183F7D1500703FA4 /* GDDFileOperateHelper.m */; };
 		655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 655DAC331842E47C00703FA4 /* GDDOffineFilesHelper.m */; };
 		6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD591835B3BE0008F709 /* class_icon.png */; };
 		6563BD5C1835B3BE0008F709 /* offline_files_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD5A1835B3BE0008F709 /* offline_files_icon.png */; };
@@ -152,8 +151,6 @@
 		655DABB0183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDOfflineContentListCell_ipad.xib; sourceTree = "<group>"; };
 		655DABB2183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDOfflineContentListCell_ipad.h; sourceTree = "<group>"; };
 		655DABB3183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDOfflineContentListCell_ipad.m; sourceTree = "<group>"; };
-		655DAC2F183F7D1500703FA4 /* GDDFileOperateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFileOperateHelper.h; sourceTree = "<group>"; };
-		655DAC30183F7D1500703FA4 /* GDDFileOperateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFileOperateHelper.m; sourceTree = "<group>"; };
 		655DAC321842E47C00703FA4 /* GDDOffineFilesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDOffineFilesHelper.h; sourceTree = "<group>"; };
 		655DAC331842E47C00703FA4 /* GDDOffineFilesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDOffineFilesHelper.m; sourceTree = "<group>"; };
 		6563BD591835B3BE0008F709 /* class_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = class_icon.png; sourceTree = "<group>"; };
@@ -509,8 +506,6 @@
 				655DAB4F183CC32400703FA4 /* GDDGenreImageDictionary.m */,
 				655DAB9D183EF77500703FA4 /* GDDConstMapUtil.h */,
 				655DAB9E183EF77500703FA4 /* GDDConstMapUtil.m */,
-				655DAC2F183F7D1500703FA4 /* GDDFileOperateHelper.h */,
-				655DAC30183F7D1500703FA4 /* GDDFileOperateHelper.m */,
 				655DAC321842E47C00703FA4 /* GDDOffineFilesHelper.h */,
 				655DAC331842E47C00703FA4 /* GDDOffineFilesHelper.m */,
 			);
@@ -683,7 +678,6 @@
 			files = (
 				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,
 				655DAB37183B82A500703FA4 /* GDDPlayPNGAndJPGViewController_ipad.m in Sources */,
-				655DAC31183F7D1500703FA4 /* GDDFileOperateHelper.m in Sources */,
 				65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */,

@@ -17,11 +17,13 @@
 
 @end
 
-@implementation GDDOffineFilesHelper
 
+
+@implementation GDDOffineFilesHelper
+NSString *const hadDownloadKey = @"hadDownload";
 -(id)init{
   if (self = [super init]) {
-    
+    _hadDownload = NO;
   }
   return self;
 }
@@ -43,8 +45,6 @@
   //创建文件管理器
   NSFileManager *fileManager = [NSFileManager defaultManager];
   [fileManager changeCurrentDirectoryPath:[self.workPath stringByExpandingTildeInPath]];
-  //创建文件fileName文件名称，contents文件的内容，如果开始没有内容可以设置为nil，attributes文件的属性，初始为nil
-  [fileManager createFileAtPath:self.fileName contents:nil attributes:nil];
   if (!self.filePath && ![self.filePath isEqualToString:@""]) {
     DLog(@"文件地址获取失败");
     return NO;
@@ -52,37 +52,37 @@
   BOOL isExsit = [fileManager fileExistsAtPath:self.filePath];
   if (isExsit) {
     DLog(@"文件存在");
+    self.hadDownload = YES;
   }
   else
   {
     DLog(@"文件不存在");
+    self.hadDownload = NO;
   }
   return isExsit;
 }
 //开始下载
 -(void)downloadByData:(GDRCollaborativeMap *)map downloadProgressChanged:(DownloadProgressChangedBlock) changeBlock downloadFinished:(DownloadProgressFinishedBlock) finishedBlock downloadError:(DownloadErrorBlock) errorBlock{
   //判断本地是否有该文件
-  //如果有该文件。表示不需要下载了
+  //如果有该文件。表示不需要下载了 直接return
   //如果没有该文件，我们将下载该文件
-  //---------------------------------------------------------------------------------------------
-  [self parseTheFilePathBasedOnTheData:map];
   if ([self isAlreadyPresentInTheLocalFileByData:map]) {
     finishedBlock();
     return;
   }
+  [self parseTheFilePathBasedOnTheData:map];
   //开始创建路径并开始下载
   if (![map get:@"url"]) RNAssert(NO, @"下载文件url 获取失败");
-  self.downloadOperation = [GDDRiveDelegate.flickrEngine downloadFatAssFileFrom:[map get:@"url"]
+  self.downloadOperation = [GDDRiveDelegate.downloadEngine downloadFatAssFileFrom:[map get:@"url"]
                                                                          toFile:self.filePath];
   [self.downloadOperation onDownloadProgressChanged:^(double progress) {
-    DLog(@"%.2f", progress*100.0);
     changeBlock( progress*100.0 );
   }];
-  
+  __weak GDDOffineFilesHelper *weakSelf = self;
   [self.downloadOperation addCompletionHandler:^(MKNetworkOperation* completedRequest) {
     DLog(@"下载完成 %@", completedRequest);
+    weakSelf.hadDownload = YES;
     finishedBlock();
-    
     
   } errorHandler:^(MKNetworkOperation *errorOp, NSError* error) {
     DLog(@"%@", error);
@@ -90,9 +90,10 @@
   }];
 }
 //取消下载
-- (void) cancelDownload{
+- (void) cancelDownloadByData:(GDRCollaborativeMap *)map{
   [self.downloadOperation cancel];
   self.downloadOperation = nil;
+  [self deleteLocalHostFileByData:map];
 }
 
 //读取文件
@@ -102,20 +103,15 @@
 }
 //删除文件
 -(void)deleteLocalHostFileByData:(GDRCollaborativeMap *)map{
-  if (![self isAlreadyPresentInTheLocalFileByData:map]) return;
+  [self parseTheFilePathBasedOnTheData:map];
   //删除待删除的文件
   NSFileManager *fileManager = [NSFileManager defaultManager];
+  NSLog(@"documentsDirecrtory:%@",self.workPath);
+  //更改到待操作的目录下
   [fileManager changeCurrentDirectoryPath:[self.workPath stringByExpandingTildeInPath]];
+  //删除待删除的文件
   [fileManager removeItemAtPath:self.fileName error:nil];
-  
-  BOOL isExsit1 = [fileManager fileExistsAtPath:self.filePath];
-  if (isExsit1) {
-    DLog(@"文件存在");
-  }
-  else
-  {
-    DLog(@"文件不存在");
-  }
+  [self isAlreadyPresentInTheLocalFileByData:map];
 }
 
 @end

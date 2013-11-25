@@ -24,11 +24,9 @@
 @property (nonatomic, strong) id <GDJsonArray> currentPath;
 @property (nonatomic, strong) id <GDJsonString> currentID;
 
-@property (nonatomic, assign) BOOL isControllerDealloc;
-@end
+@property (nonatomic, strong) id offlinedocBlock;
 
-static NSString * FOLDERS_KEY = @"folders";
-static NSString * FILES_KEY = @"files";
+@end
 
 @implementation GDDOfflineFilesViewController_iPad
 
@@ -37,7 +35,6 @@ static NSString * FILES_KEY = @"files";
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     // Custom initialization
-    _isControllerDealloc = NO;
   }
   return self;
 }
@@ -54,7 +51,9 @@ static NSString * FILES_KEY = @"files";
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  self.isControllerDealloc = YES;
+  [self removeAllObserversForTableView];
+  [self.offLineList removeObjectChangedListener:self.offlinedocBlock];
+  NSLog(@"viewWillDisappear");
 }
 - (void)didReceiveMemoryWarning
 {
@@ -82,9 +81,6 @@ static NSString * FILES_KEY = @"files";
     NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
     cell = [nibObjects objectAtIndex:0];
     [cell setBackgroundColor:[UIColor clearColor]];
-    [self addObserver:cell forKeyPath:isControllerDealloc
-              options:NSKeyValueObservingOptionNew
-              context:(__bridge void*)cell];
   }
   if ([self.offLineList length]>0) {
     GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
@@ -94,15 +90,40 @@ static NSString * FILES_KEY = @"files";
   return cell;
   
 }
+-(NSArray *)cellsForTableView:(UITableView *)tableView
+{
+  NSInteger sections = tableView.numberOfSections;
+  NSMutableArray *cells = [[NSMutableArray alloc]  init];
+  for (int section = 0; section < sections; section++) {
+    NSInteger rows =  [tableView numberOfRowsInSection:section];
+    for (int row = 0; row < rows; row++) {
+      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+      [cells addObject:[tableView cellForRowAtIndexPath:indexPath]];
+    }
+  }
+  return cells;
+}
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   //选择文件
   //  GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
   //  id <GDJsonString> idStr = [GDJson createString:[map getId]];
   //  [self.currentPath insert:[self.currentPath length] value:idStr];
   //  [self.path set:@"currentpath" value:self.currentPath];
   //  [self.remotecontrolRoot set:@"path" value:self.path];
+}
+
+- (void)removeAllObserversForTableView {
+  NSArray *subviews = [self cellsForTableView:self.tableView];
+  for (id view in subviews) {
+    if ([view isKindOfClass:[GDDOfflineContentListCell_ipad class]]) {
+      //      GDDOfflineContentListCell_ipad *cell = view;
+      //      [cell removeAllObserver];
+      // 注销监听下载KVO
+    }
+  }
 }
 
 #pragma mark - GDRealtimeProtocol Override
@@ -126,13 +147,10 @@ static NSString * FILES_KEY = @"files";
              //             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
              //             }];
              weakSelf.offLineList = [weakSelf.root get:@"offline"];
-             
-             id block = ^(GDRBaseModelEvent *event) {
+             weakSelf.offlinedocBlock = ^(GDRBaseModelEvent *event) {
                [weakSelf.tableView reloadData];
              };
-             [weakSelf.offLineList addValuesAddedListener:block];
-             [weakSelf.offLineList addValuesRemovedListener:block];
-             [weakSelf.offLineList addValuesSetListener:block];
+             [weakSelf.offLineList addObjectChangedListener:weakSelf.offlinedocBlock];
              [weakSelf.tableView reloadData];
              
              //设置该页面的back显示

@@ -12,8 +12,9 @@
 #import "UIImageView+MKNetworkKitAdditions.h"
 
 @interface GDDAppDelegate ()
-@property (nonatomic, strong) PSStackedViewController *stackController;
-@property (nonatomic, strong) GDDFlickrEngine *flickrEngine;
+@property (nonatomic, strong, readwrite) PSStackedViewController *stackController;
+@property (nonatomic, strong, readwrite) GDDFlickrEngine *flickrEngine;
+@property (nonatomic, strong, readwrite) GDDEngine *downloadEngine;
 @end
 
 @implementation GDDAppDelegate
@@ -38,10 +39,11 @@
 
   self.window.rootViewController = self.stackController;
   [self.window makeKeyAndVisible];
-  self.flickrEngine = [[GDDFlickrEngine alloc] initWithHostName:GDDConfigPlist(@"service")];
+  self.flickrEngine = [[GDDFlickrEngine alloc] initWithHostName:GDDConfigPlist(@"drive_service")];
   [self.flickrEngine useCache];
   [UIImageView setDefaultEngine:self.flickrEngine];
   
+  self.downloadEngine = [[GDDEngine alloc] initWithHostName:GDDConfigPlist(@"drive_service")];
   return YES;
 }
 

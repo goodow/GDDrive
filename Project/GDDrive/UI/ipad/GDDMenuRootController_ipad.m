@@ -31,6 +31,8 @@
 @property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
 @property (nonatomic, strong) GDRCollaborativeMap *cachePath;
 @property (nonatomic, strong) GDDMenuRootModel *menuRootModel;
+
+@property (nonatomic, strong) id remotecontrolBlock;
 @end
 
 @implementation GDDMenuRootController_ipad
@@ -43,7 +45,7 @@
   
   self.childViewController = [NSMutableArray array];
   //  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
-  [GDRRealtime setServerAddress:@"http://221.230.60.42:8880"];
+  [GDRRealtime setServerAddress:[NSString stringWithFormat:@"http://%@",GDDConfigPlist(@"realtime_service")]];
   [GDRRealtime authorize:GDDConfigPlist(@"userId") token:GDDConfigPlist(@"token")];
   
   GDDClassViewController_iPad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDClassViewController_iPad" bundle:nil];
@@ -74,18 +76,23 @@
              weakSelf.cachePath = [[mod getRoot] get:@"path"];
              weakSelf.remotecontrolRoot = [mod getRoot];
              [weakSelf.realtimeProtocol loadRealtimeData:mod];
-             [weakSelf.remotecontrolRoot addValueChangedListener:^(GDRValueChangedEvent *event) {
+             self.remotecontrolBlock = ^(GDRValueChangedEvent *event) {
                do {
                  if (![[event getProperty] isEqualToString:@"path"]) break;
                  if ([[weakSelf.cachePath description] isEqualToString:[[[mod getRoot] get:@"path"] description]]) break;
                  weakSelf.cachePath = [[mod getRoot] get:@"path"];
                  [weakSelf.realtimeProtocol loadRealtimeData:mod];
                } while (NO);
-             }];
+             };
+             [weakSelf.remotecontrolRoot addValueChangedListener:self.remotecontrolBlock];
              
            }
     opt_initializer:^(GDRModel *model) {}
           opt_error:^(GDRError *error) {}];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  [self.remotecontrolRoot removeValueChangedListener:self.remotecontrolBlock];
 }
 - (void)didReceiveMemoryWarning
 {

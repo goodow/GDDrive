@@ -11,6 +11,7 @@
 #import "UIImageView+MKNetworkKitAdditions.h"
 #import "GDDGenreImageDictionary.h"
 #import "Boolean.h"
+#import "GDDOffineFilesHelper.h"
 
 @interface GDDDescriptionMessageViewController_ipad ()
 @property (nonatomic, weak) IBOutlet UIView *mainMessageView;
@@ -115,14 +116,12 @@
                weakSelf.mod = [weakSelf.doc getModel];
                weakSelf.root = [weakSelf.mod getRoot];
                weakSelf.offlineList = [weakSelf.root get:@"offline"];
-               
-               id block = ^(GDRBaseModelEvent *event) {
-                 NSLog(@"weakSelf.filesList listener");
-               };
-               [weakSelf.offlineList addValuesAddedListener:block];
-               [weakSelf.offlineList addValuesRemovedListener:block];
-               [weakSelf.offlineList addValuesSetListener:block];
-               
+//               id block = ^(GDRBaseModelEvent *event) {
+//                 NSLog(@"weakSelf.filesList listener");
+//               };
+//               [weakSelf.offlineList addValuesAddedListener:block];
+//               [weakSelf.offlineList addValuesRemovedListener:block];
+//               [weakSelf.offlineList addValuesSetListener:block];
                //判断资源是否已经加入了离线？
                [weakSelf.offlineList indexOf:[map get:@"id"] opt_comparator:^NSComparisonResult(id obj1, id obj2) {
                  [weakSelf.offlineSwitch setOn:NO];
@@ -144,20 +143,23 @@
              } opt_error:^(GDRError *error) {
                
              }];
-
+    
     if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
       //以下是图片
-      [self.thumbnailImageView setImageFromURL:[NSURL URLWithString:GDDMultimediaHeadURL([map get:@"id"])]
-                              placeHolderImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+      //判断该资源是否已经下载
+      GDDOffineFilesHelper *offlineHelp = [[GDDOffineFilesHelper alloc]init];
+      if ([offlineHelp isAlreadyPresentInTheLocalFileByData:map]) {
+        NSData *data = [offlineHelp readFileByData:map];
+        [self.thumbnailImageView setImage:[UIImage imageWithData:data]];
+      }else{
+        [self.thumbnailImageView setImageFromURL:[NSURL URLWithString:GDDMultimediaHeadURL([map get:@"id"])]
+                                placeHolderImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+      }
     }else{
       //其他资源加载
       [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
     }
   }
-  
-  
-  
-  
 }
 
 - (void)presentViewControllerCompletion:(CompletionBlock)completion{
@@ -216,6 +218,8 @@
     if (!self.offlineMap) {
       RNAssert(NO, @"详细信息中 离线文件信息 offlineMap 为空了");
     }
+    GDDOffineFilesHelper *offlineFilesHelper = [[GDDOffineFilesHelper alloc]init];
+    [offlineFilesHelper deleteLocalHostFileByData:self.offlineMap];
     [self.offlineList removeValue:self.offlineMap];
   }
   
