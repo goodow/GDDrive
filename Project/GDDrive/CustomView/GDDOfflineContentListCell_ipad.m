@@ -74,6 +74,10 @@
     [self.progressView setProgress:progress/100.0f animated:YES];
   } downloadFinished:^{
     self.isDownloading = NO;
+    DLog(@"kvo 监听 文件下载完成 显示变更为完成");
+    [self.downloadButton setTitle:@"Finish" forState:UIControlStateNormal];
+    [self.downloadButton setEnabled:NO];
+    [self.progressView setProgress:1.0f animated:YES];
   } downloadError:^(NSError *error) {
     DLog(@"离线文件下载错误了");
   }];
@@ -96,17 +100,19 @@
   
   if ((__bridge id)context == self) {// Our notification, not our superclass’s
     if ([keyPath isEqualToString:hadDownloadKey]){
-      DLog(@"kvo 监听 文件已经下载");
       if ([[change objectForKey:@"new"]boolValue]) {
         if (self.isDownloading) {
+          DLog(@"kvo 监听 文件正在下载 显示变更为暂停");
           [self.downloadButton setTitle:@"Pause" forState:UIControlStateNormal];
           [self.downloadButton setEnabled:YES];
         }else{
+          DLog(@"kvo 监听 文件下载完成 显示变更为完成");
           [self.downloadButton setTitle:@"Finish" forState:UIControlStateNormal];
           [self.downloadButton setEnabled:NO];
           [self.progressView setProgress:1.0f animated:YES];
         }
       }else{
+        DLog(@"kvo 监听 文件可以下载 显示变更为暂停");
         [self.downloadButton setTitle:@"Download" forState:UIControlStateNormal];
         [self.downloadButton setEnabled:YES];
         [self.progressView setProgress:0.0f animated:YES];

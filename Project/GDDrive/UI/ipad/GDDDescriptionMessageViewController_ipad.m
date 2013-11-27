@@ -91,13 +91,12 @@
   if ([map get:@"isclass"]) {
     [self.offlineSwitch setEnabled:NO];
     if ([[map get:@"isclass"]booleanValue]) {
-      NSLog(@"is classs");
-      
+      //如果是课程文件夹
       [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:@"isClass"]]];
       [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]tinyImageNameByKey:@"isClass"]]];
       [self.fileOrfolderTypeLabel setText:@"课程文件夹"];
     }else{
-      NSLog(@"no class");
+      //普通文件夹
       [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:@"noClass"]]];
       [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]tinyImageNameByKey:@"noClass"]]];
       [self.fileOrfolderTypeLabel setText:@"文件夹"];
@@ -137,7 +136,7 @@
                }];
                
              } opt_initializer:^(GDRModel *model) {
-               NSLog(@"离线 init");
+               //离线模型初始化
                GDRCollaborativeList *list = [self.mod createList:[NSArray array]];
                [self.root set:@"offline" value:list];
              } opt_error:^(GDRError *error) {
@@ -200,7 +199,7 @@
   UISwitch *switchButton = (UISwitch*)sender;
   BOOL isButtonOn = [switchButton isOn];
   if (isButtonOn) {
-    NSLog(@"is on");
+    //加入离线
     self.offlineMap = [self.mod createMap:@{@"url": GDDMultimediaHeadURL([self.map get:@"id"]),
                                             @"progress": @"0",
                                             @"status": @"未下载",
@@ -214,7 +213,7 @@
     }
     [self.offlineList push:self.offlineMap];
   }else {
-    NSLog(@"is off");
+    //关闭离线
     if (!self.offlineMap) {
       RNAssert(NO, @"详细信息中 离线文件信息 offlineMap 为空了");
     }

@@ -49,9 +49,9 @@
   if ([aMap get:@"isclass"]) [[aMap get:@"isclass"]booleanValue] ?[self setContentType:@"noClass"]:[self setContentType:@"isClass"];
 }
 -(IBAction)contentMessageListener:(id)sender{
+  //弹出详细信息界面 并加载数据
   self.messageViewController = [[GDDDescriptionMessageViewController_ipad alloc]initWithNibName:@"GDDDescriptionMessageViewController_ipad" bundle:nil];
   [self.messageViewController presentViewControllerCompletion:^(BOOL finished) {
-    NSLog(@"messageViewController presentViewController finished");
   }];
   [self.messageViewController updateData:self.map];
 }

@@ -51,15 +51,20 @@ NSString *const hadDownloadKey = @"hadDownload";
   }
   BOOL isExsit = [fileManager fileExistsAtPath:self.filePath];
   if (isExsit) {
-    DLog(@"文件存在");
     self.hadDownload = YES;
   }
   else
   {
-    DLog(@"文件不存在");
     self.hadDownload = NO;
   }
   return isExsit;
+}
+-(NSString *)filePathOfHaveDownloadedByData:(GDRCollaborativeMap *)map{
+  if ([self isAlreadyPresentInTheLocalFileByData:map]) {
+    return self.filePath;
+  }else{
+    return nil;
+  }
 }
 //开始下载
 -(void)downloadByData:(GDRCollaborativeMap *)map downloadProgressChanged:(DownloadProgressChangedBlock) changeBlock downloadFinished:(DownloadProgressFinishedBlock) finishedBlock downloadError:(DownloadErrorBlock) errorBlock{
@@ -106,7 +111,6 @@ NSString *const hadDownloadKey = @"hadDownload";
   [self parseTheFilePathBasedOnTheData:map];
   //删除待删除的文件
   NSFileManager *fileManager = [NSFileManager defaultManager];
-  NSLog(@"documentsDirecrtory:%@",self.workPath);
   //更改到待操作的目录下
   [fileManager changeCurrentDirectoryPath:[self.workPath stringByExpandingTildeInPath]];
   //删除待删除的文件

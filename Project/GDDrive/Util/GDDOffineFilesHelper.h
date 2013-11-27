@@ -26,6 +26,8 @@ downloadProgressChanged:(DownloadProgressChangedBlock) changeBlock
         downloadError:(DownloadErrorBlock) errorBlock;
 //取消下载
 - (void) cancelDownloadByData:(GDRCollaborativeMap *)map;
+//获取已经下载完成的本地文件路径
+-(NSString *)filePathOfHaveDownloadedByData:(GDRCollaborativeMap *)map;
 //删除本地文件
 - (void)deleteLocalHostFileByData:(GDRCollaborativeMap *)map;
 //读取本地文件

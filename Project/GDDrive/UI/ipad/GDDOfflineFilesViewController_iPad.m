@@ -53,7 +53,6 @@
   [super viewWillDisappear:animated];
   [self removeAllObserversForTableView];
   [self.offLineList removeObjectChangedListener:self.offlinedocBlock];
-  NSLog(@"viewWillDisappear");
 }
 - (void)didReceiveMemoryWarning
 {
@@ -84,7 +83,6 @@
   }
   if ([self.offLineList length]>0) {
     GDRCollaborativeMap *map = [self.offLineList get:indexPath.row];
-    NSLog(@"%@",map);
     [cell bindWithDataBean:map];
   }
   return cell;

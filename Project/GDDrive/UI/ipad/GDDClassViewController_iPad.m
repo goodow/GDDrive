@@ -11,6 +11,8 @@
 #import "GDDContentListCell_ipad.h"
 #import "Boolean.h"
 #import "GDDPlayPNGAndJPGViewController_ipad.h"
+#import "GDDPlayPDFViewController_ipad.h"
+#import "UIAlertView+Blocks.h"
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -26,11 +28,10 @@
 @property (nonatomic, strong) id <GDJsonObject> path;
 @property (nonatomic, strong) id <GDJsonArray> currentPath;
 @property (nonatomic, strong) id <GDJsonString> currentID;
-
 @property (nonatomic, strong) id lessonBlock;
 
 @property (nonatomic, strong) GDDPlayPNGAndJPGViewController_ipad *playPNGAndJPGViewController;
-
+@property (nonatomic, strong) GDDPlayPDFViewController_ipad *playPDFViewController;
 @property (nonatomic, assign) BOOL isControllerDealloc;
 @end
 
@@ -130,7 +131,7 @@ static NSString * FILES_KEY = @"files";
     NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
     cell = [nibObjects objectAtIndex:0];
     [cell setBackgroundColor:[UIColor clearColor]];
-
+    
     [self addObserver:cell forKeyPath:isControllerDealloc
               options:NSKeyValueObservingOptionNew
               context:(__bridge void*)cell];
@@ -163,11 +164,35 @@ static NSString * FILES_KEY = @"files";
     [self.path set:@"currentpath" value:self.currentPath];
     [self.remotecontrolRoot set:@"path" value:self.path];
   }else{
-    //这里先认为只是要播放png jpg资源
+    //这里先认为只是要播放png jpg资源 此处
+    DLog(@"********这里先认为只是要播放png jpg资源 此处在所有媒体播放都能正常情况，要抽象出来媒体播放这个方法");
     GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
-    self.playPNGAndJPGViewController = [[GDDPlayPNGAndJPGViewController_ipad alloc]initWithNibName:@"GDDPlayPNGAndJPGViewController_ipad" bundle:nil];
-    [self presentViewController:self.playPNGAndJPGViewController animated:YES completion:nil];
-    [self.playPNGAndJPGViewController loadMultimediaWith:map];
+    if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
+      self.playPNGAndJPGViewController = [[GDDPlayPNGAndJPGViewController_ipad alloc]initWithNibName:@"GDDPlayPNGAndJPGViewController_ipad" bundle:nil];
+      [self presentViewController:self.playPNGAndJPGViewController animated:YES completion:nil];
+      [self.playPNGAndJPGViewController loadMultimediaWith:map];
+    }else if ([[map get:@"type"]isEqualToString:@"application/pdf"]){
+      
+      __weak GDDClassViewController_iPad *weakSelf = self;
+      self.playPDFViewController = [[GDDPlayPDFViewController_ipad alloc]initWithDataBean:map dismissReaderBlock:^(ReaderViewController *viewController) {
+        [viewController dismissViewControllerAnimated:YES completion:^{
+        }];
+      } successBlock:^(ReaderViewController *viewController) {
+        [weakSelf presentViewController:viewController animated:YES completion:nil];
+      } failureBlock:^(GDDPlayPDFError error,NSString *errorMessage) {
+        [UIAlertView showAlertViewWithTitle:@"发生错误啦"
+                                    message:errorMessage
+                          cancelButtonTitle:@"cancel"
+                          otherButtonTitles:nil
+                             alertViewStyle:UIAlertViewStyleDefault
+                                  onDismiss:^(UIAlertView *alertView, int buttonIndex) {
+                                    
+                                  }
+                                   onCancel:^{
+                                     
+                                   }];
+      }];
+    }
   }
 }
 #pragma mark - GDRealtimeProtocol Override
@@ -189,7 +214,7 @@ static NSString * FILES_KEY = @"files";
              self.lessonBlock = ^(GDRBaseModelEvent *event) {
                [weakSelf.tableView reloadData];
              };
-
+             
              [weakSelf.folderList addObjectChangedListener:self.lessonBlock];
              [weakSelf.filesList addObjectChangedListener:self.lessonBlock];
              [weakSelf.tableView reloadData];
