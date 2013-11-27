@@ -8,7 +8,7 @@
 
 #import "GDDPlayPNGAndJPGViewController_ipad.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
-#import "GDDGenreImageDictionary.h"
+#import "GDDGenreDictionary.h"
 #import "GDDOffineFilesHelper.h"
 
 @interface GDDPlayPNGAndJPGViewController_ipad ()
@@ -48,7 +48,7 @@
   // Dispose of any resources that can be recreated.
 }
 
--(void)loadMultimediaWith:(GDRCollaborativeMap *)map{
+-(void)bindWithDataBean:(GDRCollaborativeMap *)map{
   if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
     //判断该资源是否已经下载
     GDDOffineFilesHelper *offlineHelp = [[GDDOffineFilesHelper alloc]init];
@@ -57,10 +57,10 @@
       [self.imageView setImage:[UIImage imageWithData:data]];
     }else{
       [self.imageView setImageFromURL:[NSURL URLWithString:GDDMultimediaHeadURL([map get:@"id"])]
-                     placeHolderImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+                     placeHolderImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
     }
   }else{
-    [self.imageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+    [self.imageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
   }
   
   

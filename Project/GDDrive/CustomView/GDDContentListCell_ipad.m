@@ -9,7 +9,7 @@
 #import "GDDContentListCell_ipad.h"
 #import "GDDDescriptionMessageViewController_ipad.h"
 #import "Boolean.h"
-#import "GDDGenreImageDictionary.h"
+#import "GDDGenreDictionary.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
 
 @interface GDDContentListCell_ipad()
@@ -37,9 +37,9 @@
   [self.contentListImageView cancelOperation];
   if ([imageType isEqualToString:@"image/jpeg"] || [imageType isEqualToString:@"image/png"]) {
     [self.contentListImageView setImageFromURL:[NSURL URLWithString:[self.map get:@"thumbnail"]]
-                              placeHolderImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]imageNameByKey:imageType]]];
+                              placeHolderImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]imageNameByKey:imageType]]];
   }else{
-    [self.contentListImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]imageNameByKey:imageType]]];
+    [self.contentListImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]imageNameByKey:imageType]]];
   }
 }
 -(void)bindWithDataBean:(GDRCollaborativeMap *)aMap{

@@ -1,6 +1,8 @@
 platform :ios, '7.0'
 
 # pod 'GDRealtime', '~> 0.3.0'
+# 在线音乐播放媒体流库
+pod 'DOUAudioStreamer', '~> 0.2.5' 
 pod 'PSStackedView', '~> 1.0'
 pod 'GDRealtime', :git => 'https://github.com/goodow/GDRealtime.git'
 pod 'MKNetworkKit', '~> 0.87'

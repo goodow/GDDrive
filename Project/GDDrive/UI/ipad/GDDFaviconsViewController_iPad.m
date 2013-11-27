@@ -8,6 +8,7 @@
 
 #import "GDDFaviconsViewController_iPad.h"
 #import "GDDUIBarButtonItem.h"
+#import "GDDContentListCell_ipad.h"
 
 @interface GDDFaviconsViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -69,21 +70,29 @@ static NSString * FILES_KEY = @"files";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *CellIdentifier = @"CollaborativeListCell";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  static NSString *CellIdentifier = @"GDDContentListCell_ipad";
+  GDDContentListCell_ipad *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    UINib *nibObject =  [UINib nibWithNibName:@"GDDContentListCell_ipad" bundle:nil];
+    NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
+    cell = [nibObjects objectAtIndex:0];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
+    [self addObserver:cell forKeyPath:isControllerDealloc
+              options:NSKeyValueObservingOptionNew
+              context:(__bridge void*)cell];
   }
+  
   if (indexPath.section == 0) {
     if ([self.folderList length]>0) {
       GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
-      cell.textLabel.text = [map get:@"label"];
+      [cell bindWithDataBean:map];
     }
     return cell;
   }else{
     if ([self.filesList length]>0) {
       GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
-      cell.textLabel.text = [map get:@"label"];
+      [cell bindWithDataBean:map];
     }
     return cell;
   }

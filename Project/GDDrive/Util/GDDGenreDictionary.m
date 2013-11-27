@@ -1,20 +1,21 @@
 //
-//  GDDGenreImageDictionary.m
+//  GDDGenreDictionary.m
 //  GDDrive
 //
 //  Created by 大黄 on 13-11-20.
 //  Copyright (c) 2013年 大黄. All rights reserved.
 //
 
-#import "GDDGenreImageDictionary.h"
-@interface GDDGenreImageDictionary()
+#import "GDDGenreDictionary.h"
+@interface GDDGenreDictionary()
 @property (nonatomic, strong)NSDictionary *genreImageDictionary;
 @property (nonatomic, strong)NSDictionary *genreTinyImageDictionary;
 @property (nonatomic, strong)NSDictionary *genreLargeImageDictionary;
+@property (nonatomic, strong)NSDictionary *genreDictionary;
 @end
-@implementation GDDGenreImageDictionary
-+ (GDDGenreImageDictionary *) sharedInstance {
-  static GDDGenreImageDictionary *singletonInstance = nil;
+@implementation GDDGenreDictionary
++ (GDDGenreDictionary *) sharedInstance {
+  static GDDGenreDictionary *singletonInstance = nil;
   static dispatch_once_t pred;
   dispatch_once(&pred, ^{singletonInstance = [[self alloc] initSingleton];});
   return singletonInstance;
@@ -57,6 +58,13 @@
                                        @"application/pdf": @"default_type_pdf.png",
                                        @"application/x-shockwave-flash": @"default_type_swf.png"};
     
+    self.genreDictionary = @{@"image/jpeg": @"jpge",
+                             @"image/png": @"png",
+                             @"video/mp4": @"mp4",
+                             @"audio/mp3": @"mp3",
+                             @"application/pdf": @"pdf",
+                             @"application/x-shockwave-flash": @"swf"};
+    
   }
   return self;
 }
@@ -71,5 +79,9 @@
 -(NSString *)largeImageNameByKey:(NSString *)key{
   if (!key) RNAssert(NO, @"imageNameByKey key 为空了");
   return [self.genreLargeImageDictionary objectForKey:key];
+}
+-(NSString *)genreNameByKey:(NSString *)key{
+  if (!key) RNAssert(NO, @"genreNameByKey key 为空了");
+  return [self.genreDictionary objectForKey:key];
 }
 @end

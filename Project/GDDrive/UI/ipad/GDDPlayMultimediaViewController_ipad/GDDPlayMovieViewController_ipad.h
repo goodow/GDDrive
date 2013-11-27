@@ -1,14 +1,13 @@
 //
-//  GDDPlayPNGAndJPGViewController_ipad.h
+//  GDDPlayMovieViewController_ipad.h
 //  GDDrive
 //
-//  Created by 大黄 on 13-11-19.
+//  Created by 大黄 on 13-11-27.
 //  Copyright (c) 2013年 大黄. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface GDDPlayPNGAndJPGViewController_ipad : UIViewController
-
+@interface GDDPlayMovieViewController_ipad : UIViewController
 -(void)bindWithDataBean:(GDRCollaborativeMap *)map;
 @end

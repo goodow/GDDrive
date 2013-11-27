@@ -1,4 +1,5 @@
 PODS:
+  - DOUAudioStreamer (0.2.5)
   - GDJson (0.3.0):
     - J2ObjC (= 0.8.6.1)
   - GDRealtime (0.3.1):
@@ -65,6 +66,7 @@ PODS:
   - vfrReader (2.6.2)
 
 DEPENDENCIES:
+  - DOUAudioStreamer (~> 0.2.5)
   - GDRealtime (from `https://github.com/goodow/GDRealtime.git`)
   - MKNetworkKit (~> 0.87)
   - PSStackedView (~> 1.0)
@@ -75,6 +77,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/goodow/GDRealtime.git
 
 SPEC CHECKSUMS:
+  DOUAudioStreamer: 82c489de500db717438981137985b40f664c8503
   GDJson: 5d71fc0ae1defd784602f89a0b29313c96cd6a88
   GDRealtime: 0cc8bf0cd80f37d5b92f99db3173b93002bec845
   Google-API-Client: a5aea65083895ad2fa8eeca4747478215c9ac934

@@ -7,7 +7,7 @@
 //
 
 #import "GDDOffineFilesHelper.h"
-
+#import "GDDGenreDictionary.h"
 @interface GDDOffineFilesHelper()
 
 @property (nonatomic, strong) MKNetworkOperation *downloadOperation;
@@ -35,8 +35,9 @@ NSString *const hadDownloadKey = @"hadDownload";
   //参数NSCachesDirectory要获取那种路径
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
   self.workPath = paths[0];
-  self.filePath = [self.workPath stringByAppendingPathComponent:[map get:@"blobKey"]];
-  self.fileName = [map get:@"blobKey"];
+  NSString *type = [[GDDGenreDictionary sharedInstance]genreNameByKey:[map get:@"type"]];
+  self.filePath = [NSString stringWithFormat:@"%@.%@",[self.workPath stringByAppendingPathComponent:[map get:@"blobKey"]],type];
+  self.fileName = [NSString stringWithFormat:@"%@.%@",[map get:@"blobKey"],type];
   
 }
 //判断文件是否存在于本地

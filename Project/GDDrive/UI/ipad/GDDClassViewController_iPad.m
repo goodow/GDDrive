@@ -12,7 +12,11 @@
 #import "Boolean.h"
 #import "GDDPlayPNGAndJPGViewController_ipad.h"
 #import "GDDPlayPDFViewController_ipad.h"
+#import "GDDPlayMovieViewController_ipad.h"
+#import "GDDPlayAudioViewController_ipad.h"
 #import "UIAlertView+Blocks.h"
+
+#import "GDDOffineFilesHelper.h"
 
 @interface GDDClassViewController_iPad ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -32,6 +36,8 @@
 
 @property (nonatomic, strong) GDDPlayPNGAndJPGViewController_ipad *playPNGAndJPGViewController;
 @property (nonatomic, strong) GDDPlayPDFViewController_ipad *playPDFViewController;
+@property (nonatomic, strong) GDDPlayMovieViewController_ipad *playMovieViewController;
+@property (nonatomic, strong) GDDPlayAudioViewController_ipad *playAudioViewController;
 @property (nonatomic, assign) BOOL isControllerDealloc;
 @end
 
@@ -164,13 +170,11 @@ static NSString * FILES_KEY = @"files";
     [self.path set:@"currentpath" value:self.currentPath];
     [self.remotecontrolRoot set:@"path" value:self.path];
   }else{
-    //这里先认为只是要播放png jpg资源 此处
-    DLog(@"********这里先认为只是要播放png jpg资源 此处在所有媒体播放都能正常情况，要抽象出来媒体播放这个方法");
     GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
     if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
       self.playPNGAndJPGViewController = [[GDDPlayPNGAndJPGViewController_ipad alloc]initWithNibName:@"GDDPlayPNGAndJPGViewController_ipad" bundle:nil];
       [self presentViewController:self.playPNGAndJPGViewController animated:YES completion:nil];
-      [self.playPNGAndJPGViewController loadMultimediaWith:map];
+      [self.playPNGAndJPGViewController bindWithDataBean:map];
     }else if ([[map get:@"type"]isEqualToString:@"application/pdf"]){
       
       __weak GDDClassViewController_iPad *weakSelf = self;
@@ -192,9 +196,18 @@ static NSString * FILES_KEY = @"files";
                                      
                                    }];
       }];
+    }else if ([[map get:@"type"]isEqualToString:@"video/mp4"]){
+      self.playMovieViewController = [[GDDPlayMovieViewController_ipad alloc]initWithNibName:@"GDDPlayMovieViewController_ipad" bundle:nil];
+      [self presentViewController:self.playMovieViewController animated:YES completion:nil];
+      [self.playMovieViewController bindWithDataBean:map];
+    }else if ([[map get:@"type"]isEqualToString:@"audio/mp3"]){
+      self.playAudioViewController = [[GDDPlayAudioViewController_ipad alloc]initWithNibName:@"GDDPlayAudioViewController_ipad" bundle:nil];
+      [self presentViewController:self.playAudioViewController animated:YES completion:nil];
+      [self.playAudioViewController bindWithDataBean:map];
     }
   }
 }
+
 #pragma mark - GDRealtimeProtocol Override
 -(void)loadRealtimeData:(GDRModel *)mod{
   self.remotecontrolRoot = [mod getRoot];

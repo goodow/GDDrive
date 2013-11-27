@@ -84,8 +84,7 @@
                  [weakSelf.realtimeProtocol loadRealtimeData:mod];
                } while (NO);
              };
-             [weakSelf.remotecontrolRoot addValueChangedListener:self.remotecontrolBlock];
-             
+             [weakSelf.remotecontrolRoot addValueChangedListener:self.remotecontrolBlock]; 
            }
     opt_initializer:^(GDRModel *model) {}
           opt_error:^(GDRError *error) {}];
@@ -109,14 +108,15 @@
 
 }
 -(void)transitionChildViewControllerAndIntoRootPathByKey:(NSString *)key{
-  GDRCollaborativeMap *path = [self.remotecontrolRoot get:@"path"];
+
   NSString *newCurrentdocid = [NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(key)];
   id <GDJsonString> jsonCurrentdocid = [GDJson createString:newCurrentdocid];
   id <GDJsonArray> jsonCurrentpath = [GDJson createArray];
   [jsonCurrentpath set:0 string:@"root"];
-  [path set:@"currentdocid" value:jsonCurrentdocid];
-  [path set:@"currentpath" value:jsonCurrentpath];
-  [self.remotecontrolRoot set:@"path" value:path];
+  id <GDJsonObject> jsonNewpath = [GDJson createObject];
+  [jsonNewpath set:@"currentdocid" value:jsonCurrentdocid];
+  [jsonNewpath set:@"currentpath" value:jsonCurrentpath];
+  [self.remotecontrolRoot set:@"path" value:jsonNewpath];
 }
 #pragma mark -tableView dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

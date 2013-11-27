@@ -9,7 +9,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "GDDDescriptionMessageViewController_ipad.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
-#import "GDDGenreImageDictionary.h"
+#import "GDDGenreDictionary.h"
 #import "Boolean.h"
 #import "GDDOffineFilesHelper.h"
 
@@ -88,24 +88,30 @@
   //针对于文件夹和课程文件
   //文件夹 课程夹 信息展示
   [self.fileOrfolderNameLabel setText:[map get:@"label"]];
+  //默认离线不可用 并且默认全部为普通文件夹
+  [self.offlineSwitch setEnabled:NO];
+  [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:@"noClass"]]];
+  [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]tinyImageNameByKey:@"noClass"]]];
+  [self.fileOrfolderTypeLabel setText:@"文件夹"];
+  
   if ([map get:@"isclass"]) {
     [self.offlineSwitch setEnabled:NO];
     if ([[map get:@"isclass"]booleanValue]) {
       //如果是课程文件夹
-      [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:@"isClass"]]];
-      [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]tinyImageNameByKey:@"isClass"]]];
+      [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:@"isClass"]]];
+      [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]tinyImageNameByKey:@"isClass"]]];
       [self.fileOrfolderTypeLabel setText:@"课程文件夹"];
     }else{
       //普通文件夹
-      [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:@"noClass"]]];
-      [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]tinyImageNameByKey:@"noClass"]]];
+      [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:@"noClass"]]];
+      [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]tinyImageNameByKey:@"noClass"]]];
       [self.fileOrfolderTypeLabel setText:@"文件夹"];
     }
   }
   //资源文件 包括 JPG PNG SWF PDF MP3 MP4 信息展示
   if ([map get:@"type"]) {
     [self.offlineSwitch setEnabled:YES];
-    [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]tinyImageNameByKey:[map get:@"type"]]]];
+    [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]tinyImageNameByKey:[map get:@"type"]]]];
     [self.fileOrfolderTypeLabel setText:[map get:@"type"]];
     //加载是否已经添加离线
     __weak GDDDescriptionMessageViewController_ipad *weakSelf = self;
@@ -152,11 +158,11 @@
         [self.thumbnailImageView setImage:[UIImage imageWithData:data]];
       }else{
         [self.thumbnailImageView setImageFromURL:[NSURL URLWithString:GDDMultimediaHeadURL([map get:@"id"])]
-                                placeHolderImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+                                placeHolderImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
       }
     }else{
       //其他资源加载
-      [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreImageDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
+      [self.thumbnailImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
     }
   }
 }
