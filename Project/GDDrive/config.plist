@@ -7,9 +7,13 @@
 	<key>drive_service</key>
 	<string>221.230.60.42:8880</string>
 	<key>userId</key>
-	<string>955467882842706481201</string>
+	<string></string>
 	<key>token</key>
-	<string>a2240944519893491e9d33a1d0863ee2bb7a7be6</string>
+	<string></string>
+	<key>name</key>
+	<string></string>
+	<key>display_name</key>
+	<string></string>
 	<key>documentId</key>
 	<string>@tmp</string>
 	<key>remotecontrol</key>

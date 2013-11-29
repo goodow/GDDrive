@@ -34,9 +34,9 @@
     _isDownloading = NO;
     _offineFilesHelper = [[GDDOffineFilesHelper alloc]init];
     [_offineFilesHelper addObserver:self
-                             forKeyPath:hadDownloadKey
-                                options:NSKeyValueObservingOptionNew
-                                context:(__bridge void*)self];
+                         forKeyPath:hadDownloadKey
+                            options:NSKeyValueObservingOptionNew
+                            context:(__bridge void*)self];
   }
   return self;
 }
@@ -74,12 +74,12 @@
     [self.progressView setProgress:progress/100.0f animated:YES];
   } downloadFinished:^{
     self.isDownloading = NO;
-    DLog(@"kvo 监听 文件下载完成 显示变更为完成");
+    //    DLog(@"kvo 监听 文件下载完成 显示变更为完成");å
     [self.downloadButton setTitle:@"Finish" forState:UIControlStateNormal];
     [self.downloadButton setEnabled:NO];
     [self.progressView setProgress:1.0f animated:YES];
   } downloadError:^(NSError *error) {
-    DLog(@"离线文件下载错误了");
+    //    DLog(@"离线文件下载错误了");
   }];
 }
 -(void)cancelDownLoad{
@@ -102,17 +102,17 @@
     if ([keyPath isEqualToString:hadDownloadKey]){
       if ([[change objectForKey:@"new"]boolValue]) {
         if (self.isDownloading) {
-          DLog(@"kvo 监听 文件正在下载 显示变更为暂停");
+          //          DLog(@"kvo 监听 文件正在下载 显示变更为暂停");
           [self.downloadButton setTitle:@"Pause" forState:UIControlStateNormal];
           [self.downloadButton setEnabled:YES];
         }else{
-          DLog(@"kvo 监听 文件下载完成 显示变更为完成");
+          //          DLog(@"kvo 监听 文件下载完成 显示变更为完成");
           [self.downloadButton setTitle:@"Finish" forState:UIControlStateNormal];
           [self.downloadButton setEnabled:NO];
           [self.progressView setProgress:1.0f animated:YES];
         }
       }else{
-        DLog(@"kvo 监听 文件可以下载 显示变更为暂停");
+        //        DLog(@"kvo 监听 文件可以下载 显示变更为暂停");
         [self.downloadButton setTitle:@"Download" forState:UIControlStateNormal];
         [self.downloadButton setEnabled:YES];
         [self.progressView setProgress:0.0f animated:YES];

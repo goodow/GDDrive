@@ -10,4 +10,6 @@
 
 @interface GDDMenuRootController_ipad : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+-(void)loadRealtime;
+
 @end

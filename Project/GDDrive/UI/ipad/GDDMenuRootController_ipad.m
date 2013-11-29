@@ -16,6 +16,8 @@
 #import "GDDAppDelegate.h"
 #import "GDDMenuRootCell_ipad.h"
 #import "GDDMenuRootModel.h"
+#import "GDDLoginView_ipad.h"
+#import "UIAlertView+Blocks.h"
 
 @interface GDDMenuRootController_ipad ()
 @property (nonatomic, weak) IBOutlet UITableView *menuTableView;
@@ -27,6 +29,7 @@
 @property (nonatomic, strong) UINavigationController *offlineNavigationController;
 @property (nonatomic, strong) UINavigationController *descriptionMessageNavigationController;
 @property (nonatomic, strong) NSMutableArray *childViewController;
+@property (nonatomic, strong) GDDLoginView_ipad *loginView;
 
 @property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
 @property (nonatomic, strong) GDRCollaborativeMap *cachePath;
@@ -42,6 +45,48 @@
   [super viewDidLoad];
   
   self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png"] labels:@[@"我的课程", @"我的收藏", @"我的下载"]];
+  
+  //  [self loadRealtime];
+  
+  
+  //登陆信息与设置
+  UINib *nibObject =  [UINib nibWithNibName:@"GDDLoginView_ipad" bundle:nil];
+  NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
+  self.loginView = [nibObjects objectAtIndex:0];
+  [self.loginView setViewStyle];
+  [self.loginView setClickBlock:^{
+    [UIAlertView showAlertViewWithTitle:@"切换用户"
+                                message:@"是否要切换用户?"
+                      cancelButtonTitle:@"cancal"
+                      otherButtonTitles:@[@"sure"]
+                         alertViewStyle:UIAlertViewStyleDefault
+                              onDismiss:^(UIAlertView *alertView, int buttonIndex) {
+                                
+                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"userId" ];
+                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"token" ];
+                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"name" ];
+                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"display_name" ];
+                                
+                                [GDDRiveDelegate loginAPPWithAnimated:YES];
+                              }
+                               onCancel:^{
+                               }];
+  }];
+  self.menuTableView.tableHeaderView = self.loginView;
+  
+  
+}
+-(void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  [self.remotecontrolRoot removeValueChangedListener:self.remotecontrolBlock];
+}
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+-(void)loadRealtime{
+  
+  
   
   self.childViewController = [NSMutableArray array];
   //  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
@@ -84,31 +129,28 @@
                  [weakSelf.realtimeProtocol loadRealtimeData:mod];
                } while (NO);
              };
-             [weakSelf.remotecontrolRoot addValueChangedListener:self.remotecontrolBlock]; 
+             [weakSelf.remotecontrolRoot addValueChangedListener:self.remotecontrolBlock];
            }
     opt_initializer:^(GDRModel *model) {}
           opt_error:^(GDRError *error) {}];
-}
--(void)viewWillDisappear:(BOOL)animated{
-  [super viewWillDisappear:animated];
-  [self.remotecontrolRoot removeValueChangedListener:self.remotecontrolBlock];
-}
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
+  
+  //设置登陆信息
+  [self.loginView bindData];
+  
+  
 }
 -(void)transitionChildViewControllerByIndex:(NSInteger)index{
   if (self.currentViewController == [self.childViewController objectAtIndex:index]) return;
   [GDDRiveDelegate.stackController popViewControllerAnimated:YES];
   [GDDRiveDelegate.stackController pushViewController:[self.childViewController objectAtIndex:index] fromViewController:nil animated:NO];
   self.currentViewController = [self.childViewController objectAtIndex:index];
-
-  NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:index inSection:0];  
+  
+  NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
   [self.menuTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-
+  
 }
 -(void)transitionChildViewControllerAndIntoRootPathByKey:(NSString *)key{
-
+  
   NSString *newCurrentdocid = [NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(key)];
   id <GDJsonString> jsonCurrentdocid = [GDJson createString:newCurrentdocid];
   id <GDJsonArray> jsonCurrentpath = [GDJson createArray];
@@ -131,6 +173,7 @@
 {
   return 80;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

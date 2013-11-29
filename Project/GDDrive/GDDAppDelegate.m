@@ -10,11 +10,14 @@
 #import "GDDMenuRootController_ipad.h"
 #import "GDDRootViewController.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
+#import "GDDLoginViewController_ipad.h"
 
 @interface GDDAppDelegate ()
 @property (nonatomic, strong, readwrite) PSStackedViewController *stackController;
 @property (nonatomic, strong, readwrite) GDDFlickrEngine *flickrEngine;
 @property (nonatomic, strong, readwrite) GDDEngine *downloadEngine;
+@property (nonatomic, strong, readwrite) GDDRealtimeEngine *realtimeEngine;
+@property (nonatomic, strong, readwrite) GDDLoginViewController_ipad *loginViewController;
 @end
 
 @implementation GDDAppDelegate
@@ -22,10 +25,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions; {
   
   [super application:application didFinishLaunchingWithOptions:launchOptions];
+  //设置状态条样式
   if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     self.window.clipsToBounds =YES;
     self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
+  }
+  //判断程序是否第一次执行
+  if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+  }
+  else{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"firstLaunch"];
+  }
+  
+  if ([[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+    // 这里判断是否第一次
+    [GDDPlistHelper createPlistMirror];
+    
   }
   // set root controller as stack controller
   GDDMenuRootController_ipad *menuController = [[GDDMenuRootController_ipad alloc] initWithNibName:@"GDDMenuRootController_ipad" bundle:nil];
@@ -36,15 +54,66 @@
   self.stackController.enableBounces = NO;
   self.stackController.enableShadows = YES;
   self.stackController.defaultShadowWidth = 10.0f;
-
   self.window.rootViewController = self.stackController;
   [self.window makeKeyAndVisible];
+  
+  
+  [self loginAPPWithAnimated:NO];
+  
   self.flickrEngine = [[GDDFlickrEngine alloc] initWithHostName:GDDConfigPlist(@"drive_service")];
   [self.flickrEngine useCache];
   [UIImageView setDefaultEngine:self.flickrEngine];
   
   self.downloadEngine = [[GDDEngine alloc] initWithHostName:GDDConfigPlist(@"drive_service")];
+  self.realtimeEngine = [[GDDRealtimeEngine alloc]initWithHostName:GDDConfigPlist(@"realtime_service")];
   return YES;
 }
 
+-(void)loginAPPWithAnimated:(BOOL)annimated{
+  if (!self.loginViewController) {
+    self.loginViewController = [[GDDLoginViewController_ipad alloc]initWithNibName:@"GDDLoginViewController_ipad" bundle:nil];
+  }
+  //没有默认用户名密码的时候进行登录操作
+  if ([[[GDDPlistHelper sharedInstance] objectFromPlistKey:@"userId"] isEqualToString:@""] || [[[GDDPlistHelper sharedInstance] objectFromPlistKey:@"token"] isEqualToString:@""]) {
+    [self.stackController.rootViewController presentViewController:self.loginViewController animated:annimated completion:nil];
+  }else{
+    [self loadRealtime];
+  }
+//  [self.stackController.rootViewController presentViewController:self.loginViewController animated:NO completion:nil];
+}
+
+-(void)loadRealtime{
+  //初始化所有
+  /**
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"remotecontrol")]
+           onLoaded:^(GDRDocument *document) {
+           }
+    opt_initializer:^(GDRModel *model) {}
+          opt_error:^(GDRError *error) {}];
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"lesson")]
+           onLoaded:^(GDRDocument *document) {
+           }
+    opt_initializer:^(GDRModel *model) {}
+          opt_error:^(GDRError *error) {}];
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"favorites")]
+           onLoaded:^(GDRDocument *document) {
+           }
+    opt_initializer:^(GDRModel *model) {}
+          opt_error:^(GDRError *error) {}];
+  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"offlinedoc")]
+           onLoaded:^(GDRDocument *document) {
+           }
+    opt_initializer:^(GDRModel *model) {
+      //离线模型初始化
+      GDRCollaborativeList *list = [model createList:[NSArray array]];
+      GDRCollaborativeMap *root = [model getRoot];
+      [root set:@"offline" value:list];
+    }
+          opt_error:^(GDRError *error) {}];
+   */
+  
+  
+  //加载所有数据和界面
+  [(GDDMenuRootController_ipad *)self.stackController.rootViewController loadRealtime];
+}
 @end

@@ -142,16 +142,13 @@
                }];
                
              } opt_initializer:^(GDRModel *model) {
-               //离线模型初始化
-               GDRCollaborativeList *list = [self.mod createList:[NSArray array]];
-               [self.root set:@"offline" value:list];
+
              } opt_error:^(GDRError *error) {
                
              }];
     
     if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
-      //以下是图片
-      //判断该资源是否已经下载
+      //加载缩略图
       GDDOffineFilesHelper *offlineHelp = [[GDDOffineFilesHelper alloc]init];
       if ([offlineHelp isAlreadyPresentInTheLocalFileByData:map]) {
         NSData *data = [offlineHelp readFileByData:map];
