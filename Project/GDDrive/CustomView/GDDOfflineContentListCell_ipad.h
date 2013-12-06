@@ -9,5 +9,5 @@
 #import "GDDContentListCell_ipad.h"
 
 @interface GDDOfflineContentListCell_ipad : GDDContentListCell_ipad
--(void)removeAllObserver;
+//-(void)removeAllObserver;
 @end

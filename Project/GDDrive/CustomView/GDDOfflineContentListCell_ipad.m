@@ -8,16 +8,16 @@
 
 #import "GDDOfflineContentListCell_ipad.h"
 #import "GDDOffineFilesHelper.h"
+#import "GDDDownloadWorkContext.h"
 
 @interface GDDOfflineContentListCell_ipad()
 
 @property (nonatomic, weak) IBOutlet UIButton *downloadButton;
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
-@property (nonatomic, strong) MKNetworkOperation *downloadOperation;
-@property (nonatomic, strong) GDDOffineFilesHelper *offineFilesHelper;
-@property (nonatomic, assign) BOOL isDownloading;
+@property (nonatomic, strong) GDDDownloadWorkContext *workContext;
 
--(IBAction)onCircularProgressViewListener:(id)sender;
+//-(IBAction)onCircularProgressViewListener:(id)sender;
+-(IBAction)onClickDownloadWorkButtonListener:(id)sender;
 @end
 @implementation GDDOfflineContentListCell_ipad
 
@@ -31,105 +31,33 @@
 }
 -(id)initWithCoder:(NSCoder *)aDecoder{
   if (self = [super initWithCoder:aDecoder]) {
-    _isDownloading = NO;
-    _offineFilesHelper = [[GDDOffineFilesHelper alloc]init];
-    [_offineFilesHelper addObserver:self
-                         forKeyPath:hadDownloadKey
-                            options:NSKeyValueObservingOptionNew
-                            context:(__bridge void*)self];
+    _workContext = [[GDDDownloadWorkContext alloc]init];
   }
   return self;
 }
--(void)removeAllObserver{
-  [self.offineFilesHelper removeObserver:self forKeyPath:hadDownloadKey];
-}
 -(void)bindWithDataBean:(GDRCollaborativeMap *)aMap{
   [super bindWithDataBean:aMap];
-  
-  [self setDownloadButtonWithDataBean:aMap];
-}
--(IBAction)contentMessageListener:(id)sender{
-  [self cancelDownLoad];
-  [super contentMessageListener:sender];
-}
--(void)setDownloadButtonWithDataBean:(GDRCollaborativeMap *)aMap{
-  [self.offineFilesHelper isAlreadyPresentInTheLocalFileByData:aMap];
-}
--(IBAction)onCircularProgressViewListener:(id)sender{
-  //开启和暂停下载 当下载完成时 事件会屏蔽 按钮自动隐藏
-  if (self.isDownloading) {
-    //暂停下载
-    [self pauseDownLoad];
-    self.isDownloading = NO;
-  }else{
-    //开始下载
-    [self beginDownload];
-    self.isDownloading = YES;
-    [self.downloadButton setTitle:@"Pause" forState:UIControlStateNormal];
-  }
-  
-}
--(void)beginDownload{
-  [self.offineFilesHelper downloadByData:self.map downloadProgressChanged:^(double progress) {
-    [self.progressView setProgress:progress/100.0f animated:YES];
-  } downloadFinished:^{
-    self.isDownloading = NO;
-    //    DLog(@"kvo 监听 文件下载完成 显示变更为完成");å
-    [self.downloadButton setTitle:@"Finish" forState:UIControlStateNormal];
-    [self.downloadButton setEnabled:NO];
-    [self.progressView setProgress:1.0f animated:YES];
-  } downloadError:^(NSError *error) {
-    //    DLog(@"离线文件下载错误了");
+  __weak GDDOfflineContentListCell_ipad *weakSelf = self;
+  [self.workContext bindWithDataBean:aMap
+                   TitleChangedBlock:^(NSString *title) {
+                     [weakSelf.downloadButton setTitle:title forState:UIControlStateNormal];
+    }
+                  EnableChangedBlock:^(BOOL enable) {
+                    [weakSelf.downloadButton setEnabled:enable];
+    }
+                ProgressChangedBlock:^(double progress) {
+                  [weakSelf.progressView setProgress:progress/100.0f animated:YES];
   }];
 }
--(void)cancelDownLoad{
-  if (self.isDownloading) {
-    [self.offineFilesHelper cancelDownloadByData:self.map];
-    self.isDownloading = NO;
-  }
-}
--(void)pauseDownLoad{
-  //目前没有断点续传，这里我们认为是直接取消了下载，下次重新下载
-  [self cancelDownLoad];
-}
-#pragma mark KVO 监听
--(void)observeValueForKeyPath:(NSString *)keyPath
-										 ofObject:(id)object
-											 change:(NSDictionary *)change
-											context:(void *)context {
-  
-  if ((__bridge id)context == self) {// Our notification, not our superclass’s
-    if ([keyPath isEqualToString:hadDownloadKey]){
-      if ([[change objectForKey:@"new"]boolValue]) {
-        if (self.isDownloading) {
-          //          DLog(@"kvo 监听 文件正在下载 显示变更为暂停");
-          [self.downloadButton setTitle:@"Pause" forState:UIControlStateNormal];
-          [self.downloadButton setEnabled:YES];
-        }else{
-          //          DLog(@"kvo 监听 文件下载完成 显示变更为完成");
-          [self.downloadButton setTitle:@"Finish" forState:UIControlStateNormal];
-          [self.downloadButton setEnabled:NO];
-          [self.progressView setProgress:1.0f animated:YES];
-        }
-      }else{
-        //        DLog(@"kvo 监听 文件可以下载 显示变更为暂停");
-        [self.downloadButton setTitle:@"Download" forState:UIControlStateNormal];
-        [self.downloadButton setEnabled:YES];
-        [self.progressView setProgress:0.0f animated:YES];
-      }
-    }
-  } else {
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-  }
+-(IBAction)contentMessageListener:(id)sender{
+  [self.workContext interruptHandling];
+  [super contentMessageListener:sender];
 }
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
+-(void)onClickDownloadWorkButtonListener:(id)sender{
+  [self.workContext triggerStateAction];
+  
+  
+}
 
 @end

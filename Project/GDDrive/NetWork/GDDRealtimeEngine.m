@@ -20,19 +20,13 @@
                                                     httpMethod:@"post"];
   
   [operation addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-    
     DLog(@"%d", [completedOperation HTTPStatusCode]);
     DLog(@"%@", [completedOperation responseString]);
     if ([completedOperation HTTPStatusCode] == 204) {
       errorBlock(@"用户名密码错误",nil);
     }else{
-
       completionBlock([completedOperation responseJSON]);
     }
-    
-    
-    
-    
   } errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
     
     errorBlock(@"",error);
@@ -42,6 +36,6 @@
   [self enqueueOperation:operation];
   
   return operation;
-
+  
 }
 @end

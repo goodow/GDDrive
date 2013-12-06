@@ -86,8 +86,6 @@
 }
 -(void)loadRealtime{
   
-  
-  
   self.childViewController = [NSMutableArray array];
   //  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
   [GDRRealtime setServerAddress:[NSString stringWithFormat:@"http://%@",GDDConfigPlist(@"realtime_service")]];
@@ -173,7 +171,6 @@
 {
   return 80;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

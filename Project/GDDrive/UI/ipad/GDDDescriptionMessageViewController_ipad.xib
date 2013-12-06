@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GDDDescriptionMessageViewController_ipad">
             <connections>
+                <outlet property="activityIndicatorView" destination="GVH-jx-40Y" id="nM9-v7-HmC"/>
                 <outlet property="fileOrfolderImageView" destination="eXb-ed-gFH" id="zAY-XJ-kbo"/>
                 <outlet property="fileOrfolderNameLabel" destination="Cqz-y5-3ip" id="Pub-es-tgx"/>
                 <outlet property="fileOrfolderTypeLabel" destination="slw-8G-FRk" id="BEl-6b-aKh"/>
@@ -120,6 +121,11 @@
                                         <action selector="switchListener:" destination="-1" eventType="touchUpInside" id="Jkj-Xb-8VG"/>
                                     </connections>
                                 </switch>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="GVH-jx-40Y">
+                                    <rect key="frame" x="200" y="21" width="37" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="color" red="0.0039215688589999999" green="0.72156864399999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                </activityIndicatorView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>

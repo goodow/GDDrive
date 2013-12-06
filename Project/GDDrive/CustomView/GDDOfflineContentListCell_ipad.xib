@@ -45,21 +45,23 @@
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o1h-FW-gVr">
                         <rect key="frame" x="2" y="2" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLv-ic-HuC">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <state key="normal" title="D">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onClickDownloadWorkButtonListener:" destination="QdC-iL-QIg" eventType="touchUpInside" id="Al1-pS-VQ0"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <connections>
                             <action selector="onCircularProgressViewListener:" destination="QdC-iL-QIg" eventType="touchUpInside" id="Tzk-QZ-1CJ"/>
                         </connections>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2VR-ND-ny0">
-                        <rect key="frame" x="2" y="2" width="40" height="40"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                        <state key="normal" title="Dowload">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="onCircularProgressViewListener:" destination="QdC-iL-QIg" eventType="touchUpInside" id="IVh-yn-AJ8"/>
-                        </connections>
-                    </button>
                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pI0-1z-ZyT">
                         <rect key="frame" x="89" y="42" width="579" height="3"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -71,10 +73,21 @@
             <connections>
                 <outlet property="contentListImageView" destination="Z1M-5k-bNA" id="cA1-XJ-gFj"/>
                 <outlet property="contentListLabel" destination="jcD-DQ-R9h" id="9l6-2D-IMM"/>
-                <outlet property="downloadButton" destination="2VR-ND-ny0" id="IbC-U1-9NF"/>
+                <outlet property="downloadButton" destination="bLv-ic-HuC" id="A4b-Vt-xuY"/>
                 <outlet property="progressView" destination="pI0-1z-ZyT" id="l3O-qV-js2"/>
             </connections>
         </tableViewCell>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2VR-ND-ny0">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <fontDescription key="fontDescription" type="system" pointSize="8"/>
+            <state key="normal" title="Dowload">
+                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+            </state>
+            <connections>
+                <action selector="onCircularProgressViewListener:" destination="QdC-iL-QIg" eventType="touchUpInside" id="IVh-yn-AJ8"/>
+            </connections>
+        </button>
     </objects>
     <resources>
         <image name="class_icon.png" width="36" height="36"/>

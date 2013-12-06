@@ -12,5 +12,5 @@ typedef void (^CompletionBlock)(BOOL finished);
 @interface GDDDescriptionMessageViewController_ipad : UIViewController
 - (void)presentViewControllerCompletion:(CompletionBlock)completion;
 - (void)dismissViewControllerCompletion:(CompletionBlock)completion;
-- (void)updateData:(GDRCollaborativeMap *)map;
+- (void)bindWithDataBean:(GDRCollaborativeMap *)map;
 @end

@@ -53,7 +53,7 @@
   self.messageViewController = [[GDDDescriptionMessageViewController_ipad alloc]initWithNibName:@"GDDDescriptionMessageViewController_ipad" bundle:nil];
   [self.messageViewController presentViewControllerCompletion:^(BOOL finished) {
   }];
-  [self.messageViewController updateData:self.map];
+  [self.messageViewController bindWithDataBean:self.map];
 }
 
 #pragma mark KVO 监听

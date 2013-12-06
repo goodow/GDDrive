@@ -7,6 +7,7 @@
 //
 
 #import "GDDPlistHelper.h"
+#import "NSMutableDictionary+SafeSetObject.h"
 
 @implementation GDDPlistHelper
 + (GDDPlistHelper *) sharedInstance {
@@ -33,6 +34,7 @@
   }
   return self;
 }
+//创建plist实体镜像
 + (void)createPlistMirror{
   //读取plist 并在沙盒目录创建实体镜像
   NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"config" ofType:@"plist"];
@@ -50,7 +52,6 @@
   NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"config.plist"];
   //  NSLog(@"%@", [[NSMutableDictionary alloc]initWithContentsOfFile:path]);
   return [[NSMutableDictionary alloc]initWithContentsOfFile:path];
-  
 }
 -(NSString *)objectFromPlistKey:(NSString *)key{
   return [[self infolist] objectForKey:key];
@@ -58,7 +59,7 @@
 -(void)setInPlistObject:(id)object forKey:(id)key {
   NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0]stringByAppendingPathComponent:@"config.plist"];
   NSMutableDictionary *infolist= [[[NSMutableDictionary alloc]initWithContentsOfFile:path]mutableCopy];
-  [infolist setObject:object forKey:key];
+  [infolist safeSetObject:object forKey:key];
   [infolist writeToFile:path atomically:YES];
 }
 

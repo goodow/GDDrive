@@ -88,6 +88,13 @@
 		65C488E0181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488DE181A203B008E2EAF /* GDDFaviconsViewController_iPad.xib */; };
 		65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */; };
 		65C488EF181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */; };
+		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
+		65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D021856C9DF005249BB /* GDDDownloadingState.m */; };
+		65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */; };
+		65CA0D0D1856C9DF005249BB /* GDDPauseDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D061856C9DF005249BB /* GDDPauseDownloadState.m */; };
+		65CA0D0E1856C9DF005249BB /* GDDUnDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D081856C9DF005249BB /* GDDUnDownloadState.m */; };
+		65CA0D0F1856C9DF005249BB /* GDDWillDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D0A1856C9DF005249BB /* GDDWillDownloadState.m */; };
+		65CA0D1318570016005249BB /* GDDDownloadWorkContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D1218570016005249BB /* GDDDownloadWorkContext.m */; };
 		65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */; };
 		65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EA26561833138B00077EF4 /* GDDMenuRootController_ipad.xib */; };
 		773E070449474D719289E8E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763A91962AF40D8ABD7D5A7 /* libPods.a */; };
@@ -220,6 +227,21 @@
 		65C488EB181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDOfflineFilesViewController_iPad.h; sourceTree = "<group>"; };
 		65C488EC181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDOfflineFilesViewController_iPad.m; sourceTree = "<group>"; };
 		65C488ED181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDOfflineFilesViewController_iPad.xib; sourceTree = "<group>"; };
+		65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSetObject.h"; sourceTree = "<group>"; };
+		65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSetObject.m"; sourceTree = "<group>"; };
+		65CA0D011856C9DF005249BB /* GDDDownloadingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadingState.h; sourceTree = "<group>"; };
+		65CA0D021856C9DF005249BB /* GDDDownloadingState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDDownloadingState.m; sourceTree = "<group>"; };
+		65CA0D031856C9DF005249BB /* GDDFinishDownloadState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFinishDownloadState.h; sourceTree = "<group>"; };
+		65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFinishDownloadState.m; sourceTree = "<group>"; };
+		65CA0D051856C9DF005249BB /* GDDPauseDownloadState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDPauseDownloadState.h; sourceTree = "<group>"; };
+		65CA0D061856C9DF005249BB /* GDDPauseDownloadState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDPauseDownloadState.m; sourceTree = "<group>"; };
+		65CA0D071856C9DF005249BB /* GDDUnDownloadState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDUnDownloadState.h; sourceTree = "<group>"; };
+		65CA0D081856C9DF005249BB /* GDDUnDownloadState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUnDownloadState.m; sourceTree = "<group>"; };
+		65CA0D091856C9DF005249BB /* GDDWillDownloadState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDWillDownloadState.h; sourceTree = "<group>"; };
+		65CA0D0A1856C9DF005249BB /* GDDWillDownloadState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDWillDownloadState.m; sourceTree = "<group>"; };
+		65CA0D101856F80A005249BB /* GDDDownloadState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadState.h; sourceTree = "<group>"; };
+		65CA0D1118570016005249BB /* GDDDownloadWorkContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadWorkContext.h; sourceTree = "<group>"; };
+		65CA0D1218570016005249BB /* GDDDownloadWorkContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDDownloadWorkContext.m; sourceTree = "<group>"; };
 		65EA26541833138B00077EF4 /* GDDMenuRootController_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootController_ipad.h; sourceTree = "<group>"; };
 		65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootController_ipad.m; sourceTree = "<group>"; };
 		65EA26561833138B00077EF4 /* GDDMenuRootController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootController_ipad.xib; sourceTree = "<group>"; };
@@ -494,6 +516,8 @@
 				65571F01184587AC00A7C1B7 /* UIColor+GDDColorSchemes.m */,
 				65571F03184588F600A7C1B7 /* UIImageView+MKNetworkKitAdditions.h */,
 				65571F04184588F600A7C1B7 /* UIImageView+MKNetworkKitAdditions.m */,
+				65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */,
+				65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -525,16 +549,8 @@
 				655DAB48183C55C800703FA4 /* GDDFlickrEngine.m */,
 				65571F2D18482CF000A7C1B7 /* GDDRealtimeEngine.h */,
 				65571F2E18482CF000A7C1B7 /* GDDRealtimeEngine.m */,
-				655DAB4A183C619A00703FA4 /* GDDPlayMultimediaUtils */,
 			);
 			path = NetWork;
-			sourceTree = "<group>";
-		};
-		655DAB4A183C619A00703FA4 /* GDDPlayMultimediaUtils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GDDPlayMultimediaUtils;
 			sourceTree = "<group>";
 		};
 		655DAB52183D977200703FA4 /* Debug */ = {
@@ -554,6 +570,19 @@
 				65571F56184C3EE800A7C1B7 /* GDDLoginMessageModel.m */,
 				6563BD801835C8EB0008F709 /* GDDMenuRootModel.h */,
 				6563BD811835C8EB0008F709 /* GDDMenuRootModel.m */,
+				65CA0D1118570016005249BB /* GDDDownloadWorkContext.h */,
+				65CA0D1218570016005249BB /* GDDDownloadWorkContext.m */,
+				65CA0D101856F80A005249BB /* GDDDownloadState.h */,
+				65CA0D071856C9DF005249BB /* GDDUnDownloadState.h */,
+				65CA0D081856C9DF005249BB /* GDDUnDownloadState.m */,
+				65CA0D091856C9DF005249BB /* GDDWillDownloadState.h */,
+				65CA0D0A1856C9DF005249BB /* GDDWillDownloadState.m */,
+				65CA0D011856C9DF005249BB /* GDDDownloadingState.h */,
+				65CA0D021856C9DF005249BB /* GDDDownloadingState.m */,
+				65CA0D051856C9DF005249BB /* GDDPauseDownloadState.h */,
+				65CA0D061856C9DF005249BB /* GDDPauseDownloadState.m */,
+				65CA0D031856C9DF005249BB /* GDDFinishDownloadState.h */,
+				65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -769,15 +798,21 @@
 				65571F02184587AC00A7C1B7 /* UIColor+GDDColorSchemes.m in Sources */,
 				65571F40184885D500A7C1B7 /* GDDPlistHelper.m in Sources */,
 				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,
+				65CA0D0F1856C9DF005249BB /* GDDWillDownloadState.m in Sources */,
 				65C488D5181A0AA7008E2EAF /* GDDClassViewController_iPad.m in Sources */,
+				65CA0D0D1856C9DF005249BB /* GDDPauseDownloadState.m in Sources */,
+				65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */,
+				65CA0D0E1856C9DF005249BB /* GDDUnDownloadState.m in Sources */,
 				655DAB27183B5B4300703FA4 /* GDDContentListCell_ipad.m in Sources */,
+				65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */,
 				65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */,
 				65571F1A1845D8BF00A7C1B7 /* GDDPlayMovieViewController_ipad.m in Sources */,
 				65C488DF181A203B008E2EAF /* GDDFaviconsViewController_iPad.m in Sources */,
 				65571F57184C3EE800A7C1B7 /* GDDLoginMessageModel.m in Sources */,
 				65C488EE181A3EC2008E2EAF /* GDDOfflineFilesViewController_iPad.m in Sources */,
+				65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 				65571F4D184C31DD00A7C1B7 /* GDDLoginView_ipad.m in Sources */,
 				655DAB49183C55C800703FA4 /* GDDFlickrEngine.m in Sources */,
@@ -793,6 +828,7 @@
 				65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */,
 				65571F2F18482CF000A7C1B7 /* GDDRealtimeEngine.m in Sources */,
 				65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */,
+				65CA0D1318570016005249BB /* GDDDownloadWorkContext.m in Sources */,
 				65571F2B1846E27900A7C1B7 /* GDDPlayAudioViewController_ipad.m in Sources */,
 				65571EFC1845872100A7C1B7 /* UIAlertView+Blocks.m in Sources */,
 				655DAB50183CC32400703FA4 /* GDDGenreDictionary.m in Sources */,

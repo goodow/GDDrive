@@ -18,6 +18,7 @@
 @property (nonatomic, weak) IBOutlet UIView *messageView;
 @property (nonatomic, weak) IBOutlet UIView *offlineView;
 @property (nonatomic, weak) IBOutlet UISwitch *offlineSwitch;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicatorView;
 
 @property (nonatomic, weak) IBOutlet UIImageView *thumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *fileOrfolderNameLabel;
@@ -78,7 +79,7 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-- (void)updateData:(GDRCollaborativeMap *)map{
+- (void)bindWithDataBean:(GDRCollaborativeMap *)map{
   self.map = map;
   //这里要更改为抽象 加载map 并根据map指示的类型去让 界面展示图片或者是 文件类型图 文件名 类型等等数据
   //这里 暂时认为只是加载图片而已
@@ -110,7 +111,7 @@
   }
   //资源文件 包括 JPG PNG SWF PDF MP3 MP4 信息展示
   if ([map get:@"type"]) {
-    [self.offlineSwitch setEnabled:YES];
+    [self.activityIndicatorView startAnimating];
     [self.fileOrfolderImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]tinyImageNameByKey:[map get:@"type"]]]];
     [self.fileOrfolderTypeLabel setText:[map get:@"type"]];
     //加载是否已经添加离线
@@ -121,12 +122,14 @@
                weakSelf.mod = [weakSelf.doc getModel];
                weakSelf.root = [weakSelf.mod getRoot];
                weakSelf.offlineList = [weakSelf.root get:@"offline"];
-//               id block = ^(GDRBaseModelEvent *event) {
-//                 NSLog(@"weakSelf.filesList listener");
-//               };
-//               [weakSelf.offlineList addValuesAddedListener:block];
-//               [weakSelf.offlineList addValuesRemovedListener:block];
-//               [weakSelf.offlineList addValuesSetListener:block];
+               //               id block = ^(GDRBaseModelEvent *event) {
+               //                 NSLog(@"weakSelf.filesList listener");
+               //               };
+               //               [weakSelf.offlineList addValuesAddedListener:block];
+               //               [weakSelf.offlineList addValuesRemovedListener:block];
+               //               [weakSelf.offlineList addValuesSetListener:block];
+               [self.activityIndicatorView stopAnimating];
+               [self.offlineSwitch setEnabled:YES];
                //判断资源是否已经加入了离线？
                [weakSelf.offlineList indexOf:[map get:@"id"] opt_comparator:^NSComparisonResult(id obj1, id obj2) {
                  [weakSelf.offlineSwitch setOn:NO];
@@ -142,8 +145,9 @@
                }];
                
              } opt_initializer:^(GDRModel *model) {
-
+               
              } opt_error:^(GDRError *error) {
+               [self.activityIndicatorView stopAnimating];
                
              }];
     
