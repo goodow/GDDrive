@@ -4,9 +4,9 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GDDFaviconsViewController_iPad">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GDDMainViewController_ipad">
             <connections>
-                <outlet property="tableView" destination="F8O-gh-0wk" id="Uzc-uO-ibG"/>
+                <outlet property="tableView" destination="FZa-eX-wnH" id="7ma-yD-TgZ"/>
                 <outlet property="view" destination="2" id="3"/>
             </connections>
         </placeholder>
@@ -15,13 +15,13 @@
             <rect key="frame" x="0.0" y="0.0" width="708" height="1004"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="F8O-gh-0wk">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="FZa-eX-wnH">
                     <rect key="frame" x="20" y="64" width="668" height="941"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="14M-iG-k2E"/>
-                        <outlet property="delegate" destination="-1" id="dSp-kb-tFo"/>
+                        <outlet property="dataSource" destination="-1" id="ayX-1e-aRX"/>
+                        <outlet property="delegate" destination="-1" id="sl1-dd-ylj"/>
                     </connections>
                 </tableView>
             </subviews>

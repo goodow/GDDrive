@@ -18,6 +18,7 @@
 #import "GDDMenuRootModel.h"
 #import "GDDLoginView_ipad.h"
 #import "UIAlertView+Blocks.h"
+#import "GDDMainViewController_ipad.h"
 
 @interface GDDMenuRootController_ipad ()
 @property (nonatomic, weak) IBOutlet UITableView *menuTableView;
@@ -73,8 +74,6 @@
                                }];
   }];
   self.menuTableView.tableHeaderView = self.loginView;
-  
-  
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
@@ -91,15 +90,15 @@
   [GDRRealtime setServerAddress:[NSString stringWithFormat:@"http://%@",GDDConfigPlist(@"realtime_service")]];
   [GDRRealtime authorize:GDDConfigPlist(@"userId") token:GDDConfigPlist(@"token")];
   
-  GDDClassViewController_iPad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDClassViewController_iPad" bundle:nil];
+  GDDMainViewController_ipad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
   self.classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
   [self.childViewController addObject:self.classNavigationController];
   
-  GDDFaviconsViewController_iPad *faviconsViewController=[[GDDFaviconsViewController_iPad alloc] initWithNibName:@"GDDFaviconsViewController_iPad" bundle:nil];
+  GDDMainViewController_ipad *faviconsViewController=[[GDDFaviconsViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
   self.faviconsNavigationController = [[UINavigationController alloc]initWithRootViewController:faviconsViewController];
   [self.childViewController addObject:self.faviconsNavigationController];
   
-  GDDOfflineFilesViewController_iPad *offlineFilesViewController = [[GDDOfflineFilesViewController_iPad alloc] initWithNibName:@"GDDOfflineFilesViewController_iPad" bundle:nil];
+  GDDMainViewController_ipad *offlineFilesViewController = [[GDDOfflineFilesViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
   self.offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
   [self.childViewController addObject:self.offlineNavigationController];
   
@@ -210,7 +209,6 @@
       case 2:
         [self transitionChildViewControllerAndIntoRootPathByKey:@"offlinedoc"];
         break;
-        
       default:
         break;
     }

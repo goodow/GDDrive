@@ -11,6 +11,7 @@
 #import "Boolean.h"
 #import "GDDGenreDictionary.h"
 #import "UIImageView+MKNetworkKitAdditions.h"
+#import "GDDMainViewController_ipad.h"
 
 @interface GDDContentListCell_ipad()
 
@@ -67,6 +68,7 @@
       // 外部控制器, 已经被释放了, 在这里释放cell占用的资源
       [self.contentListImageView cancelOperation];
       [object removeObserver:self forKeyPath:isControllerDealloc];
+      [object resetIsControllerDeallocTag];
     }
   } else {
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];

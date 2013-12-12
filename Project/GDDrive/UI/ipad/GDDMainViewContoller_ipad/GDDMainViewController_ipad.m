@@ -1,0 +1,317 @@
+//
+//  GDDMainViewController_ipad.m
+//  GDDrive
+//
+//  Created by 大黄 on 13-12-12.
+//  Copyright (c) 2013年 大黄. All rights reserved.
+//
+
+#import "GDDMainViewController_ipad.h"
+#import "GDDUIBarButtonItem.h"
+#import "GDDContentListCell_ipad.h"
+#import "Boolean.h"
+#import "GDDPlayPNGAndJPGViewController_ipad.h"
+#import "GDDPlayPDFViewController_ipad.h"
+#import "GDDPlayMovieViewController_ipad.h"
+#import "GDDPlayAudioViewController_ipad.h"
+#import "UIAlertView+Blocks.h"
+#import "GDDOffineFilesHelper.h"
+
+@interface GDDMainViewController_ipad ()
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) GDDUIBarButtonItem *backBarButtonItem;
+@property (nonatomic, strong) GDRDocument *doc;
+@property (nonatomic, strong) GDRModel *mod;
+@property (nonatomic, strong) GDRCollaborativeMap *root;
+@property (nonatomic, strong) GDRCollaborativeList *folderList;
+@property (nonatomic, strong) GDRCollaborativeList *filesList;
+
+@property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
+@property (nonatomic, strong) id <GDJsonObject> path;
+@property (nonatomic, strong) id <GDJsonArray> currentPath;
+@property (nonatomic, strong) id <GDJsonString> currentID;
+@property (nonatomic, strong) id modelBlock;
+
+@property (nonatomic, strong) GDDPlayPNGAndJPGViewController_ipad *playPNGAndJPGViewController;
+@property (nonatomic, strong) GDDPlayPDFViewController_ipad *playPDFViewController;
+@property (nonatomic, strong) GDDPlayMovieViewController_ipad *playMovieViewController;
+@property (nonatomic, strong) GDDPlayAudioViewController_ipad *playAudioViewController;
+@property (nonatomic, assign) BOOL isControllerDealloc;
+
+@end
+
+static NSString * FOLDERS_KEY = @"folders";
+static NSString * FILES_KEY = @"files";
+
+
+@implementation GDDMainViewController_ipad
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    _isControllerDealloc = NO;
+  }
+  return self;
+}
+
+-(void)setMainViewControllerProtocol:(id <GDDMainViewController_ipad>)protocol{
+  self.mainViewControllerProtocol = protocol;
+}
+-(void)resetIsControllerDeallocTag{
+  self.isControllerDealloc = NO;
+}
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  self.backBarButtonItem  = [[GDDUIBarButtonItem alloc] initWithRootTitle:[self interfaceDescription] withClick:^{
+    [self.currentPath remove:([self.currentPath length]-1)];
+    [self.path set:@"currentpath" value:self.currentPath];
+    [self.remotecontrolRoot set:@"path" value:self.path];
+  }];
+  self.navigationItem.leftBarButtonItem = self.backBarButtonItem;
+  
+  //  [self loadRealtime];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  self.isControllerDealloc = YES;
+  [self.folderList removeObjectChangedListener:self.modelBlock];
+  [self.filesList removeObjectChangedListener:self.modelBlock];
+}
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)loadRealtime{
+  __weak GDDMainViewController_ipad *weakSelf = self;
+  [GDRRealtime load:[weakSelf realtimeLoadLocation]
+           onLoaded:^(GDRDocument *document) {
+             weakSelf.doc = document;
+             weakSelf.mod = [weakSelf.doc getModel];
+             weakSelf.root = [weakSelf.mod getRoot];
+             
+             [weakSelf.doc addDocumentSaveStateListener:^(GDRDocumentSaveStateChangedEvent *event) {
+               if ([event isSaving] || [event isPending]) {
+               }
+             }];
+             [weakSelf.mod addUndoRedoStateChangedListener:^(GDRUndoRedoStateChangedEvent *event) {
+               
+             }];
+             
+           } opt_initializer:^(GDRModel *model) {
+             
+           } opt_error:^(GDRError *error) {
+             
+           }];
+  
+}
+-(void)loadRealtimeData:(GDRModel *)mod{
+  self.remotecontrolRoot = [mod getRoot];
+  __weak GDDMainViewController_ipad *weakSelf = self;
+  weakSelf.path = [weakSelf.remotecontrolRoot get:@"path"];
+  weakSelf.currentPath = [weakSelf.path get:@"currentpath"];
+  weakSelf.currentID = [weakSelf.path get:@"currentdocid"];
+  
+  [GDRRealtime load:[weakSelf realtimeLoadLocation]
+           onLoaded:^(GDRDocument *document) {
+             weakSelf.doc = document;
+             weakSelf.mod = [weakSelf.doc getModel];
+             NSString *gdID = [[weakSelf.currentPath get:([weakSelf.currentPath length]-1)]getString];
+             weakSelf.root = [weakSelf.mod getObjectWithNSString:gdID];
+             if ([weakSelf foldersKey]) {
+               weakSelf.folderList = [weakSelf.root get:[weakSelf foldersKey]];
+             }
+             if ([weakSelf filesKey]) {
+               weakSelf.filesList = [weakSelf.root get:[weakSelf filesKey]];
+             }
+             
+             weakSelf.modelBlock = ^(GDRBaseModelEvent *event) {
+               [weakSelf.tableView reloadData];
+             };
+             
+             [weakSelf.folderList addObjectChangedListener:weakSelf.modelBlock];
+             [weakSelf.filesList addObjectChangedListener:weakSelf.modelBlock];
+             [weakSelf.tableView reloadData];
+             
+             //设置该页面的back显示
+             id <GDJsonObject> changePath = [weakSelf.remotecontrolRoot get:@"path"];
+             id <GDJsonArray> changeCurrentPath = [changePath get:@"currentpath"];
+             NSMutableArray *historyIDs = [NSMutableArray array];
+             NSMutableArray *historyNames = [NSMutableArray array];
+             for (int i = 1; i<[changeCurrentPath length]; i++) {
+               NSString *gdID = [[changeCurrentPath get:(i)]getString];
+               [historyIDs addObject:gdID];
+               GDRCollaborativeMap *changeRoot = [weakSelf.mod getObjectWithNSString:gdID];
+               NSString *name = [changeRoot get:@"label"];
+               [historyNames addObject:name];
+             }
+             [weakSelf.backBarButtonItem updateAllHistoryListWithHistoryID:historyIDs titles:historyNames];
+             
+           } opt_initializer:^(GDRModel *model) {
+             
+           } opt_error:^(GDRError *error) {
+             
+           }];
+}
+
+#pragma mark -tableView dataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 2;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  if (self.tableView.numberOfSections >1) {
+    return section == 0 ? [self.folderList length] : [self.filesList length];
+  }else{
+    return [self.filesList length];
+  }
+  
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 300.0, 44.0)];
+  UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+  headerLabel.backgroundColor = [UIColor clearColor];
+  headerLabel.opaque = NO;
+  headerLabel.textColor = [UIColor grayColor];
+  headerLabel.highlightedTextColor = [UIColor whiteColor];
+  headerLabel.font = [UIFont boldSystemFontOfSize:16];
+  headerLabel.frame = CGRectMake(0.0, 0.0, 300.0, 44.0);
+  
+  if (self.tableView.numberOfSections >1) {
+    headerLabel.text = section ? @"文件" : @"文件夹";
+  }else{
+    headerLabel.text = @"文件";
+  }
+  
+  [customView addSubview:headerLabel];
+  return customView;
+}
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  return 44.0;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  static NSString *CellIdentifier = @"GDDContentListCell_ipad";
+  GDDContentListCell_ipad *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    UINib *nibObject =  [UINib nibWithNibName:@"GDDContentListCell_ipad" bundle:nil];
+    NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
+    cell = [nibObjects objectAtIndex:0];
+    [cell setBackgroundColor:[UIColor clearColor]];
+    
+    [self addObserver:cell forKeyPath:isControllerDealloc
+              options:NSKeyValueObservingOptionNew
+              context:(__bridge void*)cell];
+  }
+  if (self.tableView.numberOfSections >1) {
+    if (indexPath.section == 0) {
+      if ([self.folderList length]>0) {
+        GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
+        [cell bindWithDataBean:map];
+      }
+      return cell;
+    }else{
+      if ([self.filesList length]>0) {
+        GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
+        [cell bindWithDataBean:map];
+      }
+      return cell;
+    }
+  }else{
+    if ([self.filesList length]>0) {
+      GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
+      [cell bindWithDataBean:map];
+    }
+    return cell;
+  }
+  
+  
+}
+-(void)openFoldersAtIndexPath:(NSIndexPath *)indexPath{
+  GDRCollaborativeMap *map = [self.folderList get:indexPath.row];
+  id <GDJsonString> idStr = [GDJson createString:[map getId]];
+  [self.currentPath insert:[self.currentPath length] value:idStr];
+  [self.path set:@"currentpath" value:self.currentPath];
+  [self.remotecontrolRoot set:@"path" value:self.path];
+}
+-(void)openFilesAtIndexPath:(NSIndexPath *)indexPath{
+  GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
+  if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
+    self.playPNGAndJPGViewController = [[GDDPlayPNGAndJPGViewController_ipad alloc]initWithNibName:@"GDDPlayPNGAndJPGViewController_ipad" bundle:nil];
+    [self presentViewController:self.playPNGAndJPGViewController animated:YES completion:nil];
+    [self.playPNGAndJPGViewController bindWithDataBean:map];
+  }else if ([[map get:@"type"]isEqualToString:@"application/pdf"]){
+    
+    __weak GDDMainViewController_ipad *weakSelf = self;
+    self.playPDFViewController = [[GDDPlayPDFViewController_ipad alloc]initWithDataBean:map dismissReaderBlock:^(ReaderViewController *viewController) {
+      [viewController dismissViewControllerAnimated:YES completion:^{
+      }];
+    } successBlock:^(ReaderViewController *viewController) {
+      [weakSelf presentViewController:viewController animated:YES completion:nil];
+    } failureBlock:^(GDDPlayPDFError error,NSString *errorMessage) {
+      [UIAlertView showAlertViewWithTitle:@"发生错误啦"
+                                  message:errorMessage
+                        cancelButtonTitle:@"cancel"
+                        otherButtonTitles:nil
+                           alertViewStyle:UIAlertViewStyleDefault
+                                onDismiss:^(UIAlertView *alertView, int buttonIndex) {
+                                  
+                                }
+                                 onCancel:^{
+                                   
+                                 }];
+    }];
+  }else if ([[map get:@"type"]isEqualToString:@"video/mp4"]){
+    self.playMovieViewController = [[GDDPlayMovieViewController_ipad alloc]initWithNibName:@"GDDPlayMovieViewController_ipad" bundle:nil];
+    [self presentViewController:self.playMovieViewController animated:YES completion:nil];
+    [self.playMovieViewController bindWithDataBean:map];
+  }else if ([[map get:@"type"]isEqualToString:@"audio/mp3"]){
+    self.playAudioViewController = [[GDDPlayAudioViewController_ipad alloc]initWithNibName:@"GDDPlayAudioViewController_ipad" bundle:nil];
+    [self presentViewController:self.playAudioViewController animated:YES completion:nil];
+    [self.playAudioViewController bindWithDataBean:map];
+  }
+}
+
+#pragma mark - tableView delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  
+  if (self.tableView.numberOfSections >1) {
+    if (indexPath.section == 0) {
+      //选择文件夹
+      [self openFoldersAtIndexPath:indexPath];
+    }else{
+      //选择文件
+      [self openFilesAtIndexPath:indexPath];
+    }
+  }else{
+    //选择文件
+    [self openFilesAtIndexPath:indexPath];
+  }
+}
+
+#pragma mark Abstract
+-(NSString *)interfaceDescription{
+  DLog(@"Abstract must realize");
+  return @"";
+}
+-(NSString *)realtimeLoadLocation{
+  DLog(@"Abstract must realize");
+  return @"";
+}
+-(NSString *)filesKey{
+  DLog(@"Abstract must realize");
+  return nil;
+}
+-(NSString *)foldersKey{
+  DLog(@"Abstract must realize");
+  return nil;
+}
+@end
