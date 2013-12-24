@@ -19,6 +19,9 @@
 @end
 
 @interface GDDMainViewController_ipad : UIViewController <GDDMainViewController_ipad,UITableViewDataSource,UITableViewDelegate,GDRealtimeProtocol,PSStackedViewDelegate>
+
+@property (nonatomic, strong, readonly) GDRCollaborativeList *filesList;
+
 -(void)resetIsControllerDeallocTag;
 
 @end

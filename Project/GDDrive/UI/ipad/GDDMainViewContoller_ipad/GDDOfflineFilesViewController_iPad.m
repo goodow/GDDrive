@@ -11,20 +11,6 @@
 #import "GDDOfflineContentListCell_ipad.h"
 
 @interface GDDOfflineFilesViewController_iPad ()
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
-
-@property (nonatomic, strong) GDDUIBarButtonItem *backBarButtonItem;
-@property (nonatomic, strong) GDRDocument *doc;
-@property (nonatomic, strong) GDRModel *mod;
-@property (nonatomic, strong) GDRCollaborativeMap *root;
-@property (nonatomic, strong) GDRCollaborativeList *offLineList;
-
-@property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
-@property (nonatomic, strong) id <GDJsonObject> path;
-@property (nonatomic, strong) id <GDJsonArray> currentPath;
-@property (nonatomic, strong) id <GDJsonString> currentID;
-
-@property (nonatomic, strong) id offlinedocBlock;
 
 @end
 
@@ -38,6 +24,23 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
   
   return @"";
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  static NSString *CellIdentifier = @"GDDOfflineContentListCell_ipad";
+  GDDOfflineContentListCell_ipad *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    UINib *nibObject =  [UINib nibWithNibName:@"GDDOfflineContentListCell_ipad" bundle:nil];
+    NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
+    cell = [nibObjects objectAtIndex:0];
+    [cell setBackgroundColor:[UIColor clearColor]];
+  }
+  if ([self.filesList length]>0) {
+    GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
+    [cell bindWithDataBean:map];
+  }
+  return cell;
+  
 }
 -(NSArray *)cellsForTableView:(UITableView *)tableView
 {
