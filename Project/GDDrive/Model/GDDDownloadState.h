@@ -11,6 +11,5 @@
 
 @protocol GDDDownloadState <NSObject>
 
--(void)downloadWork:(GDDDownloadWorkContext *)work;
 
 @end

@@ -196,32 +196,6 @@ static void *kBufferingRatioKVOKey = &kBufferingRatioKVOKey;
   // Dispose of any resources that can be recreated.
 }
 
--(void)bindWithDataBean:(GDRCollaborativeMap *)map{
-  
-  
-  NSURL *url = nil;
-  GDDOffineFilesHelper *offlineFilesHelper = [[GDDOffineFilesHelper alloc]init];
-  if ([offlineFilesHelper isAlreadyPresentInTheLocalFileByData:map]) {
-    //本地
-    NSString* path =[offlineFilesHelper filePathOfHaveDownloadedByData:map];
-    url = [NSURL fileURLWithPath:path];
-  }else{
-    //网络
-    url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",GDDMultimediaHeadURL([map get:@"id"])]];
-  };
-  NSMutableArray *allTracks = [NSMutableArray array];
-  Track *track = [[Track alloc] init];
-  [track setArtist:@"未知艺术家"];//艺术家后台还没有对应数据
-  [track setTitle:[map get:@"label"]];
-  [track setUrl:url];
-  [allTracks addObject:track];
-  self.tracks = [allTracks copy];
-  self.currentIndex = 0;
-  [self resetStreamer];
-  
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerAction:) userInfo:nil repeats:YES];
-  [self.sliderVolume setValue:[DOUAudioStreamer volume]];
-}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {

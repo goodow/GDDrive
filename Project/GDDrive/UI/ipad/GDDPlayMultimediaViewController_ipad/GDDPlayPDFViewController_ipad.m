@@ -17,39 +17,6 @@
 
 @implementation GDDPlayPDFViewController_ipad
 
-- (id)initWithDataBean:(GDRCollaborativeMap *)map
-    dismissReaderBlock:(DismissReaderViewControllerBlock)block
-          successBlock:(LoadReaderViewControllerSuccessBlock)successBlock
-            failureBlock:(LoadReaderViewControllerErrorBlock)errorBlock{
-  
-  NSString *phrase = nil; // Document password (for unlocking most encrypted PDF files)
-  GDDOffineFilesHelper *offlineHelp = [[GDDOffineFilesHelper alloc]init];
-  NSString *filePath = [offlineHelp filePathOfHaveDownloadedByData:map];
-  if (!filePath) {
-    if (self = [super init]) {
-      errorBlock(GDD_PLAY_PDF_NO_LOCAL_FILE,@"本地文件不存在 \n需要开启离线并下载");
-    }
-    return self;
-  }
-  ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase];
-  if (document != nil) // Must have a valid ReaderDocument object in order to proceed
-  {
-    if (self = [super initWithReaderDocument:document]) {
-      self.delegate = self;
-      self.dismissReaderViewControllerBlock = block;
-      successBlock(self);
-      return self;
-    }
-  }else{
-    if (self = [super init]) {
-      DLog(@"GDDPlayPDFViewController_ipad init 初始化数据发生错误，没有正常初始化成功")
-          errorBlock(GDD_PLAY_PDF_INIT_FAILURE,@"无法初始化PDF");
-    }
-    return self;
-  }
-  return nil;
-}
-
 - (void)viewDidLoad
 {
   [super viewDidLoad];

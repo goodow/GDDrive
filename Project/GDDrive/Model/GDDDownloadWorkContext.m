@@ -17,7 +17,6 @@
 
 @interface GDDDownloadWorkContext ()
 @property (nonatomic, strong) id <GDDDownloadState> currentState;
-@property (nonatomic, strong, readwrite) GDRCollaborativeMap *map;
 
 @property (nonatomic, strong, readwrite) GDDUnDownloadState *unDownloadState;
 @property (nonatomic, strong, readwrite) GDDWillDownloadState *willDownloadState;
@@ -52,22 +51,6 @@
   return self;
 }
 
--(void)bindWithDataBean:(GDRCollaborativeMap *)aMap
-      TitleChangedBlock:(GDDDownloadButtonTitleChangedBlock)titleBlock
-     EnableChangedBlock:(GDDDownloadButtonEnableChangedBlock)enableBlock
-   ProgressChangedBlock:(GDDDownloadProgressChangedBlock) progressBlock{
-  
-  //如果正在下载的状态，将不会重置状态为 unDownloadState
-  if (![self.currentState isKindOfClass:[GDDDownloadingState class]]) {
-    self.titleBlock = titleBlock;
-    self.enableBlock = enableBlock;
-    self.progressBlock = progressBlock;
-    self.map = aMap;
-    [self setState:(id<GDDDownloadState>)self.unDownloadState];
-    [self triggerStateAction];
-  }
-  
-}
 
 -(void)setState:(id<GDDDownloadState>)state{
   [self.offineFilesHelper removeObserver:(id)self.currentState forKeyPath:hadDownloadKey];
@@ -78,7 +61,6 @@
   self.currentState = state;
 }
 -(void)triggerStateAction{
-  [self.currentState downloadWork:self];
 }
 -(void)interruptHandling{
   if ([self.currentState isKindOfClass:[self.downloadingState class]]) {

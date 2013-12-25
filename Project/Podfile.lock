@@ -1,94 +1,43 @@
 PODS:
-  - DOUAudioStreamer (0.2.5)
-  - GDJson (0.3.0):
-    - J2ObjC (= 0.8.6.1)
-  - GDRealtime (0.3.1):
-    - GDRealtime/default
-  - GDRealtime/common (0.3.1):
-    - GDRealtime/generated
-    - Google-Diff-Match-Patch (~> 0.0.1)
-    - GTMHTTPFetcher (~> 0.0.1)
-  - GDRealtime/default (0.3.1):
-    - GDRealtime/common
-  - GDRealtime/generated (0.3.1):
-    - GDRealtime/generated/api
-    - GDRealtime/generated/channel
-    - GDRealtime/generated/operation
-    - GDRealtime/generated/services
-  - GDRealtime/generated/api (0.3.1):
-    - GDRealtime/generated/channel
-  - GDRealtime/generated/channel (0.3.1):
-    - GDRealtime/generated/operation
-  - GDRealtime/generated/operation (0.3.1):
-    - GDJson (~> 0.3.0)
-  - GDRealtime/generated/services (0.3.1):
-    - Google-API-Client/Common
-    - Google-API-Client/Objects
-    - Google-API-Client/Utilities
-  - Google-API-Client/Common (0.0.1):
-    - gtm-oauth2
-    - GTMHTTPFetcher
-    - SBJson
-  - Google-API-Client/Objects (0.0.1):
-    - gtm-oauth2
-    - GTMHTTPFetcher
-    - SBJson
-  - Google-API-Client/Utilities (0.0.1):
-    - gtm-oauth2
-    - GTMHTTPFetcher
-    - SBJson
-  - Google-Diff-Match-Patch (0.0.1)
-  - gtm-oauth2 (0.0.2):
-    - gtm-oauth2/Core
-    - GTMHTTPFetcher
-    - SBJson
-  - gtm-oauth2/Core (0.0.2):
-    - gtm-oauth2/Core/Mac
-    - gtm-oauth2/Core/Touch
-    - GTMHTTPFetcher
-    - SBJson
-  - gtm-oauth2/Core/Mac (0.0.2):
-    - GTMHTTPFetcher
-    - SBJson
-  - gtm-oauth2/Core/Touch (0.0.2):
-    - GTMHTTPFetcher
-    - SBJson
-  - GTMHTTPFetcher (0.0.1):
-    - SBJson
-  - J2ObjC (0.8.6.1):
+  - DOUAudioStreamer (0.2.6)
+  - GDChannel (0.5.0):
+    - GDJson (~> 0.5.0)
+    - SocketRocket (~> 0.3.1-beta2)
+  - GDJson (0.5.0):
+    - J2ObjC (~> 0.8.8)
+  - J2ObjC (0.8.8):
     - J2ObjC/lib/jre
-  - J2ObjC/lib/jre (0.8.6.1)
+  - J2ObjC/lib/jre (0.8.8)
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - PSStackedView (1.0)
   - Reachability (3.1.1)
-  - SBJson (3.2)
+  - SocketRocket (0.3.1-beta2)
   - vfrReader (2.6.2)
 
 DEPENDENCIES:
   - DOUAudioStreamer (~> 0.2.5)
-  - GDRealtime (from `https://github.com/goodow/GDRealtime.git`)
+  - GDChannel (from `https://github.com/goodow/realtime-channel.git`)
+  - GDJson (from `https://github.com/goodow/realtime-json.git`)
   - MKNetworkKit (~> 0.87)
   - PSStackedView (~> 1.0)
   - vfrReader (~> 2.6.2)
 
 EXTERNAL SOURCES:
-  GDRealtime:
-    :git: https://github.com/goodow/GDRealtime.git
+  GDChannel:
+    :git: https://github.com/goodow/realtime-channel.git
+  GDJson:
+    :git: https://github.com/goodow/realtime-json.git
 
 SPEC CHECKSUMS:
-  DOUAudioStreamer: 82c489de500db717438981137985b40f664c8503
-  GDJson: 5d71fc0ae1defd784602f89a0b29313c96cd6a88
-  GDRealtime: 0cc8bf0cd80f37d5b92f99db3173b93002bec845
-  Google-API-Client: a5aea65083895ad2fa8eeca4747478215c9ac934
-  Google-Diff-Match-Patch: 63f4950ecbd0bf3f7ccae48987e958fc825041d3
-  gtm-oauth2: 92e23fbb4ab77c4f441ffc95e2bbbf174ea589c1
-  GTMHTTPFetcher: b0af09f18ec87e7a5edeffcc8cb6449fdbf0e83f
-  J2ObjC: bea4c24af35100985485c173958f1189aa0f0f6b
+  DOUAudioStreamer: bd8cd5e59e6c0dea46b998dfc6527cae10bbabbc
+  GDChannel: 9da3f3ba782d825ea4f4f5a27d88f5183327d8dc
+  GDJson: 4490e5640ca0d56cd0b7311261ffa65ac770b5e2
+  J2ObjC: eed03a6ebf1a8c0fb1ed15d5edbded36959366dd
   MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
   PSStackedView: 734c9bd6fdae2576aa9403edef60ffcb5873a90e
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SBJson: abc2bf2baef456d5dae213f9826fe2b6fdf19861
+  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
   vfrReader: b6b005af559b8430dad01120f00fb341bdc8a420
 
-COCOAPODS: 0.27.1
+COCOAPODS: 0.28.0

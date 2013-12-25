@@ -18,7 +18,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *contentListImageView;
 @property (nonatomic, weak) IBOutlet UILabel *contentListLabel;
 @property (nonatomic, strong, readwrite) GDDDescriptionMessageViewController_ipad *messageViewController;
-@property (nonatomic, strong, readwrite) GDRCollaborativeMap *map;
 
 @end
 @implementation GDDContentListCell_ipad
@@ -35,26 +34,13 @@
   [self setIconImage:aContentType];
 }
 -(void)setIconImage:(NSString *)imageType{
-  [self.contentListImageView cancelOperation];
-  if ([imageType isEqualToString:@"image/jpeg"] || [imageType isEqualToString:@"image/png"]) {
-    [self.contentListImageView setImageFromURL:[NSURL URLWithString:[self.map get:@"thumbnail"]]
-                              placeHolderImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]imageNameByKey:imageType]]];
-  }else{
-    [self.contentListImageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]imageNameByKey:imageType]]];
-  }
-}
--(void)bindWithDataBean:(GDRCollaborativeMap *)aMap{
-  self.map = aMap;
-  [self setLabel:[aMap get:@"label"]];
-  if ([aMap get:@"type"]) [self setContentType:[aMap get:@"type"]];
-  if ([aMap get:@"isclass"]) [[aMap get:@"isclass"]booleanValue] ?[self setContentType:@"noClass"]:[self setContentType:@"isClass"];
+
 }
 -(IBAction)contentMessageListener:(id)sender{
   //弹出详细信息界面 并加载数据
   self.messageViewController = [[GDDDescriptionMessageViewController_ipad alloc]initWithNibName:@"GDDDescriptionMessageViewController_ipad" bundle:nil];
   [self.messageViewController presentViewControllerCompletion:^(BOOL finished) {
   }];
-  [self.messageViewController bindWithDataBean:self.map];
 }
 
 #pragma mark KVO 监听

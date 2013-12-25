@@ -48,23 +48,6 @@
   // Dispose of any resources that can be recreated.
 }
 
--(void)bindWithDataBean:(GDRCollaborativeMap *)map{
-  if ([[map get:@"type"]isEqualToString:@"image/jpeg"] || [[map get:@"type"]isEqualToString:@"image/png"]) {
-    //判断该资源是否已经下载
-    GDDOffineFilesHelper *offlineHelp = [[GDDOffineFilesHelper alloc]init];
-    if ([offlineHelp isAlreadyPresentInTheLocalFileByData:map]) {
-      NSData *data = [offlineHelp readFileByData:map];
-      [self.imageView setImage:[UIImage imageWithData:data]];
-    }else{
-      [self.imageView setImageFromURL:[NSURL URLWithString:GDDMultimediaHeadURL([map get:@"id"])]
-                     placeHolderImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
-    }
-  }else{
-    [self.imageView setImage:[UIImage imageNamed:[[GDDGenreDictionary sharedInstance]largeImageNameByKey:[map get:@"type"]]]];
-  }
-  
-  
-}
 -(IBAction)cancelButtonListener:(id)sender{
   [self dismissViewControllerAnimated:YES completion:nil];
 }

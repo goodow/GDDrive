@@ -21,8 +21,4 @@ typedef void (^LoadReaderViewControllerErrorBlock)(GDDPlayPDFError error, NSStri
 
 //@property (nonatomic, strong) ReaderViewController *readerViewController;
 
-- (id)initWithDataBean:(GDRCollaborativeMap *)map
-    dismissReaderBlock:(DismissReaderViewControllerBlock)block
-          successBlock:(LoadReaderViewControllerSuccessBlock)successBlock
-          failureBlock:(LoadReaderViewControllerErrorBlock)errorBlock;
 @end

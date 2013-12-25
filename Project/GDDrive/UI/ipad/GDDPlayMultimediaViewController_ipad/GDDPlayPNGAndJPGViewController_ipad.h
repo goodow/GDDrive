@@ -10,5 +10,4 @@
 
 @interface GDDPlayPNGAndJPGViewController_ipad : UIViewController
 
--(void)bindWithDataBean:(GDRCollaborativeMap *)map;
 @end

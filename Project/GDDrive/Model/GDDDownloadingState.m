@@ -26,8 +26,6 @@
 
 -(void)downloadWork:(GDDDownloadWorkContext *)work{
   self.work = work;
-  //暂停下载
-  [self.work.offineFilesHelper cancelDownloadByData:self.work.map];
 }
 #pragma mark KVO 监听
 -(void)observeValueForKeyPath:(NSString *)keyPath

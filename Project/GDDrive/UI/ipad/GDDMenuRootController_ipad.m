@@ -10,7 +10,6 @@
 #import "GDDClassViewController_iPad.h"
 #import "GDDFaviconsViewController_iPad.h"
 #import "GDDOfflineFilesViewController_iPad.h"
-#import "GDR.h"
 #import "GDDRealtimeDataToViewController.h"
 #import "PSStackedView.h"
 #import "GDDAppDelegate.h"
@@ -30,10 +29,6 @@
 @property (nonatomic, strong) UINavigationController *offlineNavigationController;
 @property (nonatomic, strong) UINavigationController *descriptionMessageNavigationController;
 @property (nonatomic, strong) NSMutableArray *childViewController;
-@property (nonatomic, strong) GDDLoginView_ipad *loginView;
-
-@property (nonatomic, strong) GDRCollaborativeMap *remotecontrolRoot;
-@property (nonatomic, strong) GDRCollaborativeMap *cachePath;
 @property (nonatomic, strong) GDDMenuRootModel *menuRootModel;
 
 @property (nonatomic, strong) id remotecontrolBlock;
@@ -46,38 +41,11 @@
   [super viewDidLoad];
   
   self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png"] labels:@[@"我的课程", @"我的收藏", @"我的下载"]];
-  
-  //  [self loadRealtime];
-  
-  
-  //登陆信息与设置
-  UINib *nibObject =  [UINib nibWithNibName:@"GDDLoginView_ipad" bundle:nil];
-  NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
-  self.loginView = [nibObjects objectAtIndex:0];
-  [self.loginView setViewStyle];
-  [self.loginView setClickBlock:^{
-    [UIAlertView showAlertViewWithTitle:@"切换用户"
-                                message:@"是否要切换用户?"
-                      cancelButtonTitle:@"cancal"
-                      otherButtonTitles:@[@"sure"]
-                         alertViewStyle:UIAlertViewStyleDefault
-                              onDismiss:^(UIAlertView *alertView, int buttonIndex) {
-                                
-                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"userId" ];
-                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"token" ];
-                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"name" ];
-                                [[GDDPlistHelper sharedInstance]setInPlistObject:@"" forKey:@"display_name" ];
-                                
-                                [GDDRiveDelegate loginAPPWithAnimated:YES];
-                              }
-                               onCancel:^{
-                               }];
-  }];
-  self.menuTableView.tableHeaderView = self.loginView;
+
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  [self.remotecontrolRoot removeValueChangedListener:self.remotecontrolBlock];
+
 }
 - (void)didReceiveMemoryWarning
 {
@@ -86,9 +54,6 @@
 -(void)loadRealtime{
   
   self.childViewController = [NSMutableArray array];
-  //  [GDRRealtime setServerAddress:@"http://drive.retechcorp.com:8080"];
-  [GDRRealtime setServerAddress:[NSString stringWithFormat:@"http://%@",GDDConfigPlist(@"realtime_service")]];
-  [GDRRealtime authorize:GDDConfigPlist(@"userId") token:GDDConfigPlist(@"token")];
   
   GDDMainViewController_ipad *classViewController=[[GDDClassViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
   self.classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
@@ -111,29 +76,6 @@
                            faviconsViewController,GDDConfigPlist(@"favorites"),
                            offlineFilesViewController,GDDConfigPlist(@"offlinedoc"),nil];
   
-  //记录和监听文件目录
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"remotecontrol")]
-           onLoaded:^(GDRDocument *document) {
-             GDRModel *mod = [document getModel];
-             weakSelf.cachePath = [[mod getRoot] get:@"path"];
-             weakSelf.remotecontrolRoot = [mod getRoot];
-             [weakSelf.realtimeProtocol loadRealtimeData:mod];
-             self.remotecontrolBlock = ^(GDRValueChangedEvent *event) {
-               do {
-                 if (![[event getProperty] isEqualToString:@"path"]) break;
-                 if ([[weakSelf.cachePath description] isEqualToString:[[[mod getRoot] get:@"path"] description]]) break;
-                 weakSelf.cachePath = [[mod getRoot] get:@"path"];
-                 [weakSelf.realtimeProtocol loadRealtimeData:mod];
-               } while (NO);
-             };
-             [weakSelf.remotecontrolRoot addValueChangedListener:self.remotecontrolBlock];
-           }
-    opt_initializer:^(GDRModel *model) {}
-          opt_error:^(GDRError *error) {}];
-  
-  //设置登陆信息
-  [self.loginView bindData];
-  
   
 }
 -(void)transitionChildViewControllerByIndex:(NSInteger)index{
@@ -148,14 +90,6 @@
 }
 -(void)transitionChildViewControllerAndIntoRootPathByKey:(NSString *)key{
   
-  NSString *newCurrentdocid = [NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(key)];
-  id <GDJsonString> jsonCurrentdocid = [GDJson createString:newCurrentdocid];
-  id <GDJsonArray> jsonCurrentpath = [GDJson createArray];
-  [jsonCurrentpath set:0 string:@"root"];
-  id <GDJsonObject> jsonNewpath = [GDJson createObject];
-  [jsonNewpath set:@"currentdocid" value:jsonCurrentdocid];
-  [jsonNewpath set:@"currentpath" value:jsonCurrentpath];
-  [self.remotecontrolRoot set:@"path" value:jsonNewpath];
 }
 #pragma mark -tableView dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -197,23 +131,7 @@
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  //  [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  if (self.remotecontrolRoot) {
-    switch (indexPath.row) {
-      case 0:
-        [self transitionChildViewControllerAndIntoRootPathByKey:@"lesson"];
-        break;
-      case 1:
-        [self transitionChildViewControllerAndIntoRootPathByKey:@"favorites"];
-        break;
-      case 2:
-        [self transitionChildViewControllerAndIntoRootPathByKey:@"offlinedoc"];
-        break;
-      default:
-        break;
-    }
-    [self transitionChildViewControllerByIndex:indexPath.row];
-  }
+  [self transitionChildViewControllerByIndex:indexPath.row];
   
 }
 @end

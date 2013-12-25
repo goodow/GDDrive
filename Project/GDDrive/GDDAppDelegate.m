@@ -24,7 +24,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions; {
   
-  [super application:application didFinishLaunchingWithOptions:launchOptions];
   //设置状态条样式
   if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -83,37 +82,7 @@
 }
 
 -(void)loadRealtime{
-  //初始化所有
-  /**
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"remotecontrol")]
-           onLoaded:^(GDRDocument *document) {
-           }
-    opt_initializer:^(GDRModel *model) {}
-          opt_error:^(GDRError *error) {}];
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"lesson")]
-           onLoaded:^(GDRDocument *document) {
-           }
-    opt_initializer:^(GDRModel *model) {}
-          opt_error:^(GDRError *error) {}];
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"favorites")]
-           onLoaded:^(GDRDocument *document) {
-           }
-    opt_initializer:^(GDRModel *model) {}
-          opt_error:^(GDRError *error) {}];
-  [GDRRealtime load:[NSString stringWithFormat:@"%@/%@/%@",GDDConfigPlist(@"documentId"),GDDConfigPlist(@"userId"),GDDConfigPlist(@"offlinedoc")]
-           onLoaded:^(GDRDocument *document) {
-           }
-    opt_initializer:^(GDRModel *model) {
-      //离线模型初始化
-      GDRCollaborativeList *list = [model createList:[NSArray array]];
-      GDRCollaborativeMap *root = [model getRoot];
-      [root set:@"offline" value:list];
-    }
-          opt_error:^(GDRError *error) {}];
-   */
-  
-  
-  //加载所有数据和界面
+   //加载所有数据和界面
   [(GDDMenuRootController_ipad *)self.stackController.rootViewController loadRealtime];
 }
 @end

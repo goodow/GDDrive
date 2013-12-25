@@ -35,20 +35,6 @@
   }
   return self;
 }
--(void)bindWithDataBean:(GDRCollaborativeMap *)aMap{
-  [super bindWithDataBean:aMap];
-  __weak GDDOfflineContentListCell_ipad *weakSelf = self;
-  [self.workContext bindWithDataBean:aMap
-                   TitleChangedBlock:^(NSString *title) {
-                     [weakSelf.downloadButton setTitle:title forState:UIControlStateNormal];
-    }
-                  EnableChangedBlock:^(BOOL enable) {
-                    [weakSelf.downloadButton setEnabled:enable];
-    }
-                ProgressChangedBlock:^(double progress) {
-                  [weakSelf.progressView setProgress:progress/100.0f animated:YES];
-  }];
-}
 -(IBAction)contentMessageListener:(id)sender{
   [self.workContext interruptHandling];
   [super contentMessageListener:sender];

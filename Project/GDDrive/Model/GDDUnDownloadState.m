@@ -21,12 +21,7 @@
   }
   return self;
 }
--(void)downloadWork:(GDDDownloadWorkContext *)work{
-  self.work = work;
-  work.titleBlock(@"Download");
-  work.enableBlock(YES);
-  [work.offineFilesHelper isAlreadyPresentInTheLocalFileByData:work.map];
-}
+
 #pragma mark KVO 监听
 -(void)observeValueForKeyPath:(NSString *)keyPath
 										 ofObject:(id)object

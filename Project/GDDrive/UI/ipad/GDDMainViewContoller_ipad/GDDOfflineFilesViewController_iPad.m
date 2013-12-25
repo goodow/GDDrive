@@ -35,10 +35,6 @@
     cell = [nibObjects objectAtIndex:0];
     [cell setBackgroundColor:[UIColor clearColor]];
   }
-  if ([self.filesList length]>0) {
-    GDRCollaborativeMap *map = [self.filesList get:indexPath.row];
-    [cell bindWithDataBean:map];
-  }
   return cell;
   
 }

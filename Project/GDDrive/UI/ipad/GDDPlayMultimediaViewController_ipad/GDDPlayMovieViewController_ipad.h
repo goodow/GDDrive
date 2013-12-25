@@ -9,5 +9,4 @@
 #import <UIKit/UIKit.h>
 
 @interface GDDPlayMovieViewController_ipad : UIViewController
--(void)bindWithDataBean:(GDRCollaborativeMap *)map;
 @end

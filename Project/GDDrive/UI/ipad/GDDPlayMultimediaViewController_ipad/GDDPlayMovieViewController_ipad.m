@@ -46,28 +46,6 @@
   // Dispose of any resources that can be recreated.
 }
 
--(void)bindWithDataBean:(GDRCollaborativeMap *)map{
-  
-  GDDOffineFilesHelper *offlineFilesHelper = [[GDDOffineFilesHelper alloc]init];
-  if ([offlineFilesHelper isAlreadyPresentInTheLocalFileByData:map]) {
-    //本地
-    NSString* path =[offlineFilesHelper filePathOfHaveDownloadedByData:map];
-    self.moviePlayerViewController = [ [ MPMoviePlayerViewController alloc]initWithContentURL:[NSURL fileURLWithPath:path]];//本地的
-  }else{
-    //网络
-    NSString *URLStr =  GDDMultimediaHeadURL([map get:@"id"]);
-    self.moviePlayerViewController = [ [ MPMoviePlayerViewController alloc]initWithContentURL:[NSURL URLWithString:URLStr]];//远程
-  };
-
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playVideoFinished:) name:MPMoviePlayerPlaybackDidFinishNotification object:[self.moviePlayerViewController moviePlayer]];
-  
-  [self.moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
-  [self.moviePlayerViewController.moviePlayer setFullscreen:YES animated:YES];
-  
-  self.moviePlayerViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-  [self.view addSubview:self.moviePlayerViewController.view];
-  [self.moviePlayerViewController.moviePlayer play];
-}
 - (void) playVideoFinished:(NSNotification *)theNotification//当点击Done按键或者播放完毕时调用此函数
 {
   [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];

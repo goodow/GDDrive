@@ -47,17 +47,4 @@
   return self;
 }
 
--(void)loadRealtimeData:(GDRModel *)mod{
-  GDRCollaborativeMap *root = [mod getRoot];
-  GDRCollaborativeMap *path = [root get:@"path"];
-  id <GDJsonString> currentdocid = [path get:@"currentdocid"];
-  NSArray *strings= [[currentdocid getString] componentsSeparatedByString:@"/"];
-  if ([[self.argsDictionary objectForKey:[strings lastObject]] conformsToProtocol:@protocol(GDRealtimeProtocol)]) {
-    self.viewControllerProtocol = [self.argsDictionary objectForKey:[strings lastObject]];
-    NSInteger index = [self.argsArray indexOfObject:[strings lastObject]];
-    self.transitionFromChildViewControllerToViewControllerBlock(index);
-    [self.viewControllerProtocol loadRealtimeData:mod];
-  }
-}
-
 @end

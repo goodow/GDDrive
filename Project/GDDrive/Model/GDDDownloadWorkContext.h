@@ -20,7 +20,7 @@ typedef void (^GDDDownloadButtonTitleChangedBlock)(NSString *title);
 typedef void (^GDDDownloadButtonEnableChangedBlock)(BOOL enable);
 
 @interface GDDDownloadWorkContext : NSObject
-@property (nonatomic, strong, readonly) GDRCollaborativeMap *map;
+
 @property (nonatomic, strong, readonly) GDDOffineFilesHelper *offineFilesHelper;
 
 @property (nonatomic, strong, readonly) GDDUnDownloadState *unDownloadState;
@@ -33,10 +33,7 @@ typedef void (^GDDDownloadButtonEnableChangedBlock)(BOOL enable);
 @property (nonatomic, strong, readonly) GDDDownloadButtonTitleChangedBlock titleBlock;
 @property (nonatomic, strong, readonly) GDDDownloadButtonEnableChangedBlock enableBlock;
 
--(void)bindWithDataBean:(GDRCollaborativeMap *)aMap
-      TitleChangedBlock:(GDDDownloadButtonTitleChangedBlock)titleBlock
-     EnableChangedBlock:(GDDDownloadButtonEnableChangedBlock)enableBlock
-   ProgressChangedBlock:(GDDDownloadProgressChangedBlock) progressBlock;
+
 -(void)setState:(id<GDDDownloadState>)state;
 -(void)triggerStateAction;
 -(void)interruptHandling;

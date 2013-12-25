@@ -23,24 +23,7 @@
   return self;
 }
 
--(void)downloadWork:(GDDDownloadWorkContext *)work{
-  self.work = work;
-  self.work.titleBlock(@"Loading");
-  self.work.enableBlock(YES);
-  [self beginDownload];
-}
--(void)beginDownload{
-  [self.work.offineFilesHelper downloadByData:self.work.map downloadProgressChanged:^(double progress) {
-    self.work.progressBlock(progress);
-  } downloadFinished:^{
-    //    DLog(@"kvo 监听 文件下载完成 显示变更为完成");å
-    [self.work setState:(id<GDDDownloadState>)self.work.finishDowloadState];
-    self.work.progressBlock(100.0f);
-    [self.work triggerStateAction];
-  } downloadError:^(NSError *error) {
-    DLog(@"离线文件下载错误了:%@",error);
-  }];
-}
+
 
 #pragma mark KVO 监听
 -(void)observeValueForKeyPath:(NSString *)keyPath

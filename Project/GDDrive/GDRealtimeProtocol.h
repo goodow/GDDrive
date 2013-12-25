@@ -10,6 +10,4 @@
 
 @protocol GDRealtimeProtocol <NSObject>
 
--(void)loadRealtimeData:(GDRModel *)mod;
-
 @end
