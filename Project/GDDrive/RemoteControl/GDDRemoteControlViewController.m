@@ -7,14 +7,13 @@
 //
 
 #import "GDDRemoteControlViewController.h"
-#import "GDDBus.h"
+#import "GDDBusProvider.h"
 
-typedef void(^GDDBusHandlerBlock)(id<GDCMessage> message);
 
 @interface GDDRemoteControlViewController ()
 
 @property (nonatomic, strong) id <GDCBus> bus;
-@property (nonatomic, strong) GDDBusHandlerBlock handlerBlock;
+@property (nonatomic, strong) GDCMessageBlock handlerBlock;
 
 @property (nonatomic, weak) IBOutlet UISlider *volumeSlider;
 @property (nonatomic, weak) IBOutlet UISlider *brightnessSlider;
@@ -51,7 +50,7 @@ typedef void(^GDDBusHandlerBlock)(id<GDCMessage> message);
   self.navigationItem.titleView = button;
   
   __weak GDDRemoteControlViewController *weakSelf = self;
-  self.bus = [[GDDBus sharedInstance]bus];
+  self.bus = [GDDBusProvider BUS];
   self.handlerBlock = ^(id<GDCMessage> message) {
     [weakSelf handlerEventBusOpened:[weakSelf bus]];
   };

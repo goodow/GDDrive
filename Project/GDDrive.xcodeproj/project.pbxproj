@@ -80,6 +80,11 @@
 		65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D291830C3C3001FF93C /* GDDAppDelegate.m */; };
 		65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D401831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m */; };
 		65818D431831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65818D411831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib */; };
+		6583BFBE187A821F00B5683C /* GDDBusProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6583BFBD187A821F00B5683C /* GDDBusProvider.m */; };
+		6583BFC2187A894600B5683C /* GDDEquipmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6583BFC0187A894600B5683C /* GDDEquipmentView.m */; };
+		6583BFC3187A894600B5683C /* GDDEquipmentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6583BFC1187A894600B5683C /* GDDEquipmentView.xib */; };
+		6583BFC7187A8AE900B5683C /* GDDMenuRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6583BFC5187A8AE900B5683C /* GDDMenuRootController.m */; };
+		6583BFC8187A8AE900B5683C /* GDDMenuRootController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6583BFC6187A8AE900B5683C /* GDDMenuRootController.xib */; };
 		65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A524DA184327710030F958 /* cell_selected_style_black.png */; };
 		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
 		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
@@ -97,7 +102,6 @@
 		65DDDB4D186A8B560064DCBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DDDB4C186A8B560064DCBA /* AppDelegate.m */; };
 		65DDDB57186ABA5D0064DCBA /* GDDRemoteControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DDDB55186ABA5D0064DCBA /* GDDRemoteControlViewController.m */; };
 		65DDDB58186ABA5D0064DCBA /* GDDRemoteControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DDDB56186ABA5D0064DCBA /* GDDRemoteControlViewController.xib */; };
-		65DDDB5B186AC6880064DCBA /* GDDBus.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DDDB5A186AC6880064DCBA /* GDDBus.m */; };
 		65DDDB5D186D29850064DCBA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DDDB5C186D29850064DCBA /* CoreTelephony.framework */; };
 		65DDDB6118725FA30064DCBA /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DDDB6018725FA30064DCBA /* MultipeerConnectivity.framework */; };
 		65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */; };
@@ -220,6 +224,14 @@
 		65818D3F1831D131001FF93C /* GDDDescriptionMessageViewController_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDescriptionMessageViewController_ipad.h; sourceTree = "<group>"; };
 		65818D401831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDDescriptionMessageViewController_ipad.m; sourceTree = "<group>"; };
 		65818D411831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDDescriptionMessageViewController_ipad.xib; sourceTree = "<group>"; };
+		6583BFBC187A821F00B5683C /* GDDBusProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDBusProvider.h; sourceTree = "<group>"; };
+		6583BFBD187A821F00B5683C /* GDDBusProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDBusProvider.m; sourceTree = "<group>"; };
+		6583BFBF187A894600B5683C /* GDDEquipmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDEquipmentView.h; sourceTree = "<group>"; };
+		6583BFC0187A894600B5683C /* GDDEquipmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDEquipmentView.m; sourceTree = "<group>"; };
+		6583BFC1187A894600B5683C /* GDDEquipmentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDEquipmentView.xib; sourceTree = "<group>"; };
+		6583BFC4187A8AE900B5683C /* GDDMenuRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootController.h; sourceTree = "<group>"; };
+		6583BFC5187A8AE900B5683C /* GDDMenuRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootController.m; sourceTree = "<group>"; };
+		6583BFC6187A8AE900B5683C /* GDDMenuRootController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootController.xib; sourceTree = "<group>"; };
 		65A524DA184327710030F958 /* cell_selected_style_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_selected_style_black.png; sourceTree = "<group>"; };
 		65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDUIBarButtonItem.h; sourceTree = "<group>"; };
 		65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUIBarButtonItem.m; sourceTree = "<group>"; };
@@ -252,8 +264,6 @@
 		65DDDB54186ABA5D0064DCBA /* GDDRemoteControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDRemoteControlViewController.h; sourceTree = "<group>"; };
 		65DDDB55186ABA5D0064DCBA /* GDDRemoteControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDRemoteControlViewController.m; sourceTree = "<group>"; };
 		65DDDB56186ABA5D0064DCBA /* GDDRemoteControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDRemoteControlViewController.xib; sourceTree = "<group>"; };
-		65DDDB59186AC6880064DCBA /* GDDBus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDBus.h; sourceTree = "<group>"; };
-		65DDDB5A186AC6880064DCBA /* GDDBus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDBus.m; sourceTree = "<group>"; };
 		65DDDB5C186D29850064DCBA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		65DDDB5E187259540064DCBA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		65DDDB6018725FA30064DCBA /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
@@ -602,6 +612,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		6583BFB6187A80A100B5683C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6583BFC4187A8AE900B5683C /* GDDMenuRootController.h */,
+				6583BFC5187A8AE900B5683C /* GDDMenuRootController.m */,
+				6583BFC6187A8AE900B5683C /* GDDMenuRootController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		65A63A471821EFFA004B6A18 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -619,6 +639,9 @@
 				65571F4B184C31DD00A7C1B7 /* GDDLoginView_ipad.h */,
 				65571F4C184C31DD00A7C1B7 /* GDDLoginView_ipad.m */,
 				65571F50184C323300A7C1B7 /* GDDLoginView_ipad.xib */,
+				6583BFBF187A894600B5683C /* GDDEquipmentView.h */,
+				6583BFC0187A894600B5683C /* GDDEquipmentView.m */,
+				6583BFC1187A894600B5683C /* GDDEquipmentView.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -642,11 +665,12 @@
 		65DDDB53186AB65C0064DCBA /* RemoteControl */ = {
 			isa = PBXGroup;
 			children = (
+				6583BFB6187A80A100B5683C /* Controller */,
 				65DDDB54186ABA5D0064DCBA /* GDDRemoteControlViewController.h */,
 				65DDDB55186ABA5D0064DCBA /* GDDRemoteControlViewController.m */,
 				65DDDB56186ABA5D0064DCBA /* GDDRemoteControlViewController.xib */,
-				65DDDB59186AC6880064DCBA /* GDDBus.h */,
-				65DDDB5A186AC6880064DCBA /* GDDBus.m */,
+				6583BFBC187A821F00B5683C /* GDDBusProvider.h */,
+				6583BFBD187A821F00B5683C /* GDDBusProvider.m */,
 			);
 			path = RemoteControl;
 			sourceTree = "<group>";
@@ -756,12 +780,14 @@
 				655DAB2A183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib in Resources */,
 				655DAB9C183E1C0F00703FA4 /* icon_type_swf.png in Resources */,
 				6534B26818153577000F83E9 /* Images.xcassets in Resources */,
+				6583BFC8187A8AE900B5683C /* GDDMenuRootController.xib in Resources */,
 				655DAB8D183E1C0F00703FA4 /* default_type_class.png in Resources */,
 				655927BE1834B42E0031EB1F /* favicons_icon.png in Resources */,
 				65818D431831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib in Resources */,
 				655DABB1183F084700703FA4 /* GDDOfflineContentListCell_ipad.xib in Resources */,
 				655DAB90183E1C0F00703FA4 /* default_type_mp3.png in Resources */,
 				65538B76181DFA18008D1DE0 /* config.plist in Resources */,
+				6583BFC3187A894600B5683C /* GDDEquipmentView.xib in Resources */,
 				65DDDB58186ABA5D0064DCBA /* GDDRemoteControlViewController.xib in Resources */,
 				655DAB8F183E1C0F00703FA4 /* default_type_jpg.png in Resources */,
 				65571F2C1846E27900A7C1B7 /* GDDPlayAudioViewController_ipad.xib in Resources */,
@@ -841,16 +867,17 @@
 				65571F40184885D500A7C1B7 /* GDDPlistHelper.m in Sources */,
 				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,
 				65CA0D0F1856C9DF005249BB /* GDDWillDownloadState.m in Sources */,
-				65DDDB5B186AC6880064DCBA /* GDDBus.m in Sources */,
 				65DDDB4D186A8B560064DCBA /* AppDelegate.m in Sources */,
 				65CA0D0D1856C9DF005249BB /* GDDPauseDownloadState.m in Sources */,
 				65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				65CA0D2418598B7B005249BB /* GDDClassViewController_iPad.m in Sources */,
 				65CA0D2518598B7B005249BB /* GDDFaviconsViewController_iPad.m in Sources */,
+				6583BFC7187A8AE900B5683C /* GDDMenuRootController.m in Sources */,
 				6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */,
 				65CA0D0E1856C9DF005249BB /* GDDUnDownloadState.m in Sources */,
 				655DAB27183B5B4300703FA4 /* GDDContentListCell_ipad.m in Sources */,
+				6583BFBE187A821F00B5683C /* GDDBusProvider.m in Sources */,
 				65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */,
 				65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */,
 				65571F1A1845D8BF00A7C1B7 /* GDDPlayMovieViewController_ipad.m in Sources */,
@@ -864,6 +891,7 @@
 				65571F3318482F4900A7C1B7 /* GDDLoginViewController_ipad.m in Sources */,
 				655DAB29183B5B4300703FA4 /* GDDMenuRootCell_ipad.m in Sources */,
 				65DDDB57186ABA5D0064DCBA /* GDDRemoteControlViewController.m in Sources */,
+				6583BFC2187A894600B5683C /* GDDEquipmentView.m in Sources */,
 				65571F05184588F600A7C1B7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				65571F54184C3EAF00A7C1B7 /* BaseModel.m in Sources */,
 				65CA0D2618598B7B005249BB /* GDDMainViewController_ipad.m in Sources */,
