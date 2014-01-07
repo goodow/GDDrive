@@ -87,6 +87,7 @@
 		6583BFC8187A8AE900B5683C /* GDDMenuRootController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6583BFC6187A8AE900B5683C /* GDDMenuRootController.xib */; };
 		65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A524DA184327710030F958 /* cell_selected_style_black.png */; };
 		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
+		65B32F5A187CF38D0028026C /* PSStackedViewControllerDecorate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */; };
 		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
 		65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D021856C9DF005249BB /* GDDDownloadingState.m */; };
 		65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */; };
@@ -235,6 +236,8 @@
 		65A524DA184327710030F958 /* cell_selected_style_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_selected_style_black.png; sourceTree = "<group>"; };
 		65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDUIBarButtonItem.h; sourceTree = "<group>"; };
 		65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUIBarButtonItem.m; sourceTree = "<group>"; };
+		65B32F58187CF38D0028026C /* PSStackedViewControllerDecorate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStackedViewControllerDecorate.h; sourceTree = "<group>"; };
+		65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStackedViewControllerDecorate.m; sourceTree = "<group>"; };
 		65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSetObject.h"; sourceTree = "<group>"; };
 		65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSetObject.m"; sourceTree = "<group>"; };
 		65CA0D011856C9DF005249BB /* GDDDownloadingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadingState.h; sourceTree = "<group>"; };
@@ -671,6 +674,8 @@
 				65DDDB56186ABA5D0064DCBA /* GDDRemoteControlViewController.xib */,
 				6583BFBC187A821F00B5683C /* GDDBusProvider.h */,
 				6583BFBD187A821F00B5683C /* GDDBusProvider.m */,
+				65B32F58187CF38D0028026C /* PSStackedViewControllerDecorate.h */,
+				65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */,
 			);
 			path = RemoteControl;
 			sourceTree = "<group>";
@@ -867,6 +872,7 @@
 				65571F40184885D500A7C1B7 /* GDDPlistHelper.m in Sources */,
 				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,
 				65CA0D0F1856C9DF005249BB /* GDDWillDownloadState.m in Sources */,
+				65B32F5A187CF38D0028026C /* PSStackedViewControllerDecorate.m in Sources */,
 				65DDDB4D186A8B560064DCBA /* AppDelegate.m in Sources */,
 				65CA0D0D1856C9DF005249BB /* GDDPauseDownloadState.m in Sources */,
 				65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */,

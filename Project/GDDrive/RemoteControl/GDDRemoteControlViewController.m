@@ -56,7 +56,14 @@
   };
   [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
   
-  //  [[GDDBus sharedInstance]bus] unregisterHandler:<#(NSString *)#> handler:<#(id)#>
+//  if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+//    [self prefersStatusBarHidden];
+//    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+//  }
+//  [[GDDBus sharedInstance]bus] unregisterHandler:<#(NSString *)#> handler:<#(id)#>
+  
+
+
 }
 
 //--- # 调节音量 address: sid.drive.settings.audio
@@ -123,18 +130,25 @@
   [self.bus send:@"hsid.drive.control" message:@{@"return": @YES} replyHandler:nil];
 }
 #pragma mark - Status Bar
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-  return UIStatusBarStyleDefault;
-}
-
+//- (UIStatusBarStyle)preferredStatusBarStyle
+//{
+//  return UIStatusBarStyleLightContent;
+//}
 //- (BOOL)prefersStatusBarHidden
 //{
-//  return _isFullScreen;
+//  return NO;
 //}
-
-- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+//- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+//{
+//  return UIStatusBarAnimationSlide;
+//}
+- (UIStatusBarStyle)preferredStatusBarStyle
 {
-  return UIStatusBarAnimationSlide;
+  return UIStatusBarStyleLightContent;
 }
+- (BOOL)prefersStatusBarHidden
+{
+  return NO;
+}
+
 @end

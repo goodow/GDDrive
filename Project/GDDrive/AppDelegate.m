@@ -19,13 +19,25 @@
 @property (nonatomic, strong) GDCMessageBlock handlerBlock;
 @property (nonatomic, strong) id <GDCBus> bus;
 @property (nonatomic, strong, readwrite) GDDLoginViewController_ipad *loginViewController;
-@property (nonatomic, strong, readwrite) PSStackedViewController *stackController;
+@property (nonatomic, strong, readwrite) PSStackedViewControllerDecorate *stackController;
 @end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//  CGRect viewRectx = [[UIScreen mainScreen] bounds];
+  if (application.statusBarOrientation == UIInterfaceOrientationPortrait) {
+    self.window.clipsToBounds =YES;
+    self.window.frame =  CGRectMake(0,20,[[UIScreen mainScreen]bounds].size.width,[[UIScreen mainScreen]bounds].size.height - 20);
+  }else if (application.statusBarOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+    self.window.clipsToBounds =YES;
+    self.window.frame =  CGRectMake(0,0,[[UIScreen mainScreen]bounds].size.width,[[UIScreen mainScreen]bounds].size.height - 20);
+  }else if(application.statusBarOrientation == UIInterfaceOrientationLandscapeLeft ) {
+    self.window.clipsToBounds =YES;
+    self.window.frame =  CGRectMake(20,0,[[UIScreen mainScreen]bounds].size.width - 20,[[UIScreen mainScreen]bounds].size.height);
+  }else if (application.statusBarOrientation == UIInterfaceOrientationLandscapeRight){
+    self.window.clipsToBounds =YES;
+    self.window.frame =  CGRectMake(0,0,[[UIScreen mainScreen]bounds].size.width - 20,[[UIScreen mainScreen]bounds].size.height);
+  }
   self.bus = [GDDBusProvider BUS];
   self.handlerBlock = ^(id<GDCMessage> message) {
     //进入模态并提示网络失败
@@ -33,6 +45,7 @@
   [self.bus registerHandler:[GDCBus LOCAL_ON_CLOSE] handler:self.handlerBlock];
   
   //判断程序是否第一次执行
+//  [application setStatusBarStyle:UIStatusBarStyleLightContent];
   if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
@@ -48,7 +61,7 @@
   }
   
   GDDMenuRootController *menuController = [[GDDMenuRootController alloc] initWithNibName:@"GDDMenuRootController" bundle:nil];
-  self.stackController = [[PSStackedViewController alloc] initWithRootViewController:menuController];
+  self.stackController = [[PSStackedViewControllerDecorate alloc] initWithRootViewController:menuController];
   
   self.stackController.largeLeftInset = 180;
   self.stackController.leftInset = 60;
@@ -57,6 +70,7 @@
   self.stackController.defaultShadowWidth = 10.0f;
   self.window.rootViewController = self.stackController;
   [self.window makeKeyAndVisible];
+
   
   [(GDDMenuRootController *)self.stackController.rootViewController loadRealtime];
   
@@ -89,4 +103,24 @@
 {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+  return UIInterfaceOrientationMaskAll;
+}
+
+@end
+
+@interface UINavigationController (StatusBarSet)
+
+- (UIStatusBarStyle)preferredStatusBarStyle;
+
+@end
+
+@implementation UINavigationController (StatusBarSet)
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+  return self.topViewController.preferredStatusBarStyle;
+}
+
 @end
