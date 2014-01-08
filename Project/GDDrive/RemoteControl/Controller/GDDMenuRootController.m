@@ -18,6 +18,9 @@
 #import "GDDLoginView_ipad.h"
 #import "UIAlertView+Blocks.h"
 #import "GDDMainViewController_ipad.h"
+#import "GDDEquipmentView.h"
+#import "GDDBusProvider.h"
+#import "GDDEquipmentModel.h"
 
 
 @interface GDDMenuRootController ()
@@ -33,6 +36,7 @@
 @property (nonatomic, strong) GDDMenuRootModel *menuRootModel;
 
 @property (nonatomic, strong) id remotecontrolBlock;
+@property (nonatomic, strong) GDDEquipmentView *equipmentView;
 @end
 
 @implementation GDDMenuRootController
@@ -40,14 +44,42 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
+  //登陆信息与设置
+  UINib *nibObject =  [UINib nibWithNibName:@"GDDEquipmentView" bundle:nil];
+  NSArray *nibObjects = [nibObject instantiateWithOwner:nil options:nil];
+  self.equipmentView = [nibObjects objectAtIndex:0];
+  [self.equipmentView bindData];
+  __weak GDDMenuRootController *weakSelf = self;
+  [self.equipmentView setClickBlock:^{
+    [UIAlertView showAlertViewWithTitle:@"切换设备"
+                                message:@"是否要切换设备?"
+                      cancelButtonTitle:@"cancal"
+                      otherButtonTitles:@[@"sure"]
+                         alertViewStyle:UIAlertViewStylePlainTextInput
+                              onDismiss:^(UIAlertView *alertView, int buttonIndex) {
+                                UITextField *tf=[alertView textFieldAtIndex:0];
+                                NSLog(@"textInputContextIdentifier:%@",tf.text);
+                                [[GDDEquipmentModel sharedInstance] updateEquipmentID:tf.text];
+                                [weakSelf.equipmentView bindData];
+                              }
+                               onCancel:^{
+                                 
+                               }];
+  }];
+  self.menuTableView.tableHeaderView = self.equipmentView;
   self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png"]
                                                        labels:@[@"课程", @"收藏", @"遥控器"]];
-
+  
+  if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+    [self prefersStatusBarHidden];
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+  }
+  
+  
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-
+  
 }
 - (void)didReceiveMemoryWarning
 {
@@ -130,8 +162,7 @@
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//  [self transitionChildViewControllerByIndex:indexPath.row];
+  [self transitionChildViewControllerByIndex:indexPath.row];
+  
 }
-
-
 @end

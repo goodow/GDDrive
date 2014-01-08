@@ -88,6 +88,7 @@
 		65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A524DA184327710030F958 /* cell_selected_style_black.png */; };
 		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
 		65B32F5A187CF38D0028026C /* PSStackedViewControllerDecorate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */; };
+		65B32F5E187D27220028026C /* GDDEquipmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F5D187D27220028026C /* GDDEquipmentModel.m */; };
 		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
 		65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D021856C9DF005249BB /* GDDDownloadingState.m */; };
 		65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */; };
@@ -238,6 +239,9 @@
 		65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUIBarButtonItem.m; sourceTree = "<group>"; };
 		65B32F58187CF38D0028026C /* PSStackedViewControllerDecorate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStackedViewControllerDecorate.h; sourceTree = "<group>"; };
 		65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStackedViewControllerDecorate.m; sourceTree = "<group>"; };
+		65B32F5C187D27220028026C /* GDDEquipmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDEquipmentModel.h; sourceTree = "<group>"; };
+		65B32F5D187D27220028026C /* GDDEquipmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDEquipmentModel.m; sourceTree = "<group>"; };
+		65B32F5F187D38350028026C /* GDDEquipmentProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDEquipmentProtocol.h; sourceTree = "<group>"; };
 		65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSetObject.h"; sourceTree = "<group>"; };
 		65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSetObject.m"; sourceTree = "<group>"; };
 		65CA0D011856C9DF005249BB /* GDDDownloadingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadingState.h; sourceTree = "<group>"; };
@@ -649,6 +653,15 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
+		65B32F5B187D26F40028026C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				65B32F5C187D27220028026C /* GDDEquipmentModel.h */,
+				65B32F5D187D27220028026C /* GDDEquipmentModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		65CA0D1A18598B7B005249BB /* GDDMainViewContoller_ipad */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,10 +681,12 @@
 		65DDDB53186AB65C0064DCBA /* RemoteControl */ = {
 			isa = PBXGroup;
 			children = (
+				65B32F5B187D26F40028026C /* Model */,
 				6583BFB6187A80A100B5683C /* Controller */,
 				65DDDB54186ABA5D0064DCBA /* GDDRemoteControlViewController.h */,
 				65DDDB55186ABA5D0064DCBA /* GDDRemoteControlViewController.m */,
 				65DDDB56186ABA5D0064DCBA /* GDDRemoteControlViewController.xib */,
+				65B32F5F187D38350028026C /* GDDEquipmentProtocol.h */,
 				6583BFBC187A821F00B5683C /* GDDBusProvider.h */,
 				6583BFBD187A821F00B5683C /* GDDBusProvider.m */,
 				65B32F58187CF38D0028026C /* PSStackedViewControllerDecorate.h */,
@@ -898,6 +913,7 @@
 				655DAB29183B5B4300703FA4 /* GDDMenuRootCell_ipad.m in Sources */,
 				65DDDB57186ABA5D0064DCBA /* GDDRemoteControlViewController.m in Sources */,
 				6583BFC2187A894600B5683C /* GDDEquipmentView.m in Sources */,
+				65B32F5E187D27220028026C /* GDDEquipmentModel.m in Sources */,
 				65571F05184588F600A7C1B7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				65571F54184C3EAF00A7C1B7 /* BaseModel.m in Sources */,
 				65CA0D2618598B7B005249BB /* GDDMainViewController_ipad.m in Sources */,

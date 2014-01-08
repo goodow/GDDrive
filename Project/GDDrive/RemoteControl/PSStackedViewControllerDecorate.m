@@ -65,12 +65,6 @@
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration; {
-  //  PRPLog(@"willRotateToInterfaceOrientation ifOrientation=%d", toInterfaceOrientation);
-  NSLog(@"%f",duration);
-//  UIInterfaceOrientationPortrait           = UIDeviceOrientationPortrait,
-//  UIInterfaceOrientationPortraitUpsideDown = UIDeviceOrientationPortraitUpsideDown,
-//  UIInterfaceOrientationLandscapeLeft      = UIDeviceOrientationLandscapeRight,
-//  UIInterfaceOrientationLandscapeRight
   if (toInterfaceOrientation == UIInterfaceOrientationPortrait) {
     GDDRemoteControlDelegate.window.clipsToBounds =YES;
     GDDRemoteControlDelegate.window.frame =  CGRectMake(0,20,[[UIScreen mainScreen]bounds].size.width,[[UIScreen mainScreen]bounds].size.height - 20);

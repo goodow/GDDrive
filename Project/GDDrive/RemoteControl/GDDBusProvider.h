@@ -10,5 +10,7 @@
 #import "GDChannel.h"
 
 @interface GDDBusProvider : NSObject
+
 +(id<GDCBus>)BUS;
+
 @end

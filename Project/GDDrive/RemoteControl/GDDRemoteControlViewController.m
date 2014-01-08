@@ -8,6 +8,7 @@
 
 #import "GDDRemoteControlViewController.h"
 #import "GDDBusProvider.h"
+#import "GDDEquipmentModel.h"
 
 
 @interface GDDRemoteControlViewController ()
@@ -17,6 +18,7 @@
 
 @property (nonatomic, weak) IBOutlet UISlider *volumeSlider;
 @property (nonatomic, weak) IBOutlet UISlider *brightnessSlider;
+@property (nonatomic, strong) id <GDDEquipmentProtocol> quipmentProtocol;
 
 
 - (IBAction)actionSliderVolume:(id)sender;
@@ -41,35 +43,27 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  //设置扫描
   UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
   [button setSize:CGSizeMake(100, 40)];
   [button setTitle:@"正在扫描" forState:UIControlStateNormal];
   [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
   [button addTarget:self action:@selector(selectorEquipmentListener:) forControlEvents:UIControlEventTouchUpInside];
   self.navigationItem.titleView = button;
-  
-  __weak GDDRemoteControlViewController *weakSelf = self;
+  self.quipmentProtocol = [GDDEquipmentModel sharedInstance];
   self.bus = [GDDBusProvider BUS];
+}
+-(void)viewWillAppear:(BOOL)animated{
+  [super viewWillAppear:animated];
+  __weak GDDRemoteControlViewController *weakSelf = self;
   self.handlerBlock = ^(id<GDCMessage> message) {
     [weakSelf handlerEventBusOpened:[weakSelf bus]];
   };
   [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
-  
-//  if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
-//    [self prefersStatusBarHidden];
-//    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
-//  }
-//  [[GDDBus sharedInstance]bus] unregisterHandler:<#(NSString *)#> handler:<#(id)#>
-  
-
-
 }
-
-//--- # 调节音量 address: sid.drive.settings.audio
-//mute: true # 静音
-//volume: 0.5 # 设置音量的大小 [0.0,1.0]
-//range: -0.3 # 音量的增幅大小 [-1.0,1.0]
+-(void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  [self.bus unregisterHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
+}
 
 -(void)handlerEventBusOpened:(id<GDCBus>) bus {
   //  [bus registerHandler:@"hsid.drive.settings.audio" handler:^(id<GDCMessage> message) {
@@ -93,7 +87,6 @@
   
   [bus send:@"hsid.drive.settings.audio" message:@{@"volume": @0.8} replyHandler:nil];
   [bus send:@"hsid.drive.control" message:@{@"brightness": @0.2} replyHandler:nil];
-
   
 }
 
@@ -110,45 +103,23 @@
 }
 
 - (IBAction)actionSliderVolume:(id)sender{
-  [self.bus send:@"hsid.drive.settings.audio" message:@{@"volume": [NSNumber numberWithFloat:[self.volumeSlider value]]} replyHandler:nil];
-  
-  //  NSDictionary *d = @{@"aaa": @"111"};
-  //  NSString *xxx=  d[@"aaa"];
-  
+  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.settings.audio"] message:@{@"volume": [NSNumber numberWithFloat:[self.volumeSlider value]]} replyHandler:nil];
 }
 - (IBAction)actionSliderBrightness:(id)sender{
-  [self.bus send:@"hsid.drive.control" message:@{@"brightness": [NSNumber numberWithFloat:[self.brightnessSlider value]]} replyHandler:nil];
+
+  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.control"] message:@{@"brightness": [NSNumber numberWithFloat:[self.brightnessSlider value]]} replyHandler:nil];
 }
 
 - (IBAction)actionMuteListener:(id)sender{
-  [self.bus send:@"hsid.drive.settings.audio" message:@{@"mute": @YES} replyHandler:nil];
+
+  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.settings.audio"] message:@{@"mute": @YES} replyHandler:nil];
 }
 - (IBAction)actionShutdownListener:(id)sender{
-  [self.bus send:@"hsid.drive.control" message:@{@"shutdown": @YES} replyHandler:nil];
+
+  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.control"] message:@{@"shutdown": @YES} replyHandler:nil];
 }
 - (IBAction)actionReturnListener:(id)sender{
-  [self.bus send:@"hsid.drive.control" message:@{@"return": @YES} replyHandler:nil];
-}
-#pragma mark - Status Bar
-//- (UIStatusBarStyle)preferredStatusBarStyle
-//{
-//  return UIStatusBarStyleLightContent;
-//}
-//- (BOOL)prefersStatusBarHidden
-//{
-//  return NO;
-//}
-//- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
-//{
-//  return UIStatusBarAnimationSlide;
-//}
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-  return UIStatusBarStyleLightContent;
-}
-- (BOOL)prefersStatusBarHidden
-{
-  return NO;
+  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.control"] message:@{@"return": @YES} replyHandler:nil];
 }
 
 @end

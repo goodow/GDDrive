@@ -8,11 +8,10 @@
 
 #import "GDDEquipmentView.h"
 #import "GDDPlistHelper.h"
+#import "GDDEquipmentModel.h"
 @interface GDDEquipmentView()
 
-@property (nonatomic, weak) IBOutlet UIView *heaPortraitView;
-@property (nonatomic, weak) IBOutlet UILabel *loginNameLabel;
-@property (nonatomic, weak) IBOutlet UILabel *nickNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *equipmentID;
 @property (nonatomic, strong) SetingBlock settingBlock;
 
 -(IBAction)setingListener:(id)sender;
@@ -24,24 +23,16 @@
   self = [super initWithFrame:frame];
   if (self) {
     // Initialization code
-
+    
   }
   return self;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
   if (self = [super initWithCoder:aDecoder]) {
-
+    
   }
   return self;
-}
-
--(void)setViewStyle{
-  [self.heaPortraitView.layer setBorderWidth:1.0f];
-  [self.heaPortraitView.layer setBorderColor:[[UIColor lightGrayColor]CGColor]];
-  [self.heaPortraitView.layer setShadowOffset:CGSizeMake(-1, 0)];
-  [self.heaPortraitView.layer setShadowOpacity:0.4f];
-  [self.heaPortraitView.layer setShadowColor:[[UIColor lightGrayColor]CGColor]];
 }
 -(void)setClickBlock:(SetingBlock)block{
   self.settingBlock = block;
@@ -52,8 +43,7 @@
   }
 }
 -(void)bindData{
-  self.loginNameLabel.text = [[GDDPlistHelper sharedInstance]objectFromPlistKey:@"name"];
-  self.nickNameLabel.text = [[GDDPlistHelper sharedInstance]objectFromPlistKey:@"display_name"];
+  self.equipmentID.text = [GDDEquipmentModel sharedInstance].equipmentID;
 }
 
 /*

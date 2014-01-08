@@ -11,7 +11,6 @@
 typedef void (^SetingBlock)(void);
 @interface GDDEquipmentView : UIView
 
--(void)setViewStyle;
 -(void)setClickBlock:(SetingBlock)block;
 -(void)bindData;
 @end
