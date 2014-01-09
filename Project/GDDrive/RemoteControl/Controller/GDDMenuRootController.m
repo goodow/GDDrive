@@ -7,7 +7,7 @@
 //
 
 #import "GDDMenuRootController.h"
-#import "GDDClassViewController_iPad.h"
+#import "GDDHeXieViewController.h"
 #import "GDDFaviconsViewController_iPad.h"
 #import "GDDOfflineFilesViewController_iPad.h"
 #import "GDDRealtimeDataToViewController.h"
@@ -89,7 +89,7 @@
   
   self.childViewController = [NSMutableArray array];
   
-  GDDMainViewController_ipad *classViewController = [[GDDClassViewController_iPad alloc] initWithNibName:@"GDDClassViewController_iPad" bundle:nil];
+  GDDHeXieViewController *classViewController = [[GDDHeXieViewController alloc] initWithNibName:@"GDDHeXieViewController" bundle:nil];
   self.classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
   [self.childViewController addObject:self.classNavigationController];
   

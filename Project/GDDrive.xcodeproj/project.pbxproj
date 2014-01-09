@@ -89,6 +89,10 @@
 		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
 		65B32F5A187CF38D0028026C /* PSStackedViewControllerDecorate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */; };
 		65B32F5E187D27220028026C /* GDDEquipmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F5D187D27220028026C /* GDDEquipmentModel.m */; };
+		65B32F66187D470B0028026C /* GDDFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F61187D470B0028026C /* GDDFolderCell.m */; };
+		65B32F67187D470B0028026C /* GDDFolderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B32F62187D470B0028026C /* GDDFolderCell.xib */; };
+		65B32F68187D470B0028026C /* GDDHeXieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F64187D470B0028026C /* GDDHeXieViewController.m */; };
+		65B32F69187D470B0028026C /* GDDHeXieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B32F65187D470B0028026C /* GDDHeXieViewController.xib */; };
 		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
 		65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D021856C9DF005249BB /* GDDDownloadingState.m */; };
 		65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */; };
@@ -242,6 +246,12 @@
 		65B32F5C187D27220028026C /* GDDEquipmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDEquipmentModel.h; sourceTree = "<group>"; };
 		65B32F5D187D27220028026C /* GDDEquipmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDEquipmentModel.m; sourceTree = "<group>"; };
 		65B32F5F187D38350028026C /* GDDEquipmentProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDEquipmentProtocol.h; sourceTree = "<group>"; };
+		65B32F60187D470B0028026C /* GDDFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFolderCell.h; sourceTree = "<group>"; };
+		65B32F61187D470B0028026C /* GDDFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFolderCell.m; sourceTree = "<group>"; };
+		65B32F62187D470B0028026C /* GDDFolderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDFolderCell.xib; sourceTree = "<group>"; };
+		65B32F63187D470B0028026C /* GDDHeXieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDHeXieViewController.h; sourceTree = "<group>"; };
+		65B32F64187D470B0028026C /* GDDHeXieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDHeXieViewController.m; sourceTree = "<group>"; };
+		65B32F65187D470B0028026C /* GDDHeXieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDHeXieViewController.xib; sourceTree = "<group>"; };
 		65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSetObject.h"; sourceTree = "<group>"; };
 		65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSetObject.m"; sourceTree = "<group>"; };
 		65CA0D011856C9DF005249BB /* GDDDownloadingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadingState.h; sourceTree = "<group>"; };
@@ -625,6 +635,12 @@
 				6583BFC4187A8AE900B5683C /* GDDMenuRootController.h */,
 				6583BFC5187A8AE900B5683C /* GDDMenuRootController.m */,
 				6583BFC6187A8AE900B5683C /* GDDMenuRootController.xib */,
+				65B32F60187D470B0028026C /* GDDFolderCell.h */,
+				65B32F61187D470B0028026C /* GDDFolderCell.m */,
+				65B32F62187D470B0028026C /* GDDFolderCell.xib */,
+				65B32F63187D470B0028026C /* GDDHeXieViewController.h */,
+				65B32F64187D470B0028026C /* GDDHeXieViewController.m */,
+				65B32F65187D470B0028026C /* GDDHeXieViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -810,6 +826,8 @@
 				6583BFC3187A894600B5683C /* GDDEquipmentView.xib in Resources */,
 				65DDDB58186ABA5D0064DCBA /* GDDRemoteControlViewController.xib in Resources */,
 				655DAB8F183E1C0F00703FA4 /* default_type_jpg.png in Resources */,
+				65B32F67187D470B0028026C /* GDDFolderCell.xib in Resources */,
+				65B32F69187D470B0028026C /* GDDHeXieViewController.xib in Resources */,
 				65571F2C1846E27900A7C1B7 /* GDDPlayAudioViewController_ipad.xib in Resources */,
 				65571F51184C323300A7C1B7 /* GDDLoginView_ipad.xib in Resources */,
 				65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */,
@@ -903,6 +921,7 @@
 				65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */,
 				65571F1A1845D8BF00A7C1B7 /* GDDPlayMovieViewController_ipad.m in Sources */,
 				65571F57184C3EE800A7C1B7 /* GDDLoginMessageModel.m in Sources */,
+				65B32F68187D470B0028026C /* GDDHeXieViewController.m in Sources */,
 				65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 				65CA0D2818598B7B005249BB /* GDDOfflineFilesViewController_iPad.m in Sources */,
@@ -922,6 +941,7 @@
 				65571F10184599A200A7C1B7 /* GDDPlayPNGAndJPGViewController_ipad.m in Sources */,
 				655DAB43183C51F300703FA4 /* GDDEngine.m in Sources */,
 				65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */,
+				65B32F66187D470B0028026C /* GDDFolderCell.m in Sources */,
 				65571F2F18482CF000A7C1B7 /* GDDRealtimeEngine.m in Sources */,
 				65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */,
 				65CA0D1318570016005249BB /* GDDDownloadWorkContext.m in Sources */,

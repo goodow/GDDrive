@@ -33,4 +33,6 @@ static id<GDCBus> BUS;
 +(id<GDCBus>)BUS{
   return BUS;
 }
+
+
 @end

@@ -78,10 +78,6 @@
     GDDRemoteControlDelegate.window.clipsToBounds =YES;
     GDDRemoteControlDelegate.window.frame =  CGRectMake(0,0,[[UIScreen mainScreen]bounds].size.width - 20,[[UIScreen mainScreen]bounds].size.height);
   }
-  
-
-  
-
 }
 
 
