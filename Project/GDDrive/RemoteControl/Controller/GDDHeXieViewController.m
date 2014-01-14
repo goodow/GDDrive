@@ -9,6 +9,8 @@
 #import "GDDHeXieViewController.h"
 #import "GDDBusProvider.h"
 #import "GDDFolderCell.h"
+#import "GDDEquipmentProtocol.h"
+#import "GDDEquipmentModel.h"
 
 @interface GDDHeXieViewController ()
 @property (nonatomic, strong) id <GDCBus> bus;
@@ -17,6 +19,7 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSDictionary *searchPickerDic;
 @property (nonatomic, strong) NSDictionary *messageDic;
+@property (nonatomic, strong) id <GDDEquipmentProtocol> equipmentProtocol;
 @end
 
 
@@ -43,6 +46,7 @@
   
 //  __weak GDDHeXieViewController *weakSelf = self;
   self.bus = [GDDBusProvider BUS];
+  self.equipmentProtocol = [GDDEquipmentModel sharedInstance];
   
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -64,9 +68,10 @@
 }
 
 -(void)handlerEventBusOpened:(id<GDCBus>) bus {
-  [self.bus send:@"hsid.drive.topic" message:@{@"action":@"post",@"query":@{@"type":@"和谐"}} replyHandler:nil];
   
-  [self.bus send:@"hsid.drive.topic" message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
+  [self.bus send:[self.equipmentProtocol connectProtocol:@"drive.topic"] message:@{@"action":@"post",@"query":@{@"type":@"和谐"}} replyHandler:nil];
+  
+  [self.bus send:[self.equipmentProtocol connectProtocol:@"drive.topic"] message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
     NSLog(@"%@",message);
     self.messageDic = [message body];
     [self.collectionView reloadData];
