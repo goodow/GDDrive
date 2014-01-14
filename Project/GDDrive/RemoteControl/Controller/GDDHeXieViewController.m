@@ -9,17 +9,15 @@
 #import "GDDHeXieViewController.h"
 #import "GDDBusProvider.h"
 #import "GDDFolderCell.h"
-#import "GDDEquipmentProtocol.h"
-#import "GDDEquipmentModel.h"
 
 @interface GDDHeXieViewController ()
 @property (nonatomic, strong) id <GDCBus> bus;
 @property (nonatomic, strong) GDCMessageBlock handlerBlock;
+@property (nonatomic, strong) GDDEquipmendIDBlock equipmendIDBlock;
 @property (nonatomic, weak) IBOutlet UIPickerView *searchPicker;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSDictionary *searchPickerDic;
 @property (nonatomic, strong) NSDictionary *messageDic;
-@property (nonatomic, strong) id <GDDEquipmentProtocol> equipmentProtocol;
 @end
 
 
@@ -43,23 +41,27 @@
   [self.collectionView registerClass:[GDDFolderCell class] forCellWithReuseIdentifier:@"GDDFolderCell"];
   
   self.searchPickerDic = @{@"grade":@[@"小班",@"中班",@"大班",@"学前"],@"term":@[@"上",@"下"],@"topic":@[@"健康",@"语言",@"社会",@"科学",@"数学",@"艺术(音乐)",@"艺术(美术)"]};
-  
-//  __weak GDDHeXieViewController *weakSelf = self;
   self.bus = [GDDBusProvider BUS];
-  self.equipmentProtocol = [GDDEquipmentModel sharedInstance];
   
 }
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
+  __weak GDDHeXieViewController *weakSelf = self;
   self.handlerBlock = ^(id<GDCMessage> message) {
     //网络恢复和良好 解除模态
   };
-  [self handlerEventBusOpened:self.bus];
+  self.equipmendIDBlock = ^(NSString *equipmendID){
+      [weakSelf handlerEventBusOpened];
+  };
+  
+  [self handlerEventBusOpened];
   [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
+  [self.bus registerHandler:[GDDBusProvider SID_ADDR] handler:self.equipmendIDBlock];
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
   [self.bus unregisterHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
+  [self.bus unregisterHandler:[GDDBusProvider SID_ADDR] handler:self.equipmendIDBlock];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -67,19 +69,15 @@
   // Dispose of any resources that can be recreated.
 }
 
--(void)handlerEventBusOpened:(id<GDCBus>) bus {
+-(void)handlerEventBusOpened{
   
-  [self.bus send:[self.equipmentProtocol connectProtocol:@"drive.topic"] message:@{@"action":@"post",@"query":@{@"type":@"和谐"}} replyHandler:nil];
+  [self.bus send:[GDDBusProvider concat:@"drive.topic"] message:@{@"action":@"post",@"query":@{@"type":@"和谐"}} replyHandler:nil];
   
-  [self.bus send:[self.equipmentProtocol connectProtocol:@"drive.topic"] message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
+  [self.bus send:[GDDBusProvider concat:@"drive.topic"] message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
     NSLog(@"%@",message);
     self.messageDic = [message body];
     [self.collectionView reloadData];
   }];
-  
-  
-  //  [bus send:@"hsid.drive.settings.audio" message:@{@"volume": @0.8} replyHandler:nil];
-  //  [bus send:@"hsid.drive.control" message:@{@"brightness": @0.2} replyHandler:nil];
 }
 
 #pragma mark -picker view delegate datasouce

@@ -8,7 +8,7 @@
 
 #import "GDDEquipmentView.h"
 #import "GDDPlistHelper.h"
-#import "GDDEquipmentModel.h"
+#import "GDDBusProvider.h"
 @interface GDDEquipmentView()
 
 @property (nonatomic, weak) IBOutlet UILabel *equipmentID;
@@ -43,7 +43,7 @@
   }
 }
 -(void)bindData{
-  self.equipmentID.text = [GDDEquipmentModel sharedInstance].equipmentID;
+  self.equipmentID.text = [GDDBusProvider equipmentID];
 }
 
 /*

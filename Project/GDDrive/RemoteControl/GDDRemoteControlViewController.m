@@ -8,7 +8,6 @@
 
 #import "GDDRemoteControlViewController.h"
 #import "GDDBusProvider.h"
-#import "GDDEquipmentModel.h"
 
 
 @interface GDDRemoteControlViewController ()
@@ -18,7 +17,6 @@
 
 @property (nonatomic, weak) IBOutlet UISlider *volumeSlider;
 @property (nonatomic, weak) IBOutlet UISlider *brightnessSlider;
-@property (nonatomic, strong) id <GDDEquipmentProtocol> quipmentProtocol;
 
 
 - (IBAction)actionSliderVolume:(id)sender;
@@ -49,7 +47,6 @@
   [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
   [button addTarget:self action:@selector(selectorEquipmentListener:) forControlEvents:UIControlEventTouchUpInside];
   self.navigationItem.titleView = button;
-  self.quipmentProtocol = [GDDEquipmentModel sharedInstance];
   self.bus = [GDDBusProvider BUS];
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -103,23 +100,23 @@
 }
 
 - (IBAction)actionSliderVolume:(id)sender{
-  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.settings.audio"] message:@{@"volume": [NSNumber numberWithFloat:[self.volumeSlider value]]} replyHandler:nil];
+  [self.bus send:[GDDBusProvider concat:@"drive.settings.audio"] message:@{@"volume": [NSNumber numberWithFloat:[self.volumeSlider value]]} replyHandler:nil];
 }
 - (IBAction)actionSliderBrightness:(id)sender{
 
-  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.control"] message:@{@"brightness": [NSNumber numberWithFloat:[self.brightnessSlider value]]} replyHandler:nil];
+  [self.bus send:[GDDBusProvider concat:@"drive.control"] message:@{@"brightness": [NSNumber numberWithFloat:[self.brightnessSlider value]]} replyHandler:nil];
 }
 
 - (IBAction)actionMuteListener:(id)sender{
 
-  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.settings.audio"] message:@{@"mute": @YES} replyHandler:nil];
+  [self.bus send:[GDDBusProvider concat:@"drive.settings.audio"] message:@{@"mute": @YES} replyHandler:nil];
 }
 - (IBAction)actionShutdownListener:(id)sender{
 
-  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.control"] message:@{@"shutdown": @YES} replyHandler:nil];
+  [self.bus send:[GDDBusProvider concat:@"drive.control"] message:@{@"shutdown": @YES} replyHandler:nil];
 }
 - (IBAction)actionReturnListener:(id)sender{
-  [self.bus send:[self.quipmentProtocol connectProtocol:@"drive.control"] message:@{@"return": @YES} replyHandler:nil];
+  [self.bus send:[GDDBusProvider concat:@"drive.control"] message:@{@"return": @YES} replyHandler:nil];
 }
 
 @end

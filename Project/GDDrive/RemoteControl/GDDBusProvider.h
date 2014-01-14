@@ -9,8 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "GDChannel.h"
 
+typedef void (^GDDEquipmendIDBlock)(NSString *equipmendID);
 @interface GDDBusProvider : NSObject
-
 +(id<GDCBus>)BUS;
 
+@end
+
+
+@interface GDDBusProvider(Constant)
++ (NSString *)SID_ADDR;
+@end
+
+
+@interface GDDBusProvider (Equipmend)
++ (NSString *)equipmentID;
++ (void)updateEquipmentID:(NSString *)equipmentID;
+
+/*description 拼接设备号和请求地址。
+ *parameter   pro 接口名
+ *return      真实设备接口访问地址
+ */
++(NSString *)concat:(NSString *)pro;
 @end
