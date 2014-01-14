@@ -34,7 +34,7 @@ static id<GDCBus> BUS;
 
 
 @implementation GDDBusProvider (Constant)
-static NSString * SID_ADDR = @"@equipmentID";
+static NSString * SID_ADDR = @"@drive.equipmentID";
 + (NSString *)SID_ADDR {
   return SID_ADDR;
 }
@@ -57,7 +57,7 @@ static NSString *EQUIPMENT_ID;
   [userDefaults setObject:EQUIPMENT_ID forKey:@"equipmentID"];
   [userDefaults synchronize];
   //同步完成后发送消息 通知所有注册 GDD_BUS_EQUIPMENT_ID 设备id变更
-  [[GDDBusProvider BUS] publish:[NSString stringWithFormat:@"@%@",[GDDBusProvider SID_ADDR]] message:[GDDBusProvider equipmentID]];
+  [[GDDBusProvider BUS] publish:[NSString stringWithFormat:@"@%@",[GDDBusProvider SID_ADDR]] message:@{@"sid": [GDDBusProvider equipmentID]}];
 }
 +(void)readNSUserDefaults
 {

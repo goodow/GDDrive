@@ -13,10 +13,9 @@
 @interface GDDRemoteControlViewController ()
 
 @property (nonatomic, strong) id <GDCBus> bus;
-@property (nonatomic, strong) GDCMessageBlock handlerBlock;
-
 @property (nonatomic, weak) IBOutlet UISlider *volumeSlider;
 @property (nonatomic, weak) IBOutlet UISlider *brightnessSlider;
+@property (nonatomic, strong) id<GDCHandlerRegistration> localOpenHandlerRegistration;
 
 
 - (IBAction)actionSliderVolume:(id)sender;
@@ -52,14 +51,14 @@
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   __weak GDDRemoteControlViewController *weakSelf = self;
-  self.handlerBlock = ^(id<GDCMessage> message) {
+
+  self.localOpenHandlerRegistration = [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:^(id<GDCMessage> message) {
     [weakSelf handlerEventBusOpened:[weakSelf bus]];
-  };
-  [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
+  }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  [self.bus unregisterHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
+  [self.localOpenHandlerRegistration unregisterHandler];
 }
 
 -(void)handlerEventBusOpened:(id<GDCBus>) bus {

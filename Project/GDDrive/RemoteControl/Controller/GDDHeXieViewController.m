@@ -12,12 +12,13 @@
 
 @interface GDDHeXieViewController ()
 @property (nonatomic, strong) id <GDCBus> bus;
-@property (nonatomic, strong) GDCMessageBlock handlerBlock;
-@property (nonatomic, strong) GDDEquipmendIDBlock equipmendIDBlock;
 @property (nonatomic, weak) IBOutlet UIPickerView *searchPicker;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) NSDictionary *searchPickerDic;
 @property (nonatomic, strong) NSDictionary *messageDic;
+
+@property (nonatomic, strong) id<GDCHandlerRegistration> localOpenHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> equipmendIDHandlerRegistration;
 @end
 
 
@@ -36,7 +37,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.navigationItem.title = @"和谐发展课程";
+  self.navigationItem.title = @"课程";
   
   [self.collectionView registerClass:[GDDFolderCell class] forCellWithReuseIdentifier:@"GDDFolderCell"];
   
@@ -47,21 +48,21 @@
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   __weak GDDHeXieViewController *weakSelf = self;
-  self.handlerBlock = ^(id<GDCMessage> message) {
-    //网络恢复和良好 解除模态
-  };
-  self.equipmendIDBlock = ^(NSString *equipmendID){
-      [weakSelf handlerEventBusOpened];
-  };
-  
   [self handlerEventBusOpened];
-  [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
-  [self.bus registerHandler:[GDDBusProvider SID_ADDR] handler:self.equipmendIDBlock];
+  self.localOpenHandlerRegistration = [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:^(id<GDCMessage> message) {
+    //网络恢复和良好 解除模态
+    
+  }];
+  self.equipmendIDHandlerRegistration = [self.bus registerHandler:[GDDBusProvider SID_ADDR] handler:^(NSDictionary *message){
+    [weakSelf handlerEventBusOpened];
+  }];
+
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  [self.bus unregisterHandler:[GDCBus LOCAL_ON_OPEN] handler:self.handlerBlock];
-  [self.bus unregisterHandler:[GDDBusProvider SID_ADDR] handler:self.equipmendIDBlock];
+  
+  [self.localOpenHandlerRegistration unregisterHandler];
+  [self.equipmendIDHandlerRegistration unregisterHandler];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -77,6 +78,12 @@
     NSLog(@"%@",message);
     self.messageDic = [message body];
     [self.collectionView reloadData];
+  }];
+  
+  [self.bus send:[GDDBusProvider concat:@"drive.file"] message:@{@"path":@"goodow/drive"} replyHandler:^(id<GDCMessage> message) {
+    NSLog(@"%@",message);
+//    self.messageDic = [message body];
+
   }];
 }
 
