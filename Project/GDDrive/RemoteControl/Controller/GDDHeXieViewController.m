@@ -9,6 +9,7 @@
 #import "GDDHeXieViewController.h"
 #import "GDDBusProvider.h"
 #import "GDDFolderCell.h"
+#import "GDDAddr.h"
 
 @interface GDDHeXieViewController ()
 @property (nonatomic, strong) id <GDCBus> bus;
@@ -53,7 +54,7 @@
     //网络恢复和良好 解除模态
     
   }];
-  self.equipmendIDHandlerRegistration = [self.bus registerHandler:[GDDBusProvider SID_ADDR] handler:^(NSDictionary *message){
+  self.equipmendIDHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_DEVICE:GDDAddrReceive] handler:^(NSDictionary *message){
     [weakSelf handlerEventBusOpened];
   }];
 
@@ -72,18 +73,17 @@
 
 -(void)handlerEventBusOpened{
   
-  [self.bus send:[GDDBusProvider concat:@"drive.topic"] message:@{@"action":@"post",@"query":@{@"type":@"和谐"}} replyHandler:nil];
+  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"post",@"query":@{@"type":@"和谐"}} replyHandler:nil];
   
-  [self.bus send:[GDDBusProvider concat:@"drive.topic"] message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
+  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
     NSLog(@"%@",message);
     self.messageDic = [message body];
     [self.collectionView reloadData];
   }];
   
-  [self.bus send:[GDDBusProvider concat:@"drive.file"] message:@{@"path":@"goodow/drive"} replyHandler:^(id<GDCMessage> message) {
+  [self.bus send:[GDDAddr FILE:GDDAddrSendRemote] message:@{@"path":@"goodow/drive"} replyHandler:^(id<GDCMessage> message) {
     NSLog(@"%@",message);
 //    self.messageDic = [message body];
-
   }];
 }
 

@@ -15,12 +15,6 @@ typedef void (^GDDEquipmendIDBlock)(NSString *equipmendID);
 
 @end
 
-
-@interface GDDBusProvider(Constant)
-+ (NSString *)SID_ADDR;
-@end
-
-
 @interface GDDBusProvider (Equipmend)
 + (NSString *)equipmentID;
 + (void)updateEquipmentID:(NSString *)equipmentID;

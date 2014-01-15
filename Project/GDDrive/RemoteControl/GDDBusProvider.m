@@ -7,6 +7,7 @@
 //
 
 #import "GDDBusProvider.h"
+#import "GDDAddr.h"
 
 @interface GDDBusProvider ()
 @end
@@ -31,15 +32,6 @@ static id<GDCBus> BUS;
 }
 @end
 
-
-
-@implementation GDDBusProvider (Constant)
-static NSString * SID_ADDR = @"@drive.equipmentID";
-+ (NSString *)SID_ADDR {
-  return SID_ADDR;
-}
-@end
-
 @implementation GDDBusProvider (Equipmend)
 static NSString *EQUIPMENT_ID;
 + (NSString *)equipmentID{
@@ -57,7 +49,7 @@ static NSString *EQUIPMENT_ID;
   [userDefaults setObject:EQUIPMENT_ID forKey:@"equipmentID"];
   [userDefaults synchronize];
   //同步完成后发送消息 通知所有注册 GDD_BUS_EQUIPMENT_ID 设备id变更
-  [[GDDBusProvider BUS] publish:[NSString stringWithFormat:@"@%@",[GDDBusProvider SID_ADDR]] message:@{@"sid": [GDDBusProvider equipmentID]}];
+  [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_DEVICE:GDDAddrSendLocal] message:@{@"sid": [GDDBusProvider equipmentID]}];
 }
 +(void)readNSUserDefaults
 {

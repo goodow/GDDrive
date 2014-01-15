@@ -22,6 +22,7 @@
 		6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481A181767B800586C62 /* Main_iPad.storyboard */; };
 		6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6548481C181767B800586C62 /* Main_iPhone.storyboard */; };
 		65538B76181DFA18008D1DE0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65538B75181DFA18008D1DE0 /* config.plist */; };
+		65555FAA18865A5200E60588 /* GDDAddr.m in Sources */ = {isa = PBXBuildFile; fileRef = 65555FA918865A5200E60588 /* GDDAddr.m */; };
 		65571EFC1845872100A7C1B7 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 65571EFB1845872100A7C1B7 /* UIAlertView+Blocks.m */; };
 		65571F02184587AC00A7C1B7 /* UIColor+GDDColorSchemes.m in Sources */ = {isa = PBXBuildFile; fileRef = 65571F01184587AC00A7C1B7 /* UIColor+GDDColorSchemes.m */; };
 		65571F05184588F600A7C1B7 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 65571F04184588F600A7C1B7 /* UIImageView+MKNetworkKitAdditions.m */; };
@@ -146,6 +147,8 @@
 		6548481B181767B800586C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		6548481D181767B800586C62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		65538B75181DFA18008D1DE0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		65555FA818865A5200E60588 /* GDDAddr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDAddr.h; sourceTree = "<group>"; };
+		65555FA918865A5200E60588 /* GDDAddr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDAddr.m; sourceTree = "<group>"; };
 		65571EFA1845872100A7C1B7 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		65571EFB1845872100A7C1B7 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		65571F00184587AC00A7C1B7 /* UIColor+GDDColorSchemes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+GDDColorSchemes.h"; sourceTree = "<group>"; };
@@ -698,6 +701,8 @@
 				65DDDB56186ABA5D0064DCBA /* GDDRemoteControlViewController.xib */,
 				6583BFBC187A821F00B5683C /* GDDBusProvider.h */,
 				6583BFBD187A821F00B5683C /* GDDBusProvider.m */,
+				65555FA818865A5200E60588 /* GDDAddr.h */,
+				65555FA918865A5200E60588 /* GDDAddr.m */,
 				65B32F58187CF38D0028026C /* PSStackedViewControllerDecorate.h */,
 				65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */,
 			);
@@ -939,6 +944,7 @@
 				65CA0D1318570016005249BB /* GDDDownloadWorkContext.m in Sources */,
 				65571F2B1846E27900A7C1B7 /* GDDPlayAudioViewController_ipad.m in Sources */,
 				65571EFC1845872100A7C1B7 /* UIAlertView+Blocks.m in Sources */,
+				65555FAA18865A5200E60588 /* GDDAddr.m in Sources */,
 				655DAB50183CC32400703FA4 /* GDDGenreDictionary.m in Sources */,
 				655DAB9F183EF77600703FA4 /* GDDConstMapUtil.m in Sources */,
 			);
