@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "GDChannel.h"
 
-typedef void (^GDDEquipmendIDBlock)(NSString *equipmendID);
 @interface GDDBusProvider : NSObject
 +(id<GDCBus>)BUS;
 

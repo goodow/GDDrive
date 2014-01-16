@@ -39,13 +39,38 @@
     self.window.frame =  CGRectMake(0,0,[[UIScreen mainScreen]bounds].size.width - 20,[[UIScreen mainScreen]bounds].size.height);
   }
   self.bus = [GDDBusProvider BUS];
+  GDCStateEnum *stateEnum = [self.bus getReadyState];
+  
+  switch ([stateEnum ordinal]) {
+    case GDCState_CONNECTING:
+      NSLog(@"CONNECTING");
+      break;
+    case GDCState_OPEN:
+      NSLog(@"OPEN");
+      break;
+    case GDCState_CLOSING:
+      NSLog(@"CLOSING");
+      break;
+    case GDCState_CLOSED:
+      NSLog(@"CLOSED");
+      break;
+    default:
+      break;
+  }
+
   self.handlerBlock = ^(id<GDCMessage> message) {
     //进入模态并提示网络失败
+    NSLog(@"网络连接失败");
   };
   [self.bus registerHandler:[GDCBus LOCAL_ON_CLOSE] handler:self.handlerBlock];
+  [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:^(id<GDCMessage> message) {
+    //进入模态并提示网络失败
+    NSLog(@"网络连接成功");
+  }];
+  
   
   //判断程序是否第一次执行
-//  [application setStatusBarStyle:UIStatusBarStyleLightContent];
+  //  [application setStatusBarStyle:UIStatusBarStyleLightContent];
   if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
@@ -70,7 +95,7 @@
   self.stackController.defaultShadowWidth = 10.0f;
   self.window.rootViewController = self.stackController;
   [self.window makeKeyAndVisible];
-
+  
   
   [(GDDMenuRootController *)self.stackController.rootViewController loadRealtime];
   

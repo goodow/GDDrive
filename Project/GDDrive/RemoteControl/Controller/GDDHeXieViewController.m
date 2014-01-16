@@ -15,8 +15,10 @@
 @property (nonatomic, strong) id <GDCBus> bus;
 @property (nonatomic, weak) IBOutlet UIPickerView *searchPicker;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) NSDictionary *searchPickerDic;
 @property (nonatomic, strong) NSDictionary *messageDic;
+
+@property (nonatomic, strong) NSMutableArray *queryConditionList;
+@property (nonatomic, strong) NSMutableArray *pathList;
 
 @property (nonatomic, strong) id<GDCHandlerRegistration> localOpenHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> equipmendIDHandlerRegistration;
@@ -42,8 +44,9 @@
   
   [self.collectionView registerClass:[GDDFolderCell class] forCellWithReuseIdentifier:@"GDDFolderCell"];
   
-  self.searchPickerDic = @{@"grade":@[@"小班",@"中班",@"大班",@"学前"],@"term":@[@"上",@"下"],@"topic":@[@"健康",@"语言",@"社会",@"科学",@"数学",@"艺术(音乐)",@"艺术(美术)"]};
   self.bus = [GDDBusProvider BUS];
+  self.pathList = [NSMutableArray array];
+  self.queryConditionList = [NSMutableArray array];
   
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -52,7 +55,7 @@
   [self handlerEventBusOpened];
   self.localOpenHandlerRegistration = [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:^(id<GDCMessage> message) {
     //网络恢复和良好 解除模态
-    
+    NSLog(@"网络恢复和良好 解除模态");
   }];
   self.equipmendIDHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_DEVICE:GDDAddrReceive] handler:^(NSDictionary *message){
     [weakSelf handlerEventBusOpened];
@@ -73,52 +76,116 @@
 
 -(void)handlerEventBusOpened{
   
-  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"post",@"query":@{@"type":@"和谐"}} replyHandler:nil];
+  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"post",@"query":@{@"type":@"入学准备"}} replyHandler:nil];
   
   [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
     NSLog(@"%@",message);
     self.messageDic = [message body];
     [self.collectionView reloadData];
   }];
+  [self recursiveQuery:self.pathList];
+}
+
+
+//查询从跟目录到最后一级查询条件的，所有分级查询条件
+-(void)recursiveQuery:(NSMutableArray *)aPathList{
+  NSString *path = @"goodow/drive";
+  for (NSString *str in aPathList) {
+    path = [NSString stringWithFormat:@"%@/%@",path,str];
+  }
+  __weak GDDHeXieViewController *weakSelf = self;
+  [self.bus send:[GDDAddr FILE:GDDAddrSendRemote] message:@{@"path":path} replyHandler:^(id<GDCMessage> message) {
+    NSDictionary *dic = [message body];
+    NSArray *arr = dic[@"folders"];
+    
+    if ([arr count]>0) {
+      NSString *str = arr[0];
+      NSString * regex = @"(^[0-9]{0,4}$)";
+      NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+      do {
+        if ([str length] < 4 ) {
+          [weakSelf.pathList addObject:str];
+          [weakSelf.queryConditionList addObject:arr];
+          break;
+        }
+        BOOL isMatch = [pred evaluateWithObject:[str substringToIndex:4]];
+        if (isMatch) {
+          [weakSelf.searchPicker reloadAllComponents];
+          [weakSelf concatSendMessage];
+          return;
+        }else{
+          [weakSelf.pathList addObject:str];
+          [weakSelf.queryConditionList addObject:arr];
+          break;
+        }
+      } while (NO);
+      [weakSelf recursiveQuery:weakSelf.pathList];
+    }else{
+      [weakSelf.searchPicker reloadAllComponents];
+      [weakSelf concatSendMessage];
+    }
+  }];
+}
+- (void)concatSendMessage{
+  NSMutableDictionary *queryDic = [NSMutableDictionary dictionary];
+  switch ([self.pathList count]) {
+    case 4:
+      queryDic[@"topic"] = self.pathList[3];
+    case 3:
+      queryDic[@"term"] = self.pathList[2];
+    case 2:
+      queryDic[@"grade"] = self.pathList[1];
+    case 1:
+      queryDic[@"type"] = self.pathList[0];
+      
+    default:
+      break;
+  }
   
-  [self.bus send:[GDDAddr FILE:GDDAddrSendRemote] message:@{@"path":@"goodow/drive"} replyHandler:^(id<GDCMessage> message) {
-    NSLog(@"%@",message);
-//    self.messageDic = [message body];
+  //推送跳转界面
+  NSMutableDictionary *pushInterfaceMessageDic = [NSMutableDictionary dictionary];
+  pushInterfaceMessageDic[@"action"] = @"post";
+  pushInterfaceMessageDic[@"query"] = queryDic;
+  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:pushInterfaceMessageDic replyHandler:nil];
+
+  //获取跳转界面数据
+  NSMutableDictionary *accessToDataMessageDic = [NSMutableDictionary dictionary];
+  accessToDataMessageDic[@"action"] = @"get";
+  accessToDataMessageDic[@"query"] = queryDic;
+  __weak GDDHeXieViewController *weakSelf = self;
+  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:accessToDataMessageDic replyHandler:^(id<GDCMessage> message) {
+    weakSelf.messageDic = [message body];
+    [weakSelf.collectionView reloadData];
   }];
 }
 
 #pragma mark -picker view delegate datasouce
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-  if (component == 0) {
-    [[self.searchPickerDic objectForKey:@"grade"] objectAtIndex:row];
-  }else if (component == 1){
-    [[self.searchPickerDic objectForKey:@"term"] objectAtIndex:row];
-  }else if (component == 2){
-    [[self.searchPickerDic objectForKey:@"topic"] objectAtIndex:row];
+  
+  NSString *selectTag = self.queryConditionList[component][row];
+  self.pathList[component] = selectTag;
+
+  for (int i = [self.queryConditionList count] - 1; i > component ; i--) {
+    [self.queryConditionList removeObjectAtIndex:i];
+    [self.pathList removeObjectAtIndex:i];
   }
+  [self.searchPicker reloadAllComponents];
+  [self recursiveQuery:self.pathList];
+  
   
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
-  return 3;
+  return 4;
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-  if (component == 0) {
-    return [[self.searchPickerDic objectForKey:@"grade"] count];
-  }else if (component == 1){
-    return [[self.searchPickerDic objectForKey:@"term"] count];
-  }else if (component == 2){
-    return [[self.searchPickerDic objectForKey:@"topic"] count];
+  if ([self.queryConditionList count] > component) {
+    return [self.queryConditionList[component] count];
   }
   return 0;
-  
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-  if (component == 0) {
-    return [[self.searchPickerDic objectForKey:@"grade"] objectAtIndex:row];
-  }else if (component == 1){
-    return [[self.searchPickerDic objectForKey:@"term"] objectAtIndex:row];
-  }else if (component == 2){
-    return [[self.searchPickerDic objectForKey:@"topic"] objectAtIndex:row];
+  if ([self.queryConditionList count] > component) {
+    return self.queryConditionList[component][row];
   }
   return @"";
 }
@@ -127,16 +194,18 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
   // 每个Section的item个数
-  return [[self.messageDic objectForKey:@"activities"] count];
+  if (self.messageDic[@"activities"] == nil) {
+    return 0;
+  }
+  return [self.messageDic[@"activities"] count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   GDDFolderCell *cell = (GDDFolderCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"GDDFolderCell" forIndexPath:indexPath];
   cell.titleLabel.text = @"";
-  if ([[self.messageDic objectForKey:@"activities"] count] > 0) {
-    cell.titleLabel.text = [[(NSArray *)[self.messageDic objectForKey:@"activities"] objectAtIndex:indexPath.row]objectForKey:@"title"];
-    
+  if ([self.messageDic[@"activities"] count] > 0) {
+    cell.titleLabel.text = self.messageDic[@"activities"][indexPath.row][@"title"];
   }
   return cell;
 }
