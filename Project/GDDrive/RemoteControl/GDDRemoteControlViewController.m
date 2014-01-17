@@ -8,6 +8,7 @@
 
 #import "GDDRemoteControlViewController.h"
 #import "GDDBusProvider.h"
+#import "GDDAddr.h"
 
 
 @interface GDDRemoteControlViewController ()
@@ -99,23 +100,19 @@
 }
 
 - (IBAction)actionSliderVolume:(id)sender{
-  [self.bus send:[GDDBusProvider concat:@"drive.settings.audio"] message:@{@"volume": [NSNumber numberWithFloat:[self.volumeSlider value]]} replyHandler:nil];
+//  [self.bus send:[GDDAddr concat:@"drive.settings.audio"] message:@{@"volume": [NSNumber numberWithFloat:[self.volumeSlider value]]} replyHandler:nil];
 }
 - (IBAction)actionSliderBrightness:(id)sender{
-
-  [self.bus send:[GDDBusProvider concat:@"drive.control"] message:@{@"brightness": [NSNumber numberWithFloat:[self.brightnessSlider value]]} replyHandler:nil];
+//  [self.bus send:[GDDAddr concat:@"drive.control"] message:@{@"brightness": [NSNumber numberWithFloat:[self.brightnessSlider value]]} replyHandler:nil];
 }
-
 - (IBAction)actionMuteListener:(id)sender{
-
-  [self.bus send:[GDDBusProvider concat:@"drive.settings.audio"] message:@{@"mute": @YES} replyHandler:nil];
+//  [self.bus send:[GDDAddr concat:@"drive.settings.audio"] message:@{@"mute": @YES} replyHandler:nil];
 }
 - (IBAction)actionShutdownListener:(id)sender{
-
-  [self.bus send:[GDDBusProvider concat:@"drive.control"] message:@{@"shutdown": @YES} replyHandler:nil];
+//  [self.bus send:[GDDAddr concat:@"drive.control"] message:@{@"shutdown": @YES} replyHandler:nil];
 }
 - (IBAction)actionReturnListener:(id)sender{
-  [self.bus send:[GDDBusProvider concat:@"drive.control"] message:@{@"return": @YES} replyHandler:nil];
+//  [self.bus send:[GDDAddr concat:@"drive.control"] message:@{@"return": @YES} replyHandler:nil];
 }
 
 @end

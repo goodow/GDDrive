@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PSStackedViewControllerDecorate.h"
-
+#import "MRProgress.h"
 
 #define GDDRemoteControlDelegate ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

@@ -8,7 +8,8 @@
 
 #import "GDDEquipmentView.h"
 #import "GDDPlistHelper.h"
-#import "GDDBusProvider.h"
+#import "GDDAddr.h"
+
 @interface GDDEquipmentView()
 
 @property (nonatomic, weak) IBOutlet UILabel *equipmentID;
@@ -43,7 +44,7 @@
   }
 }
 -(void)bindData{
-  self.equipmentID.text = [GDDBusProvider equipmentID];
+  self.equipmentID.text = [GDDAddr equipmentID];
 }
 
 /*

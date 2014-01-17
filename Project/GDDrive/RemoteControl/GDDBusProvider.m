@@ -32,33 +32,3 @@ static id<GDCBus> BUS;
 }
 @end
 
-@implementation GDDBusProvider (Equipmend)
-static NSString *EQUIPMENT_ID;
-+ (NSString *)equipmentID{
-  [GDDBusProvider readNSUserDefaults];
-  return EQUIPMENT_ID;
-}
-+ (void)updateEquipmentID:(NSString *)equipmentID{
-  EQUIPMENT_ID = equipmentID;
-  [GDDBusProvider saveNSUserDefaults];
-}
-
-+(void)saveNSUserDefaults
-{
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  [userDefaults setObject:EQUIPMENT_ID forKey:@"equipmentID"];
-  [userDefaults synchronize];
-  //同步完成后发送消息 通知所有注册 GDD_BUS_EQUIPMENT_ID 设备id变更
-  [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_DEVICE:GDDAddrSendLocal] message:@{@"sid": [GDDBusProvider equipmentID]}];
-}
-+(void)readNSUserDefaults
-{
-  NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
-  //读取NSString类型的数据
-  EQUIPMENT_ID = [userDefaultes stringForKey:@"equipmentID"];
-}
-+(NSString *)concat:(NSString *)pro{
-  return [NSString stringWithFormat:@"%@.%@",EQUIPMENT_ID,pro];
-}
-
-@end

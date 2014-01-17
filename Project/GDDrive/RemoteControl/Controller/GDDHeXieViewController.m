@@ -171,8 +171,6 @@
   }
   [self.searchPicker reloadAllComponents];
   [self recursiveQuery:self.pathList];
-  
-  
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
   return 4;

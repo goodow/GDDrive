@@ -27,8 +27,12 @@ static NSString *const ADDR_FILE = @"drive.file";
 }
 
 #pragma mark - 公共方法
+/*description 拼接设备号和请求地址。
+ *parameter   pro 接口名
+ *return      真实设备接口访问地址
+ */
 +(NSString *)concat:(NSString *)pro{
-  return [NSString stringWithFormat:@"%@.%@",[GDDBusProvider equipmentID],pro];
+  return [NSString stringWithFormat:@"%@.%@",[GDDAddr equipmentID],pro];
 }
 
 +(NSString *)address:(NSString *) addr addressStyle:(GDDAddressStyle)style{
@@ -60,5 +64,33 @@ static NSString *const ADDR_FILE = @"drive.file";
       break;
   }
 }
+
 @end
 
+
+@implementation GDDAddr (GDDEquipmend)
+static NSString *EQUIPMENT_ID;
++ (NSString *)equipmentID{
+  [GDDAddr readNSUserDefaults];
+  return EQUIPMENT_ID;
+}
++ (void)updateEquipmentID:(NSString *)equipmentID{
+  EQUIPMENT_ID = equipmentID;
+  [GDDAddr saveNSUserDefaults];
+}
+
++(void)saveNSUserDefaults
+{
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  [userDefaults setObject:EQUIPMENT_ID forKey:@"equipmentID"];
+  [userDefaults synchronize];
+  //同步完成后发送消息 通知所有注册 GDD_BUS_EQUIPMENT_ID 设备id变更
+  [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_DEVICE:GDDAddrSendLocal] message:@{@"sid": [GDDAddr equipmentID]}];
+}
++(void)readNSUserDefaults
+{
+  NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+  //读取NSString类型的数据
+  EQUIPMENT_ID = [userDefaultes stringForKey:@"equipmentID"];
+}
+@end

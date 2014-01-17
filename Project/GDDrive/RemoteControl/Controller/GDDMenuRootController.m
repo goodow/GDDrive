@@ -19,7 +19,7 @@
 #import "UIAlertView+Blocks.h"
 #import "GDDMainViewController_ipad.h"
 #import "GDDEquipmentView.h"
-#import "GDDBusProvider.h"
+#import "GDDAddr.h"
 
 
 @interface GDDMenuRootController ()
@@ -58,7 +58,7 @@
                               onDismiss:^(UIAlertView *alertView, int buttonIndex) {
                                 UITextField *tf=[alertView textFieldAtIndex:0];
                                 NSLog(@"textInputContextIdentifier:%@",tf.text);
-                                [GDDBusProvider updateEquipmentID:tf.text];
+                                [GDDAddr updateEquipmentID:tf.text];
                                 [weakSelf.equipmentView bindData];
                               }
                                onCancel:^{

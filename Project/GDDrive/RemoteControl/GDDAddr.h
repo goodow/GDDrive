@@ -23,3 +23,8 @@ typedef enum {
 @interface GDDAddr (ios)
 +(NSString *)SWITCH_DEVICE:(GDDAddressStyle)style;
 @end
+
+@interface GDDAddr (GDDEquipmend)
++ (NSString *)equipmentID;
++ (void)updateEquipmentID:(NSString *)equipmentID;
+@end

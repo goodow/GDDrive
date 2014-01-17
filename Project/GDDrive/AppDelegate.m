@@ -13,8 +13,6 @@
 #import "GDDLoginViewController_ipad.h"
 #import "GDDBusProvider.h"
 
-
-
 @interface AppDelegate ()
 @property (nonatomic, strong) GDCMessageBlock handlerBlock;
 @property (nonatomic, strong) id <GDCBus> bus;
@@ -43,29 +41,27 @@
   
   switch ([stateEnum ordinal]) {
     case GDCState_CONNECTING:
-      NSLog(@"CONNECTING");
+    case GDCState_CLOSED:
+    case GDCState_CLOSING:
+      NSLog(@"CONNECTING or CLOSING or CLOSED");
+      [MRProgressOverlayView showOverlayAddedTo:self.window animated:YES];
       break;
     case GDCState_OPEN:
       NSLog(@"OPEN");
       break;
-    case GDCState_CLOSING:
-      NSLog(@"CLOSING");
-      break;
-    case GDCState_CLOSED:
-      NSLog(@"CLOSED");
-      break;
     default:
       break;
   }
-
-  self.handlerBlock = ^(id<GDCMessage> message) {
+  
+  [self.bus registerHandler:[GDCBus LOCAL_ON_CLOSE] handler:^(id<GDCMessage> message) {
     //进入模态并提示网络失败
     NSLog(@"网络连接失败");
-  };
-  [self.bus registerHandler:[GDCBus LOCAL_ON_CLOSE] handler:self.handlerBlock];
+    [MRProgressOverlayView showOverlayAddedTo:self.window animated:YES];
+  }];
   [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:^(id<GDCMessage> message) {
     //进入模态并提示网络失败
     NSLog(@"网络连接成功");
+    [MRProgressOverlayView dismissOverlayForView:self.window animated:YES];
   }];
   
   

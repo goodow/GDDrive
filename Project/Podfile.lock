@@ -8,9 +8,9 @@ PODS:
   - J2ObjC (0.8.8):
     - J2ObjC/lib/jre
   - J2ObjC/lib/jre (0.8.8)
-  - MBProgressHUD (0.8)
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
+  - MRProgress (0.3.0)
   - PSStackedView (1.0)
   - Reachability (3.1.1)
   - SocketRocket (0.3.1-beta2)
@@ -20,8 +20,8 @@ DEPENDENCIES:
   - DOUAudioStreamer (~> 0.2.5)
   - GDChannel (from `https://github.com/goodow/realtime-channel.git`)
   - GDJson (from `https://github.com/goodow/realtime-json.git`)
-  - MBProgressHUD (~> 0.8)
   - MKNetworkKit (~> 0.87)
+  - MRProgress (~> 0.3.0)
   - PSStackedView (~> 1.0)
   - vfrReader (~> 2.6.2)
 
@@ -36,8 +36,8 @@ SPEC CHECKSUMS:
   GDChannel: 9da3f3ba782d825ea4f4f5a27d88f5183327d8dc
   GDJson: 4490e5640ca0d56cd0b7311261ffa65ac770b5e2
   J2ObjC: eed03a6ebf1a8c0fb1ed15d5edbded36959366dd
-  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
   MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
+  MRProgress: 4f086e91313001ad4a622f1ea0d19bb8aa958f6a
   PSStackedView: 734c9bd6fdae2576aa9403edef60ffcb5873a90e
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
