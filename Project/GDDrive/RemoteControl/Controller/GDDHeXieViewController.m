@@ -128,18 +128,20 @@
 }
 - (void)concatSendMessage{
   NSMutableDictionary *queryDic = [NSMutableDictionary dictionary];
-  switch ([self.pathList count]) {
-    case 4:
-      queryDic[@"topic"] = self.pathList[3];
-    case 3:
-      queryDic[@"term"] = self.pathList[2];
-    case 2:
-      queryDic[@"grade"] = self.pathList[1];
-    case 1:
-      queryDic[@"type"] = self.pathList[0];
-      
-    default:
-      break;
+  NSDictionary *map = @{@"和谐": @"type",@"收藏": @"type",@"托班": @"type",@"示范课": @"type",@"入学准备": @"type",@"智能开发": @"type",@"电子书": @"type",
+                        @"大": @"grade",@"中": @"grade",@"小": @"grade",@"学前": @"grade",
+                        @"上":@"term",@"下":@"term"};
+  
+  for (NSString *str in self.pathList) {
+    if ([map[str] isEqualToString:@"type"]) {
+      queryDic[@"type"] = str;
+    } else if ([map[str] isEqualToString:@"grade"]) {
+      queryDic[@"grade"] = str;
+    } else if ([map[str] isEqualToString:@"term"]) {
+      queryDic[@"term"] = str;
+    } else{
+      queryDic[@"topic"] = str;
+    }
   }
   
   //推送跳转界面
@@ -192,7 +194,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
   // 每个Section的item个数
-  if (self.messageDic[@"activities"] == nil) {
+  if (!self.messageDic[@"activities"] || self.messageDic[@"activities"] == [NSNull null]) {
     return 0;
   }
   return [self.messageDic[@"activities"] count];
