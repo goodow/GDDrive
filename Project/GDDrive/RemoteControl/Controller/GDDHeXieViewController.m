@@ -19,9 +19,11 @@
 
 @property (nonatomic, strong) NSMutableArray *queryConditionList;
 @property (nonatomic, strong) NSMutableArray *pathList;
+@property (nonatomic, strong) NSMutableDictionary *selectedDic;
 
 @property (nonatomic, strong) id<GDCHandlerRegistration> localOpenHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> equipmendIDHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> swichClassHandlerRegistration;
 @end
 
 
@@ -52,14 +54,19 @@
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   __weak GDDHeXieViewController *weakSelf = self;
-  [self handlerEventBusOpened];
   self.localOpenHandlerRegistration = [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:^(id<GDCMessage> message) {
     //网络恢复和良好 解除模态
     NSLog(@"网络恢复和良好 解除模态");
   }];
   self.equipmendIDHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_DEVICE:GDDAddrReceive] handler:^(NSDictionary *message){
-    [weakSelf handlerEventBusOpened];
+    
   }];
+  self.swichClassHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_CLASS:GDDAddrReceive] handler:^(id <GDCMessage> message){
+    NSLog(@"swichClassHandlerRegistration");
+    [weakSelf recursiveQuery:weakSelf.pathList];
+    weakSelf.selectedDic = [message body];
+  }];
+
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -67,25 +74,13 @@
   
   [self.localOpenHandlerRegistration unregisterHandler];
   [self.equipmendIDHandlerRegistration unregisterHandler];
+  [self.swichClassHandlerRegistration unregisterHandler];
 }
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
--(void)handlerEventBusOpened{
-  
-  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"post",@"query":@{@"type":@"入学准备"}} replyHandler:nil];
-  
-  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"get",@"query":@{@"type":@"和谐",@"grade":@"小",@"term":@"上",@"topic":@"语言"}} replyHandler:^(id<GDCMessage> message) {
-    NSLog(@"%@",message);
-    self.messageDic = [message body];
-    [self.collectionView reloadData];
-  }];
-  [self recursiveQuery:self.pathList];
-}
-
 
 //查询从跟目录到最后一级查询条件的，所有分级查询条件
 -(void)recursiveQuery:(NSMutableArray *)aPathList{
@@ -147,20 +142,37 @@
   //推送跳转界面
   NSMutableDictionary *pushInterfaceMessageDic = [NSMutableDictionary dictionary];
   pushInterfaceMessageDic[@"action"] = @"post";
-  pushInterfaceMessageDic[@"query"] = queryDic;
+  pushInterfaceMessageDic[@"queries"] = queryDic;
   [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:pushInterfaceMessageDic replyHandler:nil];
 
   //获取跳转界面数据
   NSMutableDictionary *accessToDataMessageDic = [NSMutableDictionary dictionary];
   accessToDataMessageDic[@"action"] = @"get";
-  accessToDataMessageDic[@"query"] = queryDic;
+  accessToDataMessageDic[@"queries"] = queryDic;
   __weak GDDHeXieViewController *weakSelf = self;
   [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:accessToDataMessageDic replyHandler:^(id<GDCMessage> message) {
     weakSelf.messageDic = [message body];
     [weakSelf.collectionView reloadData];
+    
+    if (weakSelf.selectedDic) {
+      NSString *classStr = weakSelf.selectedDic[@"queries"][@"type"];
+      //迭代查找元素位置
+      [self.queryConditionList enumerateObjectsUsingBlock:^(id objComponent, NSUInteger component, BOOL *stopA)
+      {
+        [objComponent enumerateObjectsUsingBlock:^(id objRow, NSUInteger row, BOOL *stopB){
+        
+          if([objRow localizedCaseInsensitiveCompare:classStr] == NSOrderedSame){
+            [weakSelf.searchPicker selectRow:row inComponent:component animated:YES];
+            [weakSelf pickerView:weakSelf.searchPicker didSelectRow:row inComponent:component];
+          }
+        }];
+        
+      }];
+      weakSelf.selectedDic = nil;
+    }
+    
   }];
 }
-
 #pragma mark -picker view delegate datasouce
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
   

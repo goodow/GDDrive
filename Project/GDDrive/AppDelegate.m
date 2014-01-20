@@ -37,21 +37,7 @@
     self.window.frame =  CGRectMake(0,0,[[UIScreen mainScreen]bounds].size.width - 20,[[UIScreen mainScreen]bounds].size.height);
   }
   self.bus = [GDDBusProvider BUS];
-  GDCStateEnum *stateEnum = [self.bus getReadyState];
-  
-  switch ([stateEnum ordinal]) {
-    case GDCState_CONNECTING:
-    case GDCState_CLOSED:
-    case GDCState_CLOSING:
-      NSLog(@"CONNECTING or CLOSING or CLOSED");
-      [MRProgressOverlayView showOverlayAddedTo:self.window animated:YES];
-      break;
-    case GDCState_OPEN:
-      NSLog(@"OPEN");
-      break;
-    default:
-      break;
-  }
+
   
   [self.bus registerHandler:[GDCBus LOCAL_ON_CLOSE] handler:^(id<GDCMessage> message) {
     //进入模态并提示网络失败
@@ -94,6 +80,21 @@
   
   
   [(GDDMenuRootController *)self.stackController.rootViewController loadRealtime];
+  GDCStateEnum *stateEnum = [self.bus getReadyState];
+  
+  switch ([stateEnum ordinal]) {
+    case GDCState_CONNECTING:
+    case GDCState_CLOSED:
+    case GDCState_CLOSING:
+      NSLog(@"CONNECTING or CLOSING or CLOSED");
+      [MRProgressOverlayView showOverlayAddedTo:self.window animated:YES];
+      break;
+    case GDCState_OPEN:
+      NSLog(@"OPEN");
+      break;
+    default:
+      break;
+  }
   
   return YES;
 }

@@ -11,6 +11,7 @@
 
 static NSString *const SID = @"huang.";
 static NSString *const SID_ADDR = @"@drive.control.switch";
+static NSString *const SID_ADDR_CLASS = @"@drive.control.class";
 
 static NSString *const ADDR_TOPIC = @"drive.topic";
 static NSString *const ADDR_FILE = @"drive.file";
@@ -57,6 +58,19 @@ static NSString *const ADDR_FILE = @"drive.file";
       return SID_ADDR;
     case GDDAddrSendLocal:
       return [NSString stringWithFormat:@"%@%@",[GDCBus LOCAL],SID_ADDR];
+    case GDDAddrSendRemote:
+      NSAssert(NO, @"本地协议，不允许发送远程协议");
+      return nil;
+    default:
+      break;
+  }
+}
++(NSString *)SWITCH_CLASS:(GDDAddressStyle)style{
+  switch (style) {
+    case GDDAddrReceive:
+      return SID_ADDR_CLASS;
+    case GDDAddrSendLocal:
+      return [NSString stringWithFormat:@"%@%@",[GDCBus LOCAL],SID_ADDR_CLASS];
     case GDDAddrSendRemote:
       NSAssert(NO, @"本地协议，不允许发送远程协议");
       return nil;

@@ -22,6 +22,7 @@ typedef enum {
 
 @interface GDDAddr (ios)
 +(NSString *)SWITCH_DEVICE:(GDDAddressStyle)style;
++(NSString *)SWITCH_CLASS:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (GDDEquipmend)

@@ -20,6 +20,7 @@
 #import "GDDMainViewController_ipad.h"
 #import "GDDEquipmentView.h"
 #import "GDDAddr.h"
+#import "GDDBusProvider.h"
 
 
 @interface GDDMenuRootController ()
@@ -36,6 +37,7 @@
 
 @property (nonatomic, strong) id remotecontrolBlock;
 @property (nonatomic, strong) GDDEquipmentView *equipmentView;
+@property (nonatomic, strong) id<GDCHandlerRegistration> menuChangeHandlerRegistration;
 @end
 
 @implementation GDDMenuRootController
@@ -108,7 +110,25 @@
                            classViewController,GDDConfigPlist(@"lesson"),
                            faviconsViewController,GDDConfigPlist(@"favorites"),
                            offlineFilesViewController,GDDConfigPlist(@"offlinedoc"),nil];
+  
+  //注册监听 外部控制跳转课程/收藏/遥控器
+  self.menuChangeHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr TOPIC:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSString *type = [message body][@"queries"][@"type"];
+    if ([type isEqualToString:@"和谐"] ||
+        [type isEqualToString:@"托班"] ||
+        [type isEqualToString:@"示范课"] ||
+        [type isEqualToString:@"入学准备"] ||
+        [type isEqualToString:@"智能开发"] ||
+        [type isEqualToString:@"电子书"])
+    {
+      [weakSelf transitionChildViewControllerByIndex:0];
+      [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:[message body]];
+    }
+    
+  }];
+  
 }
+
 -(void)transitionChildViewControllerByIndex:(NSInteger)index{
   if (self.currentViewController == [self.childViewController objectAtIndex:index]) return;
   [GDDRemoteControlDelegate.stackController popViewControllerAnimated:YES];
@@ -162,6 +182,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   [self transitionChildViewControllerByIndex:indexPath.row];
-  
+  switch (indexPath.row) {
+    case 0:
+      [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:nil];
+      break;
+      
+    default:
+      break;
+  }
 }
 @end
