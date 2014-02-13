@@ -21,7 +21,6 @@
 @property (nonatomic, strong) NSMutableArray *pathList;
 @property (nonatomic, strong) NSMutableDictionary *selectedDic;
 
-@property (nonatomic, strong) id<GDCHandlerRegistration> localOpenHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> equipmendIDHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> swichClassHandlerRegistration;
 @end
@@ -54,10 +53,6 @@
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   __weak GDDHeXieViewController *weakSelf = self;
-  self.localOpenHandlerRegistration = [self.bus registerHandler:[GDCBus LOCAL_ON_OPEN] handler:^(id<GDCMessage> message) {
-    //网络恢复和良好 解除模态
-    NSLog(@"网络恢复和良好 解除模态");
-  }];
   self.equipmendIDHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_DEVICE:GDDAddrReceive] handler:^(NSDictionary *message){
     
   }];
@@ -71,8 +66,6 @@
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  
-  [self.localOpenHandlerRegistration unregisterHandler];
   [self.equipmendIDHandlerRegistration unregisterHandler];
   [self.swichClassHandlerRegistration unregisterHandler];
 }

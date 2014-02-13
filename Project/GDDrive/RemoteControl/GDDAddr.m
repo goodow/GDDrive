@@ -12,9 +12,19 @@
 static NSString *const SID = @"huang.";
 static NSString *const SID_ADDR = @"@drive.control.switch";
 static NSString *const SID_ADDR_CLASS = @"@drive.control.class";
+static NSString *const SID_ADDR_SETTINGS_WIFI = @"@drive.control.settings.wifi";
+static NSString *const SID_ADDR_SETTINGS_RESOLUTION = @"@drive.control.settings.resolution";
+static NSString *const SID_ADDR_SETTINGS_SCREEN_OFFSET = @"@drive.control.settings.screenOffset";
+static NSString *const SID_ADDR_SETTINGS_ABOOUT_US = @"@drive.control.settings.aboutUs";
+
 
 static NSString *const ADDR_TOPIC = @"drive.topic";
 static NSString *const ADDR_FILE = @"drive.file";
+static NSString *const ADDR_SETTINGS = @"drive.view.settings";
+static NSString *const ADDR_SETTINGS_WIFI = @"drive.view.wifi";
+static NSString *const ADDR_SETTINGS_RESOLUTION = @"drive.view.resolution";
+static NSString *const ADDR_SETTINGS_SCREEN_OFFSET = @"drive.view.screenOffset";
+static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs";
 
 
 
@@ -25,6 +35,22 @@ static NSString *const ADDR_FILE = @"drive.file";
 
 +(NSString *)FILE:(GDDAddressStyle)style{
   return [self address:ADDR_FILE addressStyle:style];
+}
+
++(NSString *)SETTINGS:(GDDAddressStyle)style{
+  return [self address:ADDR_SETTINGS addressStyle:style];
+}
++(NSString *)SETTINGS_WIFI:(GDDAddressStyle)style{
+  return [self address:ADDR_SETTINGS_WIFI addressStyle:style];
+}
++(NSString *)SETTINGS_RESOLUTION:(GDDAddressStyle)style{
+  return [self address:ADDR_SETTINGS_RESOLUTION addressStyle:style];
+}
++(NSString *)SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style{
+  return [self address:ADDR_SETTINGS_SCREEN_OFFSET addressStyle:style];
+}
++(NSString *)SETTINGS_ABOOUT_US:(GDDAddressStyle)style{
+  return [self address:ADDR_SETTINGS_ABOOUT_US addressStyle:style];
 }
 
 #pragma mark - 公共方法
@@ -53,24 +79,35 @@ static NSString *const ADDR_FILE = @"drive.file";
 
 @implementation GDDAddr (ios)
 +(NSString *)SWITCH_DEVICE:(GDDAddressStyle)style{
-  switch (style) {
-    case GDDAddrReceive:
-      return SID_ADDR;
-    case GDDAddrSendLocal:
-      return [NSString stringWithFormat:@"%@%@",[GDCBus LOCAL],SID_ADDR];
-    case GDDAddrSendRemote:
-      NSAssert(NO, @"本地协议，不允许发送远程协议");
-      return nil;
-    default:
-      break;
-  }
+  return [GDDAddr SWITCH_ADDR:SID_ADDR GDDAddressStyle:style];
 }
 +(NSString *)SWITCH_CLASS:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_CLASS GDDAddressStyle:style];
+}
++(NSString *)SWITCH_SETTINGS_WIFI:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_WIFI GDDAddressStyle:style];
+}
++(NSString *)SWITCH_SETTINGS_RESOLUTION:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_RESOLUTION GDDAddressStyle:style];
+}
++(NSString *)SWITCH_SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_SCREEN_OFFSET GDDAddressStyle:style];
+}
++(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_ABOOUT_US GDDAddressStyle:style];
+}
+
+#pragma mark - 公共方法 (ios)
+/*SWITCH_ADDR       转发地址
+ *GDDAddressStyle   设置为接收者还是发送者
+ *return            新可使用地址
+ */
++(NSString *)SWITCH_ADDR:(NSString*)addr GDDAddressStyle:(GDDAddressStyle)style{
   switch (style) {
     case GDDAddrReceive:
-      return SID_ADDR_CLASS;
+      return addr;
     case GDDAddrSendLocal:
-      return [NSString stringWithFormat:@"%@%@",[GDCBus LOCAL],SID_ADDR_CLASS];
+      return [NSString stringWithFormat:@"%@%@",[GDCBus LOCAL],addr];
     case GDDAddrSendRemote:
       NSAssert(NO, @"本地协议，不允许发送远程协议");
       return nil;
@@ -78,9 +115,7 @@ static NSString *const ADDR_FILE = @"drive.file";
       break;
   }
 }
-
 @end
-
 
 @implementation GDDAddr (GDDEquipmend)
 static NSString *EQUIPMENT_ID;

@@ -18,11 +18,20 @@ typedef enum {
 
 +(NSString *)TOPIC:(GDDAddressStyle)style;
 +(NSString *)FILE:(GDDAddressStyle)style;
++(NSString *)SETTINGS:(GDDAddressStyle)style;
++(NSString *)SETTINGS_WIFI:(GDDAddressStyle)style;
++(NSString *)SETTINGS_RESOLUTION:(GDDAddressStyle)style;
++(NSString *)SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style;
++(NSString *)SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (ios)
 +(NSString *)SWITCH_DEVICE:(GDDAddressStyle)style;
 +(NSString *)SWITCH_CLASS:(GDDAddressStyle)style;
++(NSString *)SWITCH_SETTINGS_WIFI:(GDDAddressStyle)style;
++(NSString *)SWITCH_SETTINGS_RESOLUTION:(GDDAddressStyle)style;
++(NSString *)SWITCH_SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style;
++(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (GDDEquipmend)

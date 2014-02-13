@@ -21,23 +21,29 @@
 #import "GDDEquipmentView.h"
 #import "GDDAddr.h"
 #import "GDDBusProvider.h"
+#import "GDDSideViewController.h"
 
 
 @interface GDDMenuRootController ()
 @property (nonatomic, weak) IBOutlet UITableView *menuTableView;
 @property (nonatomic, strong) UIViewController *currentViewController;
-@property (nonatomic, strong) id <GDRealtimeProtocol> realtimeProtocol;
 
 @property (nonatomic, strong) UINavigationController *classNavigationController;
 @property (nonatomic, strong) UINavigationController *faviconsNavigationController;
 @property (nonatomic, strong) UINavigationController *offlineNavigationController;
 @property (nonatomic, strong) UINavigationController *descriptionMessageNavigationController;
+@property (nonatomic, strong) UINavigationController *sideNavigationController;
 @property (nonatomic, strong) NSMutableArray *childViewController;
 @property (nonatomic, strong) GDDMenuRootModel *menuRootModel;
 
 @property (nonatomic, strong) id remotecontrolBlock;
 @property (nonatomic, strong) GDDEquipmentView *equipmentView;
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuChangeHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsWifiHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsResolutionHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsScreenOffsetHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsAboutUsHandlerRegistration;
 @end
 
 @implementation GDDMenuRootController
@@ -68,8 +74,8 @@
                                }];
   }];
   self.menuTableView.tableHeaderView = self.equipmentView;
-  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png"]
-                                                       labels:@[@"课程", @"收藏", @"遥控器"]];
+  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png", @"offline_files_icon.png"]
+                                                       labels:@[@"课程", @"收藏", @"遥控器" ,@"设置"]];
   
   if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
     [self prefersStatusBarHidden];
@@ -102,15 +108,11 @@
   self.offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
   [self.childViewController addObject:self.offlineNavigationController];
   
-  __weak GDDMenuRootController *weakSelf = self;
-  self.realtimeProtocol = [[GDDRealtimeDataToViewController alloc]
-                           initWithTransitionFromChildViewControllerToViewControllerBlock:^(NSInteger i) {
-                             [weakSelf transitionChildViewControllerByIndex:i];
-                           } ObjectsAndKeys:
-                           classViewController,GDDConfigPlist(@"lesson"),
-                           faviconsViewController,GDDConfigPlist(@"favorites"),
-                           offlineFilesViewController,GDDConfigPlist(@"offlinedoc"),nil];
+  GDDSideViewController *sideViewController = [[GDDSideViewController alloc]initWithNibName:@"GDDSideViewController" bundle:nil];
+  self.sideNavigationController = [[UINavigationController alloc]initWithRootViewController:sideViewController];
+  [self.childViewController addObject:self.sideNavigationController];
   
+  __weak GDDMenuRootController *weakSelf = self;
   //注册监听 外部控制跳转课程/收藏/遥控器
   self.menuChangeHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr TOPIC:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     NSString *type = [message body][@"queries"][@"type"];
@@ -126,6 +128,36 @@
     }
     
   }];
+  //注册监听 外部控制设置界面跳转
+  self.menuSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"注册监听 外部控制设置界面跳转");
+    [weakSelf transitionChildViewControllerByIndex:3];
+  }];
+  //注册监听 外部控制设置界面-wifi跳转
+  self.menuSettingsWifiHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_WIFI:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"注册监听 外部控制设置界面-wifi跳转");
+    [weakSelf transitionChildViewControllerByIndex:3];
+    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_WIFI:GDDAddrSendLocal] message:nil];
+  }];
+  //注册监听 外部控制设置界面-分辨率跳转
+  self.menuSettingsResolutionHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_RESOLUTION:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"注册监听 外部控制设置界面-分辨率跳转");
+    [weakSelf transitionChildViewControllerByIndex:3];
+    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_RESOLUTION:GDDAddrSendLocal] message:nil];
+
+  }];
+  //注册监听 外部控制设置界面-屏幕偏移跳转
+  self.menuSettingsScreenOffsetHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_SCREEN_OFFSET:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"注册监听 外部控制设置界面-屏幕偏移跳转");
+    [weakSelf transitionChildViewControllerByIndex:3];
+    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_SCREEN_OFFSET:GDDAddrSendLocal] message:nil];
+  }];
+  //注册监听 外部控制设置界面-关于我们跳转
+  self.menuSettingsAboutUsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_ABOOUT_US:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"注册监听 外部控制设置界面-关于我们跳转");
+    [weakSelf transitionChildViewControllerByIndex:3];
+    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_ABOOUT_US:GDDAddrSendLocal] message:nil];
+  }];
   
 }
 
@@ -138,9 +170,7 @@
   NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
   [self.menuTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
--(void)transitionChildViewControllerAndIntoRootPathByKey:(NSString *)key{
-  
-}
+
 #pragma mark -tableView dataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -186,9 +216,9 @@
     case 0:
       [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:nil];
       break;
-      
     default:
       break;
   }
 }
+
 @end
