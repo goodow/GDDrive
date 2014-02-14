@@ -1,5 +1,5 @@
 //
-//  GDDSideViewController.h
+//  GDDSettingsViewController.h
 //  GDDrive
 //
 //  Created by 大黄 on 14-2-12.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDDSideViewController : UIViewController
+@interface GDDSettingsViewController : UIViewController
 
 @end

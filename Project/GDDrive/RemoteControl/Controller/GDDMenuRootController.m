@@ -21,18 +21,12 @@
 #import "GDDEquipmentView.h"
 #import "GDDAddr.h"
 #import "GDDBusProvider.h"
-#import "GDDSideViewController.h"
+#import "GDDSettingsViewController.h"
 
 
 @interface GDDMenuRootController ()
 @property (nonatomic, weak) IBOutlet UITableView *menuTableView;
 @property (nonatomic, strong) UIViewController *currentViewController;
-
-@property (nonatomic, strong) UINavigationController *classNavigationController;
-@property (nonatomic, strong) UINavigationController *faviconsNavigationController;
-@property (nonatomic, strong) UINavigationController *offlineNavigationController;
-@property (nonatomic, strong) UINavigationController *descriptionMessageNavigationController;
-@property (nonatomic, strong) UINavigationController *sideNavigationController;
 @property (nonatomic, strong) NSMutableArray *childViewController;
 @property (nonatomic, strong) GDDMenuRootModel *menuRootModel;
 
@@ -97,20 +91,20 @@
   self.childViewController = [NSMutableArray array];
   
   GDDHeXieViewController *classViewController = [[GDDHeXieViewController alloc] initWithNibName:@"GDDHeXieViewController" bundle:nil];
-  self.classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
-  [self.childViewController addObject:self.classNavigationController];
+  UINavigationController *classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
+  [self.childViewController addObject:classNavigationController];
   
   GDDMainViewController_ipad *faviconsViewController=[[GDDFaviconsViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
-  self.faviconsNavigationController = [[UINavigationController alloc]initWithRootViewController:faviconsViewController];
-  [self.childViewController addObject:self.faviconsNavigationController];
+  UINavigationController *faviconsNavigationController = [[UINavigationController alloc]initWithRootViewController:faviconsViewController];
+  [self.childViewController addObject:faviconsNavigationController];
   
   GDDMainViewController_ipad *offlineFilesViewController = [[GDDOfflineFilesViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
-  self.offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
-  [self.childViewController addObject:self.offlineNavigationController];
+  UINavigationController *offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
+  [self.childViewController addObject:offlineNavigationController];
   
-  GDDSideViewController *sideViewController = [[GDDSideViewController alloc]initWithNibName:@"GDDSideViewController" bundle:nil];
-  self.sideNavigationController = [[UINavigationController alloc]initWithRootViewController:sideViewController];
-  [self.childViewController addObject:self.sideNavigationController];
+  GDDSettingsViewController *settingsViewController = [[GDDSettingsViewController alloc]initWithNibName:@"GDDSettingsViewController" bundle:nil];
+  UINavigationController *settingsNavigationController = [[UINavigationController alloc]initWithRootViewController:settingsViewController];
+  [self.childViewController addObject:settingsNavigationController];
   
   __weak GDDMenuRootController *weakSelf = self;
   //注册监听 外部控制跳转课程/收藏/遥控器
@@ -158,7 +152,6 @@
     [weakSelf transitionChildViewControllerByIndex:3];
     [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_ABOOUT_US:GDDAddrSendLocal] message:nil];
   }];
-  
 }
 
 -(void)transitionChildViewControllerByIndex:(NSInteger)index{

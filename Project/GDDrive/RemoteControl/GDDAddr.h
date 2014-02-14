@@ -23,6 +23,8 @@ typedef enum {
 +(NSString *)SETTINGS_RESOLUTION:(GDDAddressStyle)style;
 +(NSString *)SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style;
 +(NSString *)SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
++(NSString *)SETTINGS_LOCATION:(GDDAddressStyle)style;
++(NSString *)SETTINGS_INFORMATION:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (ios)
@@ -32,6 +34,8 @@ typedef enum {
 +(NSString *)SWITCH_SETTINGS_RESOLUTION:(GDDAddressStyle)style;
 +(NSString *)SWITCH_SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style;
 +(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
++(NSString *)SWITCH_SETTINGS_LOCATION:(GDDAddressStyle)style;
++(NSString *)SWITCH_SETTINGS_INFORMATION:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (GDDEquipmend)

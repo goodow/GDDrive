@@ -16,15 +16,19 @@ static NSString *const SID_ADDR_SETTINGS_WIFI = @"@drive.control.settings.wifi";
 static NSString *const SID_ADDR_SETTINGS_RESOLUTION = @"@drive.control.settings.resolution";
 static NSString *const SID_ADDR_SETTINGS_SCREEN_OFFSET = @"@drive.control.settings.screenOffset";
 static NSString *const SID_ADDR_SETTINGS_ABOOUT_US = @"@drive.control.settings.aboutUs";
+static NSString *const SID_ADDR_SETTINGS_LOCATION = @"@drive.control.settings.location";
+static NSString *const SID_ADDR_SETTINGS_INFORMATION = @"@drive.control.settings.information";
 
 
 static NSString *const ADDR_TOPIC = @"drive.topic";
 static NSString *const ADDR_FILE = @"drive.file";
-static NSString *const ADDR_SETTINGS = @"drive.view.settings";
-static NSString *const ADDR_SETTINGS_WIFI = @"drive.view.wifi";
-static NSString *const ADDR_SETTINGS_RESOLUTION = @"drive.view.resolution";
-static NSString *const ADDR_SETTINGS_SCREEN_OFFSET = @"drive.view.screenOffset";
-static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs";
+static NSString *const ADDR_SETTINGS = @"drive.view.settings"; //设置界面
+static NSString *const ADDR_SETTINGS_WIFI = @"drive.view.wifi"; //设置WIFI
+static NSString *const ADDR_SETTINGS_RESOLUTION = @"drive.view.resolution"; //分辨率输出
+static NSString *const ADDR_SETTINGS_SCREEN_OFFSET = @"drive.view.screenOffset"; //屏幕偏移
+static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs"; //关于我们
+static NSString *const ADDR_SETTINGS_LOCATION = @"drive.settings.location"; //请求设备的位置信息
+static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"; //请求设备的信息
 
 
 
@@ -51,6 +55,12 @@ static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs";
 }
 +(NSString *)SETTINGS_ABOOUT_US:(GDDAddressStyle)style{
   return [self address:ADDR_SETTINGS_ABOOUT_US addressStyle:style];
+}
++(NSString *)SETTINGS_LOCATION:(GDDAddressStyle)style{
+  return [self address:ADDR_SETTINGS_LOCATION addressStyle:style];
+}
++(NSString *)SETTINGS_INFORMATION:(GDDAddressStyle)style{
+  return [self address:ADDR_SETTINGS_INFORMATION addressStyle:style];
 }
 
 #pragma mark - 公共方法
@@ -95,6 +105,12 @@ static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs";
 }
 +(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style{
   return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_ABOOUT_US GDDAddressStyle:style];
+}
++(NSString *)SWITCH_SETTINGS_LOCATION:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_LOCATION GDDAddressStyle:style];
+}
++(NSString *)SWITCH_SETTINGS_INFORMATION:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_INFORMATION GDDAddressStyle:style];
 }
 
 #pragma mark - 公共方法 (ios)

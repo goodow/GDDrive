@@ -112,8 +112,12 @@
 		65DDDB6118725FA30064DCBA /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DDDB6018725FA30064DCBA /* MultipeerConnectivity.framework */; };
 		65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */; };
 		65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EA26561833138B00077EF4 /* GDDMenuRootController_ipad.xib */; };
-		65F2781518AB9BA40011C874 /* GDDSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2781318AB9BA40011C874 /* GDDSideViewController.m */; };
-		65F2781618AB9BA40011C874 /* GDDSideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2781418AB9BA40011C874 /* GDDSideViewController.xib */; };
+		65F2781518AB9BA40011C874 /* GDDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2781318AB9BA40011C874 /* GDDSettingsViewController.m */; };
+		65F2781618AB9BA40011C874 /* GDDSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2781418AB9BA40011C874 /* GDDSettingsViewController.xib */; };
+		65F2782718ACF1350011C874 /* GDDLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2782518ACF1350011C874 /* GDDLocationTableViewController.m */; };
+		65F2782818ACF1350011C874 /* GDDLocationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2782618ACF1350011C874 /* GDDLocationTableViewController.xib */; };
+		65F2782C18AD01580011C874 /* GDDInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2782A18AD01580011C874 /* GDDInformationTableViewController.m */; };
+		65F2782D18AD01580011C874 /* GDDInformationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2782B18AD01580011C874 /* GDDInformationTableViewController.xib */; };
 		773E070449474D719289E8E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763A91962AF40D8ABD7D5A7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -288,9 +292,15 @@
 		65EA26541833138B00077EF4 /* GDDMenuRootController_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootController_ipad.h; sourceTree = "<group>"; };
 		65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootController_ipad.m; sourceTree = "<group>"; };
 		65EA26561833138B00077EF4 /* GDDMenuRootController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootController_ipad.xib; sourceTree = "<group>"; };
-		65F2781218AB9BA40011C874 /* GDDSideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDSideViewController.h; sourceTree = "<group>"; };
-		65F2781318AB9BA40011C874 /* GDDSideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDSideViewController.m; sourceTree = "<group>"; };
-		65F2781418AB9BA40011C874 /* GDDSideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDSideViewController.xib; sourceTree = "<group>"; };
+		65F2781218AB9BA40011C874 /* GDDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDSettingsViewController.h; sourceTree = "<group>"; };
+		65F2781318AB9BA40011C874 /* GDDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDSettingsViewController.m; sourceTree = "<group>"; };
+		65F2781418AB9BA40011C874 /* GDDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDSettingsViewController.xib; sourceTree = "<group>"; };
+		65F2782418ACF1350011C874 /* GDDLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDLocationTableViewController.h; sourceTree = "<group>"; };
+		65F2782518ACF1350011C874 /* GDDLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDLocationTableViewController.m; sourceTree = "<group>"; };
+		65F2782618ACF1350011C874 /* GDDLocationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDLocationTableViewController.xib; sourceTree = "<group>"; };
+		65F2782918AD01580011C874 /* GDDInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDInformationTableViewController.h; sourceTree = "<group>"; };
+		65F2782A18AD01580011C874 /* GDDInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDInformationTableViewController.m; sourceTree = "<group>"; };
+		65F2782B18AD01580011C874 /* GDDInformationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDInformationTableViewController.xib; sourceTree = "<group>"; };
 		8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -645,9 +655,15 @@
 				65B32F63187D470B0028026C /* GDDHeXieViewController.h */,
 				65B32F64187D470B0028026C /* GDDHeXieViewController.m */,
 				65B32F65187D470B0028026C /* GDDHeXieViewController.xib */,
-				65F2781218AB9BA40011C874 /* GDDSideViewController.h */,
-				65F2781318AB9BA40011C874 /* GDDSideViewController.m */,
-				65F2781418AB9BA40011C874 /* GDDSideViewController.xib */,
+				65F2781218AB9BA40011C874 /* GDDSettingsViewController.h */,
+				65F2781318AB9BA40011C874 /* GDDSettingsViewController.m */,
+				65F2781418AB9BA40011C874 /* GDDSettingsViewController.xib */,
+				65F2782418ACF1350011C874 /* GDDLocationTableViewController.h */,
+				65F2782518ACF1350011C874 /* GDDLocationTableViewController.m */,
+				65F2782618ACF1350011C874 /* GDDLocationTableViewController.xib */,
+				65F2782918AD01580011C874 /* GDDInformationTableViewController.h */,
+				65F2782A18AD01580011C874 /* GDDInformationTableViewController.m */,
+				65F2782B18AD01580011C874 /* GDDInformationTableViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -818,7 +834,7 @@
 				65571F3A18483DD100A7C1B7 /* Sign_bg.jpg in Resources */,
 				655DAB94183E1C0F00703FA4 /* default_type_swf.png in Resources */,
 				655DAB93183E1C0F00703FA4 /* default_type_png.png in Resources */,
-				65F2781618AB9BA40011C874 /* GDDSideViewController.xib in Resources */,
+				65F2781618AB9BA40011C874 /* GDDSettingsViewController.xib in Resources */,
 				65571F11184599A200A7C1B7 /* GDDPlayPNGAndJPGViewController_ipad.xib in Resources */,
 				655DAB2A183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib in Resources */,
 				655DAB9C183E1C0F00703FA4 /* icon_type_swf.png in Resources */,
@@ -839,6 +855,7 @@
 				65571F51184C323300A7C1B7 /* GDDLoginView_ipad.xib in Resources */,
 				65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */,
 				65571F1B1845D8BF00A7C1B7 /* GDDPlayMovieViewController_ipad.xib in Resources */,
+				65F2782818ACF1350011C874 /* GDDLocationTableViewController.xib in Resources */,
 				65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */,
 				65571F47184C2AA900A7C1B7 /* seting.png in Resources */,
 				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
@@ -852,6 +869,7 @@
 				655DAB8E183E1C0F00703FA4 /* default_type_folder.png in Resources */,
 				655DAB95183E1C0F00703FA4 /* icon_type_class.png in Resources */,
 				655DAB92183E1C0F00703FA4 /* default_type_pdf.png in Resources */,
+				65F2782D18AD01580011C874 /* GDDInformationTableViewController.xib in Resources */,
 				655DAB91183E1C0F00703FA4 /* default_type_mp4.png in Resources */,
 				6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */,
 				6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */,
@@ -927,9 +945,11 @@
 				65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */,
 				65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */,
 				65571F1A1845D8BF00A7C1B7 /* GDDPlayMovieViewController_ipad.m in Sources */,
-				65F2781518AB9BA40011C874 /* GDDSideViewController.m in Sources */,
+				65F2781518AB9BA40011C874 /* GDDSettingsViewController.m in Sources */,
 				65571F57184C3EE800A7C1B7 /* GDDLoginMessageModel.m in Sources */,
 				65B32F68187D470B0028026C /* GDDHeXieViewController.m in Sources */,
+				65F2782718ACF1350011C874 /* GDDLocationTableViewController.m in Sources */,
+				65F2782C18AD01580011C874 /* GDDInformationTableViewController.m in Sources */,
 				65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 				65CA0D2818598B7B005249BB /* GDDOfflineFilesViewController_iPad.m in Sources */,
