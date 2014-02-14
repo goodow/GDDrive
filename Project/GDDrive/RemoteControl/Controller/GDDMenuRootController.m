@@ -23,6 +23,12 @@
 #import "GDDBusProvider.h"
 #import "GDDSettingsViewController.h"
 
+typedef enum {
+  GDDMENU_PAGE_LESSON = 0,
+  GDDMENU_PAGE_COLLECT = 1,
+  GDDMENU_PAGE_REMOTE_CONTROL = 2,
+  GDDMENU_PAGE_SETTINGS = 3
+} GDDMENU_PAGE_TYPE;
 
 @interface GDDMenuRootController ()
 @property (nonatomic, weak) IBOutlet UITableView *menuTableView;
@@ -34,10 +40,6 @@
 @property (nonatomic, strong) GDDEquipmentView *equipmentView;
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuChangeHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsWifiHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsResolutionHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsScreenOffsetHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsAboutUsHandlerRegistration;
 @end
 
 @implementation GDDMenuRootController
@@ -117,7 +119,7 @@
         [type isEqualToString:@"智能开发"] ||
         [type isEqualToString:@"电子书"])
     {
-      [weakSelf transitionChildViewControllerByIndex:0];
+      [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_LESSON];
       [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:[message body]];
     }
     
@@ -125,32 +127,8 @@
   //注册监听 外部控制设置界面跳转
   self.menuSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     NSLog(@"注册监听 外部控制设置界面跳转");
-    [weakSelf transitionChildViewControllerByIndex:3];
-  }];
-  //注册监听 外部控制设置界面-wifi跳转
-  self.menuSettingsWifiHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_WIFI:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    NSLog(@"注册监听 外部控制设置界面-wifi跳转");
-    [weakSelf transitionChildViewControllerByIndex:3];
-    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_WIFI:GDDAddrSendLocal] message:nil];
-  }];
-  //注册监听 外部控制设置界面-分辨率跳转
-  self.menuSettingsResolutionHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_RESOLUTION:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    NSLog(@"注册监听 外部控制设置界面-分辨率跳转");
-    [weakSelf transitionChildViewControllerByIndex:3];
-    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_RESOLUTION:GDDAddrSendLocal] message:nil];
-
-  }];
-  //注册监听 外部控制设置界面-屏幕偏移跳转
-  self.menuSettingsScreenOffsetHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_SCREEN_OFFSET:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    NSLog(@"注册监听 外部控制设置界面-屏幕偏移跳转");
-    [weakSelf transitionChildViewControllerByIndex:3];
-    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_SCREEN_OFFSET:GDDAddrSendLocal] message:nil];
-  }];
-  //注册监听 外部控制设置界面-关于我们跳转
-  self.menuSettingsAboutUsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_ABOOUT_US:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    NSLog(@"注册监听 外部控制设置界面-关于我们跳转");
-    [weakSelf transitionChildViewControllerByIndex:3];
-    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS_ABOOUT_US:GDDAddrSendLocal] message:nil];
+    [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_SETTINGS];
+    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS:GDDAddrSendLocal] message:nil];
   }];
 }
 
@@ -206,8 +184,11 @@
 {
   [self transitionChildViewControllerByIndex:indexPath.row];
   switch (indexPath.row) {
-    case 0:
+    case GDDMENU_PAGE_LESSON:
       [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:nil];
+      break;
+    case GDDMENU_PAGE_SETTINGS:
+      [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS:GDDAddrSendLocal] message:nil];
       break;
     default:
       break;

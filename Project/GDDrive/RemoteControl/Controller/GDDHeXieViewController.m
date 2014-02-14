@@ -85,7 +85,6 @@
   [self.bus send:[GDDAddr FILE:GDDAddrSendRemote] message:@{@"path":path} replyHandler:^(id<GDCMessage> message) {
     NSDictionary *dic = [message body];
     NSArray *arr = dic[@"folders"];
-    
     if ([arr count]>0) {
       NSString *str = arr[0];
       NSString * regex = @"(^[0-9]{0,4}$)";
@@ -172,7 +171,7 @@
   NSString *selectTag = self.queryConditionList[component][row];
   self.pathList[component] = selectTag;
 
-  for (int i = [self.queryConditionList count] - 1; i > component ; i--) {
+  for (NSInteger i = [self.queryConditionList count] - 1; i > component ; i--) {
     [self.queryConditionList removeObjectAtIndex:i];
     [self.pathList removeObjectAtIndex:i];
   }
@@ -184,7 +183,7 @@
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
   if ([self.queryConditionList count] > component) {
-    return [self.queryConditionList[component] count];
+    return [(NSArray *)self.queryConditionList[component] count];
   }
   return 0;
 }
@@ -202,14 +201,14 @@
   if (!self.messageDic[@"activities"] || self.messageDic[@"activities"] == [NSNull null]) {
     return 0;
   }
-  return [self.messageDic[@"activities"] count];
+  return [(NSArray *)self.messageDic[@"activities"] count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   GDDFolderCell *cell = (GDDFolderCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"GDDFolderCell" forIndexPath:indexPath];
   cell.titleLabel.text = @"";
-  if ([self.messageDic[@"activities"] count] > 0) {
+  if ([(NSArray *)self.messageDic[@"activities"] count] > 0) {
     cell.titleLabel.text = self.messageDic[@"activities"][indexPath.row][@"title"];
   }
   return cell;

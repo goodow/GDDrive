@@ -30,9 +30,7 @@ typedef enum {
 @interface GDDAddr (ios)
 +(NSString *)SWITCH_DEVICE:(GDDAddressStyle)style;
 +(NSString *)SWITCH_CLASS:(GDDAddressStyle)style;
-+(NSString *)SWITCH_SETTINGS_WIFI:(GDDAddressStyle)style;
-+(NSString *)SWITCH_SETTINGS_RESOLUTION:(GDDAddressStyle)style;
-+(NSString *)SWITCH_SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style;
++(NSString *)SWITCH_SETTINGS:(GDDAddressStyle)style;
 +(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
 +(NSString *)SWITCH_SETTINGS_LOCATION:(GDDAddressStyle)style;
 +(NSString *)SWITCH_SETTINGS_INFORMATION:(GDDAddressStyle)style;

@@ -12,9 +12,7 @@
 static NSString *const SID = @"huang.";
 static NSString *const SID_ADDR = @"@drive.control.switch";
 static NSString *const SID_ADDR_CLASS = @"@drive.control.class";
-static NSString *const SID_ADDR_SETTINGS_WIFI = @"@drive.control.settings.wifi";
-static NSString *const SID_ADDR_SETTINGS_RESOLUTION = @"@drive.control.settings.resolution";
-static NSString *const SID_ADDR_SETTINGS_SCREEN_OFFSET = @"@drive.control.settings.screenOffset";
+static NSString *const SID_ADDR_SETTINGS = @"@drive.control.settings";
 static NSString *const SID_ADDR_SETTINGS_ABOOUT_US = @"@drive.control.settings.aboutUs";
 static NSString *const SID_ADDR_SETTINGS_LOCATION = @"@drive.control.settings.location";
 static NSString *const SID_ADDR_SETTINGS_INFORMATION = @"@drive.control.settings.information";
@@ -40,7 +38,6 @@ static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"
 +(NSString *)FILE:(GDDAddressStyle)style{
   return [self address:ADDR_FILE addressStyle:style];
 }
-
 +(NSString *)SETTINGS:(GDDAddressStyle)style{
   return [self address:ADDR_SETTINGS addressStyle:style];
 }
@@ -94,14 +91,8 @@ static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"
 +(NSString *)SWITCH_CLASS:(GDDAddressStyle)style{
   return [GDDAddr SWITCH_ADDR:SID_ADDR_CLASS GDDAddressStyle:style];
 }
-+(NSString *)SWITCH_SETTINGS_WIFI:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_WIFI GDDAddressStyle:style];
-}
-+(NSString *)SWITCH_SETTINGS_RESOLUTION:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_RESOLUTION GDDAddressStyle:style];
-}
-+(NSString *)SWITCH_SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_SCREEN_OFFSET GDDAddressStyle:style];
++(NSString *)SWITCH_SETTINGS:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS GDDAddressStyle:style];
 }
 +(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style{
   return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_ABOOUT_US GDDAddressStyle:style];

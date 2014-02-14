@@ -18,12 +18,8 @@
 @property (nonatomic, strong) GDDLocationTableViewController *locationTableViewController;
 @property (nonatomic, strong) GDDInformationTableViewController *informationTableViewController;
 @property (nonatomic, strong) id <GDCBus> bus;
-@property (nonatomic, strong) id<GDCHandlerRegistration> swichSettingsWifiHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> swichSettingsResolutionHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> swichSettingsScreenOffsetHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> swichSettingsAboutUsHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> swichSettingsLocationHandlerRegistration;
-@property (nonatomic, strong) id<GDCHandlerRegistration> swichSettingsInformationHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> switchSettingsHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> switchSettingsAboutUsHandlerRegistration;
 @end
 
 @implementation GDDSettingsViewController
@@ -54,33 +50,18 @@
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   __weak GDDSettingsViewController *weakSelf = self;
-  self.swichSettingsWifiHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SWITCH_SETTINGS_WIFI:GDDAddrReceive] handler:^(id<GDCMessage> message){
-    [weakSelf settingsWifiAction:nil];
+  self.switchSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SWITCH_SETTINGS:GDDAddrReceive] handler:^(id<GDCMessage> message){
+    [[GDDBusProvider BUS] send:[GDDAddr SETTINGS:GDDAddrSendRemote] message:@{} replyHandler:nil];
   }];
-  self.swichSettingsResolutionHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_SETTINGS_RESOLUTION:GDDAddrReceive] handler:^(id <GDCMessage> message){
-    [weakSelf resolutionAction:nil];
-  }];
-  self.swichSettingsScreenOffsetHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_SETTINGS_SCREEN_OFFSET:GDDAddrReceive] handler:^(id <GDCMessage> message){
-    [weakSelf screenOffSetAction:nil];
-  }];
-  self.swichSettingsAboutUsHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_SETTINGS_ABOOUT_US:GDDAddrReceive] handler:^(id <GDCMessage> message){
+  self.switchSettingsAboutUsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_ABOOUT_US:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"注册监听 外部控制设置界面-关于我们跳转");
     [weakSelf aboutUsAction:nil];
-  }];
-  self.swichSettingsLocationHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_SETTINGS_LOCATION:GDDAddrReceive] handler:^(id <GDCMessage> message){
-    [weakSelf locationAction:nil];
-  }];
-  self.swichSettingsInformationHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_SETTINGS_INFORMATION:GDDAddrReceive] handler:^(id <GDCMessage> message){
-  [weakSelf informationAction:nil];
   }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  [self.swichSettingsWifiHandlerRegistration unregisterHandler];
-  [self.swichSettingsResolutionHandlerRegistration unregisterHandler];
-  [self.swichSettingsScreenOffsetHandlerRegistration unregisterHandler];
-  [self.swichSettingsAboutUsHandlerRegistration unregisterHandler];
-  [self.swichSettingsLocationHandlerRegistration unregisterHandler];
-  [self.swichSettingsInformationHandlerRegistration unregisterHandler];
+  [self.switchSettingsHandlerRegistration unregisterHandler];
+  [self.switchSettingsAboutUsHandlerRegistration unregisterHandler];
 }
 - (void)didReceiveMemoryWarning
 {
