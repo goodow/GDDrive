@@ -25,6 +25,7 @@ typedef enum {
 +(NSString *)SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
 +(NSString *)SETTINGS_LOCATION:(GDDAddressStyle)style;
 +(NSString *)SETTINGS_INFORMATION:(GDDAddressStyle)style;
++(NSString *)INPUT_SIMULATE_KEYBOARD:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (ios)

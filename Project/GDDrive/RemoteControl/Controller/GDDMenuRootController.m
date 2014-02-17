@@ -10,6 +10,7 @@
 #import "GDDHeXieViewController.h"
 #import "GDDFaviconsViewController_iPad.h"
 #import "GDDOfflineFilesViewController_iPad.h"
+#import "GDDRemoteControlViewController.h"
 #import "GDDRealtimeDataToViewController.h"
 #import "PSStackedView.h"
 #import "AppDelegate.h"
@@ -100,9 +101,16 @@ typedef enum {
   UINavigationController *faviconsNavigationController = [[UINavigationController alloc]initWithRootViewController:faviconsViewController];
   [self.childViewController addObject:faviconsNavigationController];
   
+  /**
+   * 离线下载 ViewController 这里暂时屏蔽，之后还会使用
   GDDMainViewController_ipad *offlineFilesViewController = [[GDDOfflineFilesViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
-  UINavigationController *offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
-  [self.childViewController addObject:offlineNavigationController];
+  self.offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
+  [self.childViewController addObject:self.offlineNavigationController];
+   */
+  
+  GDDRemoteControlViewController *remoteControlViewController = [[GDDRemoteControlViewController alloc]initWithNibName:@"GDDRemoteControlViewController" bundle:nil];
+  UINavigationController *remoteControlNavigationController = [[UINavigationController alloc]initWithRootViewController:remoteControlViewController];
+  [self.childViewController addObject:remoteControlNavigationController];
   
   GDDSettingsViewController *settingsViewController = [[GDDSettingsViewController alloc]initWithNibName:@"GDDSettingsViewController" bundle:nil];
   UINavigationController *settingsNavigationController = [[UINavigationController alloc]initWithRootViewController:settingsViewController];
@@ -133,13 +141,19 @@ typedef enum {
 }
 
 -(void)transitionChildViewControllerByIndex:(NSInteger)index{
-  if (self.currentViewController == [self.childViewController objectAtIndex:index]) return;
-  [GDDRemoteControlDelegate.stackController popViewControllerAnimated:YES];
-  [GDDRemoteControlDelegate.stackController pushViewController:[self.childViewController objectAtIndex:index] fromViewController:nil animated:NO];
-  self.currentViewController = [self.childViewController objectAtIndex:index];
-  
-  NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
-  [self.menuTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+
+  if (index == GDDMENU_PAGE_REMOTE_CONTROL) {
+    [GDDRemoteControlDelegate.stackController popViewControllerAnimated:YES];
+    [GDDRemoteControlDelegate.stackController.rootViewController presentViewController:[self.childViewController objectAtIndex:index] animated:YES completion:nil];
+    self.currentViewController = [self.childViewController objectAtIndex:index];
+  }else{
+    if (self.currentViewController == [self.childViewController objectAtIndex:index]) return;
+    [GDDRemoteControlDelegate.stackController popViewControllerAnimated:YES];
+    [GDDRemoteControlDelegate.stackController pushViewController:[self.childViewController objectAtIndex:index] fromViewController:nil animated:NO];
+    self.currentViewController = [self.childViewController objectAtIndex:index];
+    NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    [self.menuTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+  }
 }
 
 #pragma mark -tableView dataSource
@@ -182,6 +196,10 @@ typedef enum {
 #pragma mark - tableView delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (indexPath.row == GDDMENU_PAGE_REMOTE_CONTROL) {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  }
+
   [self transitionChildViewControllerByIndex:indexPath.row];
   switch (indexPath.row) {
     case GDDMENU_PAGE_LESSON:

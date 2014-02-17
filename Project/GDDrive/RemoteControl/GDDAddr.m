@@ -27,7 +27,7 @@ static NSString *const ADDR_SETTINGS_SCREEN_OFFSET = @"drive.view.screenOffset";
 static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs"; //关于我们
 static NSString *const ADDR_SETTINGS_LOCATION = @"drive.settings.location"; //请求设备的位置信息
 static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"; //请求设备的信息
-
+static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘鼠标信号模拟
 
 
 @implementation GDDAddr
@@ -58,6 +58,9 @@ static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"
 }
 +(NSString *)SETTINGS_INFORMATION:(GDDAddressStyle)style{
   return [self address:ADDR_SETTINGS_INFORMATION addressStyle:style];
+}
++(NSString *)INPUT_SIMULATE_KEYBOARD:(GDDAddressStyle)style{
+  return [self address:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:style];
 }
 
 #pragma mark - 公共方法

@@ -20,13 +20,13 @@ static id<GDCBus> BUS;
   static id <GDCBus> bus;
   static dispatch_once_t pred;
   dispatch_once(&pred, ^{
-    bus = [[GDCWebSocketBusClient alloc] initWithUrl:@"ws://data.goodow.com:8080/eventbus/websocket" options:@{@"forkLocal":@YES}];
+    bus = [[GDCReconnectBusClient alloc] initWithUrl:@"ws://data.goodow.com:8080/eventbus/websocket" options:@{@"forkLocal":@YES}];
   });
   return bus;
 }
 +(void)initialize{
   if (self == [GDDBusProvider class]) {
-    BUS = [[GDCWebSocketBusClient alloc] initWithUrl:@"ws://data.goodow.com:8080/eventbus/websocket" options:@{@"forkLocal":@YES}];
+    BUS = [[GDCReconnectBusClient alloc] initWithUrl:@"ws://data.goodow.com:8080/eventbus/websocket" options:@{@"forkLocal":@YES}];
   }
 }
 
