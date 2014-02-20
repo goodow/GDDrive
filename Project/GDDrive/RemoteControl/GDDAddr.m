@@ -17,7 +17,6 @@ static NSString *const SID_ADDR_SETTINGS_ABOOUT_US = @"@drive.control.settings.a
 static NSString *const SID_ADDR_SETTINGS_LOCATION = @"@drive.control.settings.location";
 static NSString *const SID_ADDR_SETTINGS_INFORMATION = @"@drive.control.settings.information";
 
-
 static NSString *const ADDR_TOPIC = @"drive.topic";
 static NSString *const ADDR_FILE = @"drive.file";
 static NSString *const ADDR_SETTINGS = @"drive.view.settings"; //设置界面
@@ -28,6 +27,7 @@ static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs"; //关于
 static NSString *const ADDR_SETTINGS_LOCATION = @"drive.settings.location"; //请求设备的位置信息
 static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"; //请求设备的信息
 static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘鼠标信号模拟
+static NSString *const ADDR_NOTIFICATION = @"drive.notification"; //信息通知
 
 
 @implementation GDDAddr
@@ -61,6 +61,9 @@ static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘�
 }
 +(NSString *)INPUT_SIMULATE_KEYBOARD:(GDDAddressStyle)style{
   return [self address:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:style];
+}
++(NSString *)NOTIFICATION:(GDDAddressStyle)style{
+  return [self address:ADDR_NOTIFICATION addressStyle:style];
 }
 
 #pragma mark - 公共方法
@@ -106,7 +109,6 @@ static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘�
 +(NSString *)SWITCH_SETTINGS_INFORMATION:(GDDAddressStyle)style{
   return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_INFORMATION GDDAddressStyle:style];
 }
-
 #pragma mark - 公共方法 (ios)
 /*SWITCH_ADDR       转发地址
  *GDDAddressStyle   设置为接收者还是发送者

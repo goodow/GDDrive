@@ -15,6 +15,7 @@
 @interface GDDSettingsViewController ()
 @property (nonatomic, strong) IBOutlet UIView *localTableView;
 @property (nonatomic, strong) IBOutlet UIView *informationTableView;
+@property (nonatomic, strong) IBOutlet UITextField *notificationTextField;
 @property (nonatomic, strong) GDDLocationTableViewController *locationTableViewController;
 @property (nonatomic, strong) GDDInformationTableViewController *informationTableViewController;
 @property (nonatomic, strong) id <GDCBus> bus;
@@ -68,12 +69,16 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
-
+#pragma mark -UITextFeild delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+  [textField resignFirstResponder];
+  return YES;
+}
 #pragma mark -IBAction
 -(IBAction)settingsWifiAction:(id)sender{
   [self.bus send:[GDDAddr SETTINGS_WIFI:GDDAddrSendRemote] message:@{} replyHandler:nil];
 }
-
 -(IBAction)resolutionAction:(id)sender{
   [self.bus send:[GDDAddr SETTINGS_RESOLUTION:GDDAddrSendRemote] message:@{} replyHandler:nil];
 }
@@ -93,5 +98,10 @@
     [self.informationTableViewController bindData:[message body]];
   }];
 }
-
+-(IBAction)notificationAction:(id)sender{
+  [self.notificationTextField resignFirstResponder];
+  if (![self.notificationTextField.text isEqualToString:@""] && self.notificationTextField.text != nil) {
+    [self.bus send:[GDDAddr NOTIFICATION:GDDAddrSendRemote] message:@{@"content":self.notificationTextField.text} replyHandler:nil];
+  }
+}
 @end

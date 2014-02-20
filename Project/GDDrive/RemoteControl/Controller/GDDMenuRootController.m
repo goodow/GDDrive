@@ -23,6 +23,7 @@
 #import "GDDAddr.h"
 #import "GDDBusProvider.h"
 #import "GDDSettingsViewController.h"
+#import "UIAlertView+Blocks.h"
 
 typedef enum {
   GDDMENU_PAGE_LESSON = 0,
@@ -41,6 +42,7 @@ typedef enum {
 @property (nonatomic, strong) GDDEquipmentView *equipmentView;
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuChangeHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> notificationHandlerRegistration;
 @end
 
 @implementation GDDMenuRootController
@@ -137,6 +139,16 @@ typedef enum {
     NSLog(@"注册监听 外部控制设置界面跳转");
     [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_SETTINGS];
     [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS:GDDAddrSendLocal] message:nil];
+  }];
+  //注册监听 信息通知
+  self.notificationHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr NOTIFICATION:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    [UIAlertView showAlertViewWithTitle:@"消息通知"
+                                message:[message body][@"content"]
+                      cancelButtonTitle:@"确定"
+                      otherButtonTitles:nil
+                         alertViewStyle:UIAlertViewStyleDefault
+                              onDismiss:^(UIAlertView *alertView, int buttonIndex) {}
+                               onCancel:^{}];
   }];
 }
 

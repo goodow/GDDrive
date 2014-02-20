@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GDDSettingsViewController : UIViewController
+@interface GDDSettingsViewController : UIViewController <UITextFieldDelegate>
 
 @end
