@@ -16,6 +16,8 @@
 @property (nonatomic, strong) IBOutlet UIView *localTableView;
 @property (nonatomic, strong) IBOutlet UIView *informationTableView;
 @property (nonatomic, strong) IBOutlet UITextField *notificationTextField;
+@property (nonatomic, strong) IBOutlet UILabel *connectivityTypeLable;
+@property (nonatomic, strong) IBOutlet UILabel *connectivityStrengthLable;
 @property (nonatomic, strong) GDDLocationTableViewController *locationTableViewController;
 @property (nonatomic, strong) GDDInformationTableViewController *informationTableViewController;
 @property (nonatomic, strong) id <GDCBus> bus;
@@ -39,7 +41,7 @@
   [super viewDidLoad];
   self.navigationItem.title = @"设置";
   self.bus = [GDDBusProvider BUS];
-
+  
   self.locationTableViewController= [[GDDLocationTableViewController alloc]initWithNibName:@"GDDLocationTableViewController" bundle:nil];
   [self addChildViewController:self.locationTableViewController];
   [self.localTableView addSubview:self.locationTableViewController.tableView];
@@ -103,5 +105,13 @@
   if (![self.notificationTextField.text isEqualToString:@""] && self.notificationTextField.text != nil) {
     [self.bus send:[GDDAddr NOTIFICATION:GDDAddrSendRemote] message:@{@"content":self.notificationTextField.text} replyHandler:nil];
   }
+}
+-(IBAction)connectivityAction:(id)sender{
+  [self.bus send:[GDDAddr SETTINGS_CONNECTIVITY:GDDAddrSendRemote] message:@{@"action":@"get"} replyHandler:^(id<GDCMessage> message) {
+    NSString *type = [message body][@"type"];
+    NSString *strength = [message body][@"strength"];
+    [self.connectivityTypeLable setText:type];
+    [self.connectivityStrengthLable setText:[NSString stringWithFormat:@"%@",strength]];
+  }];
 }
 @end

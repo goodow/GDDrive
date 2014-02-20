@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GDDSettingsViewController">
             <connections>
+                <outlet property="connectivityStrengthLable" destination="0U2-dq-Dc7" id="YC1-2H-1wS"/>
+                <outlet property="connectivityTypeLable" destination="HIi-7A-ddj" id="mKH-JT-fK5"/>
                 <outlet property="informationTableView" destination="Wsz-D2-MfF" id="ett-sG-qiA"/>
                 <outlet property="localTableView" destination="Uzq-J4-HoM" id="zQZ-cb-8Vt"/>
                 <outlet property="notificationTextField" destination="f7d-rg-1aG" id="SsN-uF-SyM"/>
@@ -106,6 +108,41 @@
                         <outlet property="delegate" destination="-1" id="RaT-yn-aqZ"/>
                     </connections>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xx-S6-pm8">
+                    <rect key="frame" x="20" y="722" width="90" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="请求网络信息">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="connectivityAction:" destination="-1" eventType="touchUpInside" id="yhb-LJ-T6g"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TYPE : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGd-3r-CqE">
+                    <rect key="frame" x="23" y="760" width="57" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STRENGTH : " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cha-zc-6FK">
+                    <rect key="frame" x="23" y="789" width="105" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NULL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIi-7A-ddj">
+                    <rect key="frame" x="152" y="760" width="44" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NULL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0U2-dq-Dc7">
+                    <rect key="frame" x="152" y="789" width="44" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
