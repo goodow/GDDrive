@@ -29,6 +29,7 @@ static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"
 static NSString *const ADDR_SETTINGS_CONNECTIVITY = @"drive.connectivity"; //请求设备网络信息
 static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘鼠标信号模拟
 static NSString *const ADDR_NOTIFICATION = @"drive.notification"; //信息通知
+static NSString *const ADDR_HOME = @"drive.view.home"; //首页展示
 
 
 @implementation GDDAddr
@@ -68,6 +69,9 @@ static NSString *const ADDR_NOTIFICATION = @"drive.notification"; //信息通知
 }
 +(NSString *)NOTIFICATION:(GDDAddressStyle)style{
   return [self address:ADDR_NOTIFICATION addressStyle:style];
+}
++(NSString *)HOME:(GDDAddressStyle)style{
+  return [self address:ADDR_HOME addressStyle:style];
 }
 
 #pragma mark - 公共方法

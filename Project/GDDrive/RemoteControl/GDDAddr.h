@@ -28,6 +28,7 @@ typedef enum {
 +(NSString *)SETTINGS_CONNECTIVITY:(GDDAddressStyle)style;
 +(NSString *)INPUT_SIMULATE_KEYBOARD:(GDDAddressStyle)style;
 +(NSString *)NOTIFICATION:(GDDAddressStyle)style;
++(NSString *)HOME:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (ios)

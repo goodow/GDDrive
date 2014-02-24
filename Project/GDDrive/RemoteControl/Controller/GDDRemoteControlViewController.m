@@ -156,6 +156,7 @@ typedef enum {
 }
 -(IBAction)handleHomeAction:(id)sender{
   NSLog(@"遥控器 首页显示");
+  [self.bus send:[GDDAddr HOME:GDDAddrSendRemote] message:@{@"":@""} replyHandler:nil];
 }
 
 @end
