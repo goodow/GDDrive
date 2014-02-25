@@ -7,7 +7,6 @@
 //
 
 #import "GDDMenuRootController.h"
-#import "GDDHeXieViewController.h"
 #import "GDDFaviconsViewController_iPad.h"
 #import "GDDOfflineFilesViewController_iPad.h"
 #import "GDDRemoteControlViewController.h"
@@ -24,6 +23,8 @@
 #import "GDDBusProvider.h"
 #import "GDDSettingsViewController.h"
 #import "UIAlertView+Blocks.h"
+#import "GDDLessonViewController.h"
+#import "GDDLessonModel.h"
 
 typedef enum {
   GDDMENU_PAGE_LESSON = 0,
@@ -95,9 +96,10 @@ typedef enum {
   
   self.childViewController = [NSMutableArray array];
   
-  GDDHeXieViewController *classViewController = [[GDDHeXieViewController alloc] initWithNibName:@"GDDHeXieViewController" bundle:nil];
-  UINavigationController *classNavigationController = [[UINavigationController alloc]initWithRootViewController:classViewController];
-  [self.childViewController addObject:classNavigationController];
+  //课程界面
+  GDDLessonViewController *lessonViewController = [[GDDLessonViewController alloc] initWithNibName:@"GDDLessonViewController" bundle:nil];
+  UINavigationController *lessonNavigationController = [[UINavigationController alloc]initWithRootViewController:lessonViewController];
+  [self.childViewController addObject:lessonNavigationController];
   
   GDDMainViewController_ipad *faviconsViewController=[[GDDFaviconsViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
   UINavigationController *faviconsNavigationController = [[UINavigationController alloc]initWithRootViewController:faviconsViewController];
@@ -121,18 +123,22 @@ typedef enum {
   __weak GDDMenuRootController *weakSelf = self;
   //注册监听 外部控制跳转课程/收藏/遥控器
   self.menuChangeHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr TOPIC:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    NSString *type = [message body][@"queries"][@"type"];
-    if ([type isEqualToString:@"和谐"] ||
-        [type isEqualToString:@"托班"] ||
-        [type isEqualToString:@"示范课"] ||
-        [type isEqualToString:@"入学准备"] ||
-        [type isEqualToString:@"智能开发"] ||
-        [type isEqualToString:@"电子书"])
-    {
+    NSArray *tags = [message body][@"tags"];
+    NSInteger i = 0;
+    GDDLessonModel *lessonModel = [[GDDLessonModel alloc]init];
+    do {
+      if ([tags count] <= 0) {
+        break;
+      }
+      //和谐 托班 等课程标签这里被检索 并统一这些标签都在 GDDMENU_PAGE_LESSON 界面 展示
+      if (![[lessonModel lessonNames] containsObject:tags[i]]) {
+        i++;
+        continue;
+      }
       [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_LESSON];
       [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:[message body]];
-    }
-    
+      i++;
+    } while (i < [tags count]);
   }];
   //注册监听 外部控制设置界面跳转
   self.menuSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS:GDDAddrReceive] handler:^(id<GDCMessage> message) {
@@ -213,16 +219,6 @@ typedef enum {
   }
 
   [self transitionChildViewControllerByIndex:indexPath.row];
-  switch (indexPath.row) {
-    case GDDMENU_PAGE_LESSON:
-      [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:nil];
-      break;
-    case GDDMENU_PAGE_SETTINGS:
-      [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS:GDDAddrSendLocal] message:nil];
-      break;
-    default:
-      break;
-  }
 }
 
 @end

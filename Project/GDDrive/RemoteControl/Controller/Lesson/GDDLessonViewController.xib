@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GDDHeXieViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GDDLessonViewController">
             <connections>
                 <outlet property="collectionView" destination="2V1-Y1-gcC" id="FpL-i1-bQ0"/>
                 <outlet property="searchPicker" destination="Q52-vS-xoa" id="8j1-BY-Pla"/>

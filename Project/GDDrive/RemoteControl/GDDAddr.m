@@ -30,6 +30,8 @@ static NSString *const ADDR_SETTINGS_CONNECTIVITY = @"drive.connectivity"; //请
 static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘鼠标信号模拟
 static NSString *const ADDR_NOTIFICATION = @"drive.notification"; //信息通知
 static NSString *const ADDR_HOME = @"drive.view.home"; //首页展示
+static NSString *const ADDR_ATTACHMEND_SEARCH = @"drive.attachment.search"; //附件搜索
+static NSString *const ADDR_TAG_CHILDREN = @"drive.tag.children"; //查询同时属于多个标签的子标签
 
 
 @implementation GDDAddr
@@ -73,7 +75,12 @@ static NSString *const ADDR_HOME = @"drive.view.home"; //首页展示
 +(NSString *)HOME:(GDDAddressStyle)style{
   return [self address:ADDR_HOME addressStyle:style];
 }
-
++(NSString *)ATTACHMEND_SEARCH:(GDDAddressStyle)style{
+  return [self address:ADDR_ATTACHMEND_SEARCH addressStyle:style];
+}
++(NSString *)TAG_CHILDREN:(GDDAddressStyle)style{
+  return [self address:ADDR_TAG_CHILDREN addressStyle:style];
+}
 #pragma mark - 公共方法
 /*description 拼接设备号和请求地址。
  *parameter   pro 接口名
