@@ -53,12 +53,14 @@
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   __weak GDDSettingsViewController *weakSelf = self;
-  self.switchSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SWITCH_SETTINGS:GDDAddrReceive] handler:^(id<GDCMessage> message){
-    [[GDDBusProvider BUS] send:[GDDAddr SETTINGS:GDDAddrSendRemote] message:@{} replyHandler:nil];
+  self.switchSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SETTINGS addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message){
+    [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrSendRemote] message:@{@"redirectTo":@"settings"} replyHandler:nil];
   }];
-  self.switchSettingsAboutUsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS_ABOOUT_US:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    NSLog(@"注册监听 外部控制设置界面-关于我们跳转");
-    [weakSelf aboutUsAction:nil];
+  self.switchSettingsAboutUsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    if ([message body][@"aboutUs"]) {
+      NSLog(@"注册监听 外部控制设置界面-关于我们跳转");
+      [weakSelf aboutUsAction:nil];
+    }
   }];
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -79,35 +81,35 @@
 }
 #pragma mark -IBAction
 -(IBAction)settingsWifiAction:(id)sender{
-  [self.bus send:[GDDAddr SETTINGS_WIFI:GDDAddrSendRemote] message:@{} replyHandler:nil];
+  [self.bus send:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrSendRemote] message:@{@"redirectTo":@"settings.wifi"} replyHandler:nil];
 }
 -(IBAction)resolutionAction:(id)sender{
-  [self.bus send:[GDDAddr SETTINGS_RESOLUTION:GDDAddrSendRemote] message:@{} replyHandler:nil];
+  [self.bus send:[GDDAddr addressProtocol:ADDR_SETTINGS_RESOLUTION addressStyle:GDDAddrSendRemote] message:@{} replyHandler:nil];
 }
 -(IBAction)screenOffSetAction:(id)sender{
-  [self.bus send:[GDDAddr SETTINGS_SCREEN_OFFSET:GDDAddrSendRemote] message:@{} replyHandler:nil];
+  [self.bus send:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrSendRemote] message:@{@"redirectTo":@"settings.screenOffset"} replyHandler:nil];
 }
 -(IBAction)aboutUsAction:(id)sender{
-  [self.bus send:[GDDAddr SETTINGS_ABOOUT_US:GDDAddrSendRemote] message:@{} replyHandler:nil];
+  [self.bus send:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrSendRemote] message:@{@"redirectTo":@"aboutUs"} replyHandler:nil];
 }
 -(IBAction)locationAction:(id)sender{
-  [self.bus send:[GDDAddr SETTINGS_LOCATION:GDDAddrSendRemote] message:@{} replyHandler:^(id<GDCMessage> message) {
+  [self.bus send:[GDDAddr addressProtocol:ADDR_SETTINGS_LOCATION addressStyle:GDDAddrSendRemote] message:@{} replyHandler:^(id<GDCMessage> message) {
     [self.locationTableViewController bindData:[message body]];
   }];
 }
 -(IBAction)informationAction:(id)sender{
-  [self.bus send:[GDDAddr SETTINGS_INFORMATION:GDDAddrSendRemote] message:@{} replyHandler:^(id<GDCMessage> message) {
+  [self.bus send:[GDDAddr addressProtocol:ADDR_SETTINGS_INFORMATION addressStyle:GDDAddrSendRemote] message:@{} replyHandler:^(id<GDCMessage> message) {
     [self.informationTableViewController bindData:[message body]];
   }];
 }
 -(IBAction)notificationAction:(id)sender{
   [self.notificationTextField resignFirstResponder];
   if (![self.notificationTextField.text isEqualToString:@""] && self.notificationTextField.text != nil) {
-    [self.bus send:[GDDAddr NOTIFICATION:GDDAddrSendRemote] message:@{@"content":self.notificationTextField.text} replyHandler:nil];
+    [self.bus send:[GDDAddr addressProtocol:ADDR_NOTIFICATION addressStyle:GDDAddrSendRemote] message:@{@"content":self.notificationTextField.text} replyHandler:nil];
   }
 }
 -(IBAction)connectivityAction:(id)sender{
-  [self.bus send:[GDDAddr SETTINGS_CONNECTIVITY:GDDAddrSendRemote] message:@{@"action":@"get"} replyHandler:^(id<GDCMessage> message) {
+  [self.bus send:[GDDAddr addressProtocol:ADDR_SETTINGS_CONNECTIVITY addressStyle:GDDAddrSendRemote] message:@{@"action":@"get"} replyHandler:^(id<GDCMessage> message) {
     NSString *type = [message body][@"type"];
     NSString *strength = [message body][@"strength"];
     [self.connectivityTypeLable setText:type];

@@ -24,13 +24,14 @@
 #import "GDDSettingsViewController.h"
 #import "UIAlertView+Blocks.h"
 #import "GDDLessonViewController.h"
-#import "GDDLessonModel.h"
+#import "GDDActivityViewController.h"
 
 typedef enum {
   GDDMENU_PAGE_LESSON = 0,
   GDDMENU_PAGE_COLLECT = 1,
   GDDMENU_PAGE_REMOTE_CONTROL = 2,
-  GDDMENU_PAGE_SETTINGS = 3
+  GDDMENU_PAGE_SETTINGS = 3,
+  GDDMENU_PAGE_ACTIVITY = 4
 } GDDMENU_PAGE_TYPE;
 
 @interface GDDMenuRootController ()
@@ -44,6 +45,7 @@ typedef enum {
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuChangeHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> notificationHandlerRegistration;
+@property (nonatomic, strong) id<GDCHandlerRegistration> activityHandlerRegistration;
 @end
 
 @implementation GDDMenuRootController
@@ -74,8 +76,8 @@ typedef enum {
                                }];
   }];
   self.menuTableView.tableHeaderView = self.equipmentView;
-  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png", @"offline_files_icon.png"]
-                                                       labels:@[@"课程", @"收藏", @"遥控器" ,@"设置"]];
+  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png", @"offline_files_icon.png", @"offline_files_icon.png"]
+                                                       labels:@[@"课程", @"收藏", @"遥控器" ,@"设置" ,@"活动"]];
   
   if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
     [self prefersStatusBarHidden];
@@ -120,34 +122,40 @@ typedef enum {
   UINavigationController *settingsNavigationController = [[UINavigationController alloc]initWithRootViewController:settingsViewController];
   [self.childViewController addObject:settingsNavigationController];
   
+  GDDActivityViewController *activityViewController = [[GDDActivityViewController alloc] initWithNibName:@"GDDActivityViewController" bundle:nil];
+  UINavigationController *activityNavigationController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
+  [self.childViewController addObject:activityNavigationController];
+
   __weak GDDMenuRootController *weakSelf = self;
   //注册监听 外部控制跳转课程/收藏/遥控器
-  self.menuChangeHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr TOPIC:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+  self.menuChangeHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_TOPIC addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     NSArray *tags = [message body][@"tags"];
     NSInteger i = 0;
-    GDDLessonModel *lessonModel = [[GDDLessonModel alloc]init];
     do {
       if ([tags count] <= 0) {
         break;
       }
+      NSArray *lessons = @[@"和谐",@"托班",@"入学准备",@"智能开发",@"电子书",@"示范课"];
       //和谐 托班 等课程标签这里被检索 并统一这些标签都在 GDDMENU_PAGE_LESSON 界面 展示
-      if (![[lessonModel lessonNames] containsObject:tags[i]]) {
+      if (![lessons containsObject:tags[i]]) {
         i++;
         continue;
       }
       [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_LESSON];
-      [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_CLASS:GDDAddrSendLocal] message:[message body]];
+      [[GDDBusProvider BUS] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_CLASS addressStyle:GDDAddrSendLocal] message:[message body]];
       i++;
     } while (i < [tags count]);
   }];
   //注册监听 外部控制设置界面跳转
-  self.menuSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr SETTINGS:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+  self.menuSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     NSLog(@"注册监听 外部控制设置界面跳转");
-    [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_SETTINGS];
-    [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_SETTINGS:GDDAddrSendLocal] message:nil];
+    if ([message body][@"settings"]) {
+      [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_SETTINGS];
+      [[GDDBusProvider BUS] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SETTINGS addressStyle:GDDAddrSendLocal] message:nil];      
+    }
   }];
   //注册监听 信息通知
-  self.notificationHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr NOTIFICATION:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+  self.notificationHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_NOTIFICATION addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     [UIAlertView showAlertViewWithTitle:@"消息通知"
                                 message:[message body][@"content"]
                       cancelButtonTitle:@"确定"
@@ -155,6 +163,12 @@ typedef enum {
                          alertViewStyle:UIAlertViewStyleDefault
                               onDismiss:^(UIAlertView *alertView, int buttonIndex) {}
                                onCancel:^{}];
+  }];
+  //监听是否要跳转到活动界面
+  self.activityHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_TOPIC_ACTIVITY addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"%@",[message body]);
+    [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_ACTIVITY];
+    [[GDDBusProvider BUS] send:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_ACTIVITY_DATA addressStyle:GDDAddrSendLocal] message:[message body] replyHandler:nil];
   }];
 }
 

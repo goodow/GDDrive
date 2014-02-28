@@ -122,7 +122,7 @@ typedef enum {
   if (sender.numberOfTapsRequired == 1) {
     //单指单击
     NSLog(@"单指单击");
-    [self.bus send:[GDDAddr INPUT_SIMULATE_KEYBOARD:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_CENTER]} replyHandler:nil];
+    [self.bus send:[GDDAddr addressProtocol:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_CENTER]} replyHandler:nil];
   }else if(sender.numberOfTapsRequired == 2){
     //单指双击
     NSLog(@"单指双击");
@@ -134,29 +134,31 @@ typedef enum {
   if(recognizer.direction==UISwipeGestureRecognizerDirectionDown) {
     
     NSLog(@"swipe down");
-    [self.bus send:[GDDAddr INPUT_SIMULATE_KEYBOARD:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_DOWN]} replyHandler:nil];
+    [self.bus send:[GDDAddr addressProtocol:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_DOWN]} replyHandler:nil];
   }else if(recognizer.direction==UISwipeGestureRecognizerDirectionUp) {
     
     NSLog(@"swipe up");
-    [self.bus send:[GDDAddr INPUT_SIMULATE_KEYBOARD:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_UP]} replyHandler:nil];
+    [self.bus send:[GDDAddr addressProtocol:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_UP]} replyHandler:nil];
   }else if(recognizer.direction==UISwipeGestureRecognizerDirectionLeft) {
     
     NSLog(@"swipe left");
-    [self.bus send:[GDDAddr INPUT_SIMULATE_KEYBOARD:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_LEFT]} replyHandler:nil];
+    [self.bus send:[GDDAddr addressProtocol:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_LEFT]} replyHandler:nil];
   }else if(recognizer.direction==UISwipeGestureRecognizerDirectionRight) {
     NSLog(@"swipe right");
-    [self.bus send:[GDDAddr INPUT_SIMULATE_KEYBOARD:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_RIGHT]} replyHandler:nil];
+    [self.bus send:[GDDAddr addressProtocol:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_DPAD_RIGHT]} replyHandler:nil];
   }
   
 }
 
 -(IBAction)handleBackAction:(id)sender{
   NSLog(@"遥控器 后退键");
-  [self.bus send:[GDDAddr INPUT_SIMULATE_KEYBOARD:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_BACK]} replyHandler:nil];
+  [self.bus send:[GDDAddr addressProtocol:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:GDDAddrSendRemote] message:@{@"key":[NSNumber numberWithInt:KEYCODE_BACK]} replyHandler:nil];
 }
 -(IBAction)handleHomeAction:(id)sender{
   NSLog(@"遥控器 首页显示");
-  [self.bus send:[GDDAddr HOME:GDDAddrSendRemote] message:@{@"":@""} replyHandler:nil];
+//  [self.bus send:[GDDAddr addressProtocol:ADDR_HOME addressStyle:GDDAddrSendRemote] message:@{@"":@""} replyHandler:nil];
+  [self.bus send:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrSendRemote] message:@{@"redirectTo":@"home"} replyHandler:nil];
+  
 }
 
 @end

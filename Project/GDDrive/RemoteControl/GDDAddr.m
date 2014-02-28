@@ -10,76 +10,11 @@
 #import "GDDBusProvider.h"
 
 static NSString *const SID = @"huang.";
-static NSString *const SID_ADDR = @"@drive.control.switch";
-static NSString *const SID_ADDR_CLASS = @"@drive.control.class";
-static NSString *const SID_ADDR_SETTINGS = @"@drive.control.settings";
-static NSString *const SID_ADDR_SETTINGS_ABOOUT_US = @"@drive.control.settings.aboutUs";
-static NSString *const SID_ADDR_SETTINGS_LOCATION = @"@drive.control.settings.location";
-static NSString *const SID_ADDR_SETTINGS_INFORMATION = @"@drive.control.settings.information";
-
-static NSString *const ADDR_TOPIC = @"drive.topic";
-static NSString *const ADDR_FILE = @"drive.file";
-static NSString *const ADDR_SETTINGS = @"drive.view.settings"; //设置界面
-static NSString *const ADDR_SETTINGS_WIFI = @"drive.view.wifi"; //设置WIFI
-static NSString *const ADDR_SETTINGS_RESOLUTION = @"drive.view.resolution"; //分辨率输出
-static NSString *const ADDR_SETTINGS_SCREEN_OFFSET = @"drive.view.screenOffset"; //屏幕偏移
-static NSString *const ADDR_SETTINGS_ABOOUT_US = @"drive.view.aboutUs"; //关于我们
-static NSString *const ADDR_SETTINGS_LOCATION = @"drive.settings.location"; //请求设备的位置信息
-static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"; //请求设备的信息
-static NSString *const ADDR_SETTINGS_CONNECTIVITY = @"drive.connectivity"; //请求设备网络信息
-static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘鼠标信号模拟
-static NSString *const ADDR_NOTIFICATION = @"drive.notification"; //信息通知
-static NSString *const ADDR_HOME = @"drive.view.home"; //首页展示
-static NSString *const ADDR_ATTACHMEND_SEARCH = @"drive.attachment.search"; //附件搜索
-static NSString *const ADDR_TAG_CHILDREN = @"drive.tag.children"; //查询同时属于多个标签的子标签
-
 
 @implementation GDDAddr
-+(NSString *)TOPIC:(GDDAddressStyle)style{
-  return [self address:ADDR_TOPIC addressStyle:style];
-}
 
-+(NSString *)FILE:(GDDAddressStyle)style{
-  return [self address:ADDR_FILE addressStyle:style];
-}
-+(NSString *)SETTINGS:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS addressStyle:style];
-}
-+(NSString *)SETTINGS_WIFI:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS_WIFI addressStyle:style];
-}
-+(NSString *)SETTINGS_RESOLUTION:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS_RESOLUTION addressStyle:style];
-}
-+(NSString *)SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS_SCREEN_OFFSET addressStyle:style];
-}
-+(NSString *)SETTINGS_ABOOUT_US:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS_ABOOUT_US addressStyle:style];
-}
-+(NSString *)SETTINGS_LOCATION:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS_LOCATION addressStyle:style];
-}
-+(NSString *)SETTINGS_INFORMATION:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS_INFORMATION addressStyle:style];
-}
-+(NSString *)SETTINGS_CONNECTIVITY:(GDDAddressStyle)style{
-  return [self address:ADDR_SETTINGS_CONNECTIVITY addressStyle:style];
-}
-+(NSString *)INPUT_SIMULATE_KEYBOARD:(GDDAddressStyle)style{
-  return [self address:ADDR_INPUT_SIMULATE_KEYBOARD addressStyle:style];
-}
-+(NSString *)NOTIFICATION:(GDDAddressStyle)style{
-  return [self address:ADDR_NOTIFICATION addressStyle:style];
-}
-+(NSString *)HOME:(GDDAddressStyle)style{
-  return [self address:ADDR_HOME addressStyle:style];
-}
-+(NSString *)ATTACHMEND_SEARCH:(GDDAddressStyle)style{
-  return [self address:ADDR_ATTACHMEND_SEARCH addressStyle:style];
-}
-+(NSString *)TAG_CHILDREN:(GDDAddressStyle)style{
-  return [self address:ADDR_TAG_CHILDREN addressStyle:style];
++(NSString *)addressProtocol:(NSString *)protocol addressStyle:(GDDAddressStyle)style{
+  return [self address:protocol addressStyle:style];
 }
 #pragma mark - 公共方法
 /*description 拼接设备号和请求地址。
@@ -90,7 +25,7 @@ static NSString *const ADDR_TAG_CHILDREN = @"drive.tag.children"; //查询同时
   return [NSString stringWithFormat:@"%@.%@",[GDDAddr equipmentID],pro];
 }
 
-+(NSString *)address:(NSString *) addr addressStyle:(GDDAddressStyle)style{
++(NSString *)address:(NSString *)addr addressStyle:(GDDAddressStyle)style{
   switch (style)
   {
     case GDDAddrReceive:
@@ -106,23 +41,9 @@ static NSString *const ADDR_TAG_CHILDREN = @"drive.tag.children"; //查询同时
 @end
 
 @implementation GDDAddr (ios)
-+(NSString *)SWITCH_DEVICE:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR GDDAddressStyle:style];
-}
-+(NSString *)SWITCH_CLASS:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_CLASS GDDAddressStyle:style];
-}
-+(NSString *)SWITCH_SETTINGS:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS GDDAddressStyle:style];
-}
-+(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_ABOOUT_US GDDAddressStyle:style];
-}
-+(NSString *)SWITCH_SETTINGS_LOCATION:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_LOCATION GDDAddressStyle:style];
-}
-+(NSString *)SWITCH_SETTINGS_INFORMATION:(GDDAddressStyle)style{
-  return [GDDAddr SWITCH_ADDR:SID_ADDR_SETTINGS_INFORMATION GDDAddressStyle:style];
+
++(NSString *)localAddressProtocol:(NSString *)protocol addressStyle:(GDDAddressStyle)style{
+  return [GDDAddr SWITCH_ADDR:protocol GDDAddressStyle:style];
 }
 #pragma mark - 公共方法 (ios)
 /*SWITCH_ADDR       转发地址
@@ -161,7 +82,7 @@ static NSString *EQUIPMENT_ID;
   [userDefaults setObject:EQUIPMENT_ID forKey:@"equipmentID"];
   [userDefaults synchronize];
   //同步完成后发送消息 通知所有注册 GDD_BUS_EQUIPMENT_ID 设备id变更
-  [[GDDBusProvider BUS] publish:[GDDAddr SWITCH_DEVICE:GDDAddrSendLocal] message:@{@"sid": [GDDAddr equipmentID]}];
+  [[GDDBusProvider BUS] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SWITCH addressStyle:GDDAddrSendLocal] message:@{@"sid": [GDDAddr equipmentID]}];
 }
 +(void)readNSUserDefaults
 {

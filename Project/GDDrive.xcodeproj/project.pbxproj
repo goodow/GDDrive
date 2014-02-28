@@ -100,7 +100,8 @@
 		65B8318318B4A88600D750BF /* UIImage+GDDEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B8318218B4A88600D750BF /* UIImage+GDDEffects.m */; };
 		65BC5A9118BC72C400E8E1E5 /* GDDLessonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */; };
 		65BC5A9218BC72C400E8E1E5 /* GDDLessonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */; };
-		65BC5A9518BC73E000E8E1E5 /* GDDLessonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC5A9418BC73E000E8E1E5 /* GDDLessonModel.m */; };
+		65BC5A9D18C0590B00E8E1E5 /* GDDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC5A9B18C0590B00E8E1E5 /* GDDActivityViewController.m */; };
+		65BC5A9E18C0590B00E8E1E5 /* GDDActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65BC5A9C18C0590B00E8E1E5 /* GDDActivityViewController.xib */; };
 		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
 		65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D021856C9DF005249BB /* GDDDownloadingState.m */; };
 		65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */; };
@@ -274,8 +275,9 @@
 		65BC5A8E18BC72C400E8E1E5 /* GDDLessonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDLessonViewController.h; sourceTree = "<group>"; };
 		65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDLessonViewController.m; sourceTree = "<group>"; };
 		65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDLessonViewController.xib; sourceTree = "<group>"; };
-		65BC5A9318BC73E000E8E1E5 /* GDDLessonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDLessonModel.h; sourceTree = SOURCE_ROOT; };
-		65BC5A9418BC73E000E8E1E5 /* GDDLessonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDLessonModel.m; sourceTree = SOURCE_ROOT; };
+		65BC5A9A18C0590B00E8E1E5 /* GDDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDActivityViewController.h; sourceTree = "<group>"; };
+		65BC5A9B18C0590B00E8E1E5 /* GDDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDActivityViewController.m; sourceTree = "<group>"; };
+		65BC5A9C18C0590B00E8E1E5 /* GDDActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDActivityViewController.xib; sourceTree = "<group>"; };
 		65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSetObject.h"; sourceTree = "<group>"; };
 		65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSetObject.m"; sourceTree = "<group>"; };
 		65CA0D011856C9DF005249BB /* GDDDownloadingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadingState.h; sourceTree = "<group>"; };
@@ -721,21 +723,15 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		65B32F5B187D26F40028026C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				65BC5A9318BC73E000E8E1E5 /* GDDLessonModel.h */,
-				65BC5A9418BC73E000E8E1E5 /* GDDLessonModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		65BC5A8D18BC718E00E8E1E5 /* Lesson */ = {
 			isa = PBXGroup;
 			children = (
 				65BC5A8E18BC72C400E8E1E5 /* GDDLessonViewController.h */,
 				65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */,
 				65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */,
+				65BC5A9A18C0590B00E8E1E5 /* GDDActivityViewController.h */,
+				65BC5A9B18C0590B00E8E1E5 /* GDDActivityViewController.m */,
+				65BC5A9C18C0590B00E8E1E5 /* GDDActivityViewController.xib */,
 			);
 			path = Lesson;
 			sourceTree = "<group>";
@@ -759,7 +755,6 @@
 		65DDDB53186AB65C0064DCBA /* RemoteControl */ = {
 			isa = PBXGroup;
 			children = (
-				65B32F5B187D26F40028026C /* Model */,
 				6583BFB6187A80A100B5683C /* Controller */,
 				6583BFBC187A821F00B5683C /* GDDBusProvider.h */,
 				6583BFBD187A821F00B5683C /* GDDBusProvider.m */,
@@ -836,6 +831,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "大黄";
 				TargetAttributes = {
+					6534B2281815340F000F83E9 = {
+						DevelopmentTeam = 742YX7Q977;
+					};
 					6534B2431815340F000F83E9 = {
 						TestTargetID = 6534B2281815340F000F83E9;
 					};
@@ -918,6 +916,7 @@
 				6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */,
 				655DAB96183E1C0F00703FA4 /* icon_type_folder.png in Resources */,
 				655DAB3C183C49D300703FA4 /* loading.jpg in Resources */,
+				65BC5A9E18C0590B00E8E1E5 /* GDDActivityViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -976,6 +975,7 @@
 				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,
 				65CA0D0F1856C9DF005249BB /* GDDWillDownloadState.m in Sources */,
 				65B32F5A187CF38D0028026C /* PSStackedViewControllerDecorate.m in Sources */,
+				65BC5A9D18C0590B00E8E1E5 /* GDDActivityViewController.m in Sources */,
 				65DDDB4D186A8B560064DCBA /* AppDelegate.m in Sources */,
 				65CA0D0D1856C9DF005249BB /* GDDPauseDownloadState.m in Sources */,
 				65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */,
@@ -995,7 +995,6 @@
 				65571F57184C3EE800A7C1B7 /* GDDLoginMessageModel.m in Sources */,
 				65F2782718ACF1350011C874 /* GDDLocationTableViewController.m in Sources */,
 				65F2782C18AD01580011C874 /* GDDInformationTableViewController.m in Sources */,
-				65BC5A9518BC73E000E8E1E5 /* GDDLessonModel.m in Sources */,
 				65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 				65CA0D2818598B7B005249BB /* GDDOfflineFilesViewController_iPad.m in Sources */,
@@ -1160,6 +1159,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
 				INFOPLIST_FILE = "GDDrive/GDDrive-Info.plist";
@@ -1175,6 +1175,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GDDrive/GDDrive-Prefix.pch";
 				INFOPLIST_FILE = "GDDrive/GDDrive-Info.plist";

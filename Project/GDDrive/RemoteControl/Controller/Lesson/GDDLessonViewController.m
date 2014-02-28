@@ -10,85 +10,91 @@
 #import "GDDBusProvider.h"
 #import "GDDFolderCell.h"
 #import "GDDAddr.h"
-#import "GDDLessonModel.h"
+//#import "GDDLessonModel.h"
 
 @interface GDDLessonViewController ()
-@property (nonatomic, strong) id <GDCBus> bus;
 @property (nonatomic, weak) IBOutlet UIPickerView *searchPicker;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
-@property (nonatomic, strong) GDDLessonModel *lessonModel;
 @property (nonatomic, strong) id<GDCHandlerRegistration> swichClassHandlerRegistration;
+@property (nonatomic, copy) NSMutableArray *activityTags;
+
 @end
 
 @implementation GDDLessonViewController
+static NSDictionary *kLessonDictionary;
+static NSArray *kLessons;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
++(void)initialize{
+  
+  kLessons = @[@"和谐",@"托班",@"入学准备",@"智能开发",@"电子书",@"示范课"];
+  kLessonDictionary = @{kLessons[0]: @[@[@"小班",@"中班",@"大班",@"学前班"],@[@"上学期",@"下学期"],@[@"健康",@"语言",@"社会",@"科学",@"数学",@"艺术(音乐)",@"艺术(美术)"]],
+                        kLessons[1]:@[@[@"上学期",@"下学期"]],
+                        kLessons[2]: @[@[@"上学期",@"下学期"],@[@"语言",@"思维",@"阅读与书写",@"习惯与学习品质"]],
+                        kLessons[3]: @[@[@"小班",@"中班",@"大班",@"学前班"],@[@"上学期",@"下学期"]],
+                        kLessons[4]: @[@[@"冰波童话",@"快乐宝贝",@"其它"]],
+                        kLessons[5]:  @[@[@"小班",@"中班",@"大班",@"学前班"],@[@"上学期",@"下学期"],@[@"健康",@"语言",@"社会",@"科学",@"数学",@"艺术(音乐)",@"艺术(美术)"]]};
+  
+}
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    // Custom initialization
+    _activityTags = [NSMutableArray array];
   }
   return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
   [super viewDidLoad];
   self.navigationItem.title = @"课程辅助资源";
   [self.collectionView registerClass:[GDDFolderCell class] forCellWithReuseIdentifier:@"GDDFolderCell"];
-  self.bus = [GDDBusProvider BUS];
-  self.lessonModel = [[GDDLessonModel alloc]init];
-  self.lessonModel.attachmentTags = [NSMutableArray array];
-  self.lessonModel.selectedLesson = [self.lessonModel resourceInit];
-  [self recordResourceTag];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+
+- (NSString *)intersectionTagFromLocalTags:(NSArray *)localTags toNetTags:(NSSet *)netTags {
+  NSMutableSet *intersectSet = [NSMutableSet setWithArray:localTags];
+  [intersectSet intersectSet:netTags];
+  return [intersectSet anyObject];
+}
+
+- (void)changePikerWithComponent:(NSUInteger)component row:(NSUInteger)row {
+  [self.searchPicker selectRow:row inComponent:component animated:YES];
+  if (component == 0) {
+    [self.searchPicker reloadAllComponents];
+  }
+}
+
+-(void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
   __weak GDDLessonViewController *weakSelf = self;
   // 接收控制信息回调 根据数据跳转
-  self.swichClassHandlerRegistration = [self.bus registerHandler:[GDDAddr SWITCH_CLASS:GDDAddrReceive] handler:^(id <GDCMessage> message){
-    do {
-      // 空数据 情况直接跳出整个循环
-      if ([[message body][@"tags"] count] == 0) {
-        return;
+  self.swichClassHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_CLASS addressStyle:GDDAddrReceive] handler:^(id <GDCMessage> message){
+    // 空数据 情况直接跳出整个循环
+    NSMutableArray *tagArray = [NSMutableArray arrayWithArray:[message body][@"tags"]];
+    if (tagArray.count == 0) {
+      NSLog(@"ERROR：GDD_LOCAL_ADDR_CLASS 网络返回标签数据为空");
+      return;
+    }
+    NSMutableSet *tags = [NSMutableSet setWithArray:tagArray];
+    NSString *validLessonName = [self intersectionTagFromLocalTags:kLessons toNetTags:tags];
+    if (validLessonName == nil) {
+      NSLog(@"ERROR：GDD_LOCAL_ADDR_CLASS 网络返回的数据中不包含课程名");
+      return;
+    }
+    [tags removeObject:validLessonName];
+    [self changePikerWithComponent:0 row:[kLessons indexOfObject:validLessonName]];
+    NSArray *validTagArray = kLessonDictionary[validLessonName];
+    for (int i=0; i<tags.count; i++) {
+      NSArray *validTags = validTagArray[i];
+      NSUInteger row = 0;
+      NSString *validTag = [self intersectionTagFromLocalTags:validTags toNetTags:tags];
+      if (validTags != nil) {
+        row = [validTags indexOfObject:validTag];
       }
-      // 对于课程标签更改 并重置后续的同级条件
-      //查询课程标题
-      for (int i = 0; i < [[message body][@"tags"] count]; i++) {
-        if (![weakSelf.lessonModel.lessonNames containsObject:[message body][@"tags"][i]]) {
-          continue;
-        }
-        weakSelf.lessonModel.selectedLesson = [message body][@"tags"][i];
-      }
-      [weakSelf.searchPicker selectRow:[[self.lessonModel lessonNames]indexOfObject:weakSelf.lessonModel.selectedLesson] inComponent:0 animated:YES];
-      [weakSelf.searchPicker reloadAllComponents];
-      break;
-    } while (YES);
-    NSInteger tag = 0;
-    do {
-      NSDictionary *resourceStructureDictionary = [self.lessonModel resourceStructure];
-      NSArray *resourceTagArray =  resourceStructureDictionary[self.lessonModel.selectedLesson];
-      if ([resourceTagArray count] <= tag) {
-        break;
-      }
-      //对于实际数据模型和本地数据模型不一致通过+1调整
-      if ([[message body][@"tags"] count] <= tag+1) {
-        break;
-      }
-      NSArray *arr = resourceTagArray [tag];
-      for (int i = 0; i < [[message body][@"tags"] count]; i++) {
-        if (![arr containsObject:[message body][@"tags"][i]]) {
-          continue;
-        }
-        NSString *tagName = [message body][@"tags"][i];
-        NSInteger tagIndex = [arr indexOfObject:tagName];
-        [weakSelf.searchPicker selectRow:tagIndex inComponent:tag+1 animated:YES];
-      }
-      tag++;
-    } while (YES);
-    [weakSelf recordResourceTag];
+      [self changePikerWithComponent:i+1 row:row];
+    }
+    [weakSelf synchronousAttachmentData];
   }];
+  [self synchronousAttachmentData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -100,43 +106,31 @@
 {
   [super didReceiveMemoryWarning];
 }
-
+#pragma mark -
+-(NSArray *)attachmentTags{
+  NSMutableArray *attachmentTags = [NSMutableArray array];
+  NSInteger selecedRowOfGroupOne = [self.searchPicker selectedRowInComponent:0];
+  [attachmentTags addObject:kLessons[selecedRowOfGroupOne]];
+  NSArray *subattachments = kLessonDictionary[kLessons[selecedRowOfGroupOne]];
+  for (int i=0; i<subattachments.count; i++) {
+    NSInteger selecedRow = [self.searchPicker selectedRowInComponent:i + 1];
+    [attachmentTags addObject:subattachments[i][selecedRow]];
+  }
+  return attachmentTags;
+  
+}
+-(NSString *)currentLessonName{
+  NSInteger selecedRowOfGroupOne = [self.searchPicker selectedRowInComponent:0];
+  return kLessons[selecedRowOfGroupOne];
+}
 //记录活动层级标签
--(void)recordResourceTag{
-  //清空缓存记录
-  [self.lessonModel.attachmentTags removeAllObjects];
-  NSDictionary *resourceStructureDictionary = [self.lessonModel resourceStructure];
-  NSArray *resourceTagArray =  resourceStructureDictionary[self.lessonModel.selectedLesson];
-  NSInteger component = 0;
-  do {
-    NSInteger selecedRow = [self.searchPicker selectedRowInComponent:component];
-    if (component != 0) {
-      break;
-    }
-    [self.lessonModel.attachmentTags addObject:[self.lessonModel lessonNames][selecedRow]];
-    component ++;
-  } while (component < 4);
-  do {
-    NSInteger selecedRow = [self.searchPicker selectedRowInComponent:component];
-    if (component == 0) {
-      break;
-    }
-    if ([resourceTagArray count] <= component - 1) {
-      break;
-    }
-    NSArray *childResourceTagArray =  resourceTagArray[component - 1];
-    if ([childResourceTagArray count] <= selecedRow) {
-      break;
-    }
-    [self.lessonModel.attachmentTags addObject:childResourceTagArray[selecedRow]];
-    component ++;
-  } while (component < 4);
+-(void)synchronousAttachmentData{
   //链接接口 发送标签组信息
-  [self.bus send:[GDDAddr TOPIC:GDDAddrSendRemote] message:@{@"action":@"post", @"tags":self.lessonModel.attachmentTags} replyHandler:nil];
+  [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_TOPIC addressStyle:GDDAddrSendRemote] message:@{@"action":@"post", @"tags":self.attachmentTags} replyHandler:nil];
   //查询活动内容
   __weak GDDLessonViewController *weakSelf = self;
-  [self.bus send:[GDDAddr TAG_CHILDREN:GDDAddrSendRemote] message:@{@"tags":self.lessonModel.attachmentTags} replyHandler:^(id<GDCMessage> message){
-    weakSelf.lessonModel.activityTags = [NSMutableArray arrayWithArray:[message body]];
+  [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_TAG_CHILDREN addressStyle:GDDAddrSendRemote] message:@{@"tags":self.attachmentTags} replyHandler:^(id<GDCMessage> message){
+    _activityTags = [NSMutableArray arrayWithArray:[message body]];
     [weakSelf.collectionView reloadData];
   }];
 }
@@ -144,10 +138,9 @@
 #pragma mark -picker view delegate datasouce
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
   if (component == 0) {
-    self.lessonModel.selectedLesson = [self.lessonModel lessonNames][row];
     [self.searchPicker reloadAllComponents];
   }
-  [self recordResourceTag];
+  [self synchronousAttachmentData];
 }
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -155,9 +148,9 @@
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-  NSDictionary *resourceStructureDictionary = [self.lessonModel resourceStructure];
+  NSDictionary *resourceStructureDictionary = kLessonDictionary;
   NSArray *keyArray = [resourceStructureDictionary allKeys];
-  NSArray *resourceTagArray =  resourceStructureDictionary[self.lessonModel.selectedLesson];
+  NSArray *resourceTagArray =  resourceStructureDictionary[self.currentLessonName];
   if (component) {
     if ([resourceTagArray count] > component - 1) {
       NSArray *childResourceTagArray =  resourceTagArray[component - 1];
@@ -171,8 +164,8 @@
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-  NSDictionary *resourceStructureDictionary = [self.lessonModel resourceStructure];
-  NSArray *resourceTagArray =  resourceStructureDictionary[self.lessonModel.selectedLesson];
+  NSDictionary *resourceStructureDictionary = kLessonDictionary;
+  NSArray *resourceTagArray =  resourceStructureDictionary[self.currentLessonName];
   if (component) {
     if ([resourceTagArray count] > component - 1) {
       NSArray *childResourceTagArray =  resourceTagArray[component - 1];
@@ -181,7 +174,7 @@
       return @"";
     }
   }else{
-    return [self.lessonModel lessonNames][row];
+    return kLessons[row];
   }
 }
 
@@ -189,23 +182,22 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
   // 每个Section的item个数
-  if ([self.lessonModel.activityTags count] == 0 || !self.lessonModel.activityTags) {
-    return 0;
-  }
-  return [self.lessonModel.activityTags count];
+  return _activityTags == nil ? 0 : _activityTags.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   GDDFolderCell *cell = (GDDFolderCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"GDDFolderCell" forIndexPath:indexPath];
   cell.titleLabel.text = @"";
-  if ([self.lessonModel.activityTags count] > 0) {
-    cell.titleLabel.text = self.lessonModel.activityTags[indexPath.row];
+  if (_activityTags.count > 0) {
+    cell.titleLabel.text = _activityTags[indexPath.row];
   }
   return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-  NSLog(@"didSelectItemAtIndexPath");
+  NSMutableArray *detailedLabels = [NSMutableArray arrayWithArray:self.attachmentTags];
+  [detailedLabels addObject:_activityTags[indexPath.row]];
+  [[GDDBusProvider BUS] send:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_TOPIC_ACTIVITY addressStyle:GDDAddrSendLocal ] message:@{@"tags":detailedLabels ,@"title":_activityTags[indexPath.row]} replyHandler:nil];
 }
 @end

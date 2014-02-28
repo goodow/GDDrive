@@ -14,32 +14,35 @@ typedef enum {
   GDDAddrSendRemote = 3
 } GDDAddressStyle;
 
-@interface GDDAddr : NSObject
+static NSString *const ADDR_TOPIC = @"drive.topic";//主题界面呈现
+static NSString *const ADDR_ACTIVITY = @"drive.activity";//活动界面呈现
+static NSString *const ADDR_SETTINGS_RESOLUTION = @"drive.view.resolution"; //分辨率输出
+static NSString *const ADDR_SETTINGS_LOCATION = @"drive.settings.location"; //请求设备的位置信息
+static NSString *const ADDR_SETTINGS_INFORMATION = @"drive.settings.information"; //请求设备的信息
+static NSString *const ADDR_SETTINGS_CONNECTIVITY = @"drive.connectivity"; //请求设备网络信息
+static NSString *const ADDR_INPUT_SIMULATE_KEYBOARD = @"drive.input"; //键盘鼠标信号模拟
+static NSString *const ADDR_NOTIFICATION = @"drive.notification"; //信息通知
+static NSString *const ADDR_ATTACHMEND_SEARCH = @"drive.attachment.search"; //附件搜索
+static NSString *const ADDR_TAG_CHILDREN = @"drive.tag.children"; //查询同时属于多个标签的子标签
+static NSString *const ADDR_VIEW = @"drive.view"; //界面跳转 包括[home,repository,favorite,settings,settings.wifi,settings.screenOffset,aboutUs]这些界面 将由此接口代替
 
-+(NSString *)TOPIC:(GDDAddressStyle)style;
-+(NSString *)FILE:(GDDAddressStyle)style;
-+(NSString *)SETTINGS:(GDDAddressStyle)style;
-+(NSString *)SETTINGS_WIFI:(GDDAddressStyle)style;
-+(NSString *)SETTINGS_RESOLUTION:(GDDAddressStyle)style;
-+(NSString *)SETTINGS_SCREEN_OFFSET:(GDDAddressStyle)style;
-+(NSString *)SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
-+(NSString *)SETTINGS_LOCATION:(GDDAddressStyle)style;
-+(NSString *)SETTINGS_INFORMATION:(GDDAddressStyle)style;
-+(NSString *)SETTINGS_CONNECTIVITY:(GDDAddressStyle)style;
-+(NSString *)INPUT_SIMULATE_KEYBOARD:(GDDAddressStyle)style;
-+(NSString *)NOTIFICATION:(GDDAddressStyle)style;
-+(NSString *)HOME:(GDDAddressStyle)style;
-+(NSString *)ATTACHMEND_SEARCH:(GDDAddressStyle)style;
-+(NSString *)TAG_CHILDREN:(GDDAddressStyle)style;
+
+static NSString *const GDD_LOCAL_ADDR_SWITCH = @"@drive.control.switch";
+static NSString *const GDD_LOCAL_ADDR_CLASS = @"@drive.control.class";
+static NSString *const GDD_LOCAL_ADDR_SETTINGS = @"@drive.control.settings";
+static NSString *const GDD_LOCAL_ADDR_SETTINGS_ABOOUT_US = @"@drive.control.settings.aboutUs";
+static NSString *const GDD_LOCAL_ADDR_SETTINGS_LOCATION = @"@drive.control.settings.location";
+static NSString *const GDD_LOCAL_ADDR_SETTINGS_INFORMATION = @"@drive.control.settings.information";
+static NSString *const GDD_LOCAL_ADDR_TOPIC_ACTIVITY = @"@drive.topic.activity";
+static NSString *const GDD_LOCAL_ADDR_ACTIVITY_DATA = @"@drive.topic.activity.data";
+
+
+@interface GDDAddr : NSObject
++(NSString *)addressProtocol:(NSString *)protocol addressStyle:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (ios)
-+(NSString *)SWITCH_DEVICE:(GDDAddressStyle)style;
-+(NSString *)SWITCH_CLASS:(GDDAddressStyle)style;
-+(NSString *)SWITCH_SETTINGS:(GDDAddressStyle)style;
-+(NSString *)SWITCH_SETTINGS_ABOOUT_US:(GDDAddressStyle)style;
-+(NSString *)SWITCH_SETTINGS_LOCATION:(GDDAddressStyle)style;
-+(NSString *)SWITCH_SETTINGS_INFORMATION:(GDDAddressStyle)style;
++(NSString *)localAddressProtocol:(NSString *)protocol addressStyle:(GDDAddressStyle)style;
 @end
 
 @interface GDDAddr (GDDEquipmend)
