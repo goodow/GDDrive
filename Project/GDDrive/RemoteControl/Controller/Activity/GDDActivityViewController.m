@@ -51,14 +51,14 @@
 #pragma mark - 注册活动变化监听
 -(void)regisetActivityChangeHandler{
   // 接收控制信息回调 根据数据跳转
-  self.activityHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_ACTIVITY_DATA addressStyle:GDDAddrReceive] handler:^(id <GDCMessage> message){
+  self.activityHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_ACTIVITY_DATA addressStyle:GDDAddrReceive] handler:^(id <GDCMessage> message){
     NSLog(@"%@",[message body]);
     //控制安卓设备跳转到活动界面
     //注意 ： 这里剔除4位前缀 在之后要改正！！！！！！！！！！！！！！
-    [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_ACTIVITY addressStyle:GDDAddrSendRemote] message:@{@"action":@"post", @"tags":[message body][@"tags"], @"title":[[message body][@"title"]substringFromIndex:4] } replyHandler:nil];
+    [[GDDBusProvider sharedInstance] send:[GDDAddr addressProtocol:ADDR_ACTIVITY addressStyle:GDDAddrSendRemote] message:@{@"action":@"post", @"tags":[message body][@"tags"], @"title":[[message body][@"title"]substringFromIndex:4] } replyHandler:nil];
     _titleLabel.text = [message body][@"title"];
     
-    [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_ATTACHMEND_SEARCH addressStyle:GDDAddrSendRemote] message:@{@"tags":[message body][@"tags"]} replyHandler:^(id <GDCMessage> message){
+    [[GDDBusProvider sharedInstance] send:[GDDAddr addressProtocol:ADDR_ATTACHMEND_SEARCH addressStyle:GDDAddrSendRemote] message:@{@"tags":[message body][@"tags"]} replyHandler:^(id <GDCMessage> message){
       NSLog(@"%@",[message body]);
       _attachments = [message body];
       [_collectionView reloadData];

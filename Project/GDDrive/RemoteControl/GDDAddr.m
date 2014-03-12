@@ -82,7 +82,7 @@ static NSString *EQUIPMENT_ID;
   [userDefaults setObject:EQUIPMENT_ID forKey:@"equipmentID"];
   [userDefaults synchronize];
   //同步完成后发送消息 通知所有注册 GDD_BUS_EQUIPMENT_ID 设备id变更
-  [[GDDBusProvider BUS] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SWITCH addressStyle:GDDAddrSendLocal] message:@{@"sid": [GDDAddr equipmentID]}];
+  [[GDDBusProvider sharedInstance] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SWITCH addressStyle:GDDAddrSendLocal] message:@{@"sid": [GDDAddr equipmentID]}];
 }
 +(void)readNSUserDefaults
 {

@@ -10,13 +10,9 @@
 #import "GDDFaviconsViewController_iPad.h"
 #import "GDDOfflineFilesViewController_iPad.h"
 #import "GDDRemoteControlViewController.h"
-#import "GDDRealtimeDataToViewController.h"
-#import "PSStackedView.h"
 #import "AppDelegate.h"
 #import "GDDMenuRootCell_ipad.h"
 #import "GDDMenuRootModel.h"
-#import "GDDLoginView_ipad.h"
-#import "UIAlertView+Blocks.h"
 #import "GDDMainViewController_ipad.h"
 #import "GDDEquipmentView.h"
 #import "GDDAddr.h"
@@ -28,10 +24,10 @@
 
 typedef enum {
   GDDMENU_PAGE_LESSON = 0,
-  GDDMENU_PAGE_COLLECT = 1,
-  GDDMENU_PAGE_REMOTE_CONTROL = 2,
-  GDDMENU_PAGE_SETTINGS = 3,
-  GDDMENU_PAGE_ACTIVITY = 4
+//  GDDMENU_PAGE_COLLECT = 1,
+  GDDMENU_PAGE_REMOTE_CONTROL = 1,
+  GDDMENU_PAGE_SETTINGS = 2,
+  GDDMENU_PAGE_ACTIVITY = 3
 } GDDMENU_PAGE_TYPE;
 
 @interface GDDMenuRootController ()
@@ -49,6 +45,18 @@ typedef enum {
 @end
 
 @implementation GDDMenuRootController
+
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+  if ( self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+    self.childViewController = [NSMutableArray array];
+    [self loadSubViewControllers];
+    [self registers];
+  }
+  return self;
+}
+-(void)dealloc{
+  [self unregisters];
+}
 
 - (void)viewDidLoad
 {
@@ -76,42 +84,37 @@ typedef enum {
                                }];
   }];
   self.menuTableView.tableHeaderView = self.equipmentView;
-  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"favicons_icon.png", @"offline_files_icon.png", @"offline_files_icon.png", @"offline_files_icon.png"]
-                                                       labels:@[@"课程", @"收藏", @"遥控器" ,@"设置" ,@"活动"]];
-  
+  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"offline_files_icon.png", @"offline_files_icon.png", @"offline_files_icon.png"]
+                                                       labels:@[@"课程", @"遥控器" ,@"设置" ,@"活动"]];
   if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
     [self prefersStatusBarHidden];
     [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
   }
-  
-  
 }
 -(void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
-  
 }
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
 }
--(void)loadRealtime{
-  
-  self.childViewController = [NSMutableArray array];
-  
+
+#pragma mark - 加载子视图控制器
+-(void)loadSubViewControllers{
   //课程界面
   GDDLessonViewController *lessonViewController = [[GDDLessonViewController alloc] initWithNibName:@"GDDLessonViewController" bundle:nil];
   UINavigationController *lessonNavigationController = [[UINavigationController alloc]initWithRootViewController:lessonViewController];
   [self.childViewController addObject:lessonNavigationController];
   
+  /**
   GDDMainViewController_ipad *faviconsViewController=[[GDDFaviconsViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
   UINavigationController *faviconsNavigationController = [[UINavigationController alloc]initWithRootViewController:faviconsViewController];
   [self.childViewController addObject:faviconsNavigationController];
   
-  /**
    * 离线下载 ViewController 这里暂时屏蔽，之后还会使用
-  GDDMainViewController_ipad *offlineFilesViewController = [[GDDOfflineFilesViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
-  self.offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
-  [self.childViewController addObject:self.offlineNavigationController];
+   GDDMainViewController_ipad *offlineFilesViewController = [[GDDOfflineFilesViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
+   self.offlineNavigationController = [[UINavigationController alloc]initWithRootViewController:offlineFilesViewController];
+   [self.childViewController addObject:self.offlineNavigationController];
    */
   
   GDDRemoteControlViewController *remoteControlViewController = [[GDDRemoteControlViewController alloc]initWithNibName:@"GDDRemoteControlViewController" bundle:nil];
@@ -125,10 +128,38 @@ typedef enum {
   GDDActivityViewController *activityViewController = [[GDDActivityViewController alloc] initWithNibName:@"GDDActivityViewController" bundle:nil];
   UINavigationController *activityNavigationController = [[UINavigationController alloc] initWithRootViewController:activityViewController];
   [self.childViewController addObject:activityNavigationController];
+}
 
+#pragma mark -register & unregister
+-(void)registerSettings{
+  __weak GDDMenuRootController *weakSelf = self;
+  //注册监听 外部控制设置界面跳转
+  self.menuSettingsHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    NSLog(@"注册监听 外部控制设置界面跳转");
+    if ([message body][@"settings"]) {
+      [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_SETTINGS];
+      [[GDDBusProvider sharedInstance] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SETTINGS addressStyle:GDDAddrSendLocal] message:nil];
+    }
+  }];
+}
+-(void)registerNotification{
+  //注册监听 信息通知
+  self.notificationHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr addressProtocol:ADDR_NOTIFICATION addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+    [UIAlertView showAlertViewWithTitle:@"消息通知"
+                                message:[message body][@"content"]
+                      cancelButtonTitle:@"确定"
+                      otherButtonTitles:nil
+                         alertViewStyle:UIAlertViewStyleDefault
+                              onDismiss:^(UIAlertView *alertView, int buttonIndex) {}
+                               onCancel:^{}];
+  }];
+}
+-(void)registerTopic{
+  //监听是否要跳转到活动界面
+  
   __weak GDDMenuRootController *weakSelf = self;
   //注册监听 外部控制跳转课程/收藏/遥控器
-  self.menuChangeHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_TOPIC addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+  self.menuChangeHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr addressProtocol:ADDR_TOPIC addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     NSArray *tags = [message body][@"tags"];
     NSInteger i = 0;
     do {
@@ -142,46 +173,41 @@ typedef enum {
         continue;
       }
       [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_LESSON];
-      [[GDDBusProvider BUS] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_CLASS addressStyle:GDDAddrSendLocal] message:[message body]];
+      [[GDDBusProvider sharedInstance] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_CLASS addressStyle:GDDAddrSendLocal] message:[message body]];
       i++;
     } while (i < [tags count]);
   }];
-  //注册监听 外部控制设置界面跳转
-  self.menuSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    NSLog(@"注册监听 外部控制设置界面跳转");
-    if ([message body][@"settings"]) {
-      [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_SETTINGS];
-      [[GDDBusProvider BUS] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SETTINGS addressStyle:GDDAddrSendLocal] message:nil];      
-    }
-  }];
-  //注册监听 信息通知
-  self.notificationHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_NOTIFICATION addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
-    [UIAlertView showAlertViewWithTitle:@"消息通知"
-                                message:[message body][@"content"]
-                      cancelButtonTitle:@"确定"
-                      otherButtonTitles:nil
-                         alertViewStyle:UIAlertViewStyleDefault
-                              onDismiss:^(UIAlertView *alertView, int buttonIndex) {}
-                               onCancel:^{}];
-  }];
-  //监听是否要跳转到活动界面
-  self.activityHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_TOPIC_ACTIVITY addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+}
+- (void)registerActivity{
+  __weak GDDMenuRootController *weakSelf = self;
+  self.activityHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_TOPIC_ACTIVITY addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     NSLog(@"%@",[message body]);
     [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_ACTIVITY];
-    [[GDDBusProvider BUS] send:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_ACTIVITY_DATA addressStyle:GDDAddrSendLocal] message:[message body] replyHandler:nil];
+    [[GDDBusProvider sharedInstance] send:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_ACTIVITY_DATA addressStyle:GDDAddrSendLocal] message:[message body] replyHandler:nil];
   }];
 }
-
+-(void)registers{
+  [self registerTopic];
+  [self registerSettings];
+  [self registerNotification];
+  [self registerActivity];
+}
+-(void)unregisters{
+  [self.menuChangeHandlerRegistration unregisterHandler];
+  [self.menuSettingsHandlerRegistration unregisterHandler];
+  [self.notificationHandlerRegistration unregisterHandler];
+  [self.activityHandlerRegistration unregisterHandler];
+}
+#pragma mark -
 -(void)transitionChildViewControllerByIndex:(NSInteger)index{
-
   if (index == GDDMENU_PAGE_REMOTE_CONTROL) {
-    [GDDRemoteControlDelegate.stackController popViewControllerAnimated:YES];
-    [GDDRemoteControlDelegate.stackController.rootViewController presentViewController:[self.childViewController objectAtIndex:index] animated:YES completion:nil];
+    [self.stackController popViewControllerAnimated:YES];
+    [self.stackController.rootViewController presentViewController:[self.childViewController objectAtIndex:index] animated:YES completion:nil];
     self.currentViewController = [self.childViewController objectAtIndex:index];
   }else{
     if (self.currentViewController == [self.childViewController objectAtIndex:index]) return;
-    [GDDRemoteControlDelegate.stackController popViewControllerAnimated:YES];
-    [GDDRemoteControlDelegate.stackController pushViewController:[self.childViewController objectAtIndex:index] fromViewController:nil animated:NO];
+    [self.stackController popViewControllerAnimated:YES];
+    [self.stackController pushViewController:[self.childViewController objectAtIndex:index] fromViewController:nil animated:NO];
     self.currentViewController = [self.childViewController objectAtIndex:index];
     NSIndexPath *selectedIndexPath = [NSIndexPath indexPathForRow:index inSection:0];
     [self.menuTableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -201,7 +227,6 @@ typedef enum {
 {
   return 80;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   [self.menuRootModel setLabelWithIndex:indexPath.row];
@@ -231,7 +256,6 @@ typedef enum {
   if (indexPath.row == GDDMENU_PAGE_REMOTE_CONTROL) {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
   }
-
   [self transitionChildViewControllerByIndex:indexPath.row];
 }
 

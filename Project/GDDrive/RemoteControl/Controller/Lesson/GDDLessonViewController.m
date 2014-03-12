@@ -67,7 +67,7 @@ static NSArray *kLessons;
   [super viewWillAppear:animated];
   __weak GDDLessonViewController *weakSelf = self;
   // 接收控制信息回调 根据数据跳转
-  self.swichClassHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_CLASS addressStyle:GDDAddrReceive] handler:^(id <GDCMessage> message){
+  self.swichClassHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_CLASS addressStyle:GDDAddrReceive] handler:^(id <GDCMessage> message){
     // 空数据 情况直接跳出整个循环
     NSMutableArray *tagArray = [NSMutableArray arrayWithArray:[message body][@"tags"]];
     if (tagArray.count == 0) {
@@ -126,10 +126,10 @@ static NSArray *kLessons;
 //记录活动层级标签
 -(void)synchronousAttachmentData{
   //链接接口 发送标签组信息
-  [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_TOPIC addressStyle:GDDAddrSendRemote] message:@{@"action":@"post", @"tags":self.attachmentTags} replyHandler:nil];
+  [[GDDBusProvider sharedInstance] send:[GDDAddr addressProtocol:ADDR_TOPIC addressStyle:GDDAddrSendRemote] message:@{@"action":@"post", @"tags":self.attachmentTags} replyHandler:nil];
   //查询活动内容
   __weak GDDLessonViewController *weakSelf = self;
-  [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_TAG_CHILDREN addressStyle:GDDAddrSendRemote] message:@{@"tags":self.attachmentTags} replyHandler:^(id<GDCMessage> message){
+  [[GDDBusProvider sharedInstance] send:[GDDAddr addressProtocol:ADDR_TAG_CHILDREN addressStyle:GDDAddrSendRemote] message:@{@"tags":self.attachmentTags} replyHandler:^(id<GDCMessage> message){
     _activityTags = [NSMutableArray arrayWithArray:[message body]];
     [weakSelf.collectionView reloadData];
   }];
@@ -198,6 +198,7 @@ static NSArray *kLessons;
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
   NSMutableArray *detailedLabels = [NSMutableArray arrayWithArray:self.attachmentTags];
   [detailedLabels addObject:_activityTags[indexPath.row]];
-  [[GDDBusProvider BUS] send:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_TOPIC_ACTIVITY addressStyle:GDDAddrSendLocal ] message:@{@"tags":detailedLabels ,@"title":_activityTags[indexPath.row]} replyHandler:nil];
+  [[GDDBusProvider sharedInstance] send:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_TOPIC_ACTIVITY addressStyle:GDDAddrSendLocal ] message:@{@"tags":detailedLabels ,@"title":_activityTags[indexPath.row]} replyHandler:nil];
 }
+
 @end

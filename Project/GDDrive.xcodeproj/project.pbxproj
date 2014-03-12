@@ -88,10 +88,11 @@
 		6583BFC8187A8AE900B5683C /* GDDMenuRootController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6583BFC6187A8AE900B5683C /* GDDMenuRootController.xib */; };
 		65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 65A524DA184327710030F958 /* cell_selected_style_black.png */; };
 		65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */; };
+		65B2CE6918D6A55200C02D1C /* GDDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B2CE6718D6A55200C02D1C /* GDDActivityViewController.m */; };
+		65B2CE6A18D6A55200C02D1C /* GDDActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B2CE6818D6A55200C02D1C /* GDDActivityViewController.xib */; };
 		65B32F5A187CF38D0028026C /* PSStackedViewControllerDecorate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */; };
 		65B32F66187D470B0028026C /* GDDFolderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B32F61187D470B0028026C /* GDDFolderCell.m */; };
 		65B32F67187D470B0028026C /* GDDFolderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B32F62187D470B0028026C /* GDDFolderCell.xib */; };
-		65B8317618B47FDD00D750BF /* GDDTouchVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B8317518B47FDD00D750BF /* GDDTouchVisualizer.m */; };
 		65B8317818B4920600D750BF /* arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B8317718B4920600D750BF /* arrows.png */; };
 		65B8317C18B49F9F00D750BF /* back_arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B8317918B49F9F00D750BF /* back_arrows.png */; };
 		65B8317D18B49F9F00D750BF /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = 65B8317A18B49F9F00D750BF /* home.png */; };
@@ -100,8 +101,6 @@
 		65B8318318B4A88600D750BF /* UIImage+GDDEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B8318218B4A88600D750BF /* UIImage+GDDEffects.m */; };
 		65BC5A9118BC72C400E8E1E5 /* GDDLessonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */; };
 		65BC5A9218BC72C400E8E1E5 /* GDDLessonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */; };
-		65BC5A9D18C0590B00E8E1E5 /* GDDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC5A9B18C0590B00E8E1E5 /* GDDActivityViewController.m */; };
-		65BC5A9E18C0590B00E8E1E5 /* GDDActivityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65BC5A9C18C0590B00E8E1E5 /* GDDActivityViewController.xib */; };
 		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
 		65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D021856C9DF005249BB /* GDDDownloadingState.m */; };
 		65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */; };
@@ -117,16 +116,22 @@
 		65DDDB4D186A8B560064DCBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65DDDB4C186A8B560064DCBA /* AppDelegate.m */; };
 		65DDDB5D186D29850064DCBA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DDDB5C186D29850064DCBA /* CoreTelephony.framework */; };
 		65DDDB6118725FA30064DCBA /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65DDDB6018725FA30064DCBA /* MultipeerConnectivity.framework */; };
+		65E943F518CFFA30006A62A2 /* GDDCommandInvokerSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E943F318CFFA30006A62A2 /* GDDCommandInvokerSingleton.m */; };
+		65E943F918CFFC4B006A62A2 /* GDDCommandForNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E943F818CFFC4B006A62A2 /* GDDCommandForNetwork.m */; };
+		65E943FC18D00223006A62A2 /* GDDCommandForFirstStart.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E943FB18D00223006A62A2 /* GDDCommandForFirstStart.m */; };
+		65E943FF18D002F1006A62A2 /* GDDCommandForSetWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E943FE18D002F1006A62A2 /* GDDCommandForSetWindow.m */; };
+		65E9440218D00707006A62A2 /* GDDCommandForNetworkState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9440118D00707006A62A2 /* GDDCommandForNetworkState.m */; };
+		65E9441318D03C95006A62A2 /* GDDRemoteControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9440518D03C95006A62A2 /* GDDRemoteControlViewController.m */; };
+		65E9441418D03C95006A62A2 /* GDDRemoteControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E9440618D03C95006A62A2 /* GDDRemoteControlViewController.xib */; };
+		65E9441518D03C95006A62A2 /* GDDTouchVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9440818D03C95006A62A2 /* GDDTouchVisualizer.m */; };
+		65E9441618D03C95006A62A2 /* GDDInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9440B18D03C95006A62A2 /* GDDInformationTableViewController.m */; };
+		65E9441718D03C95006A62A2 /* GDDInformationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E9440C18D03C95006A62A2 /* GDDInformationTableViewController.xib */; };
+		65E9441818D03C95006A62A2 /* GDDLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9440E18D03C95006A62A2 /* GDDLocationTableViewController.m */; };
+		65E9441918D03C95006A62A2 /* GDDLocationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E9440F18D03C95006A62A2 /* GDDLocationTableViewController.xib */; };
+		65E9441A18D03C95006A62A2 /* GDDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E9441118D03C95006A62A2 /* GDDSettingsViewController.m */; };
+		65E9441B18D03C95006A62A2 /* GDDSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65E9441218D03C95006A62A2 /* GDDSettingsViewController.xib */; };
 		65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */; };
 		65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EA26561833138B00077EF4 /* GDDMenuRootController_ipad.xib */; };
-		65F2781518AB9BA40011C874 /* GDDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2781318AB9BA40011C874 /* GDDSettingsViewController.m */; };
-		65F2781618AB9BA40011C874 /* GDDSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2781418AB9BA40011C874 /* GDDSettingsViewController.xib */; };
-		65F2782718ACF1350011C874 /* GDDLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2782518ACF1350011C874 /* GDDLocationTableViewController.m */; };
-		65F2782818ACF1350011C874 /* GDDLocationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2782618ACF1350011C874 /* GDDLocationTableViewController.xib */; };
-		65F2782C18AD01580011C874 /* GDDInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2782A18AD01580011C874 /* GDDInformationTableViewController.m */; };
-		65F2782D18AD01580011C874 /* GDDInformationTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2782B18AD01580011C874 /* GDDInformationTableViewController.xib */; };
-		65F2783118ADF3710011C874 /* GDDRemoteControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F2782F18ADF3710011C874 /* GDDRemoteControlViewController.m */; };
-		65F2783218ADF3710011C874 /* GDDRemoteControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65F2783018ADF3710011C874 /* GDDRemoteControlViewController.xib */; };
 		773E070449474D719289E8E7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763A91962AF40D8ABD7D5A7 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -258,13 +263,14 @@
 		65A524DA184327710030F958 /* cell_selected_style_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_selected_style_black.png; sourceTree = "<group>"; };
 		65A63A4B1821F6AB004B6A18 /* GDDUIBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDDUIBarButtonItem.h; sourceTree = "<group>"; };
 		65A63A4C18220145004B6A18 /* GDDUIBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDUIBarButtonItem.m; sourceTree = "<group>"; };
+		65B2CE6618D6A55200C02D1C /* GDDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDActivityViewController.h; sourceTree = "<group>"; };
+		65B2CE6718D6A55200C02D1C /* GDDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDActivityViewController.m; sourceTree = "<group>"; };
+		65B2CE6818D6A55200C02D1C /* GDDActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDActivityViewController.xib; sourceTree = "<group>"; };
 		65B32F58187CF38D0028026C /* PSStackedViewControllerDecorate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStackedViewControllerDecorate.h; sourceTree = "<group>"; };
 		65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStackedViewControllerDecorate.m; sourceTree = "<group>"; };
 		65B32F60187D470B0028026C /* GDDFolderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFolderCell.h; sourceTree = "<group>"; };
 		65B32F61187D470B0028026C /* GDDFolderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFolderCell.m; sourceTree = "<group>"; };
 		65B32F62187D470B0028026C /* GDDFolderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDFolderCell.xib; sourceTree = "<group>"; };
-		65B8317418B47FDD00D750BF /* GDDTouchVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDTouchVisualizer.h; sourceTree = "<group>"; };
-		65B8317518B47FDD00D750BF /* GDDTouchVisualizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDTouchVisualizer.m; sourceTree = "<group>"; };
 		65B8317718B4920600D750BF /* arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrows.png; sourceTree = "<group>"; };
 		65B8317918B49F9F00D750BF /* back_arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_arrows.png; sourceTree = "<group>"; };
 		65B8317A18B49F9F00D750BF /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
@@ -275,9 +281,6 @@
 		65BC5A8E18BC72C400E8E1E5 /* GDDLessonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDLessonViewController.h; sourceTree = "<group>"; };
 		65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDLessonViewController.m; sourceTree = "<group>"; };
 		65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDLessonViewController.xib; sourceTree = "<group>"; };
-		65BC5A9A18C0590B00E8E1E5 /* GDDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDActivityViewController.h; sourceTree = "<group>"; };
-		65BC5A9B18C0590B00E8E1E5 /* GDDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDActivityViewController.m; sourceTree = "<group>"; };
-		65BC5A9C18C0590B00E8E1E5 /* GDDActivityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDActivityViewController.xib; sourceTree = "<group>"; };
 		65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSetObject.h"; sourceTree = "<group>"; };
 		65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSetObject.m"; sourceTree = "<group>"; };
 		65CA0D011856C9DF005249BB /* GDDDownloadingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadingState.h; sourceTree = "<group>"; };
@@ -307,21 +310,34 @@
 		65DDDB5C186D29850064DCBA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		65DDDB5E187259540064DCBA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		65DDDB6018725FA30064DCBA /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		65E943F018CFFA30006A62A2 /* GDDCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDCommand.h; sourceTree = "<group>"; };
+		65E943F218CFFA30006A62A2 /* GDDCommandInvokerSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDCommandInvokerSingleton.h; sourceTree = "<group>"; };
+		65E943F318CFFA30006A62A2 /* GDDCommandInvokerSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDCommandInvokerSingleton.m; sourceTree = "<group>"; };
+		65E943F718CFFC4B006A62A2 /* GDDCommandForNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDCommandForNetwork.h; sourceTree = "<group>"; };
+		65E943F818CFFC4B006A62A2 /* GDDCommandForNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDCommandForNetwork.m; sourceTree = "<group>"; };
+		65E943FA18D00223006A62A2 /* GDDCommandForFirstStart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDCommandForFirstStart.h; sourceTree = "<group>"; };
+		65E943FB18D00223006A62A2 /* GDDCommandForFirstStart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDCommandForFirstStart.m; sourceTree = "<group>"; };
+		65E943FD18D002F1006A62A2 /* GDDCommandForSetWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDCommandForSetWindow.h; sourceTree = "<group>"; };
+		65E943FE18D002F1006A62A2 /* GDDCommandForSetWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDCommandForSetWindow.m; sourceTree = "<group>"; };
+		65E9440018D00707006A62A2 /* GDDCommandForNetworkState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDCommandForNetworkState.h; sourceTree = "<group>"; };
+		65E9440118D00707006A62A2 /* GDDCommandForNetworkState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDCommandForNetworkState.m; sourceTree = "<group>"; };
+		65E9440418D03C95006A62A2 /* GDDRemoteControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDRemoteControlViewController.h; sourceTree = "<group>"; };
+		65E9440518D03C95006A62A2 /* GDDRemoteControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDRemoteControlViewController.m; sourceTree = "<group>"; };
+		65E9440618D03C95006A62A2 /* GDDRemoteControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDRemoteControlViewController.xib; sourceTree = "<group>"; };
+		65E9440718D03C95006A62A2 /* GDDTouchVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDTouchVisualizer.h; sourceTree = "<group>"; };
+		65E9440818D03C95006A62A2 /* GDDTouchVisualizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDTouchVisualizer.m; sourceTree = "<group>"; };
+		65E9440A18D03C95006A62A2 /* GDDInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDInformationTableViewController.h; sourceTree = "<group>"; };
+		65E9440B18D03C95006A62A2 /* GDDInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDInformationTableViewController.m; sourceTree = "<group>"; };
+		65E9440C18D03C95006A62A2 /* GDDInformationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDInformationTableViewController.xib; sourceTree = "<group>"; };
+		65E9440D18D03C95006A62A2 /* GDDLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDLocationTableViewController.h; sourceTree = "<group>"; };
+		65E9440E18D03C95006A62A2 /* GDDLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDLocationTableViewController.m; sourceTree = "<group>"; };
+		65E9440F18D03C95006A62A2 /* GDDLocationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDLocationTableViewController.xib; sourceTree = "<group>"; };
+		65E9441018D03C95006A62A2 /* GDDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDSettingsViewController.h; sourceTree = "<group>"; };
+		65E9441118D03C95006A62A2 /* GDDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDSettingsViewController.m; sourceTree = "<group>"; };
+		65E9441218D03C95006A62A2 /* GDDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDSettingsViewController.xib; sourceTree = "<group>"; };
 		65EA26541833138B00077EF4 /* GDDMenuRootController_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootController_ipad.h; sourceTree = "<group>"; };
 		65EA26551833138B00077EF4 /* GDDMenuRootController_ipad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootController_ipad.m; sourceTree = "<group>"; };
 		65EA26561833138B00077EF4 /* GDDMenuRootController_ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDMenuRootController_ipad.xib; sourceTree = "<group>"; };
-		65F2781218AB9BA40011C874 /* GDDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDSettingsViewController.h; sourceTree = "<group>"; };
-		65F2781318AB9BA40011C874 /* GDDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDSettingsViewController.m; sourceTree = "<group>"; };
-		65F2781418AB9BA40011C874 /* GDDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDSettingsViewController.xib; sourceTree = "<group>"; };
-		65F2782418ACF1350011C874 /* GDDLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDLocationTableViewController.h; sourceTree = "<group>"; };
-		65F2782518ACF1350011C874 /* GDDLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDLocationTableViewController.m; sourceTree = "<group>"; };
-		65F2782618ACF1350011C874 /* GDDLocationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDLocationTableViewController.xib; sourceTree = "<group>"; };
-		65F2782918AD01580011C874 /* GDDInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDInformationTableViewController.h; sourceTree = "<group>"; };
-		65F2782A18AD01580011C874 /* GDDInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDInformationTableViewController.m; sourceTree = "<group>"; };
-		65F2782B18AD01580011C874 /* GDDInformationTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDInformationTableViewController.xib; sourceTree = "<group>"; };
-		65F2782E18ADF3710011C874 /* GDDRemoteControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDRemoteControlViewController.h; sourceTree = "<group>"; };
-		65F2782F18ADF3710011C874 /* GDDRemoteControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDRemoteControlViewController.m; sourceTree = "<group>"; };
-		65F2783018ADF3710011C874 /* GDDRemoteControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDRemoteControlViewController.xib; sourceTree = "<group>"; };
 		8EED2E58FE4F4FE1894BAA93 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -674,27 +690,16 @@
 		6583BFB6187A80A100B5683C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				65BC5A8D18BC718E00E8E1E5 /* Lesson */,
 				6583BFC4187A8AE900B5683C /* GDDMenuRootController.h */,
 				6583BFC5187A8AE900B5683C /* GDDMenuRootController.m */,
 				6583BFC6187A8AE900B5683C /* GDDMenuRootController.xib */,
 				65B32F60187D470B0028026C /* GDDFolderCell.h */,
 				65B32F61187D470B0028026C /* GDDFolderCell.m */,
 				65B32F62187D470B0028026C /* GDDFolderCell.xib */,
-				65F2781218AB9BA40011C874 /* GDDSettingsViewController.h */,
-				65F2781318AB9BA40011C874 /* GDDSettingsViewController.m */,
-				65F2781418AB9BA40011C874 /* GDDSettingsViewController.xib */,
-				65F2782E18ADF3710011C874 /* GDDRemoteControlViewController.h */,
-				65F2782F18ADF3710011C874 /* GDDRemoteControlViewController.m */,
-				65F2783018ADF3710011C874 /* GDDRemoteControlViewController.xib */,
-				65B8317418B47FDD00D750BF /* GDDTouchVisualizer.h */,
-				65B8317518B47FDD00D750BF /* GDDTouchVisualizer.m */,
-				65F2782418ACF1350011C874 /* GDDLocationTableViewController.h */,
-				65F2782518ACF1350011C874 /* GDDLocationTableViewController.m */,
-				65F2782618ACF1350011C874 /* GDDLocationTableViewController.xib */,
-				65F2782918AD01580011C874 /* GDDInformationTableViewController.h */,
-				65F2782A18AD01580011C874 /* GDDInformationTableViewController.m */,
-				65F2782B18AD01580011C874 /* GDDInformationTableViewController.xib */,
+				65B2CE6518D6A55200C02D1C /* Activity */,
+				65BC5A8D18BC718E00E8E1E5 /* Lesson */,
+				65E9440318D03C95006A62A2 /* RemoteControl */,
+				65E9440918D03C95006A62A2 /* Settings */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -723,15 +728,22 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
+		65B2CE6518D6A55200C02D1C /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				65B2CE6618D6A55200C02D1C /* GDDActivityViewController.h */,
+				65B2CE6718D6A55200C02D1C /* GDDActivityViewController.m */,
+				65B2CE6818D6A55200C02D1C /* GDDActivityViewController.xib */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
 		65BC5A8D18BC718E00E8E1E5 /* Lesson */ = {
 			isa = PBXGroup;
 			children = (
 				65BC5A8E18BC72C400E8E1E5 /* GDDLessonViewController.h */,
 				65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */,
 				65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */,
-				65BC5A9A18C0590B00E8E1E5 /* GDDActivityViewController.h */,
-				65BC5A9B18C0590B00E8E1E5 /* GDDActivityViewController.m */,
-				65BC5A9C18C0590B00E8E1E5 /* GDDActivityViewController.xib */,
 			);
 			path = Lesson;
 			sourceTree = "<group>";
@@ -755,6 +767,7 @@
 		65DDDB53186AB65C0064DCBA /* RemoteControl */ = {
 			isa = PBXGroup;
 			children = (
+				65E943EF18CFFA30006A62A2 /* Command */,
 				6583BFB6187A80A100B5683C /* Controller */,
 				6583BFBC187A821F00B5683C /* GDDBusProvider.h */,
 				6583BFBD187A821F00B5683C /* GDDBusProvider.m */,
@@ -764,6 +777,52 @@
 				65B32F59187CF38D0028026C /* PSStackedViewControllerDecorate.m */,
 			);
 			path = RemoteControl;
+			sourceTree = "<group>";
+		};
+		65E943EF18CFFA30006A62A2 /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				65E943F018CFFA30006A62A2 /* GDDCommand.h */,
+				65E943F218CFFA30006A62A2 /* GDDCommandInvokerSingleton.h */,
+				65E943F318CFFA30006A62A2 /* GDDCommandInvokerSingleton.m */,
+				65E943FD18D002F1006A62A2 /* GDDCommandForSetWindow.h */,
+				65E943FE18D002F1006A62A2 /* GDDCommandForSetWindow.m */,
+				65E943F718CFFC4B006A62A2 /* GDDCommandForNetwork.h */,
+				65E943F818CFFC4B006A62A2 /* GDDCommandForNetwork.m */,
+				65E943FA18D00223006A62A2 /* GDDCommandForFirstStart.h */,
+				65E943FB18D00223006A62A2 /* GDDCommandForFirstStart.m */,
+				65E9440018D00707006A62A2 /* GDDCommandForNetworkState.h */,
+				65E9440118D00707006A62A2 /* GDDCommandForNetworkState.m */,
+			);
+			path = Command;
+			sourceTree = "<group>";
+		};
+		65E9440318D03C95006A62A2 /* RemoteControl */ = {
+			isa = PBXGroup;
+			children = (
+				65E9440418D03C95006A62A2 /* GDDRemoteControlViewController.h */,
+				65E9440518D03C95006A62A2 /* GDDRemoteControlViewController.m */,
+				65E9440618D03C95006A62A2 /* GDDRemoteControlViewController.xib */,
+				65E9440718D03C95006A62A2 /* GDDTouchVisualizer.h */,
+				65E9440818D03C95006A62A2 /* GDDTouchVisualizer.m */,
+			);
+			path = RemoteControl;
+			sourceTree = "<group>";
+		};
+		65E9440918D03C95006A62A2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				65E9440A18D03C95006A62A2 /* GDDInformationTableViewController.h */,
+				65E9440B18D03C95006A62A2 /* GDDInformationTableViewController.m */,
+				65E9440C18D03C95006A62A2 /* GDDInformationTableViewController.xib */,
+				65E9440D18D03C95006A62A2 /* GDDLocationTableViewController.h */,
+				65E9440E18D03C95006A62A2 /* GDDLocationTableViewController.m */,
+				65E9440F18D03C95006A62A2 /* GDDLocationTableViewController.xib */,
+				65E9441018D03C95006A62A2 /* GDDSettingsViewController.h */,
+				65E9441118D03C95006A62A2 /* GDDSettingsViewController.m */,
+				65E9441218D03C95006A62A2 /* GDDSettingsViewController.xib */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		65EA265B18331B0100077EF4 /* Util */ = {
@@ -873,11 +932,11 @@
 				655DAB94183E1C0F00703FA4 /* default_type_swf.png in Resources */,
 				655DAB93183E1C0F00703FA4 /* default_type_png.png in Resources */,
 				65B8318018B4A2D100D750BF /* remote_control_highlight_button.png in Resources */,
-				65F2781618AB9BA40011C874 /* GDDSettingsViewController.xib in Resources */,
 				65571F11184599A200A7C1B7 /* GDDPlayPNGAndJPGViewController_ipad.xib in Resources */,
 				655DAB2A183B5B4300703FA4 /* GDDMenuRootCell_ipad.xib in Resources */,
 				655DAB9C183E1C0F00703FA4 /* icon_type_swf.png in Resources */,
 				6534B26818153577000F83E9 /* Images.xcassets in Resources */,
+				65E9441918D03C95006A62A2 /* GDDLocationTableViewController.xib in Resources */,
 				65B8317E18B49F9F00D750BF /* remote_control_button.png in Resources */,
 				6583BFC8187A8AE900B5683C /* GDDMenuRootController.xib in Resources */,
 				655DAB8D183E1C0F00703FA4 /* default_type_class.png in Resources */,
@@ -887,21 +946,22 @@
 				655DAB90183E1C0F00703FA4 /* default_type_mp3.png in Resources */,
 				65538B76181DFA18008D1DE0 /* config.plist in Resources */,
 				6583BFC3187A894600B5683C /* GDDEquipmentView.xib in Resources */,
+				65E9441B18D03C95006A62A2 /* GDDSettingsViewController.xib in Resources */,
 				655DAB8F183E1C0F00703FA4 /* default_type_jpg.png in Resources */,
 				65B32F67187D470B0028026C /* GDDFolderCell.xib in Resources */,
+				65E9441718D03C95006A62A2 /* GDDInformationTableViewController.xib in Resources */,
 				65B8317C18B49F9F00D750BF /* back_arrows.png in Resources */,
 				65571F2C1846E27900A7C1B7 /* GDDPlayAudioViewController_ipad.xib in Resources */,
 				65571F51184C323300A7C1B7 /* GDDLoginView_ipad.xib in Resources */,
 				65A524DB184327710030F958 /* cell_selected_style_black.png in Resources */,
 				65571F1B1845D8BF00A7C1B7 /* GDDPlayMovieViewController_ipad.xib in Resources */,
-				65F2782818ACF1350011C874 /* GDDLocationTableViewController.xib in Resources */,
 				65EA26581833138B00077EF4 /* GDDMenuRootController_ipad.xib in Resources */,
 				65571F47184C2AA900A7C1B7 /* seting.png in Resources */,
 				6548481E181767B800586C62 /* Main_iPad.storyboard in Resources */,
 				6534B26718153577000F83E9 /* InfoPlist.strings in Resources */,
 				655DAB28183B5B4300703FA4 /* GDDContentListCell_ipad.xib in Resources */,
 				65B8317D18B49F9F00D750BF /* home.png in Resources */,
-				65F2783218ADF3710011C874 /* GDDRemoteControlViewController.xib in Resources */,
+				65E9441418D03C95006A62A2 /* GDDRemoteControlViewController.xib in Resources */,
 				655DAB9B183E1C0F00703FA4 /* icon_type_png.png in Resources */,
 				655DAB9A183E1C0F00703FA4 /* icon_type_pdf.png in Resources */,
 				655DAB99183E1C0F00703FA4 /* icon_type_mp4.png in Resources */,
@@ -910,13 +970,12 @@
 				655DAB8E183E1C0F00703FA4 /* default_type_folder.png in Resources */,
 				655DAB95183E1C0F00703FA4 /* icon_type_class.png in Resources */,
 				655DAB92183E1C0F00703FA4 /* default_type_pdf.png in Resources */,
-				65F2782D18AD01580011C874 /* GDDInformationTableViewController.xib in Resources */,
 				655DAB91183E1C0F00703FA4 /* default_type_mp4.png in Resources */,
 				6548481F181767B800586C62 /* Main_iPhone.storyboard in Resources */,
 				6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */,
 				655DAB96183E1C0F00703FA4 /* icon_type_folder.png in Resources */,
 				655DAB3C183C49D300703FA4 /* loading.jpg in Resources */,
-				65BC5A9E18C0590B00E8E1E5 /* GDDActivityViewController.xib in Resources */,
+				65B2CE6A18D6A55200C02D1C /* GDDActivityViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,49 +1027,52 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65E943F918CFFC4B006A62A2 /* GDDCommandForNetwork.m in Sources */,
 				65571F02184587AC00A7C1B7 /* UIColor+GDDColorSchemes.m in Sources */,
-				65B8317618B47FDD00D750BF /* GDDTouchVisualizer.m in Sources */,
 				65BC5A9118BC72C400E8E1E5 /* GDDLessonViewController.m in Sources */,
 				65571F40184885D500A7C1B7 /* GDDPlistHelper.m in Sources */,
 				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,
 				65CA0D0F1856C9DF005249BB /* GDDWillDownloadState.m in Sources */,
 				65B32F5A187CF38D0028026C /* PSStackedViewControllerDecorate.m in Sources */,
-				65BC5A9D18C0590B00E8E1E5 /* GDDActivityViewController.m in Sources */,
 				65DDDB4D186A8B560064DCBA /* AppDelegate.m in Sources */,
 				65CA0D0D1856C9DF005249BB /* GDDPauseDownloadState.m in Sources */,
 				65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				65CA0D2418598B7B005249BB /* GDDClassViewController_iPad.m in Sources */,
+				65E943F518CFFA30006A62A2 /* GDDCommandInvokerSingleton.m in Sources */,
 				65CA0D2518598B7B005249BB /* GDDFaviconsViewController_iPad.m in Sources */,
 				6583BFC7187A8AE900B5683C /* GDDMenuRootController.m in Sources */,
 				6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */,
+				65E943FC18D00223006A62A2 /* GDDCommandForFirstStart.m in Sources */,
+				65E943FF18D002F1006A62A2 /* GDDCommandForSetWindow.m in Sources */,
 				65CA0D0E1856C9DF005249BB /* GDDUnDownloadState.m in Sources */,
 				655DAB27183B5B4300703FA4 /* GDDContentListCell_ipad.m in Sources */,
 				6583BFBE187A821F00B5683C /* GDDBusProvider.m in Sources */,
 				65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */,
 				65EA26571833138B00077EF4 /* GDDMenuRootController_ipad.m in Sources */,
 				65571F1A1845D8BF00A7C1B7 /* GDDPlayMovieViewController_ipad.m in Sources */,
-				65F2781518AB9BA40011C874 /* GDDSettingsViewController.m in Sources */,
-				65F2783118ADF3710011C874 /* GDDRemoteControlViewController.m in Sources */,
 				65571F57184C3EE800A7C1B7 /* GDDLoginMessageModel.m in Sources */,
-				65F2782718ACF1350011C874 /* GDDLocationTableViewController.m in Sources */,
-				65F2782C18AD01580011C874 /* GDDInformationTableViewController.m in Sources */,
 				65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */,
 				6534B26918153577000F83E9 /* main.m in Sources */,
 				65CA0D2818598B7B005249BB /* GDDOfflineFilesViewController_iPad.m in Sources */,
 				65571F4D184C31DD00A7C1B7 /* GDDLoginView_ipad.m in Sources */,
 				655DAB49183C55C800703FA4 /* GDDFlickrEngine.m in Sources */,
+				65E9441618D03C95006A62A2 /* GDDInformationTableViewController.m in Sources */,
 				655DABB4183F08CF00703FA4 /* GDDOfflineContentListCell_ipad.m in Sources */,
 				65B8318318B4A88600D750BF /* UIImage+GDDEffects.m in Sources */,
 				65571F3318482F4900A7C1B7 /* GDDLoginViewController_ipad.m in Sources */,
+				65E9440218D00707006A62A2 /* GDDCommandForNetworkState.m in Sources */,
 				655DAB29183B5B4300703FA4 /* GDDMenuRootCell_ipad.m in Sources */,
 				6583BFC2187A894600B5683C /* GDDEquipmentView.m in Sources */,
 				65571F05184588F600A7C1B7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				65571F54184C3EAF00A7C1B7 /* BaseModel.m in Sources */,
+				65E9441818D03C95006A62A2 /* GDDLocationTableViewController.m in Sources */,
 				65CA0D2618598B7B005249BB /* GDDMainViewController_ipad.m in Sources */,
 				653A972F182B84DA000E4CAC /* GDDRealtimeDataToViewController.m in Sources */,
 				65571F0F184599A200A7C1B7 /* GDDPlayPDFViewController_ipad.m in Sources */,
 				65571F10184599A200A7C1B7 /* GDDPlayPNGAndJPGViewController_ipad.m in Sources */,
+				65E9441318D03C95006A62A2 /* GDDRemoteControlViewController.m in Sources */,
+				65E9441A18D03C95006A62A2 /* GDDSettingsViewController.m in Sources */,
 				655DAB43183C51F300703FA4 /* GDDEngine.m in Sources */,
 				65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */,
 				65B32F66187D470B0028026C /* GDDFolderCell.m in Sources */,
@@ -1018,10 +1080,12 @@
 				65A63A4D18220145004B6A18 /* GDDUIBarButtonItem.m in Sources */,
 				65CA0D1318570016005249BB /* GDDDownloadWorkContext.m in Sources */,
 				65571F2B1846E27900A7C1B7 /* GDDPlayAudioViewController_ipad.m in Sources */,
+				65B2CE6918D6A55200C02D1C /* GDDActivityViewController.m in Sources */,
 				65571EFC1845872100A7C1B7 /* UIAlertView+Blocks.m in Sources */,
 				65555FAA18865A5200E60588 /* GDDAddr.m in Sources */,
 				655DAB50183CC32400703FA4 /* GDDGenreDictionary.m in Sources */,
 				655DAB9F183EF77600703FA4 /* GDDConstMapUtil.m in Sources */,
+				65E9441518D03C95006A62A2 /* GDDTouchVisualizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

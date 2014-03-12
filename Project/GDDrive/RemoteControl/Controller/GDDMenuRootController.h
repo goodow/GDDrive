@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class PSStackedViewControllerDecorate;
 
 @interface GDDMenuRootController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
--(void)loadRealtime;
-
+@property (nonatomic, weak) PSStackedViewControllerDecorate *stackedViewControllerDecorate;
 @end

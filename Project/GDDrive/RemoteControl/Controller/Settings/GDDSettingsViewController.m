@@ -40,7 +40,7 @@
 {
   [super viewDidLoad];
   self.navigationItem.title = @"设置";
-  self.bus = [GDDBusProvider BUS];
+  self.bus = [GDDBusProvider sharedInstance];
   
   self.locationTableViewController= [[GDDLocationTableViewController alloc]initWithNibName:@"GDDLocationTableViewController" bundle:nil];
   [self addChildViewController:self.locationTableViewController];
@@ -53,10 +53,10 @@
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
   __weak GDDSettingsViewController *weakSelf = self;
-  self.switchSettingsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SETTINGS addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message){
-    [[GDDBusProvider BUS] send:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrSendRemote] message:@{@"redirectTo":@"settings"} replyHandler:nil];
+  self.switchSettingsHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_SETTINGS addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message){
+    [[GDDBusProvider sharedInstance] send:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrSendRemote] message:@{@"redirectTo":@"settings"} replyHandler:nil];
   }];
-  self.switchSettingsAboutUsHandlerRegistration = [[GDDBusProvider BUS] registerHandler:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
+  self.switchSettingsAboutUsHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr addressProtocol:ADDR_VIEW addressStyle:GDDAddrReceive] handler:^(id<GDCMessage> message) {
     if ([message body][@"aboutUs"]) {
       NSLog(@"注册监听 外部控制设置界面-关于我们跳转");
       [weakSelf aboutUsAction:nil];

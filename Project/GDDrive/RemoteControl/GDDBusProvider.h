@@ -10,7 +10,8 @@
 #import "GDChannel.h"
 
 @interface GDDBusProvider : NSObject
-+(id<GDCBus>)BUS;
 
++ (id<GDCBus>)BUS DEPRECATED_ATTRIBUTE;
++ (id<GDCBus>) sharedInstance;
 @end
 

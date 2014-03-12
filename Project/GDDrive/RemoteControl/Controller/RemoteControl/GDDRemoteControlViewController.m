@@ -53,7 +53,7 @@ typedef enum {
   self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"BACK" style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
   
   //监听上下左右手势变化
-  self.bus = [GDDBusProvider BUS];
+  self.bus = [GDDBusProvider sharedInstance];
   UISwipeGestureRecognizer *recognizer;
   recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom:)];
   [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
