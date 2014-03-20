@@ -101,6 +101,7 @@
 		65B8318318B4A88600D750BF /* UIImage+GDDEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 65B8318218B4A88600D750BF /* UIImage+GDDEffects.m */; };
 		65BC5A9118BC72C400E8E1E5 /* GDDLessonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */; };
 		65BC5A9218BC72C400E8E1E5 /* GDDLessonViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */; };
+		65C0B32C18DAE9FF00F5B670 /* GDDCommandForPonyDebugger.m in Sources */ = {isa = PBXBuildFile; fileRef = 65C0B32B18DAE9FF00F5B670 /* GDDCommandForPonyDebugger.m */; };
 		65CA0CE3185165AB005249BB /* NSMutableDictionary+SafeSetObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */; };
 		65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D021856C9DF005249BB /* GDDDownloadingState.m */; };
 		65CA0D0C1856C9DF005249BB /* GDDFinishDownloadState.m in Sources */ = {isa = PBXBuildFile; fileRef = 65CA0D041856C9DF005249BB /* GDDFinishDownloadState.m */; };
@@ -281,6 +282,8 @@
 		65BC5A8E18BC72C400E8E1E5 /* GDDLessonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDLessonViewController.h; sourceTree = "<group>"; };
 		65BC5A8F18BC72C400E8E1E5 /* GDDLessonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDLessonViewController.m; sourceTree = "<group>"; };
 		65BC5A9018BC72C400E8E1E5 /* GDDLessonViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDLessonViewController.xib; sourceTree = "<group>"; };
+		65C0B32A18DAE9FE00F5B670 /* GDDCommandForPonyDebugger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDCommandForPonyDebugger.h; sourceTree = "<group>"; };
+		65C0B32B18DAE9FF00F5B670 /* GDDCommandForPonyDebugger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDCommandForPonyDebugger.m; sourceTree = "<group>"; };
 		65CA0CE1185165AB005249BB /* NSMutableDictionary+SafeSetObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SafeSetObject.h"; sourceTree = "<group>"; };
 		65CA0CE2185165AB005249BB /* NSMutableDictionary+SafeSetObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SafeSetObject.m"; sourceTree = "<group>"; };
 		65CA0D011856C9DF005249BB /* GDDDownloadingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDownloadingState.h; sourceTree = "<group>"; };
@@ -793,6 +796,8 @@
 				65E943FB18D00223006A62A2 /* GDDCommandForFirstStart.m */,
 				65E9440018D00707006A62A2 /* GDDCommandForNetworkState.h */,
 				65E9440118D00707006A62A2 /* GDDCommandForNetworkState.m */,
+				65C0B32A18DAE9FE00F5B670 /* GDDCommandForPonyDebugger.h */,
+				65C0B32B18DAE9FF00F5B670 /* GDDCommandForPonyDebugger.m */,
 			);
 			path = Command;
 			sourceTree = "<group>";
@@ -1029,6 +1034,7 @@
 			files = (
 				65E943F918CFFC4B006A62A2 /* GDDCommandForNetwork.m in Sources */,
 				65571F02184587AC00A7C1B7 /* UIColor+GDDColorSchemes.m in Sources */,
+				65C0B32C18DAE9FF00F5B670 /* GDDCommandForPonyDebugger.m in Sources */,
 				65BC5A9118BC72C400E8E1E5 /* GDDLessonViewController.m in Sources */,
 				65571F40184885D500A7C1B7 /* GDDPlistHelper.m in Sources */,
 				655DAC341842E47C00703FA4 /* GDDOffineFilesHelper.m in Sources */,

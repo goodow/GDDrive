@@ -1,5 +1,5 @@
 PODS:
-  - DOUAudioStreamer (0.2.6)
+  - DOUAudioStreamer (0.2.7)
   - GDChannel (0.5.5):
     - GDJson (~> 0.5)
     - SocketRocket (~> 0.3.1-beta2)
@@ -11,6 +11,8 @@ PODS:
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - MRProgress (0.3.1)
+  - PonyDebugger (0.3.1):
+    - SocketRocket
   - PSStackedView (1.0)
   - Reachability (3.1.1)
   - SocketRocket (0.3.1-beta2)
@@ -20,9 +22,9 @@ DEPENDENCIES:
   - DOUAudioStreamer (~> 0.2.5)
   - GDChannel (from `https://github.com/goodow/realtime-channel.git`)
   - GDJson (from `https://github.com/goodow/realtime-json.git`)
-  - J2ObjC (from `https://github.com/goodow/j2objc.git`)
   - MKNetworkKit (~> 0.87)
   - MRProgress (~> 0.3.0)
+  - PonyDebugger (~> 0.3.1)
   - PSStackedView (~> 1.0)
   - vfrReader (~> 2.6.2)
 
@@ -31,16 +33,15 @@ EXTERNAL SOURCES:
     :git: https://github.com/goodow/realtime-channel.git
   GDJson:
     :git: https://github.com/goodow/realtime-json.git
-  J2ObjC:
-    :git: https://github.com/goodow/j2objc.git
 
 SPEC CHECKSUMS:
-  DOUAudioStreamer: bd8cd5e59e6c0dea46b998dfc6527cae10bbabbc
+  DOUAudioStreamer: 38ba25468ca6d556868a70907574fe0867b79eea
   GDChannel: d891ab12512381cbc274a40d515e1889a26c80f8
   GDJson: 30bdbae9abedc68fcb589b7d6dae0fd0804aa982
   J2ObjC: 45d67e0e2ab5c3c0befbcac6f515dade0e8f5d78
   MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
   MRProgress: 741d8849f3d6e71cf254b32ea8c0bc0b2a122136
+  PonyDebugger: d31607145d785b2315cd6f6a4ebaa378eb0c1340
   PSStackedView: 734c9bd6fdae2576aa9403edef60ffcb5873a90e
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae

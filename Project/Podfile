@@ -1,14 +1,15 @@
 platform :ios, '7.0'
 
 # pod 'GDRealtime', '~> 0.3.0'
+# pod 'GDRealtime', :git => 'https://github.com/goodow/GDRealtime.git'
+# pod 'MRProgress', '~> 0.2.2'
+# pod 'J2ObjC', :git => 'https://github.com/goodow/j2objc.git'
 # 在线音乐播放媒体流库
 pod 'DOUAudioStreamer', '~> 0.2.5' 
 pod 'PSStackedView', '~> 1.0'
-# pod 'GDRealtime', :git => 'https://github.com/goodow/GDRealtime.git'
 pod 'MKNetworkKit', '~> 0.87'
 pod 'vfrReader', '~> 2.6.2'
-# pod 'MRProgress', '~> 0.2.2'
-pod 'J2ObjC', :git => 'https://github.com/goodow/j2objc.git'
 pod 'GDJson', :git => 'https://github.com/goodow/realtime-json.git' 
 pod 'GDChannel', :git => 'https://github.com/goodow/realtime-channel.git'
 pod 'MRProgress', '~> 0.3.0'
+pod 'PonyDebugger', '~> 0.3'

@@ -14,6 +14,7 @@
 #import "GDDCommandForNetwork.h"
 #import "GDDCommandForFirstStart.h"
 #import "GDDCommandForNetworkState.h"
+#import "GDDCommandForPonyDebugger.h"
 
 @interface AppDelegate ()
 @end
@@ -23,6 +24,9 @@
 {
 
   id command = nil;
+  //设置PonyDebugger
+  command = [GDDCommandForPonyDebugger commandForPonyDebugger];
+  [[GDDCommandInvokerSingleton sharedInstance] runCommandWithCommandObject:command];
   //设置windows
   command = [GDDCommandForSetWindow commandForSetWindow];
   [[GDDCommandInvokerSingleton sharedInstance] runCommandWithCommandObject:command];
