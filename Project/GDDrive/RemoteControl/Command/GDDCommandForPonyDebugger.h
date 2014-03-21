@@ -10,5 +10,5 @@
 #import "GDDCommand.h"
 
 @interface GDDCommandForPonyDebugger : NSObject <GDDCommand>
-+ (id)commandForPonyDebugger;
+
 @end

@@ -10,5 +10,5 @@
 #import "GDDCommand.h"
 
 @interface GDDCommandForSetWindow : NSObject <GDDCommand>
-+(id)commandForSetWindow;
+
 @end

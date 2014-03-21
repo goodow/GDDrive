@@ -10,5 +10,5 @@
 #import "GDDCommand.h"
 
 @interface GDDCommandForNetwork : NSObject <GDDCommand>
-+(id)commandForNetwork;
+
 @end

@@ -10,5 +10,5 @@
 #import "GDDCommand.h"
 
 @interface GDDCommandForFirstStart : NSObject <GDDCommand>
-+(id)commandForFirstStart;
+
 @end

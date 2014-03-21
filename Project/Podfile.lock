@@ -24,7 +24,7 @@ DEPENDENCIES:
   - GDJson (from `https://github.com/goodow/realtime-json.git`)
   - MKNetworkKit (~> 0.87)
   - MRProgress (~> 0.3.0)
-  - PonyDebugger (~> 0.3.1)
+  - PonyDebugger (~> 0.3)
   - PSStackedView (~> 1.0)
   - vfrReader (~> 2.6.2)
 

@@ -25,22 +25,22 @@
 
   id command = nil;
   //设置PonyDebugger
-  command = [GDDCommandForPonyDebugger commandForPonyDebugger];
+  command = [GDDCommandForPonyDebugger new];
   [[GDDCommandInvokerSingleton sharedInstance] runCommandWithCommandObject:command];
   //设置windows
-  command = [GDDCommandForSetWindow commandForSetWindow];
+  command = [GDDCommandForSetWindow new];
   [[GDDCommandInvokerSingleton sharedInstance] runCommandWithCommandObject:command];
 
   //监听网路状态
-  command = [GDDCommandForNetwork commandForNetwork];
+  command = [GDDCommandForNetwork new];
   [[GDDCommandInvokerSingleton sharedInstance] runCommandWithCommandObject:command];
 
   //判断程序是否第一次执行
-  command = [GDDCommandForFirstStart commandForFirstStart];
+  command = [GDDCommandForFirstStart new];
   [[GDDCommandInvokerSingleton sharedInstance] runCommandWithCommandObject:command];
 
   //网络状态
-  command = [GDDCommandForNetworkState commandForNetworkState];
+  command = [GDDCommandForNetworkState new];
   [[GDDCommandInvokerSingleton sharedInstance] runCommandWithCommandObject:command];
 
   GDDMenuRootController *menuController = [[GDDMenuRootController alloc] initWithNibName:@"GDDMenuRootController" bundle:nil];
