@@ -25,7 +25,8 @@ static NSString *const ADDR_NOTIFICATION = @"drive.notification"; //信息通知
 static NSString *const ADDR_ATTACHMEND_SEARCH = @"drive.attachment.search"; //附件搜索
 static NSString *const ADDR_TAG_CHILDREN = @"drive.tag.children"; //查询同时属于多个标签的子标签
 static NSString *const ADDR_VIEW = @"drive.view"; //界面跳转 包括[home,repository,favorite,settings,settings.wifi,settings.screenOffset,aboutUs]这些界面 将由此接口代替
-
+static NSString *const ADDR_FAVORITES_SEARCH = @"drive.star.search"; //查询收藏列表
+	static NSString *const ADDR_EDITED_LIST = @"drive.star"; //查询 添加 删除列表
 
 static NSString *const GDD_LOCAL_ADDR_SWITCH = @"@drive.control.switch";
 static NSString *const GDD_LOCAL_ADDR_CLASS = @"@drive.control.class";
@@ -35,7 +36,8 @@ static NSString *const GDD_LOCAL_ADDR_SETTINGS_LOCATION = @"@drive.control.setti
 static NSString *const GDD_LOCAL_ADDR_SETTINGS_INFORMATION = @"@drive.control.settings.information";
 static NSString *const GDD_LOCAL_ADDR_TOPIC_ACTIVITY = @"@drive.topic.activity";
 static NSString *const GDD_LOCAL_ADDR_ACTIVITY_DATA = @"@drive.topic.activity.data";
-
+static NSString *const GDD_LOCAL_ADDR_FAVORITE = @"@drive.topic.favorite";
+static NSString *const GDD_LOCAL_ADDR_DELETE_FAVORITE_LIST = @"@drive.star.favorite.delete";
 
 @interface GDDAddr : NSObject
 +(NSString *)addressProtocol:(NSString *)protocol addressStyle:(GDDAddressStyle)style;

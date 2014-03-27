@@ -21,13 +21,14 @@
 #import "UIAlertView+Blocks.h"
 #import "GDDLessonViewController.h"
 #import "GDDActivityViewController.h"
+#import "GDDFavoriteViewController.h"
 
 typedef enum {
   GDDMENU_PAGE_LESSON = 0,
-//  GDDMENU_PAGE_COLLECT = 1,
-  GDDMENU_PAGE_REMOTE_CONTROL = 1,
-  GDDMENU_PAGE_SETTINGS = 2,
-  GDDMENU_PAGE_ACTIVITY = 3
+  GDDMENU_PAGE_COLLECT = 1,
+  GDDMENU_PAGE_REMOTE_CONTROL = 2,
+  GDDMENU_PAGE_SETTINGS = 3,
+  GDDMENU_PAGE_ACTIVITY = 4
 } GDDMENU_PAGE_TYPE;
 
 @interface GDDMenuRootController ()
@@ -42,6 +43,7 @@ typedef enum {
 @property (nonatomic, strong) id<GDCHandlerRegistration> menuSettingsHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> notificationHandlerRegistration;
 @property (nonatomic, strong) id<GDCHandlerRegistration> activityHandlerRegistration;
+	@property (nonatomic, strong) id<GDCHandlerRegistration> viewHandlerRegistration;
 @end
 
 @implementation GDDMenuRootController
@@ -84,8 +86,8 @@ typedef enum {
                                }];
   }];
   self.menuTableView.tableHeaderView = self.equipmentView;
-  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"offline_files_icon.png", @"offline_files_icon.png", @"offline_files_icon.png"]
-                                                       labels:@[@"课程", @"遥控器" ,@"设置" ,@"活动"]];
+  self.menuRootModel = [[GDDMenuRootModel alloc]initWithIcons:@[@"class_icon.png", @"class_icon.png", @"offline_files_icon.png", @"offline_files_icon.png", @"offline_files_icon.png"]
+                                                       labels:@[@"课程", @"收藏", @"遥控器" ,@"设置" ,@"活动"]];
   if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
     [self prefersStatusBarHidden];
     [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
@@ -106,7 +108,13 @@ typedef enum {
   UINavigationController *lessonNavigationController = [[UINavigationController alloc]initWithRootViewController:lessonViewController];
   [self.childViewController addObject:lessonNavigationController];
   
+  //我的收藏
+  GDDFavoriteViewController *favoriteViewController = [[GDDFavoriteViewController alloc] initWithNibName:@"GDDFavoriteViewController" bundle:nil];
+  UINavigationController *favoriteNavigationController = [[UINavigationController alloc]initWithRootViewController:favoriteViewController];
+  [self.childViewController addObject:favoriteNavigationController];
+  
   /**
+   *原有离线下载相关
   GDDMainViewController_ipad *faviconsViewController=[[GDDFaviconsViewController_iPad alloc] initWithNibName:@"GDDMainViewController_ipad" bundle:nil];
   UINavigationController *faviconsNavigationController = [[UINavigationController alloc]initWithRootViewController:faviconsViewController];
   [self.childViewController addObject:faviconsNavigationController];
@@ -176,6 +184,10 @@ typedef enum {
       [[GDDBusProvider sharedInstance] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_CLASS addressStyle:GDDAddrSendLocal] message:[message body]];
       i++;
     } while (i < [tags count]);
+    
+    if ([tags containsObject:@"文件"] || [tags containsObject:@"活动"]) {
+      [[GDDBusProvider sharedInstance] publish:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_FAVORITE addressStyle:GDDAddrSendLocal] message:[message body]];
+    }
   }];
 }
 - (void)registerActivity{
@@ -184,6 +196,14 @@ typedef enum {
     NSLog(@"%@",[message body]);
     [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_ACTIVITY];
     [[GDDBusProvider sharedInstance] send:[GDDAddr localAddressProtocol:GDD_LOCAL_ADDR_ACTIVITY_DATA addressStyle:GDDAddrSendLocal] message:[message body] replyHandler:nil];
+  }];
+  
+  self.viewHandlerRegistration = [[GDDBusProvider sharedInstance] registerHandler:[GDDAddr localAddressProtocol:ADDR_VIEW addressStyle:GDDAddrReceive]
+                                                                          handler:^(id <GDCMessage> message){
+    if ([[message body][@"redirectTo"] isEqualToString:@"favorite"]) {
+      NSLog(@"favorite return");
+      [weakSelf transitionChildViewControllerByIndex:GDDMENU_PAGE_COLLECT];
+    }
   }];
 }
 -(void)registers{

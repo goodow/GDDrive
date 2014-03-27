@@ -29,6 +29,7 @@
     }
     // 加载nib
     self = [arrayOfViews objectAtIndex:0];
+    [self.selectImage setHidden:YES];
   }
   return self;
 }

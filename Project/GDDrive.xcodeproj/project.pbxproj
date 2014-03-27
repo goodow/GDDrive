@@ -78,6 +78,11 @@
 		6563BD5B1835B3BE0008F709 /* class_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD591835B3BE0008F709 /* class_icon.png */; };
 		6563BD5C1835B3BE0008F709 /* offline_files_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6563BD5A1835B3BE0008F709 /* offline_files_icon.png */; };
 		6563BD821835C8EB0008F709 /* GDDMenuRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6563BD811835C8EB0008F709 /* GDDMenuRootModel.m */; };
+		657249E618E3DA6300442DA8 /* cell_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 657249E518E3DA6300442DA8 /* cell_selected.png */; };
+		657249E818E3DA7F00442DA8 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 657249E718E3DA7F00442DA8 /* trash.png */; };
+		657249F318E3EE0800442DA8 /* GDDFavoriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 657249EF18E3EE0800442DA8 /* GDDFavoriteViewController.m */; };
+		657249F418E3EE0800442DA8 /* GDDFavoriteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 657249F018E3EE0800442DA8 /* GDDFavoriteViewController.xib */; };
+		65724A3818E5608B00442DA8 /* GDDEditableCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 65724A3718E5608B00442DA8 /* GDDEditableCellModel.m */; };
 		65818D2A1830C3C3001FF93C /* GDDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D291830C3C3001FF93C /* GDDAppDelegate.m */; };
 		65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */ = {isa = PBXBuildFile; fileRef = 65818D401831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m */; };
 		65818D431831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65818D411831D131001FF93C /* GDDDescriptionMessageViewController_ipad.xib */; };
@@ -248,6 +253,13 @@
 		6563BD5A1835B3BE0008F709 /* offline_files_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = offline_files_icon.png; sourceTree = "<group>"; };
 		6563BD801835C8EB0008F709 /* GDDMenuRootModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDMenuRootModel.h; sourceTree = "<group>"; };
 		6563BD811835C8EB0008F709 /* GDDMenuRootModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDMenuRootModel.m; sourceTree = "<group>"; };
+		657249E518E3DA6300442DA8 /* cell_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell_selected.png; sourceTree = "<group>"; };
+		657249E718E3DA7F00442DA8 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		657249EE18E3EE0800442DA8 /* GDDFavoriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDFavoriteViewController.h; sourceTree = "<group>"; };
+		657249EF18E3EE0800442DA8 /* GDDFavoriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDFavoriteViewController.m; sourceTree = "<group>"; };
+		657249F018E3EE0800442DA8 /* GDDFavoriteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GDDFavoriteViewController.xib; sourceTree = "<group>"; };
+		65724A3618E5608B00442DA8 /* GDDEditableCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GDDEditableCellModel.h; path = Favorite/GDDEditableCellModel.h; sourceTree = "<group>"; };
+		65724A3718E5608B00442DA8 /* GDDEditableCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GDDEditableCellModel.m; path = Favorite/GDDEditableCellModel.m; sourceTree = "<group>"; };
 		65818D281830C3C3001FF93C /* GDDAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDAppDelegate.h; sourceTree = "<group>"; };
 		65818D291830C3C3001FF93C /* GDDAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDDAppDelegate.m; sourceTree = "<group>"; };
 		65818D3F1831D131001FF93C /* GDDDescriptionMessageViewController_ipad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDDDescriptionMessageViewController_ipad.h; sourceTree = "<group>"; };
@@ -477,6 +489,8 @@
 		6548476E181765BA00586C62 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				657249E718E3DA7F00442DA8 /* trash.png */,
+				657249E518E3DA6300442DA8 /* cell_selected.png */,
 				65B8317718B4920600D750BF /* arrows.png */,
 				65B8317918B49F9F00D750BF /* back_arrows.png */,
 				65B8317F18B4A2D100D750BF /* remote_control_highlight_button.png */,
@@ -690,6 +704,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		657249E918E3EE0800442DA8 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				657249EE18E3EE0800442DA8 /* GDDFavoriteViewController.h */,
+				657249EF18E3EE0800442DA8 /* GDDFavoriteViewController.m */,
+				657249F018E3EE0800442DA8 /* GDDFavoriteViewController.xib */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
 		6583BFB6187A80A100B5683C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -699,6 +723,9 @@
 				65B32F60187D470B0028026C /* GDDFolderCell.h */,
 				65B32F61187D470B0028026C /* GDDFolderCell.m */,
 				65B32F62187D470B0028026C /* GDDFolderCell.xib */,
+				65724A3618E5608B00442DA8 /* GDDEditableCellModel.h */,
+				65724A3718E5608B00442DA8 /* GDDEditableCellModel.m */,
+				657249E918E3EE0800442DA8 /* Favorite */,
 				65B2CE6518D6A55200C02D1C /* Activity */,
 				65BC5A8D18BC718E00E8E1E5 /* Lesson */,
 				65E9440318D03C95006A62A2 /* RemoteControl */,
@@ -953,6 +980,8 @@
 				6583BFC3187A894600B5683C /* GDDEquipmentView.xib in Resources */,
 				65E9441B18D03C95006A62A2 /* GDDSettingsViewController.xib in Resources */,
 				655DAB8F183E1C0F00703FA4 /* default_type_jpg.png in Resources */,
+				657249E618E3DA6300442DA8 /* cell_selected.png in Resources */,
+				657249F418E3EE0800442DA8 /* GDDFavoriteViewController.xib in Resources */,
 				65B32F67187D470B0028026C /* GDDFolderCell.xib in Resources */,
 				65E9441718D03C95006A62A2 /* GDDInformationTableViewController.xib in Resources */,
 				65B8317C18B49F9F00D750BF /* back_arrows.png in Resources */,
@@ -972,6 +1001,7 @@
 				655DAB99183E1C0F00703FA4 /* icon_type_mp4.png in Resources */,
 				65571F3418482F4900A7C1B7 /* GDDLoginViewController_ipad.xib in Resources */,
 				655DAB97183E1C0F00703FA4 /* icon_type_jpg.png in Resources */,
+				657249E818E3DA7F00442DA8 /* trash.png in Resources */,
 				655DAB8E183E1C0F00703FA4 /* default_type_folder.png in Resources */,
 				655DAB95183E1C0F00703FA4 /* icon_type_class.png in Resources */,
 				655DAB92183E1C0F00703FA4 /* default_type_pdf.png in Resources */,
@@ -1043,6 +1073,7 @@
 				65DDDB4D186A8B560064DCBA /* AppDelegate.m in Sources */,
 				65CA0D0D1856C9DF005249BB /* GDDPauseDownloadState.m in Sources */,
 				65CA0D0B1856C9DF005249BB /* GDDDownloadingState.m in Sources */,
+				65724A3818E5608B00442DA8 /* GDDEditableCellModel.m in Sources */,
 				65818D421831D131001FF93C /* GDDDescriptionMessageViewController_ipad.m in Sources */,
 				65CA0D2418598B7B005249BB /* GDDClassViewController_iPad.m in Sources */,
 				65E943F518CFFA30006A62A2 /* GDDCommandInvokerSingleton.m in Sources */,
@@ -1075,6 +1106,7 @@
 				65E9441818D03C95006A62A2 /* GDDLocationTableViewController.m in Sources */,
 				65CA0D2618598B7B005249BB /* GDDMainViewController_ipad.m in Sources */,
 				653A972F182B84DA000E4CAC /* GDDRealtimeDataToViewController.m in Sources */,
+				657249F318E3EE0800442DA8 /* GDDFavoriteViewController.m in Sources */,
 				65571F0F184599A200A7C1B7 /* GDDPlayPDFViewController_ipad.m in Sources */,
 				65571F10184599A200A7C1B7 /* GDDPlayPNGAndJPGViewController_ipad.m in Sources */,
 				65E9441318D03C95006A62A2 /* GDDRemoteControlViewController.m in Sources */,
