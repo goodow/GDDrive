@@ -29,7 +29,7 @@
 + (id<GDCBus>) sharedInstance {
   static id<GDCBus> singletonInstance = nil;
   static dispatch_once_t pred;
-  dispatch_once(&pred, ^{singletonInstance = [[GDCReconnectBusClient alloc] initWithUrl:@"ws://data.goodow.com:8080/eventbus/websocket" options:@{[GDCSimpleBus MODE_MIX]:@YES}];});
+  dispatch_once(&pred, ^{singletonInstance = [[GDCReconnectBusClient alloc] initWithUrl:@"ws://test.goodow.com:8080/eventbus/websocket" options:@{[GDCSimpleBus MODE_MIX]:@YES}];});
   return singletonInstance;
 }
 

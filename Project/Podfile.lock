@@ -8,6 +8,7 @@ PODS:
   - J2ObjC (0.9):
     - J2ObjC/lib/jre
   - J2ObjC/lib/jre (0.9)
+  - JASidePanels (1.3.2)
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - MRProgress (0.3.1)
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - DOUAudioStreamer (~> 0.2.5)
   - GDChannel (from `https://github.com/goodow/realtime-channel.git`)
   - GDJson (from `https://github.com/goodow/realtime-json.git`)
+  - JASidePanels (~> 1.3.2)
   - MKNetworkKit (~> 0.87)
   - MRProgress (~> 0.3.0)
   - PonyDebugger (~> 0.3)
@@ -39,6 +41,7 @@ SPEC CHECKSUMS:
   GDChannel: d891ab12512381cbc274a40d515e1889a26c80f8
   GDJson: 30bdbae9abedc68fcb589b7d6dae0fd0804aa982
   J2ObjC: 45d67e0e2ab5c3c0befbcac6f515dade0e8f5d78
+  JASidePanels: c0e642a7311ec9cc9adfa616fa4a795e4e169f20
   MKNetworkKit: f174100f92473012138b6b1c3040266af8d43a14
   MRProgress: 741d8849f3d6e71cf254b32ea8c0bc0b2a122136
   PonyDebugger: d31607145d785b2315cd6f6a4ebaa378eb0c1340

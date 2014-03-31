@@ -13,3 +13,4 @@ pod 'GDJson', :git => 'https://github.com/goodow/realtime-json.git'
 pod 'GDChannel', :git => 'https://github.com/goodow/realtime-channel.git'
 pod 'MRProgress', '~> 0.3.0'
 pod 'PonyDebugger', '~> 0.3'
+pod 'JASidePanels', '~> 1.3.2' # 主界面菜单第三方控件
